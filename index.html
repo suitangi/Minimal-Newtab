@@ -4,14 +4,21 @@
     <meta charset="utf-8">
 	<title>New Tab</title>
 	<link rel="stylesheet" type="text/css" href="styles/index.css">
+  <link href='https://fonts.googleapis.com/css?family=Antic' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet'>
     <script type="text/javascript" src="scripts/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="scripts/index.js"></script>
 </head>
 <body>
-	<h1 class="time" ID="time"></h1>
-  <form id=search action="https://www.google.com/search" method="get">
-    <input class= "search" type="search" name="q"  data-placeholder="Google Search">
-    </input type="search">
-  </form>
+  <div class = "backloader">
+  </div>
+  <div class = "cwrapper">
+  	<h1 class="time" ID="time"></h1>
+    <div class = "pa" ID="pa"></div>
+    <form action="https://www.google.com/search" method="get">
+      <input class= "search" data-placeholder=" Google Search">
+      </input>
+    </form>
+  </div>
 </body>
 </html>
