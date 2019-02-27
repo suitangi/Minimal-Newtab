@@ -1,0 +1,9 @@
+{
+ 	"manifest_version": 2,
+ 	"name": "Garden of Words Newtab",
+ 	"version": "1.0.0",
+	"description": "Replaces your newtab with a cinemagraph from Garden of Words.",
+  	"chrome_url_overrides" : {
+    	"newtab": "index.html"
+  	}
+}

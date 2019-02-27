@@ -1,0 +1,32 @@
+body {
+    font-family: "Helvetica", sans-serif;
+    font-size: 2em;
+    text-align: center;
+    padding: 40px;
+    background-image: url("../images/back.gif");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+img {
+    display: block;
+    height: 40px;
+    width: 40px;
+    margin: 0 auto;
+}
+.time{
+  color: rgba(255,255,255,0.5);
+  font-family: "Trebuchet MS";
+  font-weight: 100;
+  font-size: 120px;
+}
+.search{
+  border-radius: 15px;
+  color: rgba(255,255,255,0.7);
+  background-color: rgba(255,255,255,0.2);
+  font-size: 20px;
+  font-family: "Trebuchet MS";
+  font-weight: 100;
+  border-color: transparent;
+
+}
