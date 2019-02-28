@@ -1,24 +1,20 @@
+//formats the minute
 function checkMin(i) {
     if (i < 10) {
         i = "0" + i;
     }
     return i;
 }
+
+//formats the hour for standard (12hr) time
 function checkHour(i){
   i = i % 12;
   if(i == 0)
     i = 12;
   return i;
 }
-function militaryF(){
-  window.military = !window.military;
-  if(window.military)
-    chrome.storage.local.set({military_switch: 'on'}, function() {});
-  else
-    chrome.storage.local.set({military_switch: 'off'}, function() {});
-  startTime();
-}
 
+//starts the time
 function startTime() {
     var today = new Date();
     var h = today.getHours();
@@ -26,6 +22,8 @@ function startTime() {
     // add a zero in front of numbers<10
     m = checkMin(m);
     var pa = "";
+
+    //sets PM and AM if not in military
     if(!window.military){
       if(h > 11)
         pa = " PM"
@@ -34,18 +32,24 @@ function startTime() {
     }
     if(!window.military)
       h = checkHour(h);
+
+    // display the time
     document.getElementById('time').innerHTML = h + ":" + m;
     document.getElementById("pa").innerHTML = pa;
+
+    //calls self every 1.2 seconds to update the time
     t = setTimeout(function () {
         startTime()
-    }, 1000);
+    }, 1200);
 }
 
+//sets the element to be draggable (customized for time, search bar, todo list)
 function dragElement(elmnt) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  if(elmnt.id == "timeWrapper"){
+
+  //depends on which element it is, different place to click
+  if(elmnt.id == "timeWrapper")
     document.getElementById("time").onmousedown = dragMouseDown;
-  }
   if(elmnt.id == "searchWrapper")
     document.getElementById("searchDiv").onmousedown = dragMouseDown;
   if(elmnt.id == "todoWrapper")
@@ -62,6 +66,7 @@ function dragElement(elmnt) {
     document.onmousemove = elementDrag;
   }
 
+  //when element is dragged
   function elementDrag(e) {
     e = e || window.event;
     e.preventDefault();
@@ -73,16 +78,19 @@ function dragElement(elmnt) {
     // set the element's new position:
     elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
     elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-
+    //sets window.dragged to be true to see if an element was moved
     if(!window.dragged)
       window.dragged = true;
 
   }
 
+  // stop moving when mouse button is released
   function closeDragElement() {
-    // stop moving when mouse button is released:
+    //reset the dragged to be false
     if(window.dragged){
       window.dragged = false;
+
+      //saves the current location for the elements
       if(elmnt.id == "timeWrapper"){
         document.getElementById("time").cursor = "move";
         chrome.storage.local.set({time_top_data: elmnt.style.top}, function() {});
@@ -102,6 +110,18 @@ function dragElement(elmnt) {
     document.onmousemove = null;
   }
 }
+
+//toggles military time (24hr)
+function updateMilitary(){
+  window.military = !window.military;
+  if(window.military)
+    chrome.storage.local.set({military_switch: 'on'}, function() {});
+  else
+    chrome.storage.local.set({military_switch: 'off'}, function() {});
+  startTime();
+}
+
+//toggles the visibility of the search bar
 function updateSearch(){
   if(document.getElementById("searchSwitch").checked){
     document.getElementById("searchSwitch").checked = false;
@@ -115,6 +135,7 @@ function updateSearch(){
   }
 }
 
+//toggles the visibility of the time display
 function updateTime(){
   if(document.getElementById("timeSwitch").checked){
     document.getElementById("timeSwitch").checked = false;
@@ -128,6 +149,7 @@ function updateTime(){
   }
 }
 
+//toggles the darken filter of the background
 function updateDark(){
   if(document.getElementById("darkSwitch").checked){
     document.getElementById("darkSwitch").checked = false;
@@ -140,6 +162,8 @@ function updateDark(){
     chrome.storage.local.set({dark_switch: "on"}, function() {});
   }
 }
+
+//toggles the desaturate filter of the background
 function updateDesa(){
   if(document.getElementById("desaSwitch").checked){
     document.getElementById("desaSwitch").checked = false;
@@ -153,6 +177,7 @@ function updateDesa(){
   }
 }
 
+//toggles the visibility of the todo list
 function updateTodo(){
   if(document.getElementById("todoSwitch").checked){
     document.getElementById("todoSwitch").checked = false;
@@ -166,15 +191,7 @@ function updateTodo(){
   }
 }
 
-function loadBackground(){
-  var imn = Math.floor(Math.random() * window.vidlist.length);
-  var vid = document.getElementById("backdrop");
-  vid.src = window.vidlist[imn];
-  vid.load();
-
-}
-
-// Create a new list item when clicking on the "Add" button
+//Todo list: Create a new list item when clicking on the "Add" button
 function newElement() {
   var li = document.createElement("li");
   var inputValue = document.getElementById("myInput").value;
@@ -215,6 +232,16 @@ function newElement() {
   }
   console.log(store);
   chrome.storage.local.set({todo_data: store}, function() {});
+}
+
+
+//loads a random background (currently in video form)
+function loadBackground(){
+  var imn = Math.floor(Math.random() * window.vidlist.length);
+  var vid = document.getElementById("backdrop");
+  vid.src = window.vidlist[imn];
+  vid.load();
+
 }
 
 $(document).ready(function() {
@@ -267,11 +294,19 @@ $(document).ready(function() {
           document.getElementById("searchSwitch").checked = false;
           document.getElementById("searchWrapper").style.visibility = "hidden";
         }
+        else{
+          document.getElementById("searchSwitch").checked = true;
+          document.getElementById("searchWrapper").style.visibility = "visible";
+        }
   });
   chrome.storage.local.get({time_switch: 'on'}, function(data) {
         if(data.time_switch == 'off'){
           document.getElementById("timeSwitch").checked = false;
           document.getElementById("timeWrapper").style.visibility = "hidden";
+        }
+        else{
+          document.getElementById("timeSwitch").checked = true;
+          document.getElementById("timeWrapper").style.visibility = "visible";
         }
   });
   chrome.storage.local.get({dark_switch: 'on'}, function(data) {
@@ -341,6 +376,10 @@ $(document).ready(function() {
           document.getElementById("todoSwitch").checked = false;
           document.getElementById("todoWrapper").style.visibility = "hidden";
         }
+        else{
+          document.getElementById("todoSwitch").checked = true;
+          document.getElementById("todoWrapper").style.visibility = "visible";
+        }
   });
 
   document.getElementById("searchSwitch").parentElement.addEventListener('click', function(){
@@ -373,7 +412,7 @@ $(document).ready(function() {
   }
   var times = document.getElementById("time");
   times.addEventListener("click", function(){
-      militaryF();
+      updateMilitary();
   });
 
 

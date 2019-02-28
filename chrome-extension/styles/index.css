@@ -1,7 +1,22 @@
 body{
-  overflow: hidden;
+  overflow: hidden; /* no scrolling! */
   background-color: #222;
 }
+
+/* no scrollbar! */
+::-webkit-scrollbar {
+    display: none!important;
+}
+
+/* no ugly focus border */
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+ /* background wrapper */
 .backloader {
     text-align: center;
     padding: 0px;
@@ -12,52 +27,47 @@ body{
     bottom: 0; left: 0;
     min-height: 100%;
     height: 100%;
-    /* background-image: url(); */
     background-color: #222;
     background-size: cover;
     background-repeat: no-repeat;
-    /* filter: ; */
     filter: brightness(0.6);
     transition: 0.3s;
     z-index: 1;
 }
-video::-webkit-media-controls-fullscreen-button, video::-webkit-media-controls-play-button, video::-webkit-media-controls-pausebutton {
-    display: none;
-}
+
+/* the actual background cinemagraph (video) */
 #backdrop{
-  min-width: 100%;
+  padding: 0px;
+  border: 0px;
+  margin: 0px;
+  width: 100%;
+  position: absolute;
+  left: 0;
   min-height: 100%;
   filter: saturate(1.5);
-  width: auto;
-  height: auto;
+  object-fit: cover;
 }
+
+/* desaturate filter */
 #desaFilter{
   min-width: 100%;
   min-height: 100%;
   transition: 0.3s;
 }
+
+/* element in front of video to prevent clicking */
 #clickDisabler{
   position:absolute;
   top:0; left:0;
   min-width: 100%;
   min-height: 100%;
   filter: none;
-
   width: auto;
   height: auto;
   z-index: 2
 }
 
-::-webkit-scrollbar {
-    display: none!important;
-}
-
-img {
-    display: block;
-    height: 40px;
-    width: 40px;
-    margin: 0 auto;
-}
+/* the time widget */
 .time{
   color: rgba(255,255,255,0.5);
   font-family: "Antic";
@@ -68,6 +78,8 @@ img {
   cursor: pointer;
   /* margin-right: 1vw; */
 }
+
+/* AM/PM text element */
 .pa{
   color: rgba(255,255,255,0.5);
   font-family: "Antic";
@@ -76,6 +88,8 @@ img {
   position: absolute;
   top: calc(9vw + 5px); right: -7%;
 }
+
+/* search widget */
 .search{
   padding: 5px;
   border-radius: 7px;
@@ -87,23 +101,24 @@ img {
   width: 18vw;
   border-color: rgba(255,255,255,0.2) !important;
 }
-.sun{
-  position: absolute;
-  bottom: 5%; right: 5%;
-  font-size: 20px;
-  filter: brightness(20) opacity(0.3) saturate(0);
-  z-index: 5;
-  cursor: pointer;
+/* movable part of search widget */
+.searchDiv{
+  padding: 5px;
+  cursor: move;
 }
+
+/* wrappers for widgets */
 .timeWrapper{
   position: absolute;
   top: 60%; left: 7%;
   z-index: 5;
+  visibility: hidden;
 }
 .searchWrapper{
   position: absolute;
   top: 85%; left: 7%;
   z-index: 5;
+  visibility: hidden;
 }
 .todoWrapper{
   position: absolute;
@@ -111,31 +126,49 @@ img {
   top: 70%; left: 27%;
   width: 17.3vw;
   z-index: 5;
-
+  visibility: hidden;
 }
+
+/* setting todolist hover to be visible */
 .todoHover{
   background-color: rgba(0,0,0,0);
 }
 .todoHover:hover{
-  background-color: rgba(0,0,0,0.5) !important;
+  background-color: rgba(0,0,0,0.4) !important;
   transition: 0.2s
 }
 .todoHover:hover .todoInput::placeholder{
   color: rgba(255,255,255,0.55);
   transition: 0.2s
 }
-.searchDiv{
-  padding: 5px;
-  cursor: move;
-}
 
-input:focus,
-select:focus,
-textarea:focus,
-button:focus {
-    outline: none;
+/* all the menu elements */
+#menu{
+  padding-top: 50px;
+  background-color: rgba(0,0,0,0);
+  z-index: 7;
+  position: absolute;
+  top:0; left:0;
+  height: 100%;
+  width: 15px;
+  transition: all .2s cubic-bezier(.68, -0.2, .27, 1.55);
 }
-
+#menu:hover {
+  background-color: rgba(0,0,0,0.7);
+  width: 235px;
+}
+#menu:hover .menuText,
+#menu:hover .sliderWrapper{
+  opacity: 0.6 !important;
+  visibility: visible;
+  transition: all .17s ease;
+}
+.menuText,
+.sliderWrapper{
+  opacity: 0 !important;
+  visibility: hidden;
+  transition: all .17s ease;
+}
 
 .menuText{
   background-color: rgba(255,255,255,0) !important;
@@ -199,8 +232,7 @@ input:checked + .slider:before {
   transform: translateX(20px);
 }
 
-/* Rounded sliders */
-.slider.round {
+.slider.round {/* Rounded sliders */
   border-radius: 34px;
 }
 
@@ -208,37 +240,10 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
-#menu{
-  padding-top: 50px;
-  background-color: rgba(0,0,0,0);
-  z-index: 7;
-  position: absolute;
-  top:0; left:0;
-  height: 100%;
-  width: 15px;
-  transition: all .2s cubic-bezier(.68, -0.2, .27, 1.55);
-}
-#menu:hover {
-  background-color: rgba(0,0,0,0.7);
-  width: 235px;
-}
-#menu:hover .menuText,
-#menu:hover .sliderWrapper{
-  opacity: 0.6 !important;
-  visibility: visible;
-  transition: all .17s ease;
-}
-.menuText,
-.sliderWrapper{
-  opacity: 0 !important;
-  visibility: hidden;
-  transition: all .17s ease;
-}
 
-
-/* For the todo list */
-/* Remove margins and padding from the list */
+/* Todo list elements */
 ul {
+  /* Remove margins and padding from the list */
   margin: 0;
   padding: 0;
 }
@@ -279,20 +284,6 @@ ul li.checked {
   color: rgba(255,255,255,0.7);
   text-decoration: line-through;
 }
-
-/* Add a "checked" mark when clicked on */
-/* ul li.checked::before {
-  content: '';
-  position: absolute;
-  border-color: #fff;
-  border-style: solid;
-  border-width: 0 2px 2px 0;
-  top: 10px;
-  left: 16px;
-  transform: rotate(45deg);
-  height: 15px;
-  width: 7px;
-} */
 
 /* Style the close button */
 .close {

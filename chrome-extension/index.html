@@ -1,5 +1,6 @@
   <!DOCTYPE html>
 <html>
+<!-- head, scripts and fonts -->
 <head>
     <meta charset="utf-8">
 	<title>New Tab</title>
@@ -9,18 +10,22 @@
     <script type="text/javascript" src="scripts/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="scripts/index.js"></script>
 </head>
+
 <body>
 
+  <!-- the backgrond cinemagraph (video) -->
   <div class = "backloader" ID ="backloader">
     <div ID="desaFilter">
       <div ID="clickDisabler"></div>
-      <video ID = "backdrop" width="100%" controls = "false" loop autoplay>
+      <video ID = "backdrop" width="100%" loop autoplay>
         <source src="https://i.imgur.com/MuHjPqe.mp4" type="video/mp4">
       </video>
     </div>
   </div>
 
+  <!-- the left side menu -->
   <div ID="menu">
+    <!-- the menu for widgets -->
     <div class = "menuText" style="color: rgba(255,255,255,0.95) !important; font-weight: 500;">Widgets</div>
     <div class = "menuText">Time</div>
     <div class = "sliderWrapper">
@@ -29,7 +34,6 @@
         <span class="slider round"></span>
       </label>
     </div>
-
     <div class = "menuText">Search Bar</div>
     <div class = "sliderWrapper">
       <label class="switch">
@@ -37,7 +41,6 @@
         <span class="slider round"></span>
       </label>
     </div>
-
     <div class = "menuText">Todo List</div>
     <div class = "sliderWrapper">
       <label class="switch">
@@ -46,10 +49,11 @@
       </label>
     </div>
 
+    <!-- blank space divide -->
     <div class = "menuText" style="color: transparent !important">.</div>
+
+    <!-- the menu for background -->
     <div class = "menuText" style="color: rgba(255,255,255,0.95) !important; font-weight: 500;">Background</div>
-
-
     <div class = "menuText">Darken</div>
     <div class = "sliderWrapper">
       <label class="switch">
@@ -57,7 +61,6 @@
         <span class="slider round"></span>
       </label>
     </div>
-
     <div class = "menuText">Desaturate</div>
     <div class = "sliderWrapper">
       <label class="switch">
@@ -67,11 +70,13 @@
     </div>
   </div>
 
+  <!-- the time widget -->
   <div class = "timeWrapper" ID="timeWrapper">
   	<h1 class="time" ID="time"></h1>
     <div class = "pa" ID="pa"></div>
   </div>
 
+  <!-- the search bar widget -->
   <div class = "searchWrapper" ID = "searchWrapper">
     <div class = "searchDiv" ID="searchDiv"></div>
     <form id=search action="https://www.google.com/search" method="get">
@@ -80,6 +85,7 @@
     </form>
   </div>
 
+  <!-- todo list widget -->
   <div class = "todoWrapper" ID = "todoWrapper">
     <div class = "todoHover">
       <div ID="todoDiv" class="header">
