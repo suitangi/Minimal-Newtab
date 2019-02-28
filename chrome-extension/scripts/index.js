@@ -167,10 +167,9 @@ function updateTodo(){
 }
 
 function loadBackground(){
-  var vidlist = ["https://i.imgur.com/IrZ5pEv.mp4", "https://i.imgur.com/gNXhMXN.mp4", "https://i.imgur.com/znjchEH.mp4", "https://i.imgur.com/K1yoMcx.mp4", "https://i.imgur.com/zcoWO3X.mp4", "https://i.imgur.com/9SxOAc1.mp4", "https://i.imgur.com/gSvhV4J.mp4", "https://i.imgur.com/PH90ZoM.mp4", "https://i.imgur.com/e1o7cGP.mp4", "https://i.imgur.com/zIAHyD8.mp4", "https://i.imgur.com/9aaVlaa.mp4", "https://i.imgur.com/2zxFjED.mp4", "https://i.imgur.com/BQYhLxo.mp4", "https://i.imgur.com/95aPJWr.mp4", "https://i.imgur.com/PWtui5Z.mp4", "https://i.imgur.com/uLwMXpF.mp4", "https://i.imgur.com/t1vt5q0.mp4", "https://i.imgur.com/ml0wk22.mp4", "https://i.imgur.com/VqKjZIT.mp4", "https://i.imgur.com/NFDdleD.mp4", "https://i.imgur.com/YfwV4HA.mp4", "https://i.imgur.com/U6aP5DN.mp4", "https://i.imgur.com/z2K1uqs.mp4", "https://i.imgur.com/aZo96FP.mp4", "https://i.imgur.com/7h8tV3X.mp4", "https://i.imgur.com/95UfU2V.mp4", "https://i.imgur.com/DLtSrRN.mp4", "https://i.imgur.com/VY4ASoK.mp4", "https://i.imgur.com/ejmj6Eq.mp4", "https://i.imgur.com/H3NUnO0.mp4", "https://i.imgur.com/BtmMu4S.mp4", "https://i.imgur.com/LvA1oiD.mp4", "https://i.imgur.com/0ukSAd6.mp4", "https://i.imgur.com/aQhnCBH.mp4", "https://i.imgur.com/RjoFJmz.mp4", "https://i.imgur.com/b6zDh5c.mp4", "https://i.imgur.com/CAgwaku.mp4", "https://i.imgur.com/Hnll5Ir.mp4", "https://i.imgur.com/jPKdpbr.mp4", "https://i.imgur.com/vj76lMd.mp4", "https://i.imgur.com/AXpTJLG.mp4", "https://i.imgur.com/XeRhV0P.mp4", "https://i.imgur.com/iwc7HoP.mp4", "https://i.imgur.com/4OaYLNo.mp4", "https://i.imgur.com/MuHjPqe.mp4", "https://i.imgur.com/d0Gs9gl.mp4", "https://i.imgur.com/riFYuWn.mp4", "https://i.imgur.com/AU7KQhR.mp4", "https://i.imgur.com/A7avFfN.mp4", "https://i.imgur.com/0AWn9CO.mp4", "https://i.imgur.com/riCNGI0.mp4", "https://i.imgur.com/bsoXeMT.mp4", "https://i.imgur.com/gZojh4F.mp4"];
-  var imn = Math.floor(Math.random() * vidlist.length);
+  var imn = Math.floor(Math.random() * window.vidlist.length);
   var vid = document.getElementById("backdrop");
-  vid.src = vidlist[imn];
+  vid.src = window.vidlist[imn];
   vid.load();
 
 }
@@ -220,7 +219,16 @@ function newElement() {
 
 $(document).ready(function() {
   startTime();
-  loadBackground();
+
+  var url = chrome.extension.getURL("backgroundList.txt");
+    fetch(url)
+    .then(function(response) {
+        return response.text();
+    }).then(function(myText) {
+      window.vidlist = myText.split(", ");
+      console.log(window.vidlist);
+      loadBackground();
+    });
   document.addEventListener('contextmenu', event => event.preventDefault());
   window.military = false;
   var inputs = document.getElementsByTagName("input");
@@ -368,33 +376,6 @@ $(document).ready(function() {
       militaryF();
   });
 
-  // var myNodelist = document.getElementsByTagName("LI");
-  // var i;
-  // for (i = 0; i < myNodelist.length; i++) {
-  //   var span = document.createElement("SPAN");
-  //   var txt = document.createTextNode("\u00D7");
-  //   span.className = "close";
-  //   span.appendChild(txt);
-  //   myNodelist[i].appendChild(span);
-  // }
-  //
-  // // Click on a close button to hide the current list item
-  // var close = document.getElementsByClassName("close");
-  // var i;
-  // for (i = 0; i < close.length; i++) {
-  //   close[i].addEventListener('click', function() {
-  //     var div = this.parentElement;
-  //     div.parentNode.removeChild(div);
-  //     var lilist = document.getElementsByTagName("LI");
-  //     var store = "";
-  //     for (i = 0; i < lilist.length; i++){
-  //       // if(i == lilist.length - 1)
-  //         store += lilist[i].innerText.trim();
-  //     }
-  //     console.log(store);
-  //     chrome.storage.local.set({todo_data: store}, function() {});
-  //   });
-  // }
 
   // Add a "checked" symbol when clicking on a list item
   var list = document.querySelector('ul');
