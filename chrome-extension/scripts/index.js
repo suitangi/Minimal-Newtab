@@ -136,7 +136,7 @@ function updateDark(){
   }
   else{
     document.getElementById("darkSwitch").checked = true;
-    document.getElementById("backloader").style.filter = "brightness(0.5) saturate(1.5)";
+    document.getElementById("backloader").style.filter = "brightness(0.6)";
     chrome.storage.local.set({dark_switch: "on"}, function() {});
   }
 }
@@ -144,12 +144,12 @@ function updateDesa(){
   if(document.getElementById("desaSwitch").checked){
     document.getElementById("desaSwitch").checked = false;
     document.getElementById("desaFilter").style.filter = "none";
-    chrome.storage.local.set({Desa_switch: "off"}, function() {});
+    chrome.storage.local.set({desa_switch: "off"}, function() {});
   }
   else{
     document.getElementById("desaSwitch").checked = true;
     document.getElementById("desaFilter").style.filter = "saturate(0.6)";
-    chrome.storage.local.set({Desa_switch: "on"}, function() {});
+    chrome.storage.local.set({desa_switch: "on"}, function() {});
   }
 }
 
@@ -273,8 +273,8 @@ $(document).ready(function() {
         }
   });
   chrome.storage.local.get({desa_switch: 'off'}, function(data) {
-        if(data.dark_switch == 'on'){
-          document.getElementById("darkSwitch").checked = true;
+        if(data.desa_switch == 'on'){
+          document.getElementById("desaSwitch").checked = true;
           document.getElementById("desaFilter").style.filter = "saturate(0.6)";
         }
   });

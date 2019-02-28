@@ -17,7 +17,7 @@ body{
     background-size: cover;
     background-repeat: no-repeat;
     /* filter: ; */
-    filter: brightness(0.5) saturate(1.5);
+    filter: brightness(0.6);
     transition: 0.3s;
     z-index: 1;
 }
@@ -27,7 +27,7 @@ video::-webkit-media-controls-fullscreen-button, video::-webkit-media-controls-p
 #backdrop{
   min-width: 100%;
   min-height: 100%;
-
+  filter: saturate(1.5);
   width: auto;
   height: auto;
 }
