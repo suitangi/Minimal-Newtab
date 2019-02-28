@@ -10,15 +10,65 @@
     <script type="text/javascript" src="scripts/index.js"></script>
 </head>
 <body>
-  <div class = "backloader">
+  <div class = "backloader" ID ="backloader"></div>
+
+  <div ID="menu">
+    <div class = "menuText">Time:</div>
+    <div class = "sliderWrapper">
+      <label class="switch">
+        <input type="checkbox" ID="timeSwitch" checked>
+        <span class="slider round"></span>
+      </label>
+    </div>
+
+    <div class = "menuText">Search Bar:</div>
+    <div class = "sliderWrapper">
+      <label class="switch">
+        <input type="checkbox" ID="searchSwitch" checked>
+        <span class="slider round"></span>
+      </label>
+    </div>
+
+    <div class = "menuText">Todo List:</div>
+    <div class = "sliderWrapper">
+      <label class="switch">
+        <input type="checkbox" ID="todoSwitch" checked>
+        <span class="slider round"></span>
+      </label>
+    </div>
+
+    <div class = "menuText">Darken Background:</div>
+    <div class = "sliderWrapper">
+      <label class="switch">
+        <input type="checkbox" ID="darkSwitch" checked>
+        <span class="slider round"></span>
+      </label>
+    </div>
   </div>
-  <div class = "cwrapper">
+
+  <div class = "timeWrapper" ID="timeWrapper">
   	<h1 class="time" ID="time"></h1>
     <div class = "pa" ID="pa"></div>
-    <form action="https://www.google.com/search" method="get">
-      <input class= "search" data-placeholder=" Google Search">
-      </input>
+  </div>
+
+  <div class = "searchWrapper" ID = "searchWrapper">
+    <div class = "searchDiv" ID="searchDiv"></div>
+    <form id=search action="https://www.google.com/search" method="get">
+      <input class= "search" data-placeholder=" Google Search" type="searh" name="q" autocomplete="off"/>
+      <input type="submit" style="visibility: hidden;"/>
     </form>
   </div>
+
+  <div class = "todoWrapper" ID = "todoWrapper">
+    <div class = "todoHover">
+      <div ID="todoDiv" class="header">
+        <h2 style="margin:5px">Todo List</h2>
+      </div>
+      <ul ID="myUL">
+      </ul>
+      <input class="todoInput" autocomplete="off" type="text" id="myInput" placeholder="New Todo . . ."/>
+    </div>
+  </div>
+
 </body>
 </html>
