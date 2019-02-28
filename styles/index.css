@@ -42,7 +42,7 @@ img {
   font-weight: 100;
   font-size: 1vw;
   position: absolute;
-  top: 8vw; right: -7%;
+  top: calc(8vw + 5px); right: -7%;
 }
 .search{
   padding: 5px;
@@ -65,25 +65,24 @@ img {
 }
 .timeWrapper{
   position: absolute;
-  bottom: 5%; left: 7%;
+  top: 60%; left: 7%;
   z-index: 5;
 }
 .searchWrapper{
   position: absolute;
-  bottom: 5%; left: 7%;
+  top: 85%; left: 7%;
   z-index: 5;
 }
 .todoWrapper{
   position: absolute;
   background: transparent;
-  bottom: 10%; left: 27%;
+  top: 70%; left: 27%;
   width: 17.3vw;
   z-index: 5;
 
 }
 .todoHover{
   background-color: rgba(0,0,0,0);
-  transition: 0.2s
 }
 .todoHover:hover{
   background-color: rgba(0,0,0,0.5) !important;
@@ -185,7 +184,7 @@ input:checked + .slider:before {
   top:0; left:0;
   height: 100%;
   width: 15px;
-  transition: all .3s cubic-bezier(.68, -0.2, .27, 1.55);
+  transition: all .2s cubic-bezier(.68, -0.2, .27, 1.55);
 }
 #menu:hover {
   background-color: rgba(0,0,0,0.7);
@@ -194,12 +193,12 @@ input:checked + .slider:before {
 #menu:hover .menuText,
 #menu:hover .sliderWrapper{
   opacity: 0.6 !important;
-  transition: all .2s ease;
+  transition: all .17s ease;
 }
 .menuText,
 .sliderWrapper{
   opacity: 0 !important;
-  transition: all .2s ease;
+  transition: all .17s ease;
 }
 
 
@@ -248,7 +247,7 @@ ul li.checked {
 }
 
 /* Add a "checked" mark when clicked on */
-ul li.checked::before {
+/* ul li.checked::before {
   content: '';
   position: absolute;
   border-color: #fff;
@@ -259,7 +258,7 @@ ul li.checked::before {
   transform: rotate(45deg);
   height: 15px;
   width: 7px;
-}
+} */
 
 /* Style the close button */
 .close {

@@ -155,7 +155,7 @@ function updateTodo(){
 }
 
 function loadBackground(){
-  var imn = 1 + Math.floor(Math.random() * 17);
+  var imn = 1 + Math.floor(Math.random() * 10);
   var url = "../images/" + imn + ".gif"
   document.getElementById("backloader").style.cssText = "background-image: url(\"" + url + "\");"
 }
@@ -184,7 +184,9 @@ function newElement() {
       var lilist = document.getElementsByTagName("LI");
       var store = "";
       for (i = 0; i < lilist.length; i++){
-        // if(i == lilist.length - 1)
+        if(lilist[i].classList.contains('checked'))
+          store += "☑" + lilist[i].innerText.trim();
+        else
           store += lilist[i].innerText.trim();
       }
       console.log(store);
@@ -269,11 +271,18 @@ $(document).ready(function() {
   chrome.storage.local.get({todo_data: ''}, function(data) {
         if(data.todo_data != ''){
           var arr = data.todo_data.split("×");
-          console.log(data.todo_data);
           for(i = 0; i < arr.length - 1; i++){
             var li = document.createElement("li");
-            var t = document.createTextNode(arr[i]);
-            li.appendChild(t);
+            if(arr[i].indexOf("☑") != -1){
+              var t = document.createTextNode(String(arr[i]).slice(1));
+              li.appendChild(t);
+              li.classList.toggle('checked');
+            }
+            else{
+              var t = document.createTextNode(arr[i]);
+              li.appendChild(t);
+            }
+
             document.getElementById("myUL").appendChild(li);
 
             var span = document.createElement("SPAN");
@@ -287,10 +296,11 @@ $(document).ready(function() {
                 var lilist = document.getElementsByTagName("LI");
                 var store = "";
                 for (i = 0; i < lilist.length; i++){
-                  // if(i == lilist.length - 1)
+                  if(lilist[i].classList.contains('checked'))
+                    store += "☑" + lilist[i].innerText.trim();
+                  else
                     store += lilist[i].innerText.trim();
                 }
-                console.log(store);
                 chrome.storage.local.set({todo_data: store}, function() {});
               });
           }
@@ -333,39 +343,48 @@ $(document).ready(function() {
       militaryF();
   });
 
-  var myNodelist = document.getElementsByTagName("LI");
-  var i;
-  for (i = 0; i < myNodelist.length; i++) {
-    var span = document.createElement("SPAN");
-    var txt = document.createTextNode("\u00D7");
-    span.className = "close";
-    span.appendChild(txt);
-    myNodelist[i].appendChild(span);
-  }
-
-  // Click on a close button to hide the current list item
-  var close = document.getElementsByClassName("close");
-  var i;
-  for (i = 0; i < close.length; i++) {
-    close[i].addEventListener('click', function() {
-      var div = this.parentElement;
-      div.parentNode.removeChild(div);
-      var lilist = document.getElementsByTagName("LI");
-      var store = "";
-      for (i = 0; i < lilist.length; i++){
-        // if(i == lilist.length - 1)
-          store += lilist[i].innerText.trim();
-      }
-      console.log(store);
-      chrome.storage.local.set({todo_data: store}, function() {});
-    });
-  }
+  // var myNodelist = document.getElementsByTagName("LI");
+  // var i;
+  // for (i = 0; i < myNodelist.length; i++) {
+  //   var span = document.createElement("SPAN");
+  //   var txt = document.createTextNode("\u00D7");
+  //   span.className = "close";
+  //   span.appendChild(txt);
+  //   myNodelist[i].appendChild(span);
+  // }
+  //
+  // // Click on a close button to hide the current list item
+  // var close = document.getElementsByClassName("close");
+  // var i;
+  // for (i = 0; i < close.length; i++) {
+  //   close[i].addEventListener('click', function() {
+  //     var div = this.parentElement;
+  //     div.parentNode.removeChild(div);
+  //     var lilist = document.getElementsByTagName("LI");
+  //     var store = "";
+  //     for (i = 0; i < lilist.length; i++){
+  //       // if(i == lilist.length - 1)
+  //         store += lilist[i].innerText.trim();
+  //     }
+  //     console.log(store);
+  //     chrome.storage.local.set({todo_data: store}, function() {});
+  //   });
+  // }
 
   // Add a "checked" symbol when clicking on a list item
   var list = document.querySelector('ul');
   list.addEventListener('click', function(ev) {
     if (ev.target.tagName === 'LI') {
       ev.target.classList.toggle('checked');
+      var lilist = document.getElementsByTagName("LI");
+      var store = "";
+      for (i = 0; i < lilist.length; i++){
+        if(lilist[i].classList.contains('checked'))
+          store += "☑" + lilist[i].innerText.trim();
+        else
+          store += lilist[i].innerText.trim();
+      }
+      chrome.storage.local.set({todo_data: store}, function() {});
     }
   }, false);
 
