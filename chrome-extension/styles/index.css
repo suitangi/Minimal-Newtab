@@ -1,3 +1,7 @@
+body{
+  overflow: hidden;
+  background-color: #222;
+}
 .backloader {
     text-align: center;
     padding: 0px;
@@ -9,13 +13,41 @@
     min-height: 100%;
     height: 100%;
     /* background-image: url(); */
+    background-color: #222;
     background-size: cover;
     background-repeat: no-repeat;
     /* filter: ; */
     filter: brightness(0.5) saturate(1.5);
-    transition: 0.5s;
+    transition: 0.3s;
     z-index: 1;
 }
+video::-webkit-media-controls-fullscreen-button, video::-webkit-media-controls-play-button, video::-webkit-media-controls-pausebutton {
+    display: none;
+}
+#backdrop{
+  min-width: 100%;
+  min-height: 100%;
+
+  width: auto;
+  height: auto;
+}
+#desaFilter{
+  min-width: 100%;
+  min-height: 100%;
+  transition: 0.3s;
+}
+#clickDisabler{
+  position:absolute;
+  top:0; left:0;
+  min-width: 100%;
+  min-height: 100%;
+  filter: none;
+
+  width: auto;
+  height: auto;
+  z-index: 2
+}
+
 ::-webkit-scrollbar {
     display: none!important;
 }
@@ -30,7 +62,7 @@ img {
   color: rgba(255,255,255,0.5);
   font-family: "Antic";
   font-weight: 100;
-  font-size: 8vw;
+  font-size: 9vw;
   margin-bottom: 12px;
   margin-top: 30px;
   cursor: pointer;
@@ -42,7 +74,7 @@ img {
   font-weight: 100;
   font-size: 1vw;
   position: absolute;
-  top: calc(8vw + 5px); right: -7%;
+  top: calc(9vw + 5px); right: -7%;
 }
 .search{
   padding: 5px;
@@ -109,7 +141,7 @@ button:focus {
   background-color: rgba(255,255,255,0) !important;
   color: rgba(255,255,255,0.7);
   margin-top: 25px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   font-size: 24px;
   font-family: "Abel";
   text-align: center;
@@ -188,16 +220,18 @@ input:checked + .slider:before {
 }
 #menu:hover {
   background-color: rgba(0,0,0,0.7);
-  width: 220px;
+  width: 235px;
 }
 #menu:hover .menuText,
 #menu:hover .sliderWrapper{
   opacity: 0.6 !important;
+  visibility: visible;
   transition: all .17s ease;
 }
 .menuText,
 .sliderWrapper{
   opacity: 0 !important;
+  visibility: hidden;
   transition: all .17s ease;
 }
 

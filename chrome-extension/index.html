@@ -10,7 +10,15 @@
     <script type="text/javascript" src="scripts/index.js"></script>
 </head>
 <body>
-  <div class = "backloader" ID ="backloader"></div>
+
+  <div class = "backloader" ID ="backloader">
+    <div ID="desaFilter">
+      <div ID="clickDisabler"></div>
+      <video ID = "backdrop" width="100%" controls = "false" loop autoplay>
+        <source src="https://i.imgur.com/MuHjPqe.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
 
   <div ID="menu">
     <div class = "menuText">Time:</div>
@@ -44,6 +52,14 @@
         <span class="slider round"></span>
       </label>
     </div>
+
+    <div class = "menuText">Desaturate Background:</div>
+    <div class = "sliderWrapper">
+      <label class="switch">
+        <input type="checkbox" ID="desaSwitch">
+        <span class="slider round"></span>
+      </label>
+    </div>
   </div>
 
   <div class = "timeWrapper" ID="timeWrapper">
@@ -66,7 +82,7 @@
       </div>
       <ul ID="myUL">
       </ul>
-      <input class="todoInput" autocomplete="off" type="text" id="myInput" placeholder="New Todo . . ."/>
+      <input class="todoInput" autocomplete="off" type="text" id="myInput" placeholder="New Item . . ."/>
     </div>
   </div>
 
