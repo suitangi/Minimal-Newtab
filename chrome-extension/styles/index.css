@@ -1,6 +1,7 @@
 body{
   overflow: hidden; /* no scrolling! */
   background-color: #222;
+  margin: 0px;
 }
 
 /* no scrollbar! */
@@ -30,7 +31,7 @@ button:focus {
     background-color: #222;
     background-size: cover;
     background-repeat: no-repeat;
-    filter: brightness(0.6);
+    filter: brightness(0.65);
     transition: 0.3s;
     z-index: 1;
 }
@@ -112,13 +113,13 @@ button:focus {
   position: absolute;
   top: 60%; left: 7%;
   z-index: 5;
-  visibility: hidden;
+  opacity: 0;
 }
 .searchWrapper{
   position: absolute;
   top: 85%; left: 7%;
   z-index: 5;
-  visibility: hidden;
+  opacity: 0;
 }
 .todoWrapper{
   position: absolute;
@@ -126,7 +127,7 @@ button:focus {
   top: 70%; left: 27%;
   width: 17.3vw;
   z-index: 5;
-  visibility: hidden;
+  opacity: 0;
 }
 
 /* setting todolist hover to be visible */
@@ -335,4 +336,61 @@ ul li.checked {
 }
 .todoInput::placeholder {
   color: rgba(255,255,255, 0);
+}
+
+.entrance {
+	animation: slide-in-blurred-top 0.5s cubic-bezier(0.230, 1.000, 0.320, 1.000) forwards;
+  animation-iteration-count: 1;
+}
+.exit{
+  animation: slide-out-blurred-top 0.45s cubic-bezier(0.755, 0.050, 0.855, 0.060) forwards;
+  animation-iteration-count: 1;
+}
+.firstStart{
+  visibility: hidden;
+}
+
+/* widget come in animation */
+@keyframes slide-in-blurred-top {
+  0% {
+    -webkit-transform: translateY(-1000px) scaleY(2.5) scaleX(0.2);
+            transform: translateY(-1000px) scaleY(2.5) scaleX(0.2);
+    -webkit-transform-origin: 50% 0%;
+            transform-origin: 50% 0%;
+    -webkit-filter: blur(40px);
+            filter: blur(40px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0) scaleY(1) scaleX(1);
+            transform: translateY(0) scaleY(1) scaleX(1);
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+    -webkit-filter: blur(0);
+            filter: blur(0);
+    opacity: 1;
+  }
+}
+
+/* widget leave animation */
+@keyframes slide-out-blurred-top {
+  0% {
+    -webkit-transform: translateY(0) scaleY(1) scaleX(1);
+            transform: translateY(0) scaleY(1) scaleX(1);
+    -webkit-transform-origin: 50% 0%;
+            transform-origin: 50% 0%;
+    -webkit-filter: blur(0);
+            filter: blur(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateY(-1000px) scaleY(2) scaleX(0.2);
+            transform: translateY(-1000px) scaleY(2) scaleX(0.2);
+    -webkit-transform-origin: 50% 0%;
+            transform-origin: 50% 0%;
+    -webkit-filter: blur(40px);
+            filter: blur(40px);
+    opacity: 0;
+    /* visibility: hidden; */
+  }
 }

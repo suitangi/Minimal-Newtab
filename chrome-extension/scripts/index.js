@@ -123,28 +123,34 @@ function updateMilitary(){
 
 //toggles the visibility of the search bar
 function updateSearch(){
+  document.getElementById("searchWrapper").classList.remove("firstStart");
   if(document.getElementById("searchSwitch").checked){
     document.getElementById("searchSwitch").checked = false;
-    document.getElementById("searchWrapper").style.visibility = "hidden";
+    document.getElementById("searchWrapper").classList.add("exit");
+    document.getElementById("searchWrapper").classList.remove("entrance");
     chrome.storage.local.set({search_switch: "off"}, function() {});
   }
   else{
     document.getElementById("searchSwitch").checked = true;
-    document.getElementById("searchWrapper").style.visibility = "visible";
+    document.getElementById("searchWrapper").classList.add("entrance");
+    document.getElementById("searchWrapper").classList.remove("exit");
     chrome.storage.local.set({search_switch: "on"}, function() {});
   }
 }
 
 //toggles the visibility of the time display
 function updateTime(){
+  document.getElementById("timeWrapper").classList.remove("firstStart");
   if(document.getElementById("timeSwitch").checked){
     document.getElementById("timeSwitch").checked = false;
-    document.getElementById("timeWrapper").style.visibility = "hidden";
+    document.getElementById("timeWrapper").classList.add("exit");
+    document.getElementById("timeWrapper").classList.remove("entrance");
     chrome.storage.local.set({time_switch: "off"}, function() {});
   }
   else{
     document.getElementById("timeSwitch").checked = true;
-    document.getElementById("timeWrapper").style.visibility = "visible";
+    document.getElementById("timeWrapper").classList.add("entrance");
+    document.getElementById("timeWrapper").classList.remove("exit");
     chrome.storage.local.set({time_switch: "on"}, function() {});
   }
 }
@@ -158,7 +164,7 @@ function updateDark(){
   }
   else{
     document.getElementById("darkSwitch").checked = true;
-    document.getElementById("backloader").style.filter = "brightness(0.6)";
+    document.getElementById("backloader").style.filter = "brightness(0.65)";
     chrome.storage.local.set({dark_switch: "on"}, function() {});
   }
 }
@@ -179,15 +185,18 @@ function updateDesa(){
 
 //toggles the visibility of the todo list
 function updateTodo(){
+  document.getElementById("todoWrapper").classList.remove("firstStart");
   if(document.getElementById("todoSwitch").checked){
     document.getElementById("todoSwitch").checked = false;
-    document.getElementById("todoWrapper").style.visibility = "hidden";
+    document.getElementById("todoWrapper").classList.add("exit");
+    document.getElementById("todoWrapper").classList.remove("entrance");
     chrome.storage.local.set({todo_switch: "off"}, function() {});
   }
   else{
     document.getElementById("todoSwitch").checked = true;
-    document.getElementById("todoWrapper").style.visibility = "visible";
     chrome.storage.local.set({todo_switch: "on"}, function() {});
+    document.getElementById("todoWrapper").classList.add("entrance");
+    document.getElementById("todoWrapper").classList.remove("exit");
   }
 }
 
@@ -292,21 +301,23 @@ $(document).ready(function() {
   chrome.storage.local.get({search_switch: 'on'}, function(data) {
         if(data.search_switch == 'off'){
           document.getElementById("searchSwitch").checked = false;
-          document.getElementById("searchWrapper").style.visibility = "hidden";
+          document.getElementById("searchWrapper").classList.add("exit");
+          document.getElementById("searchWrapper").classList.add("firstStart");
         }
         else{
           document.getElementById("searchSwitch").checked = true;
-          document.getElementById("searchWrapper").style.visibility = "visible";
+          document.getElementById("searchWrapper").classList.add("entrance");
         }
   });
   chrome.storage.local.get({time_switch: 'on'}, function(data) {
         if(data.time_switch == 'off'){
           document.getElementById("timeSwitch").checked = false;
-          document.getElementById("timeWrapper").style.visibility = "hidden";
+          document.getElementById("timeWrapper").classList.add("exit");
+          document.getElementById("timeWrapper").classList.add("firstStart");
         }
         else{
           document.getElementById("timeSwitch").checked = true;
-          document.getElementById("timeWrapper").style.visibility = "visible";
+          document.getElementById("timeWrapper").classList.add("entrance");
         }
   });
   chrome.storage.local.get({dark_switch: 'on'}, function(data) {
@@ -374,11 +385,12 @@ $(document).ready(function() {
   chrome.storage.local.get({todo_switch: 'on'}, function(data) {
         if(data.todo_switch == 'off'){
           document.getElementById("todoSwitch").checked = false;
-          document.getElementById("todoWrapper").style.visibility = "hidden";
+          document.getElementById("todoWrapper").classList.add("exit");
+          document.getElementById("todoWrapper").classList.add("firstStart");
         }
         else{
           document.getElementById("todoSwitch").checked = true;
-          document.getElementById("todoWrapper").style.visibility = "visible";
+          document.getElementById("todoWrapper").classList.add("entrance");
         }
   });
 
