@@ -147,7 +147,7 @@ button:focus {
   position: absolute;
   background: transparent;
   top: 70%; left: 27%;
-  width: 17.3vw;
+  width: 17.5vw;
   z-index: 5;
   opacity: 0;
 }
@@ -280,13 +280,14 @@ ul {
 ul li {
   cursor: pointer;
   position: relative;
-  padding: 12px 8px 12px 17px;
+  padding: 12px 23px 12px 17px;
   list-style-type: none;
   background: transparent;
-  font-size: 1vw;
+  font-size: 16px;
   font-family: "Antic";
   color: rgba(255,255,255,0.7);
   transition: 0.2s;
+  word-wrap: break-word;
 
   /* make the list items unselectable */
   -webkit-user-select: none;
@@ -295,10 +296,6 @@ ul li {
   user-select: none;
 }
 
-/* Set all odd list items to a different color (zebra-stripes) */
-ul li:nth-child(odd) {
-  background: transparent;
-}
 
 /* Darker background-color on hover */
 ul li:hover {
@@ -316,7 +313,7 @@ ul li.checked {
 /* Style the close button */
 .close {
   position: absolute;
-  right: 0;
+  right: -5px;
   top: 0;
   padding: 12px 16px 12px 16px;
 }
@@ -351,8 +348,9 @@ ul li.checked {
   border-radius: 0;
   padding: 10px;
   padding-left: 17px;
+  width: 100%;
   float: left;
-  font-size: 1vw;
+  font-size: 16px;
   font-family: "Antic";
   color: rgba(255,255,255,0.7);
   border-top: 1px rgba(255,255,255,0.5);
@@ -364,6 +362,7 @@ ul li.checked {
 .todoInput::placeholder {
   color: rgba(255,255,255, 0);
 }
+
 
 .entrance {
 	animation: slide-in-blurred-top 0.5s cubic-bezier(0.230, 1.000, 0.320, 1.000) forwards;
