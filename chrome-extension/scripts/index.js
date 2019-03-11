@@ -178,7 +178,7 @@ function updateDesa(){
   }
   else{
     document.getElementById("desaSwitch").checked = true;
-    document.getElementById("desaFilter").style.filter = "saturate(0.6)";
+    document.getElementById("desaFilter").style.filter = "saturate(0.5)";
     chrome.storage.local.set({desa_switch: "on"}, function() {});
   }
 }
@@ -254,8 +254,8 @@ function loadBackground(){
 }
 
 $(document).ready(function() {
-  startTime();
 
+  //loads the list of backgrounds and loads a single one in
   var url = chrome.extension.getURL("backgroundList.txt");
     fetch(url)
     .then(function(response) {
@@ -265,13 +265,19 @@ $(document).ready(function() {
       console.log(window.vidlist);
       loadBackground();
     });
+  startTime(); //start the time
+
+  //prevent right click context menu
   document.addEventListener('contextmenu', event => event.preventDefault());
-  window.military = false;
-  var inputs = document.getElementsByTagName("input");
-  // Make the DIV element draggable:
+
+  window.military = false; //set default time and initialize variable
+
+  // Make the elements draggable:
   dragElement(document.getElementById("timeWrapper"));
   dragElement(document.getElementById("searchWrapper"));
   dragElement(document.getElementById("todoWrapper"));
+
+  //data/settings loading from chrome
   chrome.storage.local.get({military_switch: 'off'}, function(data) {
           window.military = (data.military_switch == 'on');
           if(data.military_switch == 'on'){
@@ -394,6 +400,7 @@ $(document).ready(function() {
         }
   });
 
+  //setting the switches click event listeners
   document.getElementById("searchSwitch").parentElement.addEventListener('click', function(){
     updateSearch();
   });
@@ -409,6 +416,12 @@ $(document).ready(function() {
   document.getElementById("todoSwitch").parentElement.addEventListener('click', function(){
     updateTodo();
   });
+  document.getElementById("time").addEventListener("click", function(){
+      updateMilitary();
+  });
+
+  //sets the to do list inputs
+  var inputs = document.getElementsByTagName("input");
   for (var i = 0; i < inputs.length; i++) {
       inputs[i].value = inputs[i].getAttribute('data-placeholder');
       inputs[i].addEventListener('focus', function() {
@@ -422,13 +435,8 @@ $(document).ready(function() {
           }
       });
   }
-  var times = document.getElementById("time");
-  times.addEventListener("click", function(){
-      updateMilitary();
-  });
 
-
-  // Add a "checked" symbol when clicking on a list item
+  //setting the click event to cross off items on the todo list
   var list = document.querySelector('ul');
   list.addEventListener('click', function(ev) {
     if (ev.target.tagName === 'LI') {
@@ -445,6 +453,7 @@ $(document).ready(function() {
     }
   }, false);
 
+  //when you press enter it pushes to the todo list
   $(".todoInput").on('keyup', function (e) {
     if (e.keyCode == 13) {
         newElement();

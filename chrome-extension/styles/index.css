@@ -1,13 +1,28 @@
+ /* no scrolling! */
 body{
-  overflow: hidden; /* no scrolling! */
+  overflow: hidden;
   background-color: #222;
   margin: 0px;
 }
 
-/* no scrollbar! */
+/* custom scrollbar! */
+/* width */
 ::-webkit-scrollbar {
-    display: none!important;
+  display: hidden;
 }
+
+/* ::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.3);
+} */
 
 /* no ugly focus border */
 input:focus,
@@ -51,6 +66,13 @@ button:focus {
 
 /* desaturate filter */
 #desaFilter{
+  min-width: 100%;
+  min-height: 100%;
+  transition: 0.3s;
+}
+
+/* decontrast filter */
+#deconFilter{
   min-width: 100%;
   min-height: 100%;
   transition: 0.3s;
@@ -152,11 +174,16 @@ button:focus {
   top:0; left:0;
   height: 100%;
   width: 15px;
+  overflow:auto !important;
   transition: all .2s cubic-bezier(.68, -0.2, .27, 1.55);
 }
 #menu:hover {
   background-color: rgba(0,0,0,0.7);
   width: 235px;
+  overflow:auto !important;
+}
+#menu:hover ::-webkit-scrollbar{
+  display: none;
 }
 #menu:hover .menuText,
 #menu:hover .sliderWrapper{
