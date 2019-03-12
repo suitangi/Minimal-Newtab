@@ -94,6 +94,7 @@ button:focus {
 .time{
   color: rgba(255,255,255,0.5);
   font-family: "Antic";
+  user-select: none;
   font-weight: 100;
   font-size: 9vw;
   margin-bottom: 12px;
@@ -205,6 +206,7 @@ button:focus {
   margin-bottom: 10px;
   font-size: 24px;
   font-family: "Abel";
+  user-select: none;
   text-align: center;
 }
 .sliderWrapper{
@@ -285,7 +287,7 @@ ul li {
   background: transparent;
   font-size: 16px;
   font-family: "Antic";
-  color: rgba(255,255,255,0.7);
+  color: rgba(255,255,255,0.8);
   transition: 0.2s;
   word-wrap: break-word;
 
@@ -300,13 +302,13 @@ ul li {
 /* Darker background-color on hover */
 ul li:hover {
   font-weight: 550;
-  color: rgba(255,255,255,0.9) !important;
+  color: rgba(255,255,255,1) !important;
 }
 
 /* When clicked on, add a background color and strike out text */
 ul li.checked {
   background: transparent;
-  color: rgba(255,255,255,0.7);
+  color: rgba(255,255,255,0.8);
   text-decoration: line-through;
 }
 
