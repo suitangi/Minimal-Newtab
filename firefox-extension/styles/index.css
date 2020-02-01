@@ -7,8 +7,8 @@ body{
 
 /* custom scrollbar! */
 /* width */
-::-webkit-scrollbar {
-  display: hidden;
+#menu {
+   scrollbar-width: none;
 }
 
 /* ::-webkit-scrollbar-track {

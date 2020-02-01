@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+  "name": "Garden of Words Newtab",
+  "version": "1.4.2",
+  "description": "Replaces the newtab with a beautiful cinemagraph from Garden of Words.",
+  "permissions": ["storage"],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  }
+}

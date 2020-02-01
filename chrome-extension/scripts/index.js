@@ -256,7 +256,7 @@ function loadBackground(){
 $(document).ready(function() {
 
   //loads the list of backgrounds and loads a single one in
-  var url = chrome.extension.getURL("backgroundList.txt");
+  var url = chrome.extension.getURL("kimiList.txt");
     fetch(url)
     .then(function(response) {
         return response.text();
