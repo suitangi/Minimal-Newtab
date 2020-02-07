@@ -7,8 +7,14 @@
 
  /* custom scrollbar! */
  /* width */
+ /* Track */
+ /* WebKit and Blink */
  ::-webkit-scrollbar {
-   display: hidden;
+   width: 5px;
+ }
+ ::-webkit-scrollbar-thumb {
+   background: rgba(255, 255, 255, 0.2);
+   border-radius: 4px;
  }
 
  /* ::-webkit-scrollbar-track {
@@ -210,7 +216,7 @@
    left: 0;
    height: 100%;
    width: 15px;
-   overflow: auto !important;
+   overflow: hidden;
    transition: all .2s cubic-bezier(.68, -0.2, .27, 1.55);
  }
 

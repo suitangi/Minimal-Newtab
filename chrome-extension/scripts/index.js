@@ -303,6 +303,19 @@ $(document).ready(function() {
         console.log(window.vidlist);
         loadBackground();
       });
+  } else {
+    $.alert({
+      title: 'Error',
+      content: 'No internet access. Please check your connection and try again.',
+      type: 'red',
+      boxWidth: '25%',
+      backgroundDismiss: true,
+      useBootstrap: false,
+      typeAnimated: true,
+      buttons: {
+        Dismiss: function() {}
+      }
+    });
   }
   startTime(); //start the time
 
@@ -312,22 +325,21 @@ $(document).ready(function() {
       title: '',
       content: 'Are you sure you want to reset? Doing so will reset all data including saved widgets locations and preferences.',
       boxWidth: '25%',
-    useBootstrap: false,
+      useBootstrap: false,
       type: 'blue',
+      escapeKey: 'cancel',
       buttons: {
         ok: {
           text: "I understand, reset",
           btnClass: 'btn-blue',
           keys: ['enter'],
           action: function() {
-            chrome.storage.local.clear(function(){
+            chrome.storage.local.clear(function() {
               location.reload();
             });
           }
         },
-        cancel: function() {
-          console.log('the user clicked cancel');
-        }
+        cancel: function() {}
       }
     });
   };
