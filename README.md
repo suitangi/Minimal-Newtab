@@ -1,12 +1,12 @@
 # Cinemagraph Newtab
 This extension changes your new tab page so that scenes from Makoto Shinkai's Garden of Words (Kotonoha no Niwa) can play as seamless, looping cinemagraphs in the background.
 
+![Screenshot](/../master/SC.png)
+
 ### How to use:
 1. Install the extension
 2. Open a new tab
 3. That's it!
-
-![Screenshot](/../master/SC.png)
 
 ### Clock:
 - Drag to move the clock
@@ -29,7 +29,7 @@ This extension changes your new tab page so that scenes from Makoto Shinkai's Ga
 - Desaturate option: de-saturates the background
 
 
-Disclaimer: I do not own any of the artwork or cinemagraphs used in this extension. Credit goes to their respective owner (anime stuio/publisher) and original poster cyan1618 on Imgur.
+*Disclaimer: I do not own any of the artwork or cinemagraphs used in this extension. Credit goes to their respective owner (anime stuio/publisher) and original poster cyan1618 on Imgur.
 
 
 ## Change-Log
