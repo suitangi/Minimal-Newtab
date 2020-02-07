@@ -29,7 +29,7 @@ This extension changes your new tab page so that scenes from Makoto Shinkai's Ga
 - Desaturate option: de-saturates the background
 
 
-*Disclaimer: I do not own any of the artwork or cinemagraphs used in this extension. Credit goes to their respective owner (anime stuio/publisher) and original poster cyan1618 on Imgur.
+*Disclaimer: I do not own any of the artwork or cinemagraphs used in this extension. Credit goes to their respective owner (anime stuio/publisher) and original poster cyan1618 on Imgur.*
 
 
 ## Change-Log
