@@ -1,105 +1,112 @@
   <!DOCTYPE html>
-<html>
-<!-- head, scripts and fonts -->
-<head>
+  <html>
+  <!-- head, scripts and fonts -->
+
+  <head>
     <meta charset="utf-8">
-	<title>New Tab</title>
-	<link rel="stylesheet" type="text/css" href="styles/index.css">
-  <link href='https://fonts.googleapis.com/css?family=Antic' rel='stylesheet'>
-  <link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet'>
+    <title>New Tab</title>
+    <link rel="stylesheet" type="text/css" href="styles/index.css">
+    <link rel="stylesheet" href="styles/jquery-confirm.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Antic' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet'>
     <script type="text/javascript" src="scripts/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="scripts/jquery-confirm.min.js"></script>
     <script type="text/javascript" src="scripts/index.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
 
-  <!-- the backgrond cinemagraph (video) -->
-  <div ID="deconFilter">
-    <div ID="desaFilter">
-      <div class = "backloader" ID ="backloader">
-        <div ID="clickDisabler"></div>
-        <video ID = "backdrop" width="100%" loop autoplay>
-          <source src="https://i.imgur.com/MuHjPqe.mp4" type="video/mp4">
-        </video>
+    <!-- the backgrond cinemagraph (video) -->
+    <div ID="deconFilter">
+      <div ID="desaFilter">
+        <div class="backloader" ID="backloader">
+          <div ID="clickDisabler"></div>
+          <video ID="backdrop" width="100%" loop autoplay>
+            <source src="resources/default.mp4" type="video/mp4">
+          </video>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- the left side menu -->
-  <div ID="menu">
-    <!-- the section for widgets -->
-    <div class = "menuText" style="color: rgba(255,255,255,0.95) !important; font-weight: 500;">Widgets</div>
-    <div class = "menuText">Time</div>
-    <div class = "sliderWrapper">
-      <label class="switch">
-        <input type="checkbox" ID="timeSwitch" checked>
-        <span class="slider round"></span>
-      </label>
-    </div>
-    <div class = "menuText">Search Bar</div>
-    <div class = "sliderWrapper">
-      <label class="switch">
-        <input type="checkbox" ID="searchSwitch" checked>
-        <span class="slider round"></span>
-      </label>
-    </div>
-    <div class = "menuText">Todo List</div>
-    <div class = "sliderWrapper">
-      <label class="switch">
-        <input type="checkbox" ID="todoSwitch" checked>
-        <span class="slider round"></span>
-      </label>
-    </div>
-
-    <!-- blank space divide -->
-    <div class = "menuText" style="color: transparent !important">.</div>
-
-    <!-- the section for background -->
-    <div class = "menuText" style="color: rgba(255,255,255,0.95) !important; font-weight: 500;">Background</div>
-    <div class = "menuText">Darken</div>
-    <div class = "sliderWrapper">
-      <label class="switch">
-        <input type="checkbox" ID="darkSwitch" checked>
-        <span class="slider round"></span>
-      </label>
-    </div>
-    <div class = "menuText">Desaturate</div>
-    <div class = "sliderWrapper">
-      <label class="switch">
-        <input type="checkbox" ID="desaSwitch">
-        <span class="slider round"></span>
-      </label>
-    </div>
-    <div class = "menuText" style="color: transparent !important">.</div>
-    <div class = "menuText" style="color: transparent !important">.</div>
-  </div>
-
-  <!-- the time widget -->
-  <div class = "timeWrapper" ID="timeWrapper">
-  	<h1 class="time" ID="time"></h1>
-    <div class = "pa" ID="pa"></div>
-  </div>
-
-  <!-- the search bar widget -->
-  <div class = "searchWrapper" ID = "searchWrapper">
-    <div class = "searchDiv" ID="searchDiv"></div>
-    <form id=search action="https://www.google.com/search" method="get">
-      <input class= "search" data-placeholder=" Google Search" type="searh" name="q" autocomplete="off"/>
-      <input type="submit" style="visibility: hidden;"/>
-    </form>
-  </div>
-
-  <!-- todo list widget -->
-  <div class = "todoWrapper" ID = "todoWrapper">
-    <div class = "todoHover">
-      <div ID="todoDiv" class="header">
-        <h2 style="margin:5px">Todo List</h2>
+    <!-- the left side menu -->
+    <div ID="menu">
+      <!-- the menu for widgets -->
+      <div class="menuText" style="color: rgba(255,255,255,0.95) !important; font-weight: 500;">Widgets</div>
+      <div class="menuText">Time</div>
+      <div class="sliderWrapper">
+        <label class="switch">
+          <input type="checkbox" ID="timeSwitch" checked>
+          <span class="slider round"></span>
+        </label>
       </div>
-      <ul ID="myUL">
-      </ul>
-      <input class="todoInput" autocomplete="off" type="text" id="myInput" placeholder="New Item . . ."/>
-    </div>
-  </div>
+      <div class="menuText">Search Bar</div>
+      <div class="sliderWrapper">
+        <label class="switch">
+          <input type="checkbox" ID="searchSwitch" checked>
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <div class="menuText">Todo List</div>
+      <div class="sliderWrapper">
+        <label class="switch">
+          <input type="checkbox" ID="todoSwitch" checked>
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <!-- blank space divide -->
+      <div class="menuText" style="color: transparent !important">.</div>
 
-</body>
-</html>
+      <!-- the menu for background -->
+      <div class="menuText" style="color: rgba(255,255,255,0.95) !important; font-weight: 500;">Background</div>
+      <div class="menuText">Darken</div>
+      <div class="sliderWrapper">
+        <label class="switch">
+          <input type="checkbox" ID="darkSwitch" checked>
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <div class="menuText">Desaturate</div>
+      <div class="sliderWrapper">
+        <label class="switch">
+          <input type="checkbox" ID="desaSwitch">
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <div class="menuText" style="color: transparent !important">.</div>
+      <div class="sliderWrapper">
+        <button ID="resetButton" class="button">Reset</button>
+      </div>
+      <div class="menuText" style="color: transparent !important">.</div>
+
+    </div>
+
+    <!-- the time widget -->
+    <div class="timeWrapper" ID="timeWrapper">
+      <h1 class="time" ID="time"></h1>
+      <div class="pa" ID="pa"></div>
+    </div>
+
+    <!-- the search bar widget -->
+    <div class="searchWrapper" ID="searchWrapper">
+      <div class="searchDiv" ID="searchDiv"></div>
+      <form id=search action="https://www.google.com/search" method="get">
+        <input class="search" data-placeholder=" Google Search" type="searh" name="q" autocomplete="off" />
+        <input type="submit" style="visibility: hidden;" />
+      </form>
+    </div>
+
+    <!-- todo list widget -->
+    <div class="todoWrapper" ID="todoWrapper">
+      <div class="todoHover">
+        <div ID="todoDiv" class="header">
+          <h2 style="margin:5px">Todo List</h2>
+        </div>
+        <ul ID="myUL">
+        </ul>
+        <input class="todoInput" autocomplete="off" type="text" id="myInput" placeholder="New Item . . ." />
+      </div>
+    </div>
+
+  </body>
+
+  </html>
