@@ -27,7 +27,7 @@ This extension changes your new tab page so that scenes from Makoto Shinkai's Ga
 - Each switch enables/disables respective gadgets
 - Darken option: darkens the background so it is easier to see
 - Desaturate option: de-saturates the background
-
+- Reset Button: resets the extension, wiping all data and restarts it (use this option when the widget is lost off-screen somehow)
 
 *Disclaimer: I do not own any of the artwork or cinemagraphs used in this extension. Credit goes to their respective owner (anime stuio/publisher) and original poster cyan1618 on Imgur.*
 
