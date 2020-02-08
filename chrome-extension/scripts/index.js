@@ -321,39 +321,44 @@ $(document).ready(function() {
   //add the bookmarks
   chrome.bookmarks.getTree(function(bkList) {
     window.bookmarklist = bkList[0].children[1].children;
-    let bkHtml = "";
 
-    //builds the bookmark html
-    function recurBkList(bklist) {
-      let node = bklist[0]
-      while (node != null) {
-        if (node.url == null) {
-          // console.log(i);
-          bkHtml += "<li class=\"bkItem\"><div class=\"folderName\">⮞ " + node.title + "</div><ol class=\"bkFolder hide\" style=\"list-style-type:none;\">";
-          if (node.children.length > 0) {
-            recurBkList(node.children);
+    if(window.bookmarklist.length == 0){
+      document.getElementById("bookmarks").style = "display: none;"
+    }
+    else{
+      let bkHtml = "";
+
+      //builds the bookmark html
+      function recurBkList(bklist) {
+        let node = bklist[0]
+        while (node != null) {
+          if (node.url == null) {
+            // console.log(i);
+            bkHtml += "<li class=\"bkItem\"><div class=\"folderName\">⮞ " + node.title + "</div><ol class=\"bkFolder hide\" style=\"list-style-type:none;\">";
+            if (node.children.length > 0) {
+              recurBkList(node.children);
+            }
+            bkHtml += "</ol></li>";
+          } else {
+            bkHtml += "<li class=\"bkItem\"><a href=\"" + node.url + "\" title=\"" + node.url + "\">" + node.title + "</a></li>";
           }
-          bkHtml += "</ol></li>";
-        } else {
-          bkHtml += "<li class=\"bkItem\"><a href=\"" + node.url + "\">" + node.title + "</a></li>";
+          node = bklist[node.index + 1];
         }
-        node = bklist[node.index + 1];
+      }
+
+      recurBkList(window.bookmarklist);
+      document.getElementById("bkList").innerHTML = bkHtml;
+
+      folderList = document.getElementsByClassName("folderName");
+      for (i = 0; i < folderList.length; i++) {
+        folderList[i].onclick = function(){
+          this.nextElementSibling.classList.toggle("hide");
+          this.innerText = this.innerText.replace("⮟", ">");
+          this.innerText = this.innerText.replace("⮞", "⮟");
+          this.innerText = this.innerText.replace(">", "⮞");
+        };
       }
     }
-
-    recurBkList(window.bookmarklist);
-    // console.log(bkHtml);
-    document.getElementById("bkList").innerHTML = bkHtml;
-
-    folderList = document.getElementsByClassName("folderName");
-    for (i = 0; i < folderList.length; i++) {
-      folderList[i].onclick = function(){
-        this.nextElementSibling.classList.toggle("hide");
-        this.innerText = this.innerText.replace("⮟", ">");
-        this.innerText = this.innerText.replace("⮞", "⮟");
-        this.innerText = this.innerText.replace(">", "⮞");
-      };
-    };
   });
 
   //add onclick for resetButton
