@@ -16,12 +16,12 @@ function checkHour(i) {
 
 //starts the time
 function startTime() {
-  var today = new Date();
-  var h = today.getHours();
-  var m = today.getMinutes();
+  let today = new Date();
+  let h = today.getHours();
+  let m = today.getMinutes();
   // add a zero in front of numbers<10
   m = checkMin(m);
-  var pa = "";
+  let pa = "";
 
   //sets PM and AM if not in military
   if (!window.military) {
@@ -45,7 +45,7 @@ function startTime() {
 
 //sets the element to be draggable (customized for time, search bar, todo list)
 function dragElement(elmnt) {
-  var pos1 = 0,
+  let pos1 = 0,
     pos2 = 0,
     pos3 = 0,
     pos4 = 0;
@@ -235,27 +235,27 @@ function updateTodo() {
 
 //Todo list: Create a new list item when clicking on the "Add" button
 function newElement() {
-  var li = document.createElement("li");
-  var inputValue = document.getElementById("myInput").value;
-  var t = document.createTextNode(inputValue);
+  let li = document.createElement("li");
+  let inputValue = document.getElementById("myInput").value;
+  let t = document.createTextNode(inputValue);
   li.appendChild(t);
   if (inputValue != '') {
     document.getElementById("myUL").appendChild(li);
   }
   document.getElementById("myInput").value = "";
 
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
+  let span = document.createElement("SPAN");
+  let txt = document.createTextNode("\u00D7");
   span.className = "close";
   span.appendChild(txt);
   li.appendChild(span);
-  var close = document.getElementsByClassName("close");
+  let close = document.getElementsByClassName("close");
   for (i = 0; i < close.length; i++) {
     close[i].addEventListener('click', function() {
-      var div = this.parentElement;
+      let div = this.parentElement;
       div.parentNode.removeChild(div);
-      var lilist = document.getElementsByTagName("LI");
-      var store = "";
+      let lilist = document.getElementsByTagName("LI");
+      let store = "";
       for (i = 0; i < lilist.length; i++) {
         if (lilist[i].classList.contains('checked'))
           store += "☑" + lilist[i].innerText.trim();
@@ -268,8 +268,8 @@ function newElement() {
       }, function() {});
     });
   }
-  var lilist = document.getElementsByTagName("LI");
-  var store = "";
+  let lilist = document.getElementsByTagName("LI");
+  let store = "";
   for (i = 0; i < lilist.length; i++) {
     // if(i == lilist.length - 1)
     store += lilist[i].innerText.trim();
@@ -280,11 +280,10 @@ function newElement() {
   }, function() {});
 }
 
-
 //loads a random background (currently in video form)
 function loadBackground() {
-  var imn = Math.floor(Math.random() * window.vidlist.length);
-  var vid = document.getElementById("backdrop");
+  let imn = Math.floor(Math.random() * window.vidlist.length);
+  let vid = document.getElementById("backdrop");
   vid.src = window.vidlist[imn];
   vid.load();
 
@@ -294,7 +293,7 @@ $(document).ready(function() {
 
   //loads the list of backgrounds and loads a single one in
   if (window.navigator.onLine) { //if Chrome is online
-    var url = chrome.extension.getURL("resources/kimiList.txt");
+    let url = chrome.extension.getURL("resources/kimiList.txt");
     fetch(url)
       .then(function(response) {
         return response.text();
@@ -319,11 +318,49 @@ $(document).ready(function() {
   }
   startTime(); //start the time
 
+  //add the bookmarks
+  chrome.bookmarks.getTree(function(bkList) {
+    window.bookmarklist = bkList[0].children[1].children;
+    let bkHtml = "";
+
+    //builds the bookmark html
+    function recurBkList(bklist) {
+      let node = bklist[0]
+      while (node != null) {
+        if (node.url == null) {
+          // console.log(i);
+          bkHtml += "<li class=\"bkItem\"><div class=\"folderName\">⮞ " + node.title + "</div><ol class=\"bkFolder hide\" style=\"list-style-type:none;\">";
+          if (node.children.length > 0) {
+            recurBkList(node.children);
+          }
+          bkHtml += "</ol></li>";
+        } else {
+          bkHtml += "<li class=\"bkItem\"><a href=\"" + node.url + "\">" + node.title + "</a></li>";
+        }
+        node = bklist[node.index + 1];
+      }
+    }
+
+    recurBkList(window.bookmarklist);
+    // console.log(bkHtml);
+    document.getElementById("bkList").innerHTML = bkHtml;
+
+    folderList = document.getElementsByClassName("folderName");
+    for (i = 0; i < folderList.length; i++) {
+      folderList[i].onclick = function(){
+        this.nextElementSibling.classList.toggle("hide");
+        this.innerText = this.innerText.replace("⮟", ">");
+        this.innerText = this.innerText.replace("⮞", "⮟");
+        this.innerText = this.innerText.replace(">", "⮞");
+      };
+    };
+  });
+
   //add onclick for resetButton
   document.getElementById("resetButton").onclick = function() {
     $.confirm({
       title: '',
-      content: 'Are you sure you want to reset? Doing so will reset all data including saved widgets locations and preferences.',
+      content: 'Are you sure you want to reset? Doing so will reset all data including saved widgets locations and preferences. It will not delete your bookmarks.',
       boxWidth: '25%',
       useBootstrap: false,
       type: 'blue',
@@ -452,30 +489,30 @@ $(document).ready(function() {
     todo_data: ''
   }, function(data) {
     if (data.todo_data != '') {
-      var arr = data.todo_data.split("×");
+      let arr = data.todo_data.split("×");
       for (i = 0; i < arr.length - 1; i++) {
-        var li = document.createElement("li");
+        let li = document.createElement("li");
         if (arr[i].indexOf("☑") != -1) {
-          var t = document.createTextNode(String(arr[i]).slice(1));
+          let t = document.createTextNode(String(arr[i]).slice(1));
           li.appendChild(t);
           li.classList.toggle('checked');
         } else {
-          var t = document.createTextNode(arr[i]);
+          let t = document.createTextNode(arr[i]);
           li.appendChild(t);
         }
 
         document.getElementById("myUL").appendChild(li);
 
-        var span = document.createElement("SPAN");
-        var txt = document.createTextNode("\u00D7");
+        let span = document.createElement("SPAN");
+        let txt = document.createTextNode("\u00D7");
         span.className = "close";
         span.appendChild(txt);
         li.appendChild(span);
         span.addEventListener('click', function() {
-          var div = this.parentElement;
+          let div = this.parentElement;
           div.parentNode.removeChild(div);
-          var lilist = document.getElementsByTagName("LI");
-          var store = "";
+          let lilist = document.getElementsByTagName("LI");
+          let store = "";
           for (i = 0; i < lilist.length; i++) {
             if (lilist[i].classList.contains('checked'))
               store += "☑" + lilist[i].innerText.trim();
@@ -523,8 +560,8 @@ $(document).ready(function() {
   });
 
   //sets the to do list inputs
-  var inputs = document.getElementsByTagName("input");
-  for (var i = 0; i < inputs.length; i++) {
+  let inputs = document.getElementsByTagName("input");
+  for (let i = 0; i < inputs.length; i++) {
     inputs[i].value = inputs[i].getAttribute('data-placeholder');
     inputs[i].addEventListener('focus', function() {
       if (this.value == this.getAttribute('data-placeholder')) {
@@ -539,12 +576,12 @@ $(document).ready(function() {
   }
 
   //setting the click event to cross off items on the todo list
-  var list = document.querySelector('ul');
+  let list = document.querySelector('ul');
   list.addEventListener('click', function(ev) {
     if (ev.target.tagName === 'LI') {
       ev.target.classList.toggle('checked');
-      var lilist = document.getElementsByTagName("LI");
-      var store = "";
+      let lilist = document.getElementsByTagName("LI");
+      let store = "";
       for (i = 0; i < lilist.length; i++) {
         if (lilist[i].classList.contains('checked'))
           store += "☑" + lilist[i].innerText.trim();

@@ -58,6 +58,32 @@
 
       <!-- the menu for background -->
       <div class="menuText" style="color: rgba(255,255,255,0.95) !important; font-weight: 500;">Background</div>
+      <div class="menuText">Your Name</div>
+      <div class="sliderWrapper">
+        <label class="switch">
+          <input type="checkbox" ID="kimiSwitch" checked>
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <div class="menuText">Garden of Words</div>
+      <div class="sliderWrapper">
+        <label class="switch">
+          <input type="checkbox" ID="kotoSwitch"  checked>
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <div class="menuText">5cm/s</div>
+      <div class="sliderWrapper">
+        <label class="switch">
+          <input type="checkbox" ID="5cmSwitch"  checked>
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <!-- blank space divide -->
+      <div class="menuText" style="color: transparent !important">.</div>
+
+      <!-- the menu for background -->
+      <div class="menuText" style="color: rgba(255,255,255,0.95) !important; font-weight: 500;">Effects</div>
       <div class="menuText">Darken</div>
       <div class="sliderWrapper">
         <label class="switch">
@@ -72,9 +98,14 @@
           <span class="slider round"></span>
         </label>
       </div>
+
+      <!-- Buttons -->
       <div class="menuText" style="color: transparent !important">.</div>
-      <div class="sliderWrapper">
+      <div class="sliderWrapper buttonWrapper">
         <button ID="resetButton" class="button">Reset</button>
+      </div>
+      <div class="sliderWrapper buttonWrapper">
+        <button ID="aboutButton" class="button">About</button>
       </div>
       <div class="menuText" style="color: transparent !important">.</div>
 
@@ -106,6 +137,15 @@
         <input class="todoInput" autocomplete="off" type="text" id="myInput" placeholder="New Item . . ." />
       </div>
     </div>
+
+    <!-- the bookmarks side panel -->
+    <div ID="bookmarks">
+      <div id="bkTitle" style="color: rgba(255,255,255,0.95) !important; font-weight: 500;">Bookmarks</div>
+      <ol id="bkList" style="list-style-type:none;">
+
+      </ol>
+    </div>
+
 
   </body>
 

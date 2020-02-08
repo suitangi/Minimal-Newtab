@@ -10,10 +10,11 @@
  /* Track */
  /* WebKit and Blink */
  ::-webkit-scrollbar {
-   width: 5px;
+   width: 6px;
  }
+
  ::-webkit-scrollbar-thumb {
-   background: rgba(255, 255, 255, 0.2);
+   background: rgba(255, 255, 255, 0.17);
    border-radius: 4px;
  }
 
@@ -35,31 +36,6 @@
  textarea:focus,
  button:focus {
    outline: none;
- }
-
- /* reset button */
- .button {
-   background-color: #2196F3;
-   border: none;
-   color: white;
-   padding: 4px 12px;
-   font-family: "Abel";
-   text-align: center;
-   text-decoration: none;
-   display: inline-block;
-   font-size: 16px;
-   cursor: pointer;
-   position: relative;
-   border-radius: 22px;
-   left: 50%;
-   -webkit-transform: translateX(-50%);
-   -moz-transform: translateX(-50%);
-   transform: translateX(-50%);
-   user-select: none;
- }
-
- .button:hover {
-   background-color: #1d7ecc;
  }
 
  /* background wrapper */
@@ -206,6 +182,102 @@
    transition: 0.2s
  }
 
+ /* bookmarks */
+ /* all the menu elements */
+ #bookmarks {
+   padding-top: 10px;
+   background-color: rgba(0, 0, 0, 0);
+   z-index: 7;
+   position: absolute;
+   top: 0;
+   right: 0;
+   height: 100%;
+   width: 15px;
+   overflow: hidden;
+   font-size: 14px;
+   font-family: "Antic";
+   transition: all .2s cubic-bezier(.68, -0.2, .27, 1.55);
+ }
+
+ #bookmarks:hover {
+   background-color: rgba(0, 0, 0, 0.7);
+   width: 300px;
+   overflow: auto !important;
+ }
+
+ #bookmarks:hover ::-webkit-scrollbar {
+   display: none;
+ }
+
+ #bookmarks:hover #bkList,
+ #bookmarks:hover #bkTitle {
+   opacity: 0.7 !important;
+   visibility: visible;
+   transition: all .17s ease;
+ }
+
+ #bkTitle {
+   background-color: rgba(255, 255, 255, 0) !important;
+   margin-top: 10px;
+   margin-bottom: 10px;
+   text-align: center;
+   user-select: none;
+   color: rgba(255, 255, 255, 0.7);
+   font-size: 24px;
+   font-family: "Abel";
+ }
+
+ #bookmarks #bkList,
+ #bookmarks #bkTitle {
+   visibility: hidden;
+ }
+
+ #bkList {
+   padding-left: 15px;
+   padding-right: 5px;
+ }
+
+ .bkFolder {
+   padding-left: 12px;
+ }
+
+ .bkFolder .bkItem {
+   border-left: 1px solid white;
+   border-radius: 0px 4px 4px 0px;
+ }
+
+ .bkItem {
+   border-radius: 4px;
+ }
+
+ .bkItem:hover {
+   background-color: rgba(255, 255, 255, 0.13);
+ }
+
+ .bkItem a {
+   color: white;
+   text-align: left;
+   display: block;
+   text-decoration: none;
+   padding-left: 7px;
+   padding-top: 6px;
+   padding-bottom: 7px;
+   user-select: none;
+ }
+
+ .folderName {
+   padding-left: 0px;
+   color: white;
+   cursor: pointer;
+   padding-left: 7px;
+   padding-top: 6px;
+   padding-bottom: 7px;
+ }
+
+ .hide {
+   display: none;
+ }
+
  /* all the menu elements */
  #menu {
    padding-top: 50px;
@@ -255,11 +327,40 @@
    text-align: center;
  }
 
+ /* button */
+ .button {
+   background-color: rgba(255, 255, 255, 0.3);
+   border: none;
+   color: rgba(255, 255, 255, 0.7);
+   padding: 6px 20px;
+   font-family: "Abel";
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 24px;
+   cursor: pointer;
+   position: relative;
+   border-radius: 17px;
+   left: 50%;
+   -webkit-transform: translateX(-50%);
+   -moz-transform: translateX(-50%);
+   transform: translateX(-50%);
+   user-select: none;
+ }
+
+ .button:hover {
+   background-color: rgba(255, 255, 255, 0.25);
+ }
+
+ .buttonWrapper {
+   margin-bottom: 17px !important;
+ }
+
  .sliderWrapper {
    margin-left: auto;
    margin-right: auto;
    margin-top: 10px;
-   margin-bottom: 45px;
+   margin-bottom: 35px;
    width: 43px;
  }
 

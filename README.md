@@ -34,6 +34,7 @@ This extension changes your new tab page so that scenes from Makoto Shinkai's Ga
 
 ## Change-Log
 ```
+1.5.0 Added updated menu and bookmarks panel
 1.4.3 Bug fixes, menu now scrollable, slight font adjustments
 1.4.1 Bug fixes, Added animations for widgets, Background changes
 1.4.0 Original Release: Garden of Words Newtab
