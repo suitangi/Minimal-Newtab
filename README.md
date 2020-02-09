@@ -1,5 +1,10 @@
 # Cinemagraph Newtab
-This extension changes your new tab page so that scenes from Makoto Shinkai's Garden of Words (Kotonoha no Niwa) can play as seamless, looping cinemagraphs in the background.
+This extension changes your new tab page so that scenes from Makoto Shinkai's movies can play as seamless, looping cinemagraphs in the background.
+
+The movies included are:
+- Kimi no Na Wa (Your Name)
+- Byousoku 5 Centimeter (5cm/s)
+- Kotonoha no Niwa (Garden of Words)
 
 ![Screenshot](/../master/SC.png)
 
