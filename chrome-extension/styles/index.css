@@ -194,7 +194,7 @@
    height: 100%;
    width: 15px;
    overflow: hidden;
-   font-size: 14px;
+   font-size: 16px;
    font-family: "Antic";
    transition: all .2s cubic-bezier(.68, -0.2, .27, 1.55);
  }
@@ -239,7 +239,7 @@
 
  .bkFolder {
    padding-left: 12px;
-   padding-bottom: 3px;
+   padding-bottom: 5px;
  }
 
  .bkFolder .bkItem {
@@ -261,8 +261,8 @@
    display: block;
    text-decoration: none;
    padding-left: 7px;
-   padding-top: 6px;
-   padding-bottom: 7px;
+   padding-top: 7px;
+   padding-bottom: 8px;
    user-select: none;
  }
 
@@ -271,13 +271,9 @@
    color: white;
    cursor: pointer;
    padding-left: 7px;
-   padding-top: 6px;
-   padding-bottom: 7px;
+   padding-top: 7px;
+   padding-bottom: 8px;
    user-select: none;
- }
-
- .hide {
-   display: none;
  }
 
  /* all the menu elements */
@@ -294,7 +290,8 @@
    transition: all .2s cubic-bezier(.68, -0.2, .27, 1.55);
  }
 
- #menu:hover {
+ #menu:hover,
+ #menu.delay {
    background-color: rgba(0, 0, 0, 0.7);
    width: 235px;
    overflow: auto !important;
@@ -305,7 +302,9 @@
  }
 
  #menu:hover .menuText,
- #menu:hover .sliderWrapper {
+ #menu:hover .sliderWrapper,
+ #menu.delay .menuText,
+ #menu.delay .sliderWrapper {
    opacity: 0.6 !important;
    visibility: visible;
    transition: all .17s ease;

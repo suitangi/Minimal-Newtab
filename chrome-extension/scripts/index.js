@@ -271,7 +271,6 @@ function newElement() {
         else
           store += lilist[i].innerText.trim();
       }
-      console.log(store);
       chrome.storage.local.set({
         todo_data: store
       }, function() {});
@@ -283,7 +282,6 @@ function newElement() {
     // if(i == lilist.length - 1)
     store += lilist[i].innerText.trim();
   }
-  console.log(store);
   chrome.storage.local.set({
     todo_data: store
   }, function() {});
@@ -296,25 +294,47 @@ function loadBackground(backJson) {
   backList = backJson.sources;
   let index = 0;
   bkMenu = document.getElementById("backgroundMenu");
-  //functional programming yay
+
+  //functional programming yay callback hell xd
   function loadSource(backList) {
     if (index == backList.length) {
+      //if none of the sources are selected, use the defualt provided and give warning alert
+      if (window.vidlist.length == 0) {
+        let defBk = backJson.default;
+        window.vidlist.push(defBk);
+        $.alert({
+          title: 'No Background sources selected',
+          content: 'A default background was loaded. Please select sources in the left hand menu.',
+          type: 'blue',
+          boxWidth: '25%',
+          backgroundDismiss: true,
+          useBootstrap: false,
+          typeAnimated: true,
+          buttons: {
+            Dismiss: function() {
+              location.reload();
+            }
+          }
+        });
+      }
+
       //loading ended: choose a random cinemagraph, but not the last one shown
       chrome.storage.local.get({
-        lastShown: ""
-      }, function(data) {
-        let imn = Math.floor(Math.random() * window.vidlist.length);
-        let vid = document.getElementById("backdrop");
-        while (data.lastShown == window.vidlist[imn]) {
+          lastShown: ""
+        },
+        function(data) {
           let imn = Math.floor(Math.random() * window.vidlist.length);
-        }
-        vid.src = window.vidlist[imn];
-        vid.load();
-        //save the last shown in chrome
-        chrome.storage.local.set({
-          lastShown: window.vidlist[imn]
-        }, function() {});
-      });
+          let vid = document.getElementById("backdrop");
+          while (data.lastShown == window.vidlist[imn] && window.vidlist.length != 1) {
+            let imn = Math.floor(Math.random() * window.vidlist.length);
+          }
+          vid.src = window.vidlist[imn];
+          vid.load();
+          //save the last shown in chrome
+          chrome.storage.local.set({
+            lastShown: window.vidlist[imn]
+          }, function() {});
+        });
       return;
     } else {
       let name = backList[index].name;
@@ -372,6 +392,7 @@ $(document).ready(function() {
       .then((response) => response.json())
       .then((json) => loadBackground(json));
   } else {
+    //send an error alert for no internet connection
     $.alert({
       title: 'Error',
       content: 'No internet access. Please check your connection and try again.',
@@ -403,7 +424,7 @@ $(document).ready(function() {
         while (node != null) {
           if (node.url == null) {
             // console.log(i);
-            bkHtml += "<li class=\"bkItem\"><div class=\"folderName\">⮞ " + node.title + "</div><ol class=\"bkFolder hide\" style=\"list-style-type:none;\">";
+            bkHtml += "<li class=\"bkItem\"><div class=\"folderName\">⮞ " + node.title + "</div><ol class=\"bkFolder\" style=\"list-style-type:none; display:none;\">";
             if (node.children.length > 0) {
               recurBkList(node.children);
             }
@@ -421,7 +442,8 @@ $(document).ready(function() {
       folderList = document.getElementsByClassName("folderName");
       for (i = 0; i < folderList.length; i++) {
         folderList[i].onclick = function() {
-          this.nextElementSibling.classList.toggle("hide");
+          this.nextElementSibling.classList.toggle("hidden");
+          $(this).next().slideToggle("fast");
           this.innerText = this.innerText.replace("⮟", ">");
           this.innerText = this.innerText.replace("⮞", "⮟");
           this.innerText = this.innerText.replace(">", "⮞");
@@ -430,11 +452,33 @@ $(document).ready(function() {
     }
   });
 
+  //add onclick for aboutButton
+  document.getElementById("aboutButton").onclick = function() {
+    document.getElementById("menu").classList.add("delay");
+    $.alert({
+      title: 'About',
+      content: 'Lorem Ipsum',
+      type: 'blue',
+      boxWidth: '25%',
+      backgroundDismiss: true,
+      useBootstrap: false,
+      typeAnimated: true,
+      buttons: {
+        Dismiss: function() {
+          setTimeout(function() {
+            document.getElementById("menu").classList.remove("delay")
+          }, 250);
+        }
+      }
+    });
+  };
+
   //add onclick for resetButton
   document.getElementById("resetButton").onclick = function() {
+    document.getElementById("menu").classList.add("delay");
     $.confirm({
-      title: '',
-      content: 'Are you sure you want to reset? Doing so will reset all data including saved widgets locations and preferences. It will not delete your bookmarks.',
+      title: 'Are you sure',
+      content: 'you want to reset? Doing so will reset all data including saved widgets locations and preferences. It will not delete your bookmarks.',
       boxWidth: '25%',
       useBootstrap: false,
       type: 'blue',
@@ -450,7 +494,11 @@ $(document).ready(function() {
             });
           }
         },
-        cancel: function() {}
+        cancel: function() {
+          setTimeout(function() {
+            document.getElementById("menu").classList.remove("delay")
+          }, 250);
+        }
       }
     });
   };

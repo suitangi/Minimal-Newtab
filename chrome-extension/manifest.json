@@ -1,16 +1,18 @@
 {
- 	"manifest_version": 2,
- 	"name": "Makoto Shinkai's Newtab",
+  "manifest_version": 2,
+  "name": "Makoto Shinkai's Newtab",
   "short_name": "Shinkai's Tab",
- 	"version": "1.5.0",
-	"description": "Replaces the newtab with a beautiful cinemagraph from one of Makoto Shinkai's movies (Your Name, 5cm/s, Garden of Words).",
+  "version": "1.5.0",
+  "description": "Replaces the newtab with a beautiful cinemagraph from one of Makoto Shinkai's movies (Your Name, 5cm/s, Garden of Words).",
   "permissions": ["storage", "bookmarks"],
-  "icons": { "16": "icons/icon16.png",
-         "48": "icons/icon48.png",
-        "128": "icons/icon128.png" },
-	"chrome_url_overrides" : {
-  	"newtab": "index.html"
-	}
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  }
 
 
 }
