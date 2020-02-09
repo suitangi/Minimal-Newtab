@@ -297,6 +297,7 @@ function loadBackground(backJson) {
 
   //functional programming yay callback hell xd
   function loadSource(backList) {
+    //end case
     if (index == backList.length) {
       //if none of the sources are selected, use the defualt provided and give warning alert
       if (window.vidlist.length == 0) {
@@ -334,6 +335,10 @@ function loadBackground(backJson) {
           chrome.storage.local.set({
             lastShown: window.vidlist[imn]
           }, function() {});
+
+          //if there is only one background source, don't need to show the menu switches
+          if(backList.length == 1)
+            $('.backgroundMenu').css("display", "none");
         });
       return;
     } else {
@@ -352,7 +357,6 @@ function loadBackground(backJson) {
 
       //adding the onClick for the swtiches
       document.getElementById(key).parentElement.onclick = function() {
-        console.log(this);
         checkElement = this.firstElementChild;
         obj = {};
         key = checkElement.id;

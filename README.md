@@ -39,6 +39,7 @@ The movies included are:
 
 ## Change-Log
 ```
+1.5.1 Button bug fixes, dynamic menu bugfixes
 1.5.0 Added updated menu and bookmarks panel
 1.4.3 Bug fixes, menu now scrollable, slight font adjustments
 1.4.1 Bug fixes, Added animations for widgets, Background changes
