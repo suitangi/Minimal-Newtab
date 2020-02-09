@@ -239,6 +239,7 @@
 
  .bkFolder {
    padding-left: 12px;
+   padding-bottom: 3px;
  }
 
  .bkFolder .bkItem {
@@ -272,6 +273,7 @@
    padding-left: 7px;
    padding-top: 6px;
    padding-bottom: 7px;
+   user-select: none;
  }
 
  .hide {

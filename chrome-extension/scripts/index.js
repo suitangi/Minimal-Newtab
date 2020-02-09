@@ -1,3 +1,12 @@
+//helper html string to node
+function createHTML(htmlString) {
+  var div = document.createElement('div');
+  div.innerHTML = htmlString.trim();
+
+  // Change this to div.childNodes to support multiple top-level nodes
+  return div.firstChild;
+}
+
 //formats the minute
 function checkMin(i) {
   if (i < 10) {
@@ -281,27 +290,87 @@ function newElement() {
 }
 
 //loads a random background (currently in video form)
-function loadBackground() {
-  let imn = Math.floor(Math.random() * window.vidlist.length);
-  let vid = document.getElementById("backdrop");
-  vid.src = window.vidlist[imn];
-  vid.load();
+function loadBackground(backJson) {
+  console.log(backJson.sources);
+  window.vidlist = [];
+  backList = backJson.sources;
+  let index = 0;
+  bkMenu = document.getElementById("backgroundMenu");
+  //functional programming yay
+  function loadSource(backList) {
+    if (index == backList.length) {
+      //loading ended: choose a random cinemagraph, but not the last one shown
+      chrome.storage.local.get({
+        lastShown: ""
+      }, function(data) {
+        let imn = Math.floor(Math.random() * window.vidlist.length);
+        let vid = document.getElementById("backdrop");
+        while (data.lastShown == window.vidlist[imn]) {
+          let imn = Math.floor(Math.random() * window.vidlist.length);
+        }
+        vid.src = window.vidlist[imn];
+        vid.load();
+        //save the last shown in chrome
+        chrome.storage.local.set({
+          lastShown: window.vidlist[imn]
+        }, function() {});
+      });
+      return;
+    } else {
+      let name = backList[index].name;
 
+      //build the json object to store data
+      obj = {};
+      key = name.split(' ').join('-');
+      obj[key] = 'on';
+
+      //create the backgroundMenu switch and add it to background menu
+      var textNode = createHTML("<div class=\"menuText\">" + name + "</div>");
+      var divNode = createHTML("<div class=\"sliderWrapper\"> <label class=\"switch\"> <input type=\"checkbox\" ID=\"" + key + "\" checked> <span class=\"slider round\"></span> </label> </div>");
+      bkMenu.appendChild(textNode);
+      bkMenu.appendChild(divNode);
+
+      //adding the onClick for the swtiches
+      document.getElementById(key).parentElement.onclick = function() {
+        console.log(this);
+        checkElement = this.firstElementChild;
+        obj = {};
+        key = checkElement.id;
+        if (checkElement.checked) {
+          checkElement.checked = false;
+          obj[key] = "off";
+          chrome.storage.local.set(obj, function() {});
+        } else {
+          checkElement.checked = true;
+          obj[key] = "on";
+          chrome.storage.local.set(obj, function() {});
+        }
+      }
+
+      //storing and getting data from chrome to see whether it was on or off
+      chrome.storage.local.get(obj, function(data) {
+        if (data[key] == 'off') {
+          document.getElementById(key).checked = false;
+        } else {
+          window.vidlist.push(...backList[index].list)
+        }
+        index += 1;
+        loadSource(backList);
+      });
+    }
+  }
+  loadSource(backList);
 }
 
 $(document).ready(function() {
 
-  //loads the list of backgrounds and loads a single one in
-  if (window.navigator.onLine) { //if Chrome is online
-    let url = chrome.extension.getURL("resources/kimiList.txt");
-    fetch(url)
-      .then(function(response) {
-        return response.text();
-      }).then(function(myText) {
-        window.vidlist = myText.split(", ");
-        console.log(window.vidlist);
-        loadBackground();
-      });
+  //if Chrome is online
+  if (window.navigator.onLine) {
+    //loads the backgorund json
+    const jsonUrl = chrome.runtime.getURL('resources/background.json');
+    fetch(jsonUrl)
+      .then((response) => response.json())
+      .then((json) => loadBackground(json));
   } else {
     $.alert({
       title: 'Error',
@@ -316,16 +385,16 @@ $(document).ready(function() {
       }
     });
   }
+
   startTime(); //start the time
 
   //add the bookmarks
   chrome.bookmarks.getTree(function(bkList) {
     window.bookmarklist = bkList[0].children[1].children;
 
-    if(window.bookmarklist.length == 0){
+    if (window.bookmarklist.length == 0) {
       document.getElementById("bookmarks").style = "display: none;"
-    }
-    else{
+    } else {
       let bkHtml = "";
 
       //builds the bookmark html
@@ -351,7 +420,7 @@ $(document).ready(function() {
 
       folderList = document.getElementsByClassName("folderName");
       for (i = 0; i < folderList.length; i++) {
-        folderList[i].onclick = function(){
+        folderList[i].onclick = function() {
           this.nextElementSibling.classList.toggle("hide");
           this.innerText = this.innerText.replace("⮟", ">");
           this.innerText = this.innerText.replace("⮞", "⮟");
@@ -410,7 +479,6 @@ $(document).ready(function() {
   }, function(data) {
     if (data.time_top_data != '') {
       document.getElementById("timeWrapper").style.top = data.time_top_data;
-      console.log(data.time_top_data);
     }
   });
   chrome.storage.local.get({
