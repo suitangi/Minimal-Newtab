@@ -225,49 +225,56 @@ function updateFilter() {
   }, function() {});
 }
 
+// saves the Todo list to the chrome storage
+function saveTodo() {
+  let lilist = document.getElementById("myUL").getElementsByTagName("LI");
+  let store = "";
+  for (i = 0; i < lilist.length; i++) {
+    if (lilist[i].classList.contains('checked'))
+      store += "☑" + lilist[i].innerText.trim();
+    else
+      store += lilist[i].innerText.trim();
+  }
+  chrome.storage.local.set({
+    todo_data: store
+  }, function() {});
+}
+
 //Todo list: Create a new list item when clicking on the "Add" button
 function newElement() {
   let li = document.createElement("li");
-  let inputValue = document.getElementById("myInput").value;
+  let inputValue = document.getElementById("todoInput").value;
   let t = document.createTextNode(inputValue);
   li.appendChild(t);
   if (inputValue != '') {
     document.getElementById("myUL").appendChild(li);
   }
-  document.getElementById("myInput").value = "";
+  document.getElementById("todoInput").value = "";
 
   let span = document.createElement("SPAN");
   let txt = document.createTextNode("\u00D7");
   span.className = "close";
   span.appendChild(txt);
+  span.setAttribute("contenteditable", "false");
   li.appendChild(span);
+  li.setAttribute("contenteditable", "true");
+  li.addEventListener('keypress', (evt) => {
+    if (evt.which === 13) {
+      evt.preventDefault();
+    }
+  });
+  li.addEventListener("input", function() {
+    saveTodo();
+  }, false);
   let close = document.getElementsByClassName("close");
   for (i = 0; i < close.length; i++) {
     close[i].addEventListener('click', function() {
       let div = this.parentElement;
       div.parentNode.removeChild(div);
-      let lilist = document.getElementsByTagName("LI");
-      let store = "";
-      for (i = 0; i < lilist.length; i++) {
-        if (lilist[i].classList.contains('checked'))
-          store += "☑" + lilist[i].innerText.trim();
-        else
-          store += lilist[i].innerText.trim();
-      }
-      chrome.storage.local.set({
-        todo_data: store
-      }, function() {});
+      saveTodo();
     });
   }
-  let lilist = document.getElementsByTagName("LI");
-  let store = "";
-  for (i = 0; i < lilist.length; i++) {
-    // if(i == lilist.length - 1)
-    store += lilist[i].innerText.trim();
-  }
-  chrome.storage.local.set({
-    todo_data: store
-  }, function() {});
+  saveTodo();
 }
 
 //loads a random background (currently in video form)
@@ -442,7 +449,7 @@ $(document).ready(function() {
   //add onclick for aboutButton
   document.getElementById("aboutButton").onclick = function() {
     document.getElementById("menu").classList.add("delay");
-    $.alert({
+    $.dialog({
       title: 'About',
       content: 'Lorem Ipsum',
       type: 'blue',
@@ -450,13 +457,11 @@ $(document).ready(function() {
       backgroundDismiss: true,
       useBootstrap: false,
       typeAnimated: true,
-      buttons: {
-        Dismiss: function() {
-          setTimeout(function() {
-            document.getElementById("menu").classList.remove("delay")
-          }, 250);
-        }
-      }
+      onDestroy: function () {
+        setTimeout(function() {
+          document.getElementById("menu").classList.remove("delay")
+        }, 250);
+    },
     });
   };
 
@@ -592,6 +597,7 @@ $(document).ready(function() {
   chrome.storage.local.get({
     todo_data: ''
   }, function(data) {
+    console.log(data.todo_data);
     if (data.todo_data != '') {
       let arr = data.todo_data.split("×");
       for (i = 0; i < arr.length - 1; i++) {
@@ -604,28 +610,26 @@ $(document).ready(function() {
           let t = document.createTextNode(arr[i]);
           li.appendChild(t);
         }
-
+        li.setAttribute("contenteditable", "true");
         document.getElementById("myUL").appendChild(li);
-
+        li.addEventListener('keypress', (evt) => {
+          if (evt.which === 13) {
+            evt.preventDefault();
+          }
+        });
+        li.addEventListener("input", function() {
+          saveTodo();
+        }, false);
         let span = document.createElement("SPAN");
         let txt = document.createTextNode("\u00D7");
+        span.setAttribute("contenteditable", "false");
         span.className = "close";
         span.appendChild(txt);
         li.appendChild(span);
         span.addEventListener('click', function() {
           let div = this.parentElement;
           div.parentNode.removeChild(div);
-          let lilist = document.getElementsByTagName("LI");
-          let store = "";
-          for (i = 0; i < lilist.length; i++) {
-            if (lilist[i].classList.contains('checked'))
-              store += "☑" + lilist[i].innerText.trim();
-            else
-              store += lilist[i].innerText.trim();
-          }
-          chrome.storage.local.set({
-            todo_data: store
-          }, function() {});
+          saveTodo();
         });
       }
     }
@@ -669,8 +673,18 @@ $(document).ready(function() {
     updateFilter();
   });
 
-  //sets the to do list inputs
-  let inputs = document.getElementById("todoWrapper").getElementsByTagName("input");
+  //makes the list sortable
+  $("#myUL").sortable({
+    update: function() {
+      saveTodo();
+    }
+  });
+
+  //sets the placeholders for the inputs that have it
+  let inputs = [];
+  inputs.push(document.getElementById("todoInput"));
+  inputs.push(document.getElementById("searchInput"));
+  console.log(inputs);
   for (let i = 0; i < inputs.length; i++) {
     inputs[i].value = inputs[i].getAttribute('data-placeholder');
     inputs[i].addEventListener('focus', function() {
@@ -690,17 +704,7 @@ $(document).ready(function() {
   list.addEventListener('click', function(ev) {
     if (ev.target.tagName === 'LI') {
       ev.target.classList.toggle('checked');
-      let lilist = document.getElementsByTagName("LI");
-      let store = "";
-      for (i = 0; i < lilist.length; i++) {
-        if (lilist[i].classList.contains('checked'))
-          store += "☑" + lilist[i].innerText.trim();
-        else
-          store += lilist[i].innerText.trim();
-      }
-      chrome.storage.local.set({
-        todo_data: store
-      }, function() {});
+      saveTodo();
     }
   }, false);
 

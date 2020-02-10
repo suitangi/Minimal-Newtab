@@ -21,6 +21,8 @@ The movies included are:
 - Type in the "New Item" box and press Enter to enter a new item
 - Click on items to cross them off
 - Click on the x next to the item to delete it
+- Right click on the item to edit it
+- Drag and drop the item to reorder the list
 - Drag the top of the list (where it says "todo list") to move the list
 
 ### Search Bar:
@@ -39,6 +41,7 @@ The movies included are:
 
 ## Change-Log
 ```
+1.6.1 Todo list new functions: reordering and editing
 1.6.0 Revamped background filter effects system
 1.5.1 Button bug fixes, dynamic menu bugfixes
 1.5.0 Added updated menu and bookmarks panel

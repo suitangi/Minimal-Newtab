@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Makoto Shinkai's Newtab",
   "short_name": "Shinkai's Tab",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "Replaces the newtab with a beautiful cinemagraph from one of Makoto Shinkai's movies (Your Name, 5cm/s, Garden of Words).",
   "permissions": ["storage", "bookmarks"],
   "icons": {

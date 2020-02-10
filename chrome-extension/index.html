@@ -7,10 +7,12 @@
     <title>New Tab</title>
     <link rel="stylesheet" type="text/css" href="styles/index.css">
     <link rel="stylesheet" href="styles/jquery-confirm.min.css">
+    <link rel="stylesheet" href="styles/jquery-ui.css">
     <link href='https://fonts.googleapis.com/css?family=Antic' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet'>
     <script type="text/javascript" src="scripts/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="scripts/jquery-confirm.min.js"></script>
+    <script type="text/javascript" src="scripts/jquery-ui.js"></script>
     <script type="text/javascript" src="scripts/index.js"></script>
   </head>
 
@@ -64,7 +66,7 @@
       </div>
       <div class="menuText">Saturation</div>
       <div class="slidecontainer">
-        <input type="range" min="0" max="120" value="90" class="rangeSlider" id="satuSlider">
+        <input type="range" min="0" max="180" value="90" class="rangeSlider" id="satuSlider">
       </div>
       <div class="menuText">Contrast</div>
       <div class="slidecontainer">
@@ -74,19 +76,6 @@
       <div class="slidecontainer">
         <input type="range" min="0" max="120" value="0" class="rangeSlider" id="blurSlider">
       </div>
-      <!-- <div class="sliderWrapper">
-        <label class="switch">
-          <input type="checkbox" ID="darkSwitch" checked>
-          <span class="slider round"></span>
-        </label>
-      </div>
-      <div class="menuText">Desaturate</div>
-      <div class="sliderWrapper">
-        <label class="switch">
-          <input type="checkbox" ID="desaSwitch">
-          <span class="slider round"></span>
-        </label>
-      </div> -->
 
       <!-- Buttons -->
       <div class="menuText" style="color: transparent !important">.</div><!-- blank space divide -->
@@ -110,7 +99,7 @@
     <div class="searchWrapper" ID="searchWrapper">
       <div class="searchDiv" ID="searchDiv"></div>
       <form id=search action="https://www.google.com/search" method="get">
-        <input class="search" data-placeholder=" Google Search" type="searh" name="q" autocomplete="off" />
+        <input id="searchInput" class="search" data-placeholder=" Google Search" type="searh" name="q" autocomplete="off" />
         <input type="submit" style="visibility: hidden;" />
       </form>
     </div>
@@ -123,7 +112,7 @@
         </div>
         <ul ID="myUL">
         </ul>
-        <input class="todoInput" autocomplete="off" type="text" id="myInput" placeholder="New Item . . ." />
+        <input class="todoInput" autocomplete="off" type="text" id="todoInput" placeholder="New Item . . ." />
       </div>
     </div>
 

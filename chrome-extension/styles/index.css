@@ -168,7 +168,7 @@
  }
 
  #myUL {
-   padding-right: 3px;
+   padding-right: 5px;
  }
 
  /* setting todolist hover to be visible */
@@ -179,12 +179,12 @@
 
  .todoHover:hover {
    background-color: rgba(0, 0, 0, 0.4) !important;
-   transition: 0.2s
+   transition: 0.2s;
  }
 
  .todoHover:hover .todoInput::placeholder {
    color: rgba(255, 255, 255, 0.55);
-   transition: 0.2s
+   transition: 0.2s;
  }
 
  /* bookmarks */
@@ -311,7 +311,7 @@
  #menu:hover .slidecontainer,
  #menu.delay .menuText,
  #menu.delay .sliderWrapper,
- #menu:hover .slidecontainer {
+ #menu.delay .slidecontainer {
    opacity: 0.6 !important;
    visibility: visible;
    transition: all .17s ease;
@@ -486,7 +486,7 @@
  }
 
  /* Style the list items */
- ul li {
+ #myUL li {
    cursor: pointer;
    position: relative;
    padding: 12px 23px 12px 17px;
@@ -495,7 +495,7 @@
    font-size: 16px;
    font-family: "Antic";
    color: rgba(255, 255, 255, 0.8);
-   transition: 0.2s;
+   transition-duration: 0s;
    word-wrap: break-word;
    /* make the list items unselectable */
    -webkit-user-select: none;
