@@ -19,11 +19,11 @@ The movies included are:
 
 ### Todo List:
 - Type in the "New Item" box and press Enter to enter a new item
-- Click on items to cross them off
+- Click on items to edit them
 - Click on the x next to the item to delete it
-- Right click on the item to edit it
+- Right click on the item to cross them off
 - Drag and drop the item to reorder the list
-- Drag the top of the list (where it says "todo list") to move the list
+- Drag the top of the list (where it says "todo list") to move the widget
 
 ### Search Bar:
 - Drag from the top of the search bar to move it
@@ -37,7 +37,7 @@ The movies included are:
 - Reset Button: resets the extension, wiping all data and restarts it (use this option when the widget is lost off-screen somehow)
 
 ## Using Your Own Backgrounds
-The background.json is styled in such a way:
+The `background.json` is styled in such a way:
 
 ```json
 {
@@ -71,8 +71,8 @@ Here's and Example Backgorund Json:
   ]
 }
 ```
-
-The menu for choosing sources will be automatically generated if there is more than one source. It takes the name from the name field in the json list of sources.
+The `background.json` name should not be changed and should be in the resources directory.
+The menu for choosing sources will be automatically generated if there is more than one source. It takes the name from the name field in the json of each source.
 The saved name in the `chrome.local.stoage` also uses the name field.
 
 *Disclaimer: I do not own any of the artwork or cinemagraphs used in this extension. Credit goes to their respective owner (anime stuio/publisher) and original poster cyan1618 on Imgur.*
