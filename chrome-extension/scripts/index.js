@@ -240,10 +240,73 @@ function saveTodo() {
   }, function() {});
 }
 
+// Todo: Set the list li element listeners
+function setLiListeners(li) {
+  li.onclick = function() {
+    $(this).focus();
+    let li = document.getElementById("myUL").getElementsByTagName("li");
+    for (i = 0; i < li.length; i++) {
+      if (li[i].innerText == "\u00D7") {
+        let node = createHTML("<br>");
+        li[i].insertBefore(node, li[i].firstChild);
+      }
+    }
+    $(this).parent().sortable("disable");
+  }
+  li.onmousedown = function(evt) {
+    if (evt.button === 2) {
+      this.blur();
+      window.getSelection().empty();
+    }
+  }
+  li.addEventListener('contextmenu', function(evt) {
+    evt.preventDefault();
+    this.classList.toggle('checked');
+    this.blur();
+    window.getSelection().empty();
+    saveTodo();
+  });
+  li.addEventListener('keyup', (evt) => {
+    if (evt.keyCode === 8) {
+      console.log("suc")
+      if (li.innerText == "\u00D7") {
+        evt.preventDefault();
+        let node = createHTML("<br>");
+        li.insertBefore(node, li.firstChild);
+      }
+    }
+  });
+  li.addEventListener('keydown', (evt) => {
+    if (evt.which === 13) {
+      document.activeElement.blur();
+      evt.preventDefault();
+    } else if (evt.keyCode === 8) {
+      let li = document.activeElement;
+      if (li.innerText.trim() == "\u00D7") {
+        evt.preventDefault();
+        li.parentNode.removeChild(li);
+        saveTodo();
+      }
+    } else {
+      let li = document.activeElement;
+      if (li.innerText == "\u00D7") {
+        let node = createHTML("<br>");
+        li.insertBefore(node, li.firstChild);
+      }
+    }
+  });
+  li.addEventListener("blur", function() {
+    $(this).parent().sortable("enable");
+  }, false);
+  li.addEventListener("input", function() {
+    saveTodo();
+  });
+}
+
 //Todo list: Create a new list item when clicking on the "Add" button
 function newElement() {
   let li = document.createElement("li");
-  let inputValue = document.getElementById("todoInput").value;
+  let inputValue = document.getElementById("todoInput").value.trim();
   let t = document.createTextNode(inputValue);
   li.appendChild(t);
   if (inputValue != '') {
@@ -258,14 +321,7 @@ function newElement() {
   span.setAttribute("contenteditable", "false");
   li.appendChild(span);
   li.setAttribute("contenteditable", "true");
-  li.addEventListener('keypress', (evt) => {
-    if (evt.which === 13) {
-      evt.preventDefault();
-    }
-  });
-  li.addEventListener("input", function() {
-    saveTodo();
-  }, false);
+  setLiListeners(li);
   let close = document.getElementsByClassName("close");
   for (i = 0; i < close.length; i++) {
     close[i].addEventListener('click', function() {
@@ -457,11 +513,11 @@ $(document).ready(function() {
       backgroundDismiss: true,
       useBootstrap: false,
       typeAnimated: true,
-      onDestroy: function () {
+      onDestroy: function() {
         setTimeout(function() {
           document.getElementById("menu").classList.remove("delay")
         }, 250);
-    },
+      },
     });
   };
 
@@ -612,14 +668,7 @@ $(document).ready(function() {
         }
         li.setAttribute("contenteditable", "true");
         document.getElementById("myUL").appendChild(li);
-        li.addEventListener('keypress', (evt) => {
-          if (evt.which === 13) {
-            evt.preventDefault();
-          }
-        });
-        li.addEventListener("input", function() {
-          saveTodo();
-        }, false);
+        setLiListeners(li);
         let span = document.createElement("SPAN");
         let txt = document.createTextNode("\u00D7");
         span.setAttribute("contenteditable", "false");
@@ -673,10 +722,17 @@ $(document).ready(function() {
     updateFilter();
   });
 
-  //makes the list sortable
+  // makes the list sortable
   $("#myUL").sortable({
+    start: function() {
+      document.activeElement.blur();
+      document.getElementById("myUL").style = "cursor: -webkit-grabbing !important; cursor: grabbing !important;";
+    },
     update: function() {
       saveTodo();
+    },
+    stop: function() {
+      document.getElementById("myUL").style = "cursor: default;";
     }
   });
 
@@ -684,7 +740,6 @@ $(document).ready(function() {
   let inputs = [];
   inputs.push(document.getElementById("todoInput"));
   inputs.push(document.getElementById("searchInput"));
-  console.log(inputs);
   for (let i = 0; i < inputs.length; i++) {
     inputs[i].value = inputs[i].getAttribute('data-placeholder');
     inputs[i].addEventListener('focus', function() {
@@ -700,13 +755,14 @@ $(document).ready(function() {
   }
 
   //setting the click event to cross off items on the todo list
-  let list = document.querySelector('ul');
-  list.addEventListener('click', function(ev) {
-    if (ev.target.tagName === 'LI') {
-      ev.target.classList.toggle('checked');
-      saveTodo();
-    }
-  }, false);
+  // let list = document.querySelector('ul');
+  // list.addEventListener('contextmenu', function(ev) {
+  //   if (ev.target.tagName === 'LI') {
+  //     ev.target.classList.toggle('checked');
+  //     ev.target.blur();
+  //     saveTodo();
+  //   }
+  // }, false);
 
   //when you press enter it pushes to the todo list
   $(".todoInput").on('keyup', function(e) {

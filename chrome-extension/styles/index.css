@@ -487,7 +487,7 @@
 
  /* Style the list items */
  #myUL li {
-   cursor: pointer;
+   /* cursor: pointer; */
    position: relative;
    padding: 12px 23px 12px 17px;
    list-style-type: none;
@@ -502,6 +502,12 @@
    -moz-user-select: none;
    -ms-user-select: none;
    user-select: none;
+   border-radius: 5px;
+ }
+
+ #myUL li:focus {
+   cursor: text;
+   outline: none;
  }
 
  /* Darker background-color on hover */
@@ -520,9 +526,11 @@
  /* Style the close button */
  .close {
    position: absolute;
+   cursor: pointer;
    right: -5px;
    top: 0;
    padding: 12px 16px 12px 16px;
+   border-radius: 5px;
  }
 
  .close:hover {
