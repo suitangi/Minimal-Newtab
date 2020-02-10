@@ -8,7 +8,7 @@ The movies included are:
 
 ![Screenshot](/../master/SC.png)
 
-### How to use:
+## How to use:
 1. Install the extension
 2. Open a new tab
 3. That's it!
@@ -36,8 +36,46 @@ The movies included are:
 - Desaturate option: de-saturates the background
 - Reset Button: resets the extension, wiping all data and restarts it (use this option when the widget is lost off-screen somehow)
 
-*Disclaimer: I do not own any of the artwork or cinemagraphs used in this extension. Credit goes to their respective owner (anime stuio/publisher) and original poster cyan1618 on Imgur.*
+## Using Your Own Backgrounds
+The background.json is styled in such a way:
 
+```json
+{
+  "default": "default-image-link-here",
+  "sources": [{
+      "name": "Name of The Source",
+      "list": ["link1", "link2", "link3", "..."]
+
+    },
+    {
+      "name": "Source2",
+      "list": ["link1", "link2", "..."]
+    }
+  ]
+}
+```
+
+Here's and Example Backgorund Json:
+```json
+{
+  "default": "https://i.imgur.com/t1vt5q0.mp4",
+  "sources": [{
+      "name": "Your Name",
+      "list": ["https://i.imgur.com/OnwkTKE.mp4", "https://i.imgur.com/IpcZlnk.mp4"]
+
+    },
+    {
+      "name": "Garden of Words",
+      "list": ["https://i.imgur.com/IrZ5pEv.mp4", "https://i.imgur.com/gNXhMXN.mp4"]
+    }
+  ]
+}
+```
+
+The menu for choosing sources will be automatically generated if there is more than one source. It takes the name from the name field in the json list of sources.
+The saved name in the `chrome.local.stoage` also uses the name field.
+
+*Disclaimer: I do not own any of the artwork or cinemagraphs used in this extension. Credit goes to their respective owner (anime stuio/publisher) and original poster cyan1618 on Imgur.*
 
 ## Change-Log
 ```
