@@ -188,40 +188,6 @@ function updateTime() {
   }
 }
 
-//toggles the darken filter of the background
-function updateDark() {
-  if (document.getElementById("darkSwitch").checked) {
-    document.getElementById("darkSwitch").checked = false;
-    document.getElementById("backloader").style.filter = "none";
-    chrome.storage.local.set({
-      dark_switch: "off"
-    }, function() {});
-  } else {
-    document.getElementById("darkSwitch").checked = true;
-    document.getElementById("backloader").style.filter = "brightness(0.65)";
-    chrome.storage.local.set({
-      dark_switch: "on"
-    }, function() {});
-  }
-}
-
-//toggles the desaturate filter of the background
-function updateDesa() {
-  if (document.getElementById("desaSwitch").checked) {
-    document.getElementById("desaSwitch").checked = false;
-    document.getElementById("desaFilter").style.filter = "none";
-    chrome.storage.local.set({
-      desa_switch: "off"
-    }, function() {});
-  } else {
-    document.getElementById("desaSwitch").checked = true;
-    document.getElementById("desaFilter").style.filter = "saturate(0.5)";
-    chrome.storage.local.set({
-      desa_switch: "on"
-    }, function() {});
-  }
-}
-
 //toggles the visibility of the todo list
 function updateTodo() {
   document.getElementById("todoWrapper").classList.remove("firstStart");
@@ -240,6 +206,23 @@ function updateTodo() {
     document.getElementById("todoWrapper").classList.add("entrance");
     document.getElementById("todoWrapper").classList.remove("exit");
   }
+}
+
+//Updates the filter Effects
+function updateFilter() {
+  // console.log(document.getElementById("darkSlider").value);
+  let darkVal = document.getElementById("darkSlider").value;
+  let satuVal = document.getElementById("satuSlider").value;
+  let conVal = document.getElementById("conSlider").value;
+  let blurVal = document.getElementById("blurSlider").value;
+  document.getElementById("backloader").style = "filter: brightness(" + darkVal / 100 + ") " +
+    "saturate(" + satuVal / 100 + ") " +
+    "contrast(" + conVal / 100 + ") " +
+    "blur(" + blurVal / 10 + "px);";
+  let arr = [darkVal, satuVal, conVal, blurVal];
+  chrome.storage.local.set({
+    filter: arr
+  }, function() {});
 }
 
 //Todo list: Create a new list item when clicking on the "Add" button
@@ -337,7 +320,7 @@ function loadBackground(backJson) {
           }, function() {});
 
           //if there is only one background source, don't need to show the menu switches
-          if(backList.length == 1)
+          if (backList.length == 1)
             $('.backgroundMenu').css("display", "none");
         });
       return;
@@ -387,7 +370,6 @@ function loadBackground(backJson) {
 }
 
 $(document).ready(function() {
-
   //if Chrome is online
   if (window.navigator.onLine) {
     //loads the backgorund json
@@ -455,6 +437,7 @@ $(document).ready(function() {
       }
     }
   });
+
 
   //add onclick for aboutButton
   document.getElementById("aboutButton").onclick = function() {
@@ -578,22 +561,18 @@ $(document).ready(function() {
       document.getElementById("timeWrapper").classList.add("entrance");
     }
   });
+
+  //load the filters
   chrome.storage.local.get({
-    dark_switch: 'on'
+    filter: [35, 90, 100, 0]
   }, function(data) {
-    if (data.dark_switch == 'off') {
-      document.getElementById("darkSwitch").checked = false;
-      document.getElementById("backloader").style.filter = "none";
-    }
+    document.getElementById("darkSlider").value = data.filter[0];
+    document.getElementById("satuSlider").value = data.filter[1];
+    document.getElementById("conSlider").value = data.filter[2];
+    document.getElementById("blurSlider").value = data.filter[3];
+    updateFilter();
   });
-  chrome.storage.local.get({
-    desa_switch: 'off'
-  }, function(data) {
-    if (data.desa_switch == 'on') {
-      document.getElementById("desaSwitch").checked = true;
-      document.getElementById("desaFilter").style.filter = "saturate(0.6)";
-    }
-  });
+
 
   // todo data loading
   chrome.storage.local.get({
@@ -671,21 +650,27 @@ $(document).ready(function() {
   document.getElementById("timeSwitch").parentElement.addEventListener('click', function() {
     updateTime();
   });
-  document.getElementById("darkSwitch").parentElement.addEventListener('click', function() {
-    updateDark();
-  });
-  document.getElementById("desaSwitch").parentElement.addEventListener('click', function() {
-    updateDesa();
-  });
   document.getElementById("todoSwitch").parentElement.addEventListener('click', function() {
     updateTodo();
   });
   document.getElementById("time").addEventListener("click", function() {
     updateMilitary();
   });
+  document.getElementById("darkSlider").addEventListener("input", function() {
+    updateFilter();
+  });
+  document.getElementById("satuSlider").addEventListener("input", function() {
+    updateFilter();
+  });
+  document.getElementById("conSlider").addEventListener("input", function() {
+    updateFilter();
+  });
+  document.getElementById("blurSlider").addEventListener("input", function() {
+    updateFilter();
+  });
 
   //sets the to do list inputs
-  let inputs = document.getElementsByTagName("input");
+  let inputs = document.getElementById("todoWrapper").getElementsByTagName("input");
   for (let i = 0; i < inputs.length; i++) {
     inputs[i].value = inputs[i].getAttribute('data-placeholder');
     inputs[i].addEventListener('focus', function() {

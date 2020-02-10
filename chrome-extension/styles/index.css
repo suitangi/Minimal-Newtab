@@ -53,7 +53,7 @@
    background-color: #222;
    background-size: cover;
    background-repeat: no-repeat;
-   filter: brightness(0.65);
+   filter: brightness(0.5) saturation(0.9) blur(0px) contrast(100%);
    transition: 0.3s;
    z-index: 1;
  }
@@ -167,9 +167,14 @@
    opacity: 0;
  }
 
+ #myUL {
+   padding-right: 3px;
+ }
+
  /* setting todolist hover to be visible */
  .todoHover {
    background-color: rgba(0, 0, 0, 0);
+   border-radius: 8px;
  }
 
  .todoHover:hover {
@@ -303,15 +308,18 @@
 
  #menu:hover .menuText,
  #menu:hover .sliderWrapper,
+ #menu:hover .slidecontainer,
  #menu.delay .menuText,
- #menu.delay .sliderWrapper {
+ #menu.delay .sliderWrapper,
+ #menu:hover .slidecontainer {
    opacity: 0.6 !important;
    visibility: visible;
    transition: all .17s ease;
  }
 
  .menuText,
- .sliderWrapper {
+ .sliderWrapper,
+ .slidecontainer {
    opacity: 0 !important;
    visibility: hidden;
    transition: all .17s ease;
@@ -387,6 +395,11 @@
    bottom: 0;
    background-color: #ccc;
    transition: .4s;
+   opacity: 0.7;
+ }
+
+ .slider:hover {
+   opacity: 1;
  }
 
  .slider:before {
@@ -419,6 +432,50 @@
 
  .slider.round:before {
    border-radius: 50%;
+ }
+
+ /* effect rangesliders */
+ .slidecontainer {
+   margin-left: auto;
+   margin-right: auto;
+   margin-top: 10px;
+   margin-bottom: 35px;
+   width: 70%;
+ }
+
+ .rangeSlider {
+   -webkit-appearance: none;
+   width: 100%;
+   height: 5px;
+   border-radius: 4px;
+   background: #2196F3;
+   outline: none;
+   -webkit-transition: .2s;
+   transition: opacity .2s;
+   opacity: 0.7;
+ }
+
+ .rangeSlider:hover {
+   opacity: 1;
+ }
+
+ .rangeSlider::-webkit-slider-thumb {
+   -webkit-appearance: none;
+   appearance: none;
+   width: 20px;
+   height: 20px;
+   border-radius: 50%;
+   background: #ddd;
+   cursor: pointer;
+ }
+
+ /*for firefox*/
+ .rangeSlider::-moz-range-thumb {
+   width: 20px;
+   height: 20px;
+   border-radius: 50%;
+   background: #ddd;
+   cursor: pointer;
  }
 
  /* Todo list elements */
@@ -470,6 +527,7 @@
 
  .close:hover {
    color: white;
+   background-color: rgba(255, 255, 255, 0.15);
  }
 
  /* Style the header */

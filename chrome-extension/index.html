@@ -17,15 +17,11 @@
   <body>
 
     <!-- the backgrond cinemagraph (video) -->
-    <div ID="deconFilter">
-      <div ID="desaFilter">
-        <div class="backloader" ID="backloader">
-          <div ID="clickDisabler"></div>
-          <video ID="backdrop" width="100%" loop autoplay>
-            <source src="https://i.imgur.com/t1vt5q0.mp4" type="video/mp4">
-          </video>
-        </div>
-      </div>
+    <div class="backloader" ID="backloader" style="">
+      <div ID="clickDisabler"></div>
+      <video ID="backdrop" width="100%" loop autoplay>
+        <source src="https://i.imgur.com/t1vt5q0.mp4" type="video/mp4">
+      </video>
     </div>
 
     <!-- the left side menu -->
@@ -62,8 +58,23 @@
 
       <!-- the menu for effects -->
       <div class="menuText" style="color: rgba(255,255,255,0.95) !important; font-weight: 500;">Effects</div>
-      <div class="menuText">Darken</div>
-      <div class="sliderWrapper">
+      <div class="menuText">Brightness</div>
+      <div class="slidecontainer">
+        <input type="range" min="10" max="120" value="35" class="rangeSlider" id="darkSlider">
+      </div>
+      <div class="menuText">Saturation</div>
+      <div class="slidecontainer">
+        <input type="range" min="0" max="120" value="90" class="rangeSlider" id="satuSlider">
+      </div>
+      <div class="menuText">Contrast</div>
+      <div class="slidecontainer">
+        <input type="range" min="40" max="140" value="100" class="rangeSlider" id="conSlider">
+      </div>
+      <div class="menuText">Blur</div>
+      <div class="slidecontainer">
+        <input type="range" min="0" max="120" value="0" class="rangeSlider" id="blurSlider">
+      </div>
+      <!-- <div class="sliderWrapper">
         <label class="switch">
           <input type="checkbox" ID="darkSwitch" checked>
           <span class="slider round"></span>
@@ -75,7 +86,7 @@
           <input type="checkbox" ID="desaSwitch">
           <span class="slider round"></span>
         </label>
-      </div>
+      </div> -->
 
       <!-- Buttons -->
       <div class="menuText" style="color: transparent !important">.</div><!-- blank space divide -->
