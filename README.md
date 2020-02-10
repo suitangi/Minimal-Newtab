@@ -30,11 +30,15 @@ The movies included are:
 - Type in the box and press enter to perform a Google search
 
 ### Menu
-- Move the mouse to the left most part of the window/screen to access the menu.
+- Move the mouse to the left most part of the window to access the menu.
 - Each switch enables/disables respective gadgets
 - Darken option: darkens the background so it is easier to see
 - Desaturate option: de-saturates the background
 - Reset Button: resets the extension, wiping all data and restarts it (use this option when the widget is lost off-screen somehow)
+
+### Bookmarks
+- Move the mouse to the right most part of the window to access bookmarks.
+- Folders are drop-down-styled, click on them to see contents
 
 ## Using Your Own Backgrounds
 The `background.json` is styled in such a way:
