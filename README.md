@@ -84,6 +84,10 @@ The saved name in the `chrome.local.stoage` also uses the name field.
 ## Other Informataion
 *Disclaimer: I do not own any of the artwork or cinemagraphs used in this extension. Credit goes to their respective owner (anime stuio/publisher) and original poster cyan1618 on Imgur.*
 
+#### Permissions
+- Storage: To store the data relating to preferences and widgets
+- Bookmark: To show the bookmarks on the right hand side tab
+
 #### This project uses:
 - [jQuery](https://github.com/jquery/jquery)
 - [jQuery-confirm](https://github.com/craftpip/jquery-confirm)
