@@ -81,9 +81,10 @@ The `background.json` name should not be changed and should be in the resources 
 The menu for choosing sources will be automatically generated if there is more than one source. It takes the name from the name field in the json of each source.
 The saved name in the `chrome.local.stoage` also uses the name field.
 
+## Other Informataion
 *Disclaimer: I do not own any of the artwork or cinemagraphs used in this extension. Credit goes to their respective owner (anime stuio/publisher) and original poster cyan1618 on Imgur.*
 
-This project uses:
+#### This project uses:
 - [jQuery](https://github.com/jquery/jquery)
 - [jQuery-confirm](https://github.com/craftpip/jquery-confirm)
 - [jQuery-ui](https://github.com/jquery/jquery-ui)
