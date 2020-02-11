@@ -19,7 +19,9 @@ The movies included are:
 
 ### Todo List:
 - Type in the "New Item" box and press Enter to enter a new item
-- Click on items to edit them
+- Press enter while editing a list item to create a new list item below
+- Press backspace on any empty list item to delete it
+- Left click on items to edit them
 - Click on the x next to the item to delete it
 - Right click on the item to cross them off
 - Drag and drop the item to reorder the list

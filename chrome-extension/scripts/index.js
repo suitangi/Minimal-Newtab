@@ -7,6 +7,17 @@ function createHTML(htmlString) {
   return div.firstChild;
 }
 
+//helper for setting the cursor to the end of the editable content
+function setEndOfContenteditable(contentEditableElement) {
+  var range, selection;
+  range = document.createRange(); //Create a range (a range is a like the selection but invisible)
+  range.selectNodeContents(contentEditableElement); //Select the entire contents of the element with the range
+  range.collapse(false); //collapse the range to the end point. false means collapse to end rather than the start
+  selection = window.getSelection(); //get the selection object (allows you to change selection)
+  selection.removeAllRanges(); //remove any selections already made
+  selection.addRange(range); //make the range you have just created the visible selection
+}
+
 //formats the minute
 function checkMin(i) {
   if (i < 10) {
@@ -243,7 +254,12 @@ function saveTodo() {
 // Todo: Set the list li element listeners
 function setLiListeners(li) {
   li.onclick = function() {
-    $(this).focus();
+    if (document.activeElement == null || document.activeElement.tagName.toLowerCase() != 'li') {
+      $(this).focus();
+      setEndOfContenteditable(this);
+    } else {
+      $(this).focus();
+    }
     let li = document.getElementById("myUL").getElementsByTagName("li");
     for (i = 0; i < li.length; i++) {
       if (li[i].innerText == "\u00D7") {
@@ -255,20 +271,18 @@ function setLiListeners(li) {
   }
   li.onmousedown = function(evt) {
     if (evt.button === 2) {
-      this.blur();
+      evt.preventDefault();
       window.getSelection().empty();
     }
   }
   li.addEventListener('contextmenu', function(evt) {
     evt.preventDefault();
     this.classList.toggle('checked');
-    this.blur();
     window.getSelection().empty();
     saveTodo();
   });
   li.addEventListener('keyup', (evt) => {
     if (evt.keyCode === 8) {
-      console.log("suc")
       if (li.innerText == "\u00D7") {
         evt.preventDefault();
         let node = createHTML("<br>");
@@ -278,14 +292,33 @@ function setLiListeners(li) {
   });
   li.addEventListener('keydown', (evt) => {
     if (evt.which === 13) {
-      document.activeElement.blur();
+      let li = document.activeElement;
+      insertNewListItem(li);
+      li.nextElementSibling.focus();
       evt.preventDefault();
     } else if (evt.keyCode === 8) {
       let li = document.activeElement;
       if (li.innerText.trim() == "\u00D7") {
         evt.preventDefault();
+        let previous = li.previousElementSibling;
+        if (previous != null) {
+          previous.focus();
+          setEndOfContenteditable(previous);
+        }
         li.parentNode.removeChild(li);
+        if (document.getElementById("myUL").getElementsByTagName("li").length == 0)
+          document.getElementById("todoInput").style = "";
         saveTodo();
+      }
+    } else if (evt.keyCode === 38) {
+      let previous = li.previousElementSibling;
+      if (previous != null) {
+        previous.focus();
+      }
+    } else if (evt.keyCode === 40) {
+      let next = li.nextElementSibling;
+      if (next != null) {
+        next.focus();
       }
     } else {
       let li = document.activeElement;
@@ -301,6 +334,40 @@ function setLiListeners(li) {
   li.addEventListener("input", function() {
     saveTodo();
   });
+}
+
+//helper insert after
+function insertAfter(el, referenceNode) {
+  referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
+}
+
+//Todo: insert new list item
+function insertNewListItem(nodeInsertAfter) {
+  let li = document.createElement("li");
+  insertAfter(li, nodeInsertAfter);
+  let span = document.createElement("SPAN");
+  let txt = document.createTextNode("\u00D7");
+  let br = document.createElement("br");
+  span.className = "close";
+  span.appendChild(txt);
+  span.setAttribute("contenteditable", "false");
+  li.appendChild(br);
+  li.appendChild(span);
+  li.setAttribute("contenteditable", "true");
+  setLiListeners(li);
+  let close = document.getElementsByClassName("close");
+  for (i = 0; i < close.length; i++) {
+    close[i].addEventListener('click', function() {
+      let li = this.parentElement;
+      if (li.parentElement != null)
+        li.parentElement.removeChild(li);
+      if (document.getElementById("myUL").getElementsByTagName("li").length == 0)
+        document.getElementById("todoInput").style = "";
+      saveTodo();
+    });
+  }
+  document.getElementById("todoInput").style = "display: none;";
+  saveTodo();
 }
 
 //Todo list: Create a new list item when clicking on the "Add" button
@@ -325,11 +392,17 @@ function newElement() {
   let close = document.getElementsByClassName("close");
   for (i = 0; i < close.length; i++) {
     close[i].addEventListener('click', function() {
-      let div = this.parentElement;
-      div.parentNode.removeChild(div);
+      let li = this.parentElement;
+      if (li.parentElement != null)
+        li.parentElement.removeChild(li);
+      if (document.getElementById("myUL").getElementsByTagName("li").length == 0)
+        document.getElementById("todoInput").style = "";
       saveTodo();
     });
   }
+  document.getElementById("todoInput").style = "display: none;";
+  li.focus();
+  setEndOfContenteditable(li);
   saveTodo();
 }
 
@@ -676,11 +749,17 @@ $(document).ready(function() {
         span.appendChild(txt);
         li.appendChild(span);
         span.addEventListener('click', function() {
-          let div = this.parentElement;
-          div.parentNode.removeChild(div);
+          let li = this.parentElement;
+          if (li.parentElement != null)
+            li.parentElement.removeChild(li);
+          if (document.getElementById("myUL").getElementsByTagName("li").length == 0)
+            document.getElementById("todoInput").style = "";
           saveTodo();
         });
       }
+    } else {
+      if (document.getElementById("myUL").getElementsByTagName("li").length == 0)
+        document.getElementById("todoInput").style = "";
     }
   });
   chrome.storage.local.get({
@@ -732,7 +811,7 @@ $(document).ready(function() {
       saveTodo();
     },
     stop: function() {
-      document.getElementById("myUL").style = "cursor: default;";
+      document.getElementById("myUL").style = "";
     }
   });
 
@@ -753,16 +832,6 @@ $(document).ready(function() {
       }
     });
   }
-
-  //setting the click event to cross off items on the todo list
-  // let list = document.querySelector('ul');
-  // list.addEventListener('contextmenu', function(ev) {
-  //   if (ev.target.tagName === 'LI') {
-  //     ev.target.classList.toggle('checked');
-  //     ev.target.blur();
-  //     saveTodo();
-  //   }
-  // }, false);
 
   //when you press enter it pushes to the todo list
   $(".todoInput").on('keyup', function(e) {
