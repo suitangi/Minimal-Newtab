@@ -83,6 +83,11 @@ The saved name in the `chrome.local.stoage` also uses the name field.
 
 *Disclaimer: I do not own any of the artwork or cinemagraphs used in this extension. Credit goes to their respective owner (anime stuio/publisher) and original poster cyan1618 on Imgur.*
 
+This project uses:
+- [jQuery](https://github.com/jquery/jquery)
+- [jQuery-confirm](https://github.com/craftpip/jquery-confirm)
+- [jQuery-ui](https://github.com/jquery/jquery-ui)
+
 ## Change-Log
 ```
 1.6.2 Todo list rework
