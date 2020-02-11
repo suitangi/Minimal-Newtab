@@ -85,6 +85,7 @@ The saved name in the `chrome.local.stoage` also uses the name field.
 
 ## Change-Log
 ```
+1.6.2 Todo list rework
 1.6.1 Todo list new functions: reordering and editing
 1.6.0 Revamped background filter effects system
 1.5.1 Button bug fixes, dynamic menu bugfixes
