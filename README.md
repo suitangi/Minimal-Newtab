@@ -6,7 +6,7 @@ The movies included are:
 - Byousoku 5 Centimeter (5cm/s)
 - Kotonoha no Niwa (Garden of Words)
 
-![Screenshot](https://github.com/suitangi/Cinemagraph-Newtab/blob/master/SC.png)
+![Screenshot](https://raw.githubusercontent.com/suitangi/Cinemagraph-Newtab/master/SC.png)
 
 ## How to use:
 1. Install the extension
