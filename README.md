@@ -13,8 +13,8 @@ You can also clone this repository:
 ```
 git clone https://github.com/suitangi/Minimal-Newtab.git
 ```
-and [use your own background lists](#using-your-own-backgrounds).
 Just make sure to turn on developer options in chrome://extensions/ and 'Load Unpacked' and then select the folder where the `manifest.json` file is located.
+This option allows you to [use your own background lists](#using-your-own-backgrounds).
 
 ## Features
 ### Clock:
@@ -69,6 +69,7 @@ The `background.json` is styled in such a way:
 }
 ```
 
+
 Here's and Example Backgorund Json:
 ```json
 {
@@ -86,13 +87,14 @@ Here's and Example Backgorund Json:
 }
 ```
 The `background.json` name should not be changed and should be in the resources directory.
-The menu for choosing sources will be automatically generated if there is more than one source. It takes the name from the name field in the json of each source.
-The saved name in the `chrome.local.stoage` also uses the name field.
+The menu for choosing sources will be automatically generated if there is more than one source. It takes the name from the `name:` field in the json of each `source`.
+The saved name in the `chrome.local.stoage` also uses the same field.
 
 ## Other Informataion
 *Disclaimer: I do not own any of the artwork or cinemagraphs used in this extension. Credit goes to their respective owners.*
 
 ### Browser Permissions
+These are the permission that the `manifest.json` asks for:
 - Storage: To store the data relating to preferences and widgets
 - Bookmark: To show the bookmarks on the right hand side tab
 
