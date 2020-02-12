@@ -13,7 +13,7 @@ The movies included are:
 
 ![Screenshot](https://raw.githubusercontent.com/suitangi/Minimal-Newtab/master/resources/SC.png)
 
-** Get the extension (here)[https://chrome.google.com/webstore/detail/ojaookiigngaiipdhccdoaalmjpgpigh/publish-accepted?authuser=0&hl=en] **
+**Get the extension [here](https://chrome.google.com/webstore/detail/ojaookiigngaiipdhccdoaalmjpgpigh/publish-accepted?authuser=0&hl=en)**
 
 ## How to use:
 1. Install the extension
