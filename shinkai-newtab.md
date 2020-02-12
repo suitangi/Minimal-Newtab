@@ -1,5 +1,6 @@
 ---
 title: Shinkai's Newtab
+description: Want a beautiful yet minimal new tab page that comes to life?
 ---
 
 # Shinkai's Newtab
