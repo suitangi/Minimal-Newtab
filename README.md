@@ -6,7 +6,7 @@ The movies included are:
 - Byousoku 5 Centimeter (5cm/s)
 - Kotonoha no Niwa (Garden of Words)
 
-![Screenshot](blob/master/README.md)
+![Screenshot](../blob/master/README.md)
 
 ## How to use:
 1. Install the extension
