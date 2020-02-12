@@ -1,6 +1,7 @@
 ---
 title: Minimal Newtab
 description: A NewTab replacement extension framework that allows for custom defined lists of backgrounds to be loaded into a minimalistic newtab.
+showGithub: true
 ---
 
 # Minimal Newtab
