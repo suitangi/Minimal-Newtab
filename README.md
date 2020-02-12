@@ -37,10 +37,15 @@ Just make sure to turn on developer options in chrome://extensions/ and 'Load Un
 
 ### Menu
 - Move the mouse to the left most part of the window to access the menu.
-- Each switch enables/disables respective gadgets
-- Darken option: darkens the background so it is easier to see
-- Desaturate option: de-saturates the background
+- Each switch enables/disables respective widgets
 - Reset Button: resets the extension, wiping all data and restarts it (use this option when the widget is lost off-screen somehow)
+- About Button: see information regarding the extension
+#### Effects
+- Brightness: adjust the brightness of the background
+- Saturation: adjust the saturation (how colorful) of the background
+- Contrast: adjust the contrast of the background
+- Blur: adjust the blur of the background (default is no blur)
+
 
 ### Bookmarks
 - Move the mouse to the right most part of the window to access bookmarks.
