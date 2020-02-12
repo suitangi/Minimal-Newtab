@@ -1,3 +1,7 @@
+---
+title: Shinkai's Newtab
+---
+
 # Shinkai's Newtab
 This extension changes your new tab page so that scenes from Makoto Shinkai's movies can play as seamless, looping cinemagraphs in the background.
 
