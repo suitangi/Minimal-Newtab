@@ -1,8 +1,3 @@
----
-title: Minimal Newtab
-description: A NewTab replacement extension framework that allows for custom defined lists of backgrounds to be loaded into a minimalistic newtab.
----
-
 # Minimal Newtab
 This project is a Google Chrome/Firefox Newtab replacement framework that allows for custom defined lists of backgrounds to be loaded into a minimalistic page such that every time a new tab is opened, a random background is loaded.
 
