@@ -43,7 +43,8 @@ This option allows you to [use your own background lists](#using-your-own-backgr
 
 ### Menu
 - Move the mouse to the left most part of the window to access the menu.
-- Each switch enables/disables respective widgets
+- Each switch in **Widgets** enables/disables respective widgets
+- Each switch in **Background** enables/disables the respective source of images
 - Effects:
   - Brightness: adjust the brightness of the background
   - Saturation: adjust the saturation (how colorful) of the background
@@ -121,4 +122,3 @@ This project uses these jQuery libraries:
 1.4.1 Bug fixes, Added animations for widgets, Background changes
 1.4.0 Original Release: Garden of Words Newtab
 ```
-
