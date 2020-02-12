@@ -11,15 +11,18 @@ The movies included are:
 - Byousoku 5 Centimeter (5cm/s)
 - Kotonoha no Niwa (Garden of Words)
 
-![Screenshot](https://raw.githubusercontent.com/suitangi/Minimal-Newtab/master/resources/SC.png)
+**Get the extension here:**
+- [Chrome](https://chrome.google.com/webstore/detail/ojaookiigngaiipdhccdoaalmjpgpigh/publish-accepted?authuser=0&hl=en)
+- [Firefox](https://addons.mozilla.org/en-US/firefox/addon/garden-of-words-newtab/)
 
-**Get the extension [here](https://chrome.google.com/webstore/detail/ojaookiigngaiipdhccdoaalmjpgpigh/publish-accepted?authuser=0&hl=en)**
+![Screenshot](https://raw.githubusercontent.com/suitangi/Minimal-Newtab/master/resources/SC.png)
 
 ## How to use:
 1. Install the extension
 2. Open a new tab
 3. That's it!
 
+## Features
 ### Clock:
 - Drag to move the clock
 - Click once to switch between standard 12hr and 24hr time
@@ -49,7 +52,7 @@ The movies included are:
 - Move the mouse to the right most part of the window to access bookmarks.
 - Folders are drop-down-styled, click on them to see contents
 
-## Permissions
+## Browser Permissions
 - Storage: To store the data relating to preferences and widgets
 - Bookmark: To show the bookmarks on the right hand side tab
 
@@ -57,6 +60,8 @@ The movies included are:
 *Disclaimer: I do not own any of the artwork or cinemagraphs used in this extension. Credit goes to their respective owner (anime stuio/publisher) and original poster cyan1618 on Imgur.*
 
 The project is open sourced, you can check it out [here](https://github.com/suitangi/Minimal-Newtab). I don't collect any user data; this extension does need to be online to work though (to load the backgrounds, as it does not download them).
+
+Please report bugs to suitangi778@gmail.com.
 
 ## Change-Log
 ```

@@ -1,18 +1,27 @@
-# Cinemagraph Newtab
-This extension changes your new tab page so that scenes from Makoto Shinkai's movies can play as seamless, looping cinemagraphs in the background.
+---
+title: Minimal Newtab
+description: A NewTab replacement extension framework that allows for custom defined lists of backgrounds to be loaded into a minimalistic newtab.
+---
 
-The movies included are:
-- Kimi no Na Wa (Your Name)
-- Byousoku 5 Centimeter (5cm/s)
-- Kotonoha no Niwa (Garden of Words)
+# Minimal Newtab
+This project is a Google Chrome/Firefox Newtab replacement framework that allows for custom defined lists of backgrounds to be loaded into a minimalistic page such that every time a new tab is opened, a random background is loaded.
 
 ![Screenshot](https://raw.githubusercontent.com/suitangi/Minimal-Newtab/master/resources/SC.png)
 
-## How to use:
-1. Install the extension
-2. Open a new tab
-3. That's it!
+## Usage
+These are some of the published extensions with this framework:
+* [Shinkai's Newtab](https://suitangi.github.io/Minimal-Newtab/resources/Shinkai's%20Newtab):
+  * [Chrome](https://chrome.google.com/webstore/detail/ojaookiigngaiipdhccdoaalmjpgpigh/publish-accepted?authuser=0&hl=en)
+  * [Firefox](https://addons.mozilla.org/en-US/firefox/addon/garden-of-words-newtab/)
 
+You can also clone this repository:
+```
+git clone https://github.com/suitangi/Minimal-Newtab.git
+```
+and [use your own background lists](#using-your-own-backgrounds).
+Just make sure to turn on developer options in chrome://extensions/ and 'Load Unpacked' and then select the folder where the `manifest.json` file is located.
+
+## Features
 ### Clock:
 - Drag to move the clock
 - Click once to switch between standard 12hr and 24hr time
@@ -82,13 +91,14 @@ The menu for choosing sources will be automatically generated if there is more t
 The saved name in the `chrome.local.stoage` also uses the name field.
 
 ## Other Informataion
-*Disclaimer: I do not own any of the artwork or cinemagraphs used in this extension. Credit goes to their respective owner (anime stuio/publisher) and original poster cyan1618 on Imgur.*
+*Disclaimer: I do not own any of the artwork or cinemagraphs used in this extension. Credit goes to their respective owners.*
 
-#### Permissions
+### Browser Permissions
 - Storage: To store the data relating to preferences and widgets
 - Bookmark: To show the bookmarks on the right hand side tab
 
-#### This project uses:
+### jQuery
+This project uses these jQuery libraries:
 - [jQuery](https://github.com/jquery/jquery)
 - [jQuery-confirm](https://github.com/craftpip/jquery-confirm)
 - [jQuery-ui](https://github.com/jquery/jquery-ui)
