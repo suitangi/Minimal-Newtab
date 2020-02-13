@@ -478,6 +478,7 @@ function loadBackground(backJson) {
 
 $(document).ready(function() {
 
+  //Print console warning
   console.log("%c------------- Danger Zone ----------------", "color: red; font-size: 25px")
   console.log("%cThis is a browser feature intended for developers. If someone told you to copy-paste something here to enable a feature or \"hack\", it is a scam.", "font-size: 16px;")
   console.log("%cIf you ARE a developer, feel free to check this project out here:", "font-size: 16px;")
@@ -660,7 +661,6 @@ $(document).ready(function() {
       document.getElementById("searchWrapper").style.left = data.search_left_data;
     }
   });
-
 
   //load the background filters
   chrome.storage.local.get({
