@@ -1,4 +1,4 @@
-//helper html string to node
+//Helper: html string to node
 function createHTML(htmlString) {
   var div = document.createElement('div');
   div.innerHTML = htmlString.trim();
@@ -7,7 +7,7 @@ function createHTML(htmlString) {
   return div.firstChild;
 }
 
-//helper for setting the cursor to the end of the editable content
+//Helper: for setting the cursor to the end of the editable content
 function setEndOfContenteditable(contentEditableElement) {
   var range, selection;
   range = document.createRange(); //Create a range (a range is a like the selection but invisible)
@@ -18,7 +18,12 @@ function setEndOfContenteditable(contentEditableElement) {
   selection.addRange(range); //make the range you have just created the visible selection
 }
 
-//formats the minute
+//Helper: insert an element after aanother
+function insertAfter(el, referenceNode) {
+  referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
+}
+
+//Time: formats the minute
 function checkMin(i) {
   if (i < 10) {
     i = "0" + i;
@@ -26,7 +31,7 @@ function checkMin(i) {
   return i;
 }
 
-//formats the hour for standard (12hr) time
+//Time: formats the hour for standard (12hr) time
 function checkHour(i) {
   i = i % 12;
   if (i == 0)
@@ -34,7 +39,7 @@ function checkHour(i) {
   return i;
 }
 
-//starts the time
+//Time: starts the time
 function startTime() {
   let today = new Date();
   let h = today.getHours();
@@ -63,7 +68,7 @@ function startTime() {
   }, 1200);
 }
 
-//sets the element to be draggable (customized for time, search bar, todo list)
+//Widgets: sets the element to be draggable (customized for time, search bar, todo list)
 function dragElement(elmnt) {
   let pos1 = 0,
     pos2 = 0,
@@ -116,9 +121,7 @@ function dragElement(elmnt) {
       //saves the current location for the elements
       if (elmnt.id == "timeWrapper") {
         chrome.storage.local.set({
-          time_top_data: elmnt.style.top
-        }, function() {});
-        chrome.storage.local.set({
+          time_top_data: elmnt.style.top,
           time_left_data: elmnt.style.left
         }, function() {});
         window.military = !window.military;
@@ -145,7 +148,7 @@ function dragElement(elmnt) {
   }
 }
 
-//toggles military time (24hr)
+//Time: toggles military time (24hr)
 function updateMilitary() {
   window.military = !window.military;
   if (window.military)
@@ -159,7 +162,7 @@ function updateMilitary() {
   startTime();
 }
 
-//toggles the visibility of the search bar
+//Search: toggles the visibility of the search bar
 function updateSearch() {
   document.getElementById("searchWrapper").classList.remove("firstStart");
   if (document.getElementById("searchSwitch").checked) {
@@ -179,7 +182,7 @@ function updateSearch() {
   }
 }
 
-//toggles the visibility of the time display
+//Time: toggles the visibility of the time display
 function updateTime() {
   document.getElementById("timeWrapper").classList.remove("firstStart");
   if (document.getElementById("timeSwitch").checked) {
@@ -199,7 +202,7 @@ function updateTime() {
   }
 }
 
-//toggles the visibility of the todo list
+//Todo: toggles the visibility of the todo list
 function updateTodo() {
   document.getElementById("todoWrapper").classList.remove("firstStart");
   if (document.getElementById("todoSwitch").checked) {
@@ -219,7 +222,7 @@ function updateTodo() {
   }
 }
 
-//Updates the filter Effects
+//Filters: Updates the filter Effects
 function updateFilter() {
   // console.log(document.getElementById("darkSlider").value);
   let darkVal = document.getElementById("darkSlider").value;
@@ -236,7 +239,7 @@ function updateFilter() {
   }, function() {});
 }
 
-// saves the Todo list to the chrome storage
+//Todo: saves the Todo list to the chrome storage
 function saveTodo() {
   let lilist = document.getElementById("myUL").getElementsByTagName("LI");
   let store = "";
@@ -251,7 +254,7 @@ function saveTodo() {
   }, function() {});
 }
 
-// Todo: Set the list li element listeners
+//Todo: Set the list li element listeners
 function setLiListeners(li) {
   li.onclick = function() {
     if (document.activeElement == null || document.activeElement.tagName.toLowerCase() != 'li') {
@@ -293,7 +296,10 @@ function setLiListeners(li) {
   li.addEventListener('keydown', (evt) => {
     if (evt.which === 13) {
       let li = document.activeElement;
-      insertNewListItem(li);
+      let newLi = newListItem("", false);
+      insertAfter(newLi, li);
+      document.getElementById("todoInput").style = "display: none;";
+      saveTodo();
       li.nextElementSibling.focus();
       evt.preventDefault();
     } else if (evt.keyCode === 8) {
@@ -336,74 +342,39 @@ function setLiListeners(li) {
   });
 }
 
-//helper insert after
-function insertAfter(el, referenceNode) {
-  referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
-}
-
-//Todo: insert new list item
-function insertNewListItem(nodeInsertAfter) {
+//Todo: new list item, returns the list item created
+function newListItem(text, check) {
   let li = document.createElement("li");
-  insertAfter(li, nodeInsertAfter);
-  let span = document.createElement("SPAN");
-  let txt = document.createTextNode("\u00D7");
-  let br = document.createElement("br");
-  span.className = "close";
-  span.appendChild(txt);
-  span.setAttribute("contenteditable", "false");
-  li.appendChild(br);
-  li.appendChild(span);
-  li.setAttribute("contenteditable", "true");
-  setLiListeners(li);
-  let close = document.getElementsByClassName("close");
-  for (i = 0; i < close.length; i++) {
-    close[i].addEventListener('click', function() {
-      let li = this.parentElement;
-      if (li.parentElement != null)
-        li.parentElement.removeChild(li);
-      if (document.getElementById("myUL").getElementsByTagName("li").length == 0)
-        document.getElementById("todoInput").style = "";
-      saveTodo();
-    });
+  if (check) {
+    li.classList.toggle('checked');
   }
-  document.getElementById("todoInput").style = "display: none;";
-  saveTodo();
-}
-
-//Todo list: Create a new list item when clicking on the "Add" button
-function newElement() {
-  let li = document.createElement("li");
-  let inputValue = document.getElementById("todoInput").value.trim();
-  let t = document.createTextNode(inputValue);
+  let t;
+  if (text != "") {
+    t = document.createTextNode(text);
+  } else {
+    t = document.createElement("br");
+  }
   li.appendChild(t);
-  if (inputValue != '') {
-    document.getElementById("myUL").appendChild(li);
-  }
-  document.getElementById("todoInput").value = "";
-
+  li.setAttribute("contenteditable", "true");
+  document.getElementById("myUL").appendChild(li);
+  setLiListeners(li);
+  //the spaan is the close button
   let span = document.createElement("SPAN");
   let txt = document.createTextNode("\u00D7");
+  span.setAttribute("contenteditable", "false");
   span.className = "close";
   span.appendChild(txt);
-  span.setAttribute("contenteditable", "false");
   li.appendChild(span);
-  li.setAttribute("contenteditable", "true");
-  setLiListeners(li);
-  let close = document.getElementsByClassName("close");
-  for (i = 0; i < close.length; i++) {
-    close[i].addEventListener('click', function() {
-      let li = this.parentElement;
-      if (li.parentElement != null)
-        li.parentElement.removeChild(li);
-      if (document.getElementById("myUL").getElementsByTagName("li").length == 0)
-        document.getElementById("todoInput").style = "";
-      saveTodo();
-    });
-  }
-  document.getElementById("todoInput").style = "display: none;";
-  li.focus();
-  setEndOfContenteditable(li);
-  saveTodo();
+  //setting the close click event listener
+  span.addEventListener('click', function() {
+    let li = this.parentElement;
+    if (li.parentElement != null) //click sometimes triggers twice, first one deletes, second one needs to fizzle
+      li.parentElement.removeChild(li);
+    if (document.getElementById("myUL").getElementsByTagName("li").length == 0)
+      document.getElementById("todoInput").style = "";
+    saveTodo();
+  });
+  return li;
 }
 
 //loads a random background (currently in video form)
@@ -641,56 +612,12 @@ $(document).ready(function() {
   dragElement(document.getElementById("todoWrapper"));
 
   //data/settings loading from chrome
+  //getting the clock settings
   chrome.storage.local.get({
+    time_switch: 'on',
+    time_top_data: '',
+    time_left_data: '',
     military_switch: 'off'
-  }, function(data) {
-    window.military = (data.military_switch == 'on');
-    if (data.military_switch == 'on') {
-      startTime();
-    }
-  });
-  chrome.storage.local.get({
-    time_top_data: ''
-  }, function(data) {
-    if (data.time_top_data != '') {
-      document.getElementById("timeWrapper").style.top = data.time_top_data;
-    }
-  });
-  chrome.storage.local.get({
-    time_left_data: ''
-  }, function(data) {
-    if (data.time_left_data != '') {
-      document.getElementById("timeWrapper").style.left = data.time_left_data;
-    }
-  });
-  chrome.storage.local.get({
-    search_top_data: ''
-  }, function(data) {
-    if (data.search_top_data != '') {
-      document.getElementById("searchWrapper").style.top = data.search_top_data;
-    }
-  });
-  chrome.storage.local.get({
-    search_left_data: ''
-  }, function(data) {
-    if (data.search_left_data != '') {
-      document.getElementById("searchWrapper").style.left = data.search_left_data;
-    }
-  });
-  chrome.storage.local.get({
-    search_switch: 'on'
-  }, function(data) {
-    if (data.search_switch == 'off') {
-      document.getElementById("searchSwitch").checked = false;
-      document.getElementById("searchWrapper").classList.add("exit");
-      document.getElementById("searchWrapper").classList.add("firstStart");
-    } else {
-      document.getElementById("searchSwitch").checked = true;
-      document.getElementById("searchWrapper").classList.add("entrance");
-    }
-  });
-  chrome.storage.local.get({
-    time_switch: 'on'
   }, function(data) {
     if (data.time_switch == 'off') {
       document.getElementById("timeSwitch").checked = false;
@@ -700,9 +627,42 @@ $(document).ready(function() {
       document.getElementById("timeSwitch").checked = true;
       document.getElementById("timeWrapper").classList.add("entrance");
     }
+    if (data.time_top_data != '') {
+      document.getElementById("timeWrapper").style.top = data.time_top_data;
+    }
+    if (data.time_left_data != '') {
+      document.getElementById("timeWrapper").style.left = data.time_left_data;
+    }
+    window.military = (data.military_switch == 'on');
+    if (data.military_switch == 'on') {
+      startTime();
+    }
   });
 
-  //load the filters
+  //getting the searchbar settings
+  chrome.storage.local.get({
+    search_switch: 'on',
+    search_top_data: '',
+    search_left_data: ''
+  }, function(data) {
+    if (data.search_switch == 'off') {
+      document.getElementById("searchSwitch").checked = false;
+      document.getElementById("searchWrapper").classList.add("exit");
+      document.getElementById("searchWrapper").classList.add("firstStart");
+    } else {
+      document.getElementById("searchSwitch").checked = true;
+      document.getElementById("searchWrapper").classList.add("entrance");
+    }
+    if (data.search_top_data != '') {
+      document.getElementById("searchWrapper").style.top = data.search_top_data;
+    }
+    if (data.search_left_data != '') {
+      document.getElementById("searchWrapper").style.left = data.search_left_data;
+    }
+  });
+
+
+  //load the background filters
   chrome.storage.local.get({
     filter: [35, 90, 100, 0]
   }, function(data) {
@@ -713,63 +673,12 @@ $(document).ready(function() {
     updateFilter();
   });
 
-
-  // todo data loading
+  // todo list data loading (and parsing list data)
   chrome.storage.local.get({
-    todo_top_data: ''
-  }, function(data) {
-    if (data.todo_top_data != '') {
-      document.getElementById("todoWrapper").style.top = data.todo_top_data;
-    }
-  });
-  chrome.storage.local.get({
-    todo_left_data: ''
-  }, function(data) {
-    if (data.todo_left_data != '') {
-      document.getElementById("todoWrapper").style.left = data.todo_left_data;
-    }
-  });
-  chrome.storage.local.get({
+    todo_switch: 'on',
+    todo_top_data: '',
+    todo_left_data: '',
     todo_data: ''
-  }, function(data) {
-    console.log(data.todo_data);
-    if (data.todo_data != '') {
-      let arr = data.todo_data.split("×");
-      for (i = 0; i < arr.length - 1; i++) {
-        let li = document.createElement("li");
-        if (arr[i].indexOf("☑") != -1) {
-          let t = document.createTextNode(String(arr[i]).slice(1));
-          li.appendChild(t);
-          li.classList.toggle('checked');
-        } else {
-          let t = document.createTextNode(arr[i]);
-          li.appendChild(t);
-        }
-        li.setAttribute("contenteditable", "true");
-        document.getElementById("myUL").appendChild(li);
-        setLiListeners(li);
-        let span = document.createElement("SPAN");
-        let txt = document.createTextNode("\u00D7");
-        span.setAttribute("contenteditable", "false");
-        span.className = "close";
-        span.appendChild(txt);
-        li.appendChild(span);
-        span.addEventListener('click', function() {
-          let li = this.parentElement;
-          if (li.parentElement != null)
-            li.parentElement.removeChild(li);
-          if (document.getElementById("myUL").getElementsByTagName("li").length == 0)
-            document.getElementById("todoInput").style = "";
-          saveTodo();
-        });
-      }
-    } else {
-      if (document.getElementById("myUL").getElementsByTagName("li").length == 0)
-        document.getElementById("todoInput").style = "";
-    }
-  });
-  chrome.storage.local.get({
-    todo_switch: 'on'
   }, function(data) {
     if (data.todo_switch == 'off') {
       document.getElementById("todoSwitch").checked = false;
@@ -778,6 +687,27 @@ $(document).ready(function() {
     } else {
       document.getElementById("todoSwitch").checked = true;
       document.getElementById("todoWrapper").classList.add("entrance");
+    }
+    if (data.todo_top_data != '') {
+      document.getElementById("todoWrapper").style.top = data.todo_top_data;
+    }
+    if (data.todo_left_data != '') {
+      document.getElementById("todoWrapper").style.left = data.todo_left_data;
+    }
+    // console.log("Todo list data loading:" + data.todo_data); //DEBUG
+    if (data.todo_data != '') {
+      let arr = data.todo_data.split("×");
+      for (i = 0; i < arr.length - 1; i++) {
+        let li;
+        if (arr[i].indexOf("☑") != -1) {
+          li = newListItem(String(arr[i]).slice(1), true);
+        } else {
+          li = newListItem(arr[i], false);
+        }
+        document.getElementById("myUL").appendChild(li);
+      }
+    } else {
+      document.getElementById("todoInput").style = "";
     }
   });
 
@@ -842,7 +772,16 @@ $(document).ready(function() {
   //when you press enter it pushes to the todo list
   $(".todoInput").on('keyup', function(e) {
     if (e.keyCode == 13) {
-      newElement();
+      let inputValue = document.getElementById("todoInput").value.trim();
+      if (inputValue != '') {
+        let li = newListItem(inputValue, false);
+        document.getElementById("todoInput").value = "";
+        document.getElementById("todoInput").style = "display: none;";
+        document.getElementById("myUL").appendChild(li);
+        setEndOfContenteditable(li);
+        li.focus();
+        saveTodo();
+      }
     }
   });
 });
