@@ -64,7 +64,7 @@ The movies included are:
 ## Other Information
 *Disclaimer: I do not own any of the artwork or cinemagraphs used in this extension. Credit goes to their respective owner (anime stuio/publisher) and original poster cyan1618 on Imgur.*
 
-The project is open sourced, you can check it out [here](https://github.com/suitangi/Minimal-Newtab). I don't collect any user data; this extension does need to be online to work though (to load the backgrounds, as it does not download them).
+The project is open-sourced, you can check it out [here](https://suitangi.github.io/Minimal-Newtab/). I don't collect any user data; this extension does need to be online to work though (to load the backgrounds, as it does not download them).
 
 Please report bugs to suitangi778@gmail.com.
 
