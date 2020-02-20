@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="styles/jquery-ui.css">
     <link href='https://fonts.googleapis.com/css?family=Antic' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script type="text/javascript" src="scripts/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="scripts/jquery-confirm.min.js"></script>
     <script type="text/javascript" src="scripts/jquery-ui.js"></script>
@@ -20,8 +21,8 @@
 
     <!-- the backgrond cinemagraph (video) -->
     <div class="backloader" ID="backloader" style="">
-      <div ID="clickDisabler"></div>
-      <video ID="backdrop" width="100%" loop autoplay>
+      <img src="" ID="backdropimg" class="backdrop" draggable="false" width="100%">
+      <video ID="backdropvid" class="backdrop" width="100%" loop autoplay style="display: none;">
         <source src="https://i.imgur.com/t1vt5q0.mp4" type="video/mp4">
       </video>
     </div>
@@ -30,59 +31,103 @@
     <div ID="menu">
       <!-- the menu for widgets -->
       <div class="menuText" style="color: rgba(255,255,255,0.95) !important; font-weight: 500;">Widgets</div>
-      <div class="menuText">Time</div>
-      <div class="sliderWrapper">
-        <label class="switch">
-          <input type="checkbox" ID="timeSwitch" checked>
-          <span class="slider round"></span>
-        </label>
+      <div class="menuItem" data="Enables/Disables the Time Display">
+        <div class="menuText">Time</div>
+        <div class="sliderWrapper">
+          <label class="switch">
+            <input type="checkbox" ID="timeSwitch" checked>
+            <span class="slider round"></span>
+          </label>
+        </div>
       </div>
-      <div class="menuText">Search Bar</div>
-      <div class="sliderWrapper">
-        <label class="switch">
-          <input type="checkbox" ID="searchSwitch" checked>
-          <span class="slider round"></span>
-        </label>
+      <div class="menuItem" data="Enables/Disables the Search Bar">
+        <div class="menuText">Search Bar</div>
+        <div class="sliderWrapper">
+          <label class="switch">
+            <input type="checkbox" ID="searchSwitch" checked>
+            <span class="slider round"></span>
+          </label>
+        </div>
       </div>
-      <div class="menuText">Todo List</div>
-      <div class="sliderWrapper">
-        <label class="switch">
-          <input type="checkbox" ID="todoSwitch" checked>
-          <span class="slider round"></span>
-        </label>
+      <div class="menuItem" data="Enables/Disables the Todo List">
+        <div class="menuText">Todo List</div>
+        <div class="sliderWrapper">
+          <label class="switch">
+            <input type="checkbox" ID="todoSwitch" checked>
+            <span class="slider round"></span>
+          </label>
+        </div>
       </div>
       <div class="menuText" style="color: transparent !important">.</div><!-- blank space divide -->
 
       <!-- the menu for background -->
       <div class="menuText backgroundMenu" style="color: rgba(255,255,255,0.95) !important; font-weight: 500;">Background</div>
-      <div ID="backgroundMenu" class="backgroundMenu"></div>
+      <div ID="backgroundMenu" class="backgroundMenu">
+        <div ID="favoriteSlider" class="menuItem" data="Toggle your favorite backgrounds">
+          <div class="menuText">Favorites</div>
+          <div class="sliderWrapper">
+            <label class="switch">
+              <input type="checkbox" ID="favSwitch">
+              <span class="slider round"></span>
+            </label> </div>
+        </div>
+      </div>
+      <div class="menuText backgroundMenu" style="color: transparent !important">.</div><!-- blank space divide -->
+
+      <!-- favorite button -->
+
+      <div class="menuItem" data="Add this background to your favorites">
+        <div class="sliderWrapper">
+          <div class="like-button">
+            <i class="material-icons not-liked bouncy md-36">favorite_border</i>
+            <i class="material-icons is-liked bouncy md-36">favorite</i>
+          </div>
+        </div>
+      </div>
+      <div class="menuItem" data="Remove this background">
+        <!-- delete button -->
+        <div class="sliderWrapper">
+          <div class="delete-button">
+            <i class="material-icons not-deleted bouncy md-36">delete_outline</i>
+            <i class="material-icons is-deleted bouncy md-36">delete</i>
+          </div>
+        </div>
+      </div>
       <div class="menuText backgroundMenu" style="color: transparent !important">.</div><!-- blank space divide -->
 
       <!-- the menu for effects -->
       <div class="menuText" style="color: rgba(255,255,255,0.95) !important; font-weight: 500;">Effects</div>
-      <div class="menuText">Brightness</div>
-      <div class="slidecontainer">
-        <input type="range" min="10" max="120" value="35" class="rangeSlider" id="darkSlider">
+      <div class="menuItem" data="Adjust the brightness of the background">
+        <div class="menuText">Brightness</div>
+        <div class="slidecontainer">
+          <input type="range" min="10" max="120" value="35" class="rangeSlider" id="darkSlider">
+        </div>
       </div>
-      <div class="menuText">Saturation</div>
-      <div class="slidecontainer">
-        <input type="range" min="0" max="180" value="90" class="rangeSlider" id="satuSlider">
+      <div class="menuItem" data="Adjust the saturation of the background">
+        <div class="menuText">Saturation</div>
+        <div class="slidecontainer">
+          <input type="range" min="0" max="180" value="90" class="rangeSlider" id="satuSlider">
+        </div>
       </div>
-      <div class="menuText">Contrast</div>
-      <div class="slidecontainer">
-        <input type="range" min="40" max="140" value="100" class="rangeSlider" id="conSlider">
+      <div class="menuItem" data="Adjust the contrast of the background">
+        <div class="menuText">Contrast</div>
+        <div class="slidecontainer">
+          <input type="range" min="40" max="140" value="100" class="rangeSlider" id="conSlider">
+        </div>
       </div>
-      <div class="menuText">Blur</div>
-      <div class="slidecontainer">
-        <input type="range" min="0" max="120" value="0" class="rangeSlider" id="blurSlider">
+      <div class="menuItem" data="Adjust the blurring of the background">
+        <div class="menuText">Blur</div>
+        <div class="slidecontainer">
+          <input type="range" min="0" max="120" value="0" class="rangeSlider" id="blurSlider">
+        </div>
       </div>
 
       <!-- Buttons -->
       <div class="menuText" style="color: transparent !important">.</div><!-- blank space divide -->
-      <div class="sliderWrapper buttonWrapper">
+      <div class="sliderWrapper buttonWrapper" data="Resets selected data">
         <button ID="resetButton" class="button">Reset</button>
       </div>
-      <div class="sliderWrapper buttonWrapper">
+      <div class="sliderWrapper buttonWrapper" data="About this extension">
         <button ID="aboutButton" class="button">About</button>
       </div>
       <div class="menuText" style="color: transparent !important">.</div><!-- blank space divide -->

@@ -202,6 +202,46 @@ function updateTime() {
   }
 }
 
+//Time: toggles the visibility of the time display
+function updateFav() {
+  if (document.getElementById("favSwitch").checked) {
+    document.getElementById("favSwitch").checked = false;
+    chrome.storage.local.set({
+      fav_switch: "off"
+    }, function() {});
+  } else {
+    chrome.storage.local.get({
+      fav_list: []
+    }, function(data) {
+      //don't let user turn on fav images if they have no fav backgronds
+      if (data.fav_list.length == 0) {
+        document.getElementById("menu").classList.add("delay");
+        $.alert({
+          title: 'No Favorites',
+          content: 'You don\'t have any favorite backgrounds. To add backgrounds to favorites, scroll down the menu and click the heart when you see a background you like.',
+          type: 'red',
+          boxWidth: '25%',
+          backgroundDismiss: true,
+          useBootstrap: false,
+          typeAnimated: true,
+          buttons: {
+            Okay: function() {
+              setTimeout(function() {
+                document.getElementById("menu").classList.remove("delay")
+              }, 250);
+            }
+          }
+        });
+      } else {
+        document.getElementById("favSwitch").checked = true;
+        chrome.storage.local.set({
+          fav_switch: "on"
+        }, function() {});
+      }
+    });
+  }
+}
+
 //Todo: toggles the visibility of the todo list
 function updateTodo() {
   document.getElementById("todoWrapper").classList.remove("firstStart");
@@ -377,58 +417,242 @@ function newListItem(text, check) {
   return li;
 }
 
+// adds a background to favorites
+function addFav(bg) {
+  chrome.storage.local.get({
+    fav_list: []
+  }, function(data) {
+    let list = data.fav_list;
+    list.push(bg);
+    chrome.storage.local.set({
+      fav_list: list
+    }, function() {})
+  });
+}
+
+// remove a background from favorites
+function removeFav(bg) {
+  chrome.storage.local.get({
+    fav_list: []
+  }, function(data) {
+    let list = data.fav_list;
+    for (var i = 0; i < list.length; i++) {
+      if (list[i].link == bg.link) {
+        list.splice(i, 1);
+        i--;
+      }
+    }
+    chrome.storage.local.set({
+      fav_list: list
+    }, function() {})
+  });
+}
+
+// add a backgorund to the blacklist
+function addBlack(bg) {
+  chrome.storage.local.get({
+    black_list: []
+  }, function(data) {
+    let list = data.black_list;
+    list.push(bg.link);
+    chrome.storage.local.set({
+      black_list: list
+    }, function() {})
+  });
+}
+
 //loads a random background (currently in video form)
 function loadBackground(backJson) {
+  console.log("Loaded background.json:");
   console.log(backJson.sources);
-  window.vidlist = [];
+  window.backlist = [];
+
+  let vid = document.getElementById("backdropvid");
+  let img = document.getElementById("backdropimg");
+  if (backJson.type == "video") {
+    vid.style = "";
+    img.style = "display: none;"
+  } else if (backJson.type == "image") {
+    img.style = "";
+    vid.style = "display: none;"
+  }
+
   backList = backJson.sources;
   let index = 0;
   bkMenu = document.getElementById("backgroundMenu");
 
-  //functional programming yay callback hell xd
+  //functional prograamming (recursive but there shouldn't be many calls to begin with)
   function loadSource(backList) {
     //end case
     if (index == backList.length) {
-      //if none of the sources are selected, use the defualt provided and give warning alert
-      if (window.vidlist.length == 0) {
-        let defBk = backJson.default;
-        window.vidlist.push(defBk);
-        $.alert({
-          title: 'No Background sources selected',
-          content: 'A default background was loaded. Please select sources in the left hand menu.',
-          type: 'blue',
-          boxWidth: '25%',
-          backgroundDismiss: true,
-          useBootstrap: false,
-          typeAnimated: true,
-          buttons: {
-            Dismiss: function() {
-              location.reload();
-            }
-          }
-        });
-      }
 
-      //loading ended: choose a random cinemagraph, but not the last one shown
       chrome.storage.local.get({
-          lastShown: ""
+          lastShown: '',
+          fav_list: [],
+          fav_switch: 'off',
+          black_list: []
         },
         function(data) {
-          let imn = Math.floor(Math.random() * window.vidlist.length);
-          let vid = document.getElementById("backdrop");
-          while (data.lastShown == window.vidlist[imn] && window.vidlist.length != 1) {
-            let imn = Math.floor(Math.random() * window.vidlist.length);
-          }
-          vid.src = window.vidlist[imn];
-          vid.load();
-          //save the last shown in chrome
-          chrome.storage.local.set({
-            lastShown: window.vidlist[imn]
-          }, function() {});
+          //if none of the sources are selected, use the defualt provided and give warning alert
+          if (window.backlist.length == 0 && (data.fav_switch == 'off' || (data.fav_switch == 'on' && data.fav_list.length == 0))) {
+            if (backJson.default != null) {
+              window.back = backJson.default;
+              vid = document.getElementById("backdropvid");
+              img = document.getElementById("backdropimg");
 
-          //if there is only one background source, don't need to show the menu switches
-          if (backList.length == 1)
-            $('.backgroundMenu').css("display", "none");
+              console.log("Favorites:");
+              console.log(data.fav_list);
+              let str = window.back.link;
+              console.log("Defaulted backgorund:");
+              console.log(str);
+              let fext = str.substring(str.length - 3).toLowerCase();
+              if (fext == 'jpg' || fext == 'png' || fext == 'bmp') { //the file type is image
+                img.src = str;
+                img.style = "";
+                vid.style = "display: none;"
+              } else { //file type is video
+                img.style = "display: none;"
+                vid.style = "";
+                vid.src = str;
+                vid.load();
+              }
+            }
+            $.alert({
+              title: 'No Background sources selected',
+              content: 'A default background was loaded. Please select a source in the left hand menu, and then refresh the page.',
+              type: 'blue',
+              boxWidth: '25%',
+              backgroundDismiss: true,
+              useBootstrap: false,
+              typeAnimated: true,
+              buttons: {
+                Dismiss: function() {
+                  chrome.storage.local.set({
+                    fav_switch: "off"
+                  }, function() {});
+                }
+              }
+            });
+          } else { //loading ended: choose a random background
+
+            //adds the favorite list to the list of possible
+            if (data.fav_switch == 'on') {
+              window.backlist.push(...data.fav_list);
+            }
+
+            //if not the specific case that user only wants one faved background
+            if (!(data.fav_list.length == 1 && window.backlist.length == 1 && data.fav_list[0].link == data.lastShown)) {
+              //then remove the last shown and blacklisted backgrounds from the list
+              for (var i = 0; i < window.backlist.length; i++) {
+                for (var j = 0; j < data.black_list.length; j++) {
+                  if (window.backlist[i] != null && window.backlist[i].link == data.black_list[j]) {
+                    window.backlist.splice(i, 1);
+                    i--;
+                  }
+                }
+              }
+            }
+
+            // dumb user removed all source-selected backgrounds
+            if (window.backlist.length == 0) {
+              if (backJson.default != null) {
+                window.back = backJson.default;
+                vid = document.getElementById("backdropvid");
+                img = document.getElementById("backdropimg");
+
+                console.log("Favorites:");
+                console.log(data.fav_list);
+                let str = window.back.link;
+                console.log("Defaulted backgorund:");
+                console.log(str);
+                let fext = str.substring(str.length - 3).toLowerCase();
+                if (fext == 'jpg' || fext == 'png' || fext == 'bmp') { //the file type is image
+                  img.src = str;
+                  img.style = "";
+                  vid.style = "display: none;"
+                } else { //file type is video
+                  img.style = "display: none;"
+                  vid.style = "";
+                  vid.src = str;
+                  vid.load();
+                }
+              }
+              $.alert({
+                title: 'Too many backgrounds removed',
+                content: 'A default background was loaded. You have removed all backgrounds in the sources you selected, you can reset your removed backgrounds or select more background sources.',
+                type: 'red',
+                boxWidth: '25%',
+                backgroundDismiss: true,
+                useBootstrap: false,
+                typeAnimated: true,
+                buttons: {
+                  ok: {
+                    text: "Reset my removed backgrounds",
+                    btnClass: 'btn-red',
+                    keys: ['enter'],
+                    action: function() {
+                      chrome.storage.local.set({
+                        black_list: []
+                      }, function() {
+                        location.reload();
+                      });
+                    }
+                  },
+                  cancel: function() {}
+                }
+              });
+            } else {
+              // remove the last shown if there is more than one
+              for (var i = 0; i < window.backlist.length; i++) {
+                if (window.backlist[i] != null && window.backlist.length != 1 && window.backlist[i].link == data.lastShown) {
+                  window.backlist.splice(i, 1);
+                  i--;
+                }
+              }
+
+              //get the random image number
+              let imn = Math.floor(Math.random() * window.backlist.length);
+              vid = document.getElementById("backdropvid");
+              img = document.getElementById("backdropimg");
+
+              console.log("Favorites:");
+              console.log(data.fav_list);
+              console.log("Removed:");
+              console.log(data.black_list);
+              window.back = window.backlist[imn]
+              let str = window.back.link;
+              console.log("Selected backgorund:");
+              console.log(str);
+              let fext = str.substring(str.length - 3).toLowerCase();
+              if (fext == 'jpg' || fext == 'png' || fext == 'bmp') { //the file type is image
+                img.src = str;
+                img.style = "";
+                vid.style = "display: none;"
+              } else { //file type is video
+                img.style = "display: none;"
+                vid.style = "";
+                vid.src = str;
+                vid.load();
+              }
+              //save the last shown in chrome
+              chrome.storage.local.set({
+                lastShown: window.backlist[imn].link
+              }, function() {});
+
+              //setting the fav switch and like buttons (due to async, they have to be here)
+              if (data.fav_switch == 'on' && data.fav_list.length > 0) {
+                document.getElementById("favSwitch").checked = true;
+              }
+
+              let favLinkList = [];
+              for (var i = 0; i < data.fav_list.length; i++) {
+                favLinkList.push(data.fav_list[i].link);
+              }
+              if (favLinkList.indexOf(window.back.link) != -1) {
+                $('.like-button').toggleClass('is-active');
+              }
+            }
+          }
         });
       return;
     } else {
@@ -439,11 +663,19 @@ function loadBackground(backJson) {
       key = name.split(' ').join('-');
       obj[key] = 'on';
 
+      //descriptors shouldn't be more than 34 characters
+      let descriptor = "Backgrounds from " + name;
+      if (backList[index].description != null) {
+        descriptor = backList[index].description;
+      }
+
       //create the backgroundMenu switch and add it to background menu
+      var itemNode = createHTML("<div class=\"menuItem\" data=\"" + descriptor + "\"></div>");
       var textNode = createHTML("<div class=\"menuText\">" + name + "</div>");
       var divNode = createHTML("<div class=\"sliderWrapper\"> <label class=\"switch\"> <input type=\"checkbox\" ID=\"" + key + "\" checked> <span class=\"slider round\"></span> </label> </div>");
-      bkMenu.appendChild(textNode);
-      bkMenu.appendChild(divNode);
+      itemNode.appendChild(textNode);
+      itemNode.appendChild(divNode);
+      bkMenu.insertBefore(itemNode, document.getElementById("favoriteSlider"));
 
       //adding the onClick for the swtiches
       document.getElementById(key).parentElement.onclick = function() {
@@ -466,23 +698,24 @@ function loadBackground(backJson) {
         if (data[key] == 'off') {
           document.getElementById(key).checked = false;
         } else {
-          window.vidlist.push(...backList[index].list)
+          window.backlist.push(...backList[index].list)
         }
         index += 1;
         loadSource(backList);
       });
     }
   }
+
   loadSource(backList);
 }
 
 $(document).ready(function() {
 
   //Print console warning
-  console.log("%c------------- Danger Zone ----------------", "color: red; font-size: 25px")
-  console.log("%cThis is a browser feature intended for developers. If someone told you to copy-paste something here to enable a feature or \"hack\", it is a scam.", "font-size: 16px;")
+  console.log("%c--- Danger Zone ---", "color: red; font-size: 25px")
+  console.log("%cThis is a browser feature intended for developers. If someone told you to copy-paste something here to enable a feature or \"hack\", it is likely a scam.", "font-size: 16px;")
   console.log("%cIf you ARE a developer, feel free to check this project out here:", "font-size: 16px;")
-  console.log("%chttps://github.com/suitangi/Minimal-Newtab", "font-size: 16px;")
+  console.log("%chttps://suitangi.github.io/Minimal-Newtab/", "font-size: 16px;")
 
   //if Chrome is online
   if (window.navigator.onLine) {
@@ -552,6 +785,48 @@ $(document).ready(function() {
     }
   });
 
+  //add onclick for like and delete buttons
+  $('.like-button').click(function() {
+    if ($(this).hasClass('is-active')) {
+      removeFav(window.back);
+    } else {
+      addFav(window.back);
+    }
+    $(this).toggleClass('is-active');
+  })
+
+  $('.delete-button').click(function() {
+    if (!$(this).hasClass('is-active')) {
+      document.getElementById("menu").classList.add("delay");
+      $.confirm({
+        title: 'Are you sure?',
+        content: 'This will remove the background. You can\'t undo this action unless you reset the extension with the reset button in the menu.',
+        boxWidth: '25%',
+        useBootstrap: false,
+        type: 'blue',
+        escapeKey: 'cancel',
+        buttons: {
+          ok: {
+            text: "Remove this background",
+            btnClass: 'btn-blue',
+            keys: ['enter'],
+            action: function() {
+              addBlack(window.back);
+              $('.delete-button').addClass('is-active');
+              setTimeout(function() {
+                document.getElementById("menu").classList.remove("delay")
+              }, 250);
+            }
+          },
+          cancel: function() {
+            setTimeout(function() {
+              document.getElementById("menu").classList.remove("delay")
+            }, 250);
+          }
+        }
+      });
+    }
+  })
 
   //add onclick for aboutButton
   document.getElementById("aboutButton").onclick = function() {
@@ -717,6 +992,9 @@ $(document).ready(function() {
   });
   document.getElementById("timeSwitch").parentElement.addEventListener('click', function() {
     updateTime();
+  });
+  document.getElementById("favSwitch").parentElement.addEventListener('click', function() {
+    updateFav();
   });
   document.getElementById("todoSwitch").parentElement.addEventListener('click', function() {
     updateTodo();
