@@ -121,6 +121,16 @@
    right: -7%;
  }
 
+/* time widget element */
+ .info {
+   color: rgba(255, 255, 255, 0.5);
+   font-family: "Antic";
+   user-select: none;
+   font-weight: 100;
+   font-size: 30px;
+   cursor: pointer;
+ }
+
  /* search widget */
  .search {
    padding: 5px;
@@ -144,6 +154,14 @@
  .timeWrapper {
    position: absolute;
    top: 60%;
+   left: 7%;
+   z-index: 5;
+   opacity: 0;
+ }
+
+ .infoWrapper {
+   position: absolute;
+   top: 30%;
    left: 7%;
    z-index: 5;
    opacity: 0;
@@ -293,7 +311,7 @@
 
  #menu:hover,
  #menu.delay {
-   background-color: rgba(0, 0, 0, 0.7);
+   background-color: rgba(0, 0, 0, 0.8);
    width: 235px;
    overflow: auto !important;
  }

@@ -82,6 +82,8 @@ function dragElement(elmnt) {
     document.getElementById("searchDiv").onmousedown = dragMouseDown;
   if (elmnt.id == "todoWrapper")
     document.getElementById("todoDiv").onmousedown = dragMouseDown;
+  if (elmnt.id == "infoWrapper")
+    document.getElementById("info").onmousedown = dragMouseDown;
 
   function dragMouseDown(e) {
     e = e || window.event;
@@ -128,18 +130,20 @@ function dragElement(elmnt) {
       }
       if (elmnt.id == "searchWrapper") {
         chrome.storage.local.set({
-          search_top_data: elmnt.style.top
-        }, function() {});
-        chrome.storage.local.set({
+          search_top_data: elmnt.style.top,
           search_left_data: elmnt.style.left
         }, function() {});
       }
       if (elmnt.id == "todoWrapper") {
         chrome.storage.local.set({
-          todo_top_data: elmnt.style.top
-        }, function() {});
-        chrome.storage.local.set({
+          todo_top_data: elmnt.style.top,
           todo_left_data: elmnt.style.left
+        }, function() {});
+      }
+      if (elmnt.id == "infoWrapper") {
+        chrome.storage.local.set({
+          info_top_data: elmnt.style.top,
+          info_left_data: elmnt.style.left
         }, function() {});
       }
     }
@@ -202,7 +206,27 @@ function updateTime() {
   }
 }
 
-//Time: toggles the visibility of the time display
+//Time: toggles the visibility of the info display
+function updateinfo() {
+  document.getElementById("infoWrapper").classList.remove("firstStart");
+  if (document.getElementById("infoSwitch").checked) {
+    document.getElementById("infoSwitch").checked = false;
+    document.getElementById("infoWrapper").classList.add("exit");
+    document.getElementById("infoWrapper").classList.remove("entrance");
+    chrome.storage.local.set({
+      info_switch: "off"
+    }, function() {});
+  } else {
+    document.getElementById("infoSwitch").checked = true;
+    document.getElementById("infoWrapper").classList.add("entrance");
+    document.getElementById("infoWrapper").classList.remove("exit");
+    chrome.storage.local.set({
+      info_switch: "on"
+    }, function() {});
+  }
+}
+
+//Time: toggles the favorites source of backgrounds
 function updateFav() {
   if (document.getElementById("favSwitch").checked) {
     document.getElementById("favSwitch").checked = false;
@@ -461,11 +485,55 @@ function addBlack(bg) {
   });
 }
 
+
+// shows the report background dialog
+function reportBk() {
+  document.getElementById("menu").classList.add("delay");
+  $.confirm({
+    title: false,
+    content: '<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeeJuD-3LOxM2pJniVo2BCOLmIPctBQDdOkEg4Ejr9n29gNng/viewform?embedded=true?usp=pp_url&entry.2076178066=' +
+      encodeURI(JSON.stringify(window.back)) +
+      '" width="640" height="620" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>',
+    boxWidth: '640px',
+    useBootstrap: false,
+    escapeKey: 'Close',
+    buttons: {
+      Close: function() {
+        setTimeout(function() {
+          document.getElementById("menu").classList.remove("delay")
+        }, 250);
+      }
+    }
+  });
+}
+
+// loads the background information
+function loadInfo() {
+  if (window.infoDisplay != null) {
+    chrome.storage.local.get({
+      info_mode: 0
+    }, function(data) {
+      let infoChosen = window.infoDisplay[data.info_mode];
+      let infoText = "";
+      for (i = 0; i < infoChosen.length; i++) {
+        infoText += window.back[infoChosen[i]] + "\n";
+      }
+      document.getElementById('info').innerText = infoText;
+    });
+  } else {
+    $('#infoMenuItem').css("display", "none");
+    $('#infoWrapper').css("display", "none");
+  }
+}
+
 //loads a random background (currently in video form)
 function loadBackground(backJson) {
   console.log("Loaded background.json:");
   console.log(backJson.sources);
   window.backlist = [];
+
+  //loads the background info panel data
+  window.infoDisplay = backJson.info;
 
   let vid = document.getElementById("backdropvid");
   let img = document.getElementById("backdropimg");
@@ -500,11 +568,13 @@ function loadBackground(backJson) {
               vid = document.getElementById("backdropvid");
               img = document.getElementById("backdropimg");
 
+              //console logging
               console.log("Favorites:");
               console.log(data.fav_list);
               let str = window.back.link;
               console.log("Defaulted backgorund:");
               console.log(str);
+
               let fext = str.substring(str.length - 3).toLowerCase();
               if (fext == 'jpg' || fext == 'png' || fext == 'bmp') { //the file type is image
                 img.src = str;
@@ -516,6 +586,7 @@ function loadBackground(backJson) {
                 vid.src = str;
                 vid.load();
               }
+              loadInfo();
             }
             $.alert({
               title: 'No Background sources selected',
@@ -560,6 +631,7 @@ function loadBackground(backJson) {
                 vid = document.getElementById("backdropvid");
                 img = document.getElementById("backdropimg");
 
+                //console logging
                 console.log("Favorites:");
                 console.log(data.fav_list);
                 let str = window.back.link;
@@ -643,7 +715,7 @@ function loadBackground(backJson) {
               if (data.fav_switch == 'on' && data.fav_list.length > 0) {
                 document.getElementById("favSwitch").checked = true;
               }
-
+              //if the current image is in favorites, make the heart button filled
               let favLinkList = [];
               for (var i = 0; i < data.fav_list.length; i++) {
                 favLinkList.push(data.fav_list[i].link);
@@ -651,6 +723,9 @@ function loadBackground(backJson) {
               if (favLinkList.indexOf(window.back.link) != -1) {
                 $('.like-button').toggleClass('is-active');
               }
+
+              //load the background info after the background has been chosen
+              loadInfo();
             }
           }
         });
@@ -693,12 +768,18 @@ function loadBackground(backJson) {
         }
       }
 
+      //add source to each element of the list
+      let toPushList = backList[index].list
+      for (i = 0; i < toPushList.length; i++) {
+        toPushList[i]["source"] = name;
+      }
+
       //storing and getting data from chrome to see whether it was on or off
       chrome.storage.local.get(obj, function(data) {
         if (data[key] == 'off') {
           document.getElementById(key).checked = false;
         } else {
-          window.backlist.push(...backList[index].list)
+          window.backlist.push(...toPushList);
         }
         index += 1;
         loadSource(backList);
@@ -720,7 +801,7 @@ $(document).ready(function() {
   //if Chrome is online
   if (window.navigator.onLine) {
     //loads the backgorund json
-    const jsonUrl = chrome.runtime.getURL('resources/background.json');
+    const jsonUrl = chrome.runtime.getURL('resources/mtgart.json');
     fetch(jsonUrl)
       .then((response) => response.json())
       .then((json) => loadBackground(json));
@@ -831,19 +912,30 @@ $(document).ready(function() {
   //add onclick for aboutButton
   document.getElementById("aboutButton").onclick = function() {
     document.getElementById("menu").classList.add("delay");
-    $.dialog({
+    let manifest = chrome.runtime.getManifest();
+    $.confirm({
       title: 'About',
-      content: 'Lorem Ipsum',
+      content: manifest.name + ' ' + manifest.version + '<br>' + manifest.description,
       type: 'blue',
       boxWidth: '25%',
       backgroundDismiss: true,
       useBootstrap: false,
       typeAnimated: true,
-      onDestroy: function() {
-        setTimeout(function() {
-          document.getElementById("menu").classList.remove("delay")
-        }, 250);
-      },
+      buttons: {
+        ok: {
+          text: "Report this background",
+          btnClass: 'btn-blue',
+          keys: ['enter'],
+          action: function() {
+            reportBk();
+          }
+        },
+        Close: function() {
+          setTimeout(function() {
+            document.getElementById("menu").classList.remove("delay")
+          }, 250);
+        }
+      }
     });
   };
 
@@ -886,6 +978,7 @@ $(document).ready(function() {
   dragElement(document.getElementById("timeWrapper"));
   dragElement(document.getElementById("searchWrapper"));
   dragElement(document.getElementById("todoWrapper"));
+  dragElement(document.getElementById('infoWrapper'));
 
   //data/settings loading from chrome
   //getting the clock settings
@@ -912,6 +1005,30 @@ $(document).ready(function() {
     window.military = (data.military_switch == 'on');
     if (data.military_switch == 'on') {
       startTime();
+    }
+  });
+
+  //getting the clock settings
+  chrome.storage.local.get({
+    info_switch: 'on',
+    info_top_data: '',
+    info_left_data: '',
+    info_align: 'left',
+    info_mode: 0,
+  }, function(data) {
+    if (data.info_switch == 'off') {
+      document.getElementById("infoSwitch").checked = false;
+      document.getElementById("infoWrapper").classList.add("exit");
+      document.getElementById("infoWrapper").classList.add("firstStart");
+    } else {
+      document.getElementById("infoSwitch").checked = true;
+      document.getElementById("infoWrapper").classList.add("entrance");
+    }
+    if (data.info_top_data != '') {
+      document.getElementById("infoWrapper").style.top = data.info_top_data;
+    }
+    if (data.info_left_data != '') {
+      document.getElementById("infoWrapper").style.left = data.info_left_data;
     }
   });
 
@@ -992,6 +1109,9 @@ $(document).ready(function() {
   });
   document.getElementById("timeSwitch").parentElement.addEventListener('click', function() {
     updateTime();
+  });
+  document.getElementById("infoSwitch").parentElement.addEventListener('click', function() {
+    updateinfo();
   });
   document.getElementById("favSwitch").parentElement.addEventListener('click', function() {
     updateFav();
