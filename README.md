@@ -44,8 +44,11 @@ This option allows you to [use your own background lists](#using-your-own-backgr
   - Saturation: adjust the saturation (how colorful) of the background
   - Contrast: adjust the contrast of the background
   - Blur: adjust the blur of the background (default is no blur)
+- ❤ : Add or remove the current background to favorites
+- 🗑️: Remove this background (won't show this background again)
 - Reset Button: resets the extension, wiping all data and restarts it (use this option when the widget is lost off-screen somehow)
 - About Button: see information regarding the extension
+  - Report background: used to report a broken/low quality background
 
 ### Bookmarks
 - Move the mouse to the right most part of the window to access bookmarks.
@@ -56,40 +59,86 @@ The `background.json` is styled in such a way:
 
 ```json
 {
-  "default": "default-image-link-here",
+  "default": {
+    "link": "default-link",
+    "metadata1": "metadata1",
+    "metadata2": "metadata2"
+  },
+  "info" : [
+    ["metadata1", "metadata2"],
+    ["metadata2"]
+  ],
   "sources": [{
-      "name": "Name of The Source",
-      "list": ["link1", "link2", "link3", "..."]
+      "name": "Name of The Source1",
+      "list": [
+        { "link": "link1",
+        "metadata1": "metadata1",
+        "metadata2": "metadata2"
+        },
+        { "link": "link2",
+          "metadata1": "metadata1",
+          "metadata2": "metadata2"
+        },
+        { "link": "link3",
+          "metadata1": "metadata1",
+          "metadata2": "metadata2"
+        }]
 
     },
     {
       "name": "Source2",
-      "list": ["link1", "link2", "..."]
+      "list": [
+        { "link": "link4",
+        "metadata1": "metadata1",
+        "metadata2": "metadata2"
+        },
+        { "link": "link5",
+          "metadata1": "metadata1",
+          "metadata2": "metadata2"
+        },
+        { "link": "link6",
+          "metadata1": "metadata1",
+          "metadata2": "metadata2"
+        }]
     }
   ]
 }
 ```
 
 
-Here's and Example Backgorund Json:
+Here's and Example Backgorund Json (with no metadata):
 ```json
 {
-  "default": "https://i.imgur.com/t1vt5q0.mp4",
+  "default": {
+    "link": "https://i.imgur.com/t1vt5q0.mp4"
+  },
+  "info": [
+    ["source"]
+  ],
   "sources": [{
       "name": "Your Name",
-      "list": ["https://i.imgur.com/OnwkTKE.mp4", "https://i.imgur.com/IpcZlnk.mp4"]
-
+      "list": [{
+          "link": "https://i.imgur.com/OnwkTKE.mp4"
+        },
+        {
+          "link": "https://i.imgur.com/IpcZlnk.mp4"
+        }]
     },
     {
       "name": "Garden of Words",
-      "list": ["https://i.imgur.com/IrZ5pEv.mp4", "https://i.imgur.com/gNXhMXN.mp4"]
+      "list": [{
+        "link": "https://i.imgur.com/IrZ5pEv.mp4"
+        },
+        {
+          "link": "https://i.imgur.com/gNXhMXN.mp4"
+        }]
     }
   ]
 }
 ```
 The `background.json` name should not be changed and should be in the resources directory.
-The menu for choosing sources will be automatically generated if there is more than one source. It takes the name from the `name:` field in the json of each `source`.
-The saved name in the `chrome.local.stoage` also uses the same field.
+The menu for choosing sources will be automatically generated. It takes the title from the `name:` field in the json of each `source`.
+The `info` field is a list that determines how the background metadata is shown. `"source"` refers to the source of the background, which isn't located in the metadata of the background, but can still be retrieved.
 
 ## Other Informataion
 *Disclaimer: I do not own any of the artwork or cinemagraphs used in this extension. Credit goes to their respective owners.*

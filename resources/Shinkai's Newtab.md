@@ -50,8 +50,11 @@ The movies included are:
   - Saturation: adjust the saturation (how colorful) of the background
   - Contrast: adjust the contrast of the background
   - Blur: adjust the blur of the background (default is no blur)
+- ❤ : Add or remove the current background to favorites
+- 🗑️: Remove this background (won't show this background again)
 - Reset Button: resets the extension, wiping all data and restarts it (use this option when the widget is lost off-screen somehow)
 - About Button: see information regarding the extension
+    - Report background: used to report a broken/low quality background
 
 ### Bookmarks
 - Move the mouse to the right most part of the window to access bookmarks.
@@ -63,8 +66,9 @@ The movies included are:
 
 ## Other Information
 *Disclaimer: I do not own any of the artwork or cinemagraphs used in this extension. Credit goes to their respective owner (anime stuio/publisher) and original poster cyan1618 on Imgur.*
+*If you have a copyright problem with any of the backgrounds, please contact me at suitangi778@gmail.com*
 
-The project is open-sourced, you can check it out [here](https://suitangi.github.io/Minimal-Newtab/). I don't collect any user data; this extension does need to be online to work though (to load the backgrounds, as it does not download them).
+The project is free and open-sourced, you can check it out [here](https://suitangi.github.io/Minimal-Newtab/). I don't collect any user data nor profit; this extension does need to be online to work though (to load the backgrounds, as it does not download them).
 
 Please report bugs to suitangi778@gmail.com.
 
