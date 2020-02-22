@@ -1,9 +1,48 @@
 ﻿{
   "type": "image",
   "info": [
-    ["Card Name", "Artist", "Set"],
-    [],
-    []
+    [
+      {
+        "name": "Card Name",
+        "size": "large"
+      },
+      {
+        "name": "Artist",
+        "size": "small"
+      },
+      {
+        "name": "Set",
+        "size": "small"
+      }
+    ],
+    [
+      {
+          "name": "Card Name",
+          "size": "medium"
+      },
+      {
+          "name": "Artist",
+          "size": "small"
+      }
+    ],
+    [
+      {
+          "name": "Card Name",
+          "size": "medium"
+      }
+    ],
+    [
+      {
+          "name": "Artist",
+          "size": "medium"
+      }
+    ],
+    [
+      {
+          "name": "Set",
+          "size": "medium"
+      }
+    ]
   ],
   "default": {
     "Artist": "Dan Scott",
@@ -2259,7 +2298,7 @@
     },
     {
       "name": "Modern",
-      "description": "Art from between Mirrodin & RtR",
+      "description": "Art from between 8th Ed. & RtR",
       "list": [
         {
           "Artist": "Nils Hamm",
@@ -2995,7 +3034,7 @@
         },
         {
           "Artist": "Jason Chan",
-          "link": "https://www.mtgpics.com/pics/art/zen/116_1.jpg",
+          "link": "https://i.imgur.com/g5c8PVL.png",
           "Card Name": "Vampire Nighthawk",
           "Set": "Zendikar"
         },
@@ -3943,7 +3982,7 @@
         },
         {
           "Artist": "Raymond Swanland",
-          "link": "https://www.mtgpics.com/pics/art/10m/118_1.jpg",
+          "link": "https://i.imgur.com/FOpWPZl.jpg",
           "Card Name": "Vampire Nocturnus",
           "Set": "Magic 2010"
         },
@@ -4099,7 +4138,7 @@
         },
         {
           "Artist": "D. Alexander Gregory",
-          "link": "https://www.mtgpics.com/pics/art/tsp/054_2.jpg",
+          "link": "https://i.imgur.com/6SfO3no.png",
           "Card Name": "Coral Trickster",
           "Set": "Time Spiral"
         },
@@ -5491,7 +5530,7 @@
         },
         {
           "Artist": "Christopher Moeller",
-          "link": "https://www.mtgpics.com/pics/art/dka/057.jpg",
+          "link": "https://i.imgur.com/ayO7pgD.jpg",
           "Card Name": "Curse of Thirst",
           "Set": "Dark Ascension"
         },
@@ -11137,12 +11176,6 @@
         },
         {
           "Artist": "Deruchenko Alexander",
-          "link": "https://www.mtgpics.com/pics/art/xln/081_1.jpg",
-          "Card Name": "Spell Pierce",
-          "Set": "Ixalan"
-        },
-        {
-          "Artist": "Deruchenko Alexander",
           "link": "https://www.mtgpics.com/pics/art/xln/068_1.jpg",
           "Card Name": "Pirate's Prize",
           "Set": "Ixalan"
@@ -12218,7 +12251,7 @@
         {
           "Artist": "Victor Adame Minguez",
           "link": "https://www.mtgpics.com/pics/art/war/293.jpg",
-          "Card Name": "Servo",
+          "Card Name": "Servo Token",
           "Set": "War of the Spark"
         },
         {
@@ -12585,6 +12618,12 @@
           "Artist": "Johannes Voss",
           "link": "https://www.mtgpics.com/pics/art/thb/122.jpg",
           "Card Name": "Venomous Hierophant",
+          "Set": "Theros Beyond Death"
+        },
+        {
+          "Artist": "Seb McKinnon",
+          "link": "https://i.imgur.com/fldYagc.png",
+          "Card Name": "Mire Triton",
           "Set": "Theros Beyond Death"
         },
         {
@@ -12967,7 +13006,7 @@
         },
         {
           "Artist": "Zack Stella",
-          "link": "https://www.mtgpics.com/pics/art/thb/045.jpg",
+          "link": "https://www.hipstersofthecoast.com/wp-content/uploads/2020/02/6.Callaphe.jpg",
           "Card Name": "Callaphe, Beloved of the Sea",
           "Set": "Theros Beyond Death"
         },
@@ -13011,6 +13050,12 @@
           "Artist": "Caroline Gariba",
           "link": "https://www.mtgpics.com/pics/art/thb/272.jpg",
           "Card Name": "Elspeth's Devotee",
+          "Set": "Theros Beyond Death"
+        },
+        {
+          "Artist": "Filip Burburan",
+          "link": "https://i.imgur.com/p0QsbIp.png",
+          "Card Name": "Nyxbloom Ancient",
           "Set": "Theros Beyond Death"
         },
         {
@@ -29718,12 +29763,6 @@
           "Set": "Misc. Promos"
         },
         {
-          "Artist": "Deruchenko Alexander",
-          "link": "https://www.mtgpics.com/pics/art/pmo/283_1.jpg",
-          "Card Name": "Munda's Vanguard",
-          "Set": "Misc. Promos"
-        },
-        {
           "Artist": "Matt Stewart",
           "link": "https://www.mtgpics.com/pics/art/pmo/184.jpg",
           "Card Name": "Shamanic Revelation",
@@ -29973,6 +30012,12 @@
           "Artist": "Deruchenko Alexander",
           "link": "https://www.mtgpics.com/pics/art/pmo/283.jpg",
           "Card Name": "Munda's Vanguard",
+          "Set": "Misc. Promos"
+        },
+        {
+          "Artist": "Deruchenko Alexander",
+          "link": "https://www.mtgpics.com/pics/art/pmo/283_1.jpg",
+          "Card Name": "Munda's Vanguard (Sketch)",
           "Set": "Misc. Promos"
         },
         {

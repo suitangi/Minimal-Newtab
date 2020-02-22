@@ -154,6 +154,11 @@ This project uses these jQuery libraries:
 - [jQuery-confirm](https://github.com/craftpip/jquery-confirm)
 - [jQuery-ui](https://github.com/jquery/jquery-ui)
 
+## Special Thanks
+To all the testers:
+[G-Jayakar](https://github.com/G-Jayakar)
+[DaisyFei](https://github.com/DaisyFei)
+
 ## Change-Log
 ```
 1.6.2 Todo list rework

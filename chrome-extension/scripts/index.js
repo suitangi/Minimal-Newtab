@@ -141,6 +141,7 @@ function dragElement(elmnt) {
         }, function() {});
       }
       if (elmnt.id == "infoWrapper") {
+        window.infoMode -= 1;
         chrome.storage.local.set({
           info_top_data: elmnt.style.top,
           info_left_data: elmnt.style.left
@@ -510,20 +511,39 @@ function reportBk() {
 // loads the background information
 function loadInfo() {
   if (window.infoDisplay != null) {
-    chrome.storage.local.get({
-      info_mode: 0
-    }, function(data) {
-      let infoChosen = window.infoDisplay[data.info_mode];
-      let infoText = "";
-      for (i = 0; i < infoChosen.length; i++) {
-        infoText += window.back[infoChosen[i]] + "\n";
+    let infoChosen = window.infoDisplay[window.infoMode];
+    let infoText = "";
+    for (i = 0; i < infoChosen.length; i++) {
+      let size = "font-size: ";
+      if (infoChosen[i].size == null) {
+        size = "";
+      } else if (infoChosen[i].size == "small") {
+        size += "calc(8px + .6vw)";
+      } else if (infoChosen[i].size == "large") {
+        size += "calc(24px + .6vw)";
+      } else {
+        size += "calc(16px + .6vw)";
       }
-      document.getElementById('info').innerText = infoText;
-    });
+      infoText += '<span style="' + size + '"' + '>' + window.back[infoChosen[i].name] + '</span><br>';
+    }
+    document.getElementById('info').innerHTML = infoText;
   } else {
     $('#infoMenuItem').css("display", "none");
     $('#infoWrapper').css("display", "none");
   }
+}
+
+//change the background info panel up/down
+function updateInfoMode() {
+  window.infoMode += 1;
+  if (window.infoMode == window.infoDisplay.length) {
+    window.infoMode = 0;
+  }
+  chrome.storage.local.set({
+    info_mode: window.infoMode
+  }, function() {
+    loadInfo();
+  });
 }
 
 //loads a random background (currently in video form)
@@ -1030,6 +1050,7 @@ $(document).ready(function() {
     if (data.info_left_data != '') {
       document.getElementById("infoWrapper").style.left = data.info_left_data;
     }
+    window.infoMode = data.info_mode;
   });
 
   //getting the searchbar settings
@@ -1112,6 +1133,9 @@ $(document).ready(function() {
   });
   document.getElementById("infoSwitch").parentElement.addEventListener('click', function() {
     updateinfo();
+  });
+  document.getElementById("info").addEventListener("click", function() {
+    updateInfoMode();
   });
   document.getElementById("favSwitch").parentElement.addEventListener('click', function() {
     updateFav();

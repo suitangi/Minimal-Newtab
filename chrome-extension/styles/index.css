@@ -127,7 +127,7 @@
    font-family: "Antic";
    user-select: none;
    font-weight: 100;
-   font-size: 30px;
+   font-size: calc(12px + .7vw);
    cursor: pointer;
  }
 
@@ -180,7 +180,7 @@
    background: transparent;
    top: 70%;
    left: 27%;
-   width: 17.5vw;
+   width: calc(250px + 4vw);
    z-index: 5;
    opacity: 0;
  }
@@ -712,8 +712,9 @@
    padding: 10px 20px;
    color: rgba(255, 255, 255, 0.6);
    font-family: "Antic";
-   font-size: 1.05vw;
+   font-size: calc(16px + .3vw);
    text-align: center;
+   cursor: move;
  }
 
  /* Clear floats after the header */
@@ -721,10 +722,6 @@
    content: "";
    display: table;
    clear: both;
- }
-
- #todoDiv {
-   cursor: move;
  }
 
  /* Style the input */
