@@ -514,6 +514,8 @@ function loadInfo() {
     let infoChosen = window.infoDisplay[window.infoMode];
     let infoText = "";
     for (i = 0; i < infoChosen.length; i++) {
+
+      //set the font size
       let size = "font-size: ";
       if (infoChosen[i].size == null) {
         size = "";
@@ -524,9 +526,19 @@ function loadInfo() {
       } else {
         size += "calc(16px + .6vw)";
       }
+
       infoText += '<span style="' + size + '"' + '>' + window.back[infoChosen[i].name] + '</span><br>';
     }
     document.getElementById('info').innerHTML = infoText;
+    let infoX = document.getElementById("infoWrapper").offsetLeft;
+    let ww = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    if (infoX > 3 * ww / 4) {
+      $('#info').css('text-align', 'right');
+    } else if (infoX > ww / 4) {
+      $('#info').css('text-align', 'center');
+    } else {
+      $('#info').css('text-align', 'left');
+    }
   } else {
     $('#infoMenuItem').css("display", "none");
     $('#infoWrapper').css("display", "none");
@@ -554,6 +566,12 @@ function loadBackground(backJson) {
 
   //loads the background info panel data
   window.infoDisplay = backJson.info;
+  if (backJson.info_title){
+    infoTitle = backJson.info_title;
+    $('#infoMenuText').text(infoTitle);
+    $('#infoMenuText').attr('data', "Toggles the " + infoTitle);
+    console.log($('#infoMenuText').attr('data'));
+  }
 
   let vid = document.getElementById("backdropvid");
   let img = document.getElementById("backdropimg");
