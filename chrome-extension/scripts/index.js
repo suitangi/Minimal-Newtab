@@ -569,8 +569,7 @@ function loadBackground(backJson) {
   if (backJson.info_title){
     infoTitle = backJson.info_title;
     $('#infoMenuText').text(infoTitle);
-    $('#infoMenuText').attr('data', "Toggles the " + infoTitle);
-    console.log($('#infoMenuText').attr('data'));
+    $('#infoMenuItem').attr('data', "Toggles the " + infoTitle);
   }
 
   let vid = document.getElementById("backdropvid");
@@ -981,8 +980,21 @@ $(document).ready(function() {
   document.getElementById("resetButton").onclick = function() {
     document.getElementById("menu").classList.add("delay");
     $.confirm({
-      title: 'Are you sure',
-      content: 'you want to reset? Doing so will reset all data including saved widgets locations and preferences. It will not delete your bookmarks.',
+      title: 'Are you sure you want to reset your data?',
+      content: '<span style="font-size: 16px;">Choose what data you would like to reset: </span><br>' +
+      '<br><label class="reset-container""> Widgets Location' +
+      '<input type="checkbox" id="reset-input-loc" checked="checked">' +
+      '<span class="reset-checkmark"></span></label>' +
+      '<br><label class="reset-container"> Widgets Preferences/Data' +
+      '<input type="checkbox" id="reset-input-pref" checked="checked">' +
+      '<span class="reset-checkmark"></span></label>' +
+      '<br><label class="reset-container"> Favorite Backgrounds' +
+      '<input type="checkbox" id="reset-input-fav" checked="checked">' +
+      '<span class="reset-checkmark"></span></label>' +
+      '<br><label class="reset-container"> Removed Backgrounds' +
+      '<input type="checkbox" id="reset-input-rem" checked="checked">' +
+      '<span class="reset-checkmark"></span></label>' +
+      '<br>This action cannot be undone!',
       boxWidth: '25%',
       useBootstrap: false,
       type: 'blue',
@@ -993,9 +1005,46 @@ $(document).ready(function() {
           btnClass: 'btn-blue',
           keys: ['enter'],
           action: function() {
-            chrome.storage.local.clear(function() {
-              location.reload();
-            });
+            if(this.$content.find('#reset-input-loc').is(":checked")){
+              chrome.storage.local.set({
+                time_top_data: '',
+                time_left_data: '',
+                info_top_data: '',
+                info_left_data: '',
+                todo_top_data: '',
+                todo_left_data:'',
+                search_top_data: '',
+                search_left_data: '',
+              },
+                function() {});
+            }
+            if(this.$content.find('#reset-input-pref').is(":checked")){
+              chrome.storage.local.set({
+                military_switch: 'off',
+                time_switch: 'on',
+                info_mode: 0,
+                info_switch: 'on',
+                search_switch: 'on',
+                todo_switch: 'on',
+                todo_data: ''
+              },
+                function() {});
+            }
+            if(this.$content.find('#reset-input-fav').is(":checked")){
+              chrome.storage.local.set({
+                fav_switch: 'off',
+                fav_list: []
+              },
+                function() {});
+            }
+            if(this.$content.find('#reset-input-rem').is(":checked")){
+              chrome.storage.local.set({
+                black_list: []
+              },
+                function() {});
+            }
+            location.reload();
+
           }
         },
         cancel: function() {
@@ -1051,7 +1100,6 @@ $(document).ready(function() {
     info_switch: 'on',
     info_top_data: '',
     info_left_data: '',
-    info_align: 'left',
     info_mode: 0,
   }, function(data) {
     if (data.info_switch == 'off') {

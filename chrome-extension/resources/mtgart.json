@@ -30,6 +30,16 @@
       {
           "name": "Card Name",
           "size": "medium"
+      },
+      {
+          "name": "Set",
+          "size": "small"
+      }
+    ],
+    [
+      {
+          "name": "Card Name",
+          "size": "medium"
       }
     ],
     [
@@ -1405,61 +1415,55 @@
           "Artist": "Filip Burburan",
           "link": "https://www.mtgpics.com/pics/art/uni/027.jpg",
           "Card Name": "Badlands",
-          "Set": "Ultra Rare Cards"
+          "Set": "Power 9"
         },
         {
           "Artist": "Steven Belledin",
           "link": "https://www.mtgpics.com/pics/art/uni/031.jpg",
           "Card Name": "Black Lotus",
-          "Set": "Ultra Rare Cards"
+          "Set": "Power 9"
         },
         {
           "Artist": "Raoul Vitale",
           "link": "https://www.mtgpics.com/pics/art/uni/023.jpg",
           "Card Name": "Mox Emerald",
-          "Set": "Ultra Rare Cards"
+          "Set": "Power 9"
         },
         {
           "Artist": "Raoul Vitale",
           "link": "https://www.mtgpics.com/pics/art/uni/021.jpg",
           "Card Name": "Mox Pearl",
-          "Set": "Ultra Rare Cards"
+          "Set": "Power 9"
         },
         {
           "Artist": "Mark Poole",
           "link": "https://www.mtgpics.com/pics/art/uni/008.jpg",
           "Card Name": "Ancestral Recall",
-          "Set": "Ultra Rare Cards"
+          "Set": "Power 9"
         },
         {
           "Artist": "Chris Rahn",
           "link": "https://www.mtgpics.com/pics/art/uni/014_1.jpg",
           "Card Name": "Time Walk (Magic Online)",
-          "Set": "Ultra Rare Cards"
+          "Set": "Power 9"
         },
         {
           "Artist": "Volkan Baga",
           "link": "https://www.mtgpics.com/pics/art/uni/013.jpg",
           "Card Name": "Mox Sapphire",
-          "Set": "Ultra Rare Cards"
+          "Set": "Power 9"
         },
         {
           "Artist": "Volkan Baga",
           "link": "https://www.mtgpics.com/pics/art/uni/009.jpg",
           "Card Name": "Mox Pearl",
-          "Set": "Ultra Rare Cards"
+          "Set": "Power 9"
         },
         {
           "Artist": "Volkan Baga",
           "link": "https://www.mtgpics.com/pics/art/uni/010_1.jpg",
           "Card Name": "Mox Jet",
-          "Set": "Ultra Rare Cards"
-        },
-        {
-          "Artist": "Ian Miller",
-          "link": "https://www.mtgpics.com/pics/art/5th/110.jpg",
-          "Card Name": "Drudge Skeletons",
-          "Set": "Fifth Edition"
+          "Set": "Power 9"
         },
         {
           "Artist": "DiTerlizzi",
@@ -2381,7 +2385,7 @@
         },
         {
           "Artist": "Lars Grant-West",
-          "link": "https://www.mtgpics.com/pics/art/soa/171.jpg",
+          "link": "https://i.imgur.com/6TrrVwu.png",
           "Card Name": "Grixis Charm",
           "Set": "Shards of Alara"
         },
@@ -4307,7 +4311,7 @@
         },
         {
           "Artist": "Zoltan Boros",
-          "link": "https://www.mtgpics.com/pics/art/col/119_1.jpg",
+          "link": "https://i.imgur.com/Vm3ZC0a.png",
           "Card Name": "Ronom Hulk",
           "Set": "Coldsnap"
         },
@@ -5333,7 +5337,7 @@
         },
         {
           "Artist": "Pete Venters",
-          "link": "https://www.mtgpics.com/pics/art/sak/158.jpg",
+          "link": "https://i.imgur.com/xbG7SnD.jpg",
           "Card Name": "Pithing Needle",
           "Set": "Saviors of Kamigawa"
         },
@@ -5381,7 +5385,7 @@
         },
         {
           "Artist": "Adam Rex",
-          "link": "https://www.mtgpics.com/pics/art/sak/136_1.jpg",
+          "link": "https://i.imgur.com/EqbXAc6.png",
           "Card Name": "Masumaro, First to Live",
           "Set": "Saviors of Kamigawa"
         },
@@ -5395,12 +5399,6 @@
           "Artist": "Kev Walker",
           "link": "https://www.mtgpics.com/pics/art/sak/071_1.jpg",
           "Card Name": "Hand of Cruelty",
-          "Set": "Saviors of Kamigawa"
-        },
-        {
-          "Artist": "Tsutomu Kawade",
-          "link": "https://www.mtgpics.com/pics/art/sak/113_1.jpg",
-          "Card Name": "Skyfire Kirin",
           "Set": "Saviors of Kamigawa"
         },
         {
@@ -5477,7 +5475,7 @@
         },
         {
           "Artist": "Scott M. Fischer",
-          "link": "https://www.mtgpics.com/pics/art/drs/009_1.jpg",
+          "link": "https://i.imgur.com/hbcPGu6.png",
           "Card Name": "Pristine Angel",
           "Set": "Darksteel"
         },
@@ -5789,7 +5787,7 @@
         },
         {
           "Artist": "Hideaki Takamura",
-          "link": "https://www.mtgpics.com/pics/art/bek/164_1.jpg",
+          "link": "https://i.imgur.com/OUqW35c.jpg",
           "Card Name": "Yomiji, Who Bars the Way",
           "Set": "Betrayers of Kamigawa"
         },
@@ -6719,7 +6717,7 @@
         },
         {
           "Artist": "Terese Nielsen",
-          "link": "https://www.mtgpics.com/pics/art/isd/177.jpg",
+          "link": "https://i.imgur.com/MmN0hvu.png",
           "Card Name": "Elder of Laurels",
           "Set": "Innistrad"
         },
@@ -7379,7 +7377,7 @@
         },
         {
           "Artist": "Johannes Voss",
-          "link": "https://www.mtgpics.com/pics/art/avr/013.jpg",
+          "link": "https://i.imgur.com/OGJUufN.jpg",
           "Card Name": "Commander's Authority",
           "Set": "Avacyn Restored"
         },
@@ -7451,7 +7449,7 @@
         },
         {
           "Artist": "Wayne Reynolds",
-          "link": "https://www.mtgpics.com/pics/art/gui/139_1.jpg",
+          "link": "https://i.imgur.com/iqYYH7Q.png",
           "Card Name": "Wreak Havoc",
           "Set": "Guildpact"
         },
@@ -8711,7 +8709,7 @@
         },
         {
           "Artist": "Pete Venters",
-          "link": "https://www.mtgpics.com/pics/art/mrd/174.jpg",
+          "link": "https://i.imgur.com/yJNJEQI.png",
           "Card Name": "Gate to the Aether",
           "Set": "Mirrodin"
         },
@@ -8776,21 +8774,9 @@
           "Set": "Dissension"
         },
         {
-          "Artist": "Paolo Parente",
-          "link": "https://www.mtgpics.com/pics/art/dis/190_1.jpg",
-          "Card Name": "Pure / Simple",
-          "Set": "Dissension"
-        },
-        {
           "Artist": "Heather Hudson",
           "link": "https://www.mtgpics.com/pics/art/dis/173_2.jpg",
           "Card Name": "Ghost Quarter",
-          "Set": "Dissension"
-        },
-        {
-          "Artist": "Paolo Parente",
-          "link": "https://www.mtgpics.com/pics/art/dis/154_1.jpg",
-          "Card Name": "Pure / Simple",
           "Set": "Dissension"
         },
         {
@@ -12743,12 +12729,6 @@
         },
         {
           "Artist": "Jason A. Engle",
-          "link": "https://www.mtgpics.com/pics/art/thb/265_1.jpg",
-          "Card Name": "Purphoros, Bronze-Blooded",
-          "Set": "Theros Beyond Death"
-        },
-        {
-          "Artist": "Jason A. Engle",
           "link": "https://www.mtgpics.com/pics/art/thb/268_1.jpg",
           "Card Name": "Klothys, God of Destiny",
           "Set": "Theros Beyond Death"
@@ -12899,7 +12879,7 @@
         },
         {
           "Artist": "Jason A. Engle",
-          "link": "https://www.mtgpics.com/pics/art/thb/265.jpg",
+          "link": "https://i.imgur.com/ETUeYxB.png",
           "Card Name": "Purphoros, Bronze-Blooded",
           "Set": "Theros Beyond Death"
         },
@@ -14087,7 +14067,7 @@
         },
         {
           "Artist": "Glen Angus",
-          "link": "https://www.mtgpics.com/pics/art/rav/261_1.jpg",
+          "link": "https://i.imgur.com/UwWW0YU.png",
           "Card Name": "Glass Golem",
           "Set": "Ravnica"
         },

@@ -121,7 +121,7 @@
    right: -7%;
  }
 
-/* time widget element */
+ /* time widget element */
  .info {
    color: rgba(255, 255, 255, 0.5);
    font-family: "Antic";
@@ -746,6 +746,77 @@
    color: rgba(255, 255, 255, 0);
  }
 
+ /* reset options */
+ /* Customize the label (the container) */
+ .reset-container {
+   display: block;
+   position: relative;
+   padding-left: 35px;
+   margin-bottom: 12px;
+   cursor: pointer;
+   font-size: 14px;
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+ }
+
+ /* Hide the browser's default checkbox */
+ .reset-container input {
+   position: absolute;
+   opacity: 0;
+   cursor: pointer;
+   height: 0;
+   width: 0;
+ }
+
+ /* Create a custom checkbox */
+ .reset-checkmark {
+   position: absolute;
+   top: 1px;
+   left: 10px;
+   height: 18px;
+   width: 18px;
+   background-color: #eee;
+   transition: 0.25s;
+ }
+
+ /* On mouse-over, add a grey background color */
+ .reset-container:hover input~.reset-checkmark {
+   background-color: #ccc;
+ }
+
+ /* When the checkbox is checked, add a blue background */
+ .reset-container input:checked~.reset-checkmark {
+   background-color: #2196F3;
+ }
+
+ /* Create the checkmark/indicator (hidden when not checked) */
+ .reset-checkmark:after {
+   content: "";
+   position: absolute;
+   display: none;
+ }
+
+ /* Show the checkmark when checked */
+ .reset-container input:checked~.reset-checkmark:after {
+   display: block;
+ }
+
+ /* Style the checkmark/indicator */
+ .reset-container .reset-checkmark:after {
+   left: 5px;
+   top: 1px;
+   width: 5px;
+   height: 10px;
+   border: solid white;
+   border-width: 0 3px 3px 0;
+   -webkit-transform: rotate(45deg);
+   -ms-transform: rotate(45deg);
+   transform: rotate(45deg);
+ }
+
+ /* animation */
  .entrance {
    animation: slide-in-blurred-top 0.5s cubic-bezier(0.230, 1.000, 0.320, 1.000) forwards;
    animation-iteration-count: 1;
