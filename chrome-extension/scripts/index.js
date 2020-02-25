@@ -344,7 +344,7 @@ function saveTodo() {
 //Todo: Set the list li element listeners
 function setLiListeners(li) {
   li.onclick = function() {
-    if (document.activeElement == null || document.activeElement.tagName.toLowerCase() != 'li') {
+    if (document.activeElement == null || !document.activeElement.classList.contains('listText')) {
       $(this).find('.listText').focus();
       setEndOfContenteditable(this.firstChild);
     } else {
