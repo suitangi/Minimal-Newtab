@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "Garden of Words Newtab",
-  "version": "1.4.2",
-  "description": "Replaces the newtab with a beautiful cinemagraph from Garden of Words.",
+  "name": "Name of Extension",
+  "version": "1.0.0",
+  "description": "Replaces the newtab with ...",
   "permissions": ["storage", "bookmarks"],
   "icons": {
     "16": "icons/icon16.png",

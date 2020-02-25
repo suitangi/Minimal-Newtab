@@ -74,7 +74,6 @@
    border-radius: 4px;
  }
 
-
  /* no ugly focus border */
  input:focus,
  select:focus,
@@ -381,7 +380,6 @@
    background-color: rgba(0, 0, 0, 0.8);
    width: 235px;
    overflow: auto !important;
-
    /* firefox scrollbar */
    scrollbar-color: rgba(255, 255, 255, 0.1) rgba(0, 0, 0, 0);
    scrollbar-width: thin;
@@ -735,16 +733,24 @@
    transition-duration: 0s;
    word-wrap: break-word;
    /* make the list items unselectable */
-
    user-select: none;
    border-radius: 8px;
+   min-height: 19px;
  }
 
- #myUL li:focus {
+ #myUL li:focus-within {
    cursor: text;
    outline: none;
    transition-duration: 0.2s;
    background-color: rgba(255, 255, 255, 0.07);
+ }
+
+ #myUL li .listText {
+   user-select: text;
+ }
+
+ #myUL li .listText:focus {
+   outline: none;
  }
 
  /* Darker background-color on hover */

@@ -345,18 +345,18 @@ function saveTodo() {
 function setLiListeners(li) {
   li.onclick = function() {
     if (document.activeElement == null || document.activeElement.tagName.toLowerCase() != 'li') {
-      $(this).focus();
-      setEndOfContenteditable(this);
+      $(this).find('.listText').focus();
+      setEndOfContenteditable(this.firstChild);
     } else {
-      $(this).focus();
+      $(this).find('.listText').focus();
     }
-    let li = document.getElementById("myUL").getElementsByTagName("li");
-    for (i = 0; i < li.length; i++) {
-      if (li[i].innerText == "\u00D7") {
-        let node = createHTML("<br>");
-        li[i].insertBefore(node, li[i].firstChild);
-      }
-    }
+    // let li = document.getElementById("myUL").getElementsByTagName("li");
+    // for (i = 0; i < li.length; i++) {
+    //   if (li[i].innerText == "\u00D7") {
+    //     let node = createHTML("<br>");
+    //     li[i].insertBefore(node, li[i].firstChild);
+    //   }
+    // }
     $(this).parent().sortable("disable");
   }
   li.onmousedown = function(evt) {
@@ -376,24 +376,24 @@ function setLiListeners(li) {
       if (li.innerText == "\u00D7") {
         evt.preventDefault();
         let node = createHTML("<br>");
-        li.insertBefore(node, li.firstChild);
+        li.firstChild.appendChild(node);
       }
     }
   });
   li.addEventListener('keydown', (evt) => {
     if (evt.which === 13) {
-      let li = document.activeElement;
+      let li = document.activeElement.parentElement;
       let newLi = newListItem("", false);
       insertAfter(newLi, li);
       document.getElementById("todoInput").style = "display: none;";
       saveTodo();
-      li.nextElementSibling.focus();
+      li.nextElementSibling.firstChild.focus();
       evt.preventDefault();
     } else if (evt.keyCode === 8) {
-      let li = document.activeElement;
+      let li = document.activeElement.parentElement;
       if (li.innerText.trim() == "\u00D7") {
         evt.preventDefault();
-        let previous = li.previousElementSibling;
+        let previous = li.previousElementSibling.firstChild;
         if (previous != null) {
           previous.focus();
           setEndOfContenteditable(previous);
@@ -404,27 +404,21 @@ function setLiListeners(li) {
         saveTodo();
       }
     } else if (evt.keyCode === 38) {
-      let previous = li.previousElementSibling;
+      let previous = li.previousElementSibling.firstChild;
       if (previous != null) {
         previous.focus();
       }
     } else if (evt.keyCode === 40) {
-      let next = li.nextElementSibling;
+      let next = li.nextElementSibling.firstChild;
       if (next != null) {
         next.focus();
       }
-    } else {
-      let li = document.activeElement;
-      if (li.innerText == "\u00D7") {
-        let node = createHTML("<br>");
-        li.insertBefore(node, li.firstChild);
-      }
     }
   });
-  li.addEventListener("blur", function() {
-    $(this).parent().sortable("enable");
+  li.firstChild.addEventListener("blur", function() {
+    $(this).parent().parent().sortable("enable");
   }, false);
-  li.addEventListener("input", function() {
+  li.firstChild.addEventListener("input", function() {
     saveTodo();
   });
 }
@@ -441,15 +435,17 @@ function newListItem(text, check) {
   } else {
     t = document.createElement("br");
   }
-  li.appendChild(t);
-  li.setAttribute("contenteditable", "true");
-  li.setAttribute("spellcheck", "false")
+  let txtSpan = document.createElement("span");
+  txtSpan.appendChild(t);
+  li.appendChild(txtSpan);
+  txtSpan.setAttribute("contenteditable", "true");
+  txtSpan.setAttribute("spellcheck", "false")
+  txtSpan.classList.add('listText');
   document.getElementById("myUL").appendChild(li);
   setLiListeners(li);
   //the spaan is the close button
   let span = document.createElement("SPAN");
   let txt = document.createTextNode("\u00D7");
-  span.setAttribute("contenteditable", "false");
   span.className = "close";
   span.appendChild(txt);
   li.appendChild(span);
