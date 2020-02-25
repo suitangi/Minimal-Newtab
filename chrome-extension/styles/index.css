@@ -1,8 +1,64 @@
  /* no scrolling! */
  body {
    overflow: hidden;
-   background-color: #000;
+   background-color: #222;
    margin: 0px;
+   font-family: Calibri;
+   user-select: none;
+ }
+
+ /* loading bar */
+ #progress-line, #progress-line:before {
+   height: 3px;
+   width: 100%;
+   margin: 0;
+ }
+
+ #progress-line {
+   background-color: rgba(255, 255, 255, 0);
+   display: -webkit-flex;
+   display: flex;
+ }
+
+ #progress-line:before {
+   background-color: rgba(255, 255, 255, 0.6);
+   content: '';
+   -webkit-animation: running-progress 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+   animation: running-progress 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+ }
+
+ @-webkit-keyframes running-progress {
+   0% {
+     margin-left: 0px;
+     margin-right: 100%;
+   }
+
+   50% {
+     margin-left: 25%;
+     margin-right: 0%;
+   }
+
+   100% {
+     margin-left: 100%;
+     margin-right: 0;
+   }
+ }
+
+ @keyframes running-progress {
+   0% {
+     margin-left: 0px;
+     margin-right: 100%;
+   }
+
+   50% {
+     margin-left: 25%;
+     margin-right: 0%;
+   }
+
+   100% {
+     margin-left: 100%;
+     margin-right: 0;
+   }
  }
 
  /* custom scrollbar! */
@@ -18,18 +74,7 @@
    border-radius: 4px;
  }
 
- /* ::-webkit-scrollbar-track {
-  border-radius: 10px;
-}
 
-::-webkit-scrollbar-thumb {
-  background: rgba(0,0,0,0);
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255,255,255,0.3);
-} */
  /* no ugly focus border */
  input:focus,
  select:focus,
@@ -69,6 +114,11 @@
    min-height: 100%;
    filter: saturate(1.5);
    object-fit: cover;
+ }
+
+ #backdropimg, #backdropvid {
+   transition: 0.5s;
+   opacity: 0;
  }
 
  /* desaturate filter */
@@ -150,6 +200,22 @@
    cursor: move;
  }
 
+ /* change search button */
+ #searchChange {
+   position: absolute;
+   top: 35%;
+   right: -25px;
+   font-size: 20px;
+   cursor: pointer;
+   color: rgba(255, 255, 255, 0);
+   transition: 0.25s;
+   user-select: none;
+ }
+
+ #searchChange:hover {
+   color: rgba(255, 255, 255, 0.3);
+ }
+
  /* wrappers for widgets */
  .timeWrapper {
    position: absolute;
@@ -202,7 +268,6 @@
  }
 
  /* bookmarks */
- /* all the menu elements */
  #bookmarks {
    padding-top: 10px;
    background-color: rgba(0, 0, 0, 0);
@@ -222,6 +287,8 @@
    background-color: rgba(0, 0, 0, 0.8);
    width: 300px;
    overflow: auto !important;
+   scrollbar-color: rgba(255, 255, 255, 0.1) rgba(0, 0, 0, 0);
+   scrollbar-width: thin;
  }
 
  #bookmarks:hover ::-webkit-scrollbar {
@@ -314,6 +381,10 @@
    background-color: rgba(0, 0, 0, 0.8);
    width: 235px;
    overflow: auto !important;
+
+   /* firefox scrollbar */
+   scrollbar-color: rgba(255, 255, 255, 0.1) rgba(0, 0, 0, 0);
+   scrollbar-width: thin;
  }
 
  #menu:hover ::-webkit-scrollbar {
@@ -664,9 +735,7 @@
    transition-duration: 0s;
    word-wrap: break-word;
    /* make the list items unselectable */
-   -webkit-user-select: none;
-   -moz-user-select: none;
-   -ms-user-select: none;
+
    user-select: none;
    border-radius: 8px;
  }
@@ -777,6 +846,7 @@
    left: 10px;
    height: 18px;
    width: 18px;
+   border-radius: 3px;
    background-color: #eee;
    transition: 0.25s;
  }

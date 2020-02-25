@@ -3,7 +3,7 @@
   "name": "Garden of Words Newtab",
   "version": "1.4.2",
   "description": "Replaces the newtab with a beautiful cinemagraph from Garden of Words.",
-  "permissions": ["storage"],
+  "permissions": ["storage", "bookmarks"],
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",

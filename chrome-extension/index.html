@@ -21,6 +21,7 @@
 
     <!-- the backgrond cinemagraph (video) -->
     <div class="backloader" ID="backloader" style="">
+      <div ID="progress-line"></div>
       <img src="" ID="backdropimg" class="backdrop" draggable="false" width="100%">
       <video ID="backdropvid" class="backdrop" width="100%" loop autoplay style="display: none;">
         <source src="https://i.imgur.com/t1vt5q0.mp4" type="video/mp4">
@@ -158,8 +159,9 @@
       <div class="searchDiv" ID="searchDiv"></div>
       <form id=search action="https://www.google.com/search" method="get">
         <input id="searchInput" class="search" data-placeholder=" Google Search" type="searh" name="q" autocomplete="off" />
-        <input type="submit" style="visibility: hidden;" />
+        <input type="submit" style="display: none;" />
       </form>
+      <div id="searchChange">⯈</div>
     </div>
 
     <!-- todo list widget -->

@@ -187,6 +187,28 @@ function updateSearch() {
   }
 }
 
+//Search bar: chaanges the search engine
+function changeSearch() {
+  chrome.storage.local.get({
+    search_engine: 0
+  }, function(data) {
+    let index = data.search_engine + 1;
+    if (index == window.searchEngines.length)
+      index = 0;
+    let searchInput = $('#searchInput');
+    searchInput.parent().attr('action', window.searchEngines[index].action);
+    console.log(window.searchEngines[index].action)
+    let val = (searchInput.val() == searchInput.attr('data-placeholder') ? "" : searchInput.val());
+    searchInput.attr('data-placeholder', window.searchEngines[index].placeholder);
+    searchInput.val(val);
+    searchInput.focus();
+    searchInput.blur();
+    chrome.storage.local.set({
+      search_engine: index
+    }, function() {});
+  });
+}
+
 //Time: toggles the visibility of the time display
 function updateTime() {
   document.getElementById("timeWrapper").classList.remove("firstStart");
@@ -421,6 +443,7 @@ function newListItem(text, check) {
   }
   li.appendChild(t);
   li.setAttribute("contenteditable", "true");
+  li.setAttribute("spellcheck", "false")
   document.getElementById("myUL").appendChild(li);
   setLiListeners(li);
   //the spaan is the close button
@@ -566,7 +589,7 @@ function loadBackground(backJson) {
 
   //loads the background info panel data
   window.infoDisplay = backJson.info;
-  if (backJson.info_title){
+  if (backJson.info_title) {
     infoTitle = backJson.info_title;
     $('#infoMenuText').text(infoTitle);
     $('#infoMenuItem').attr('data', "Toggles the " + infoTitle);
@@ -616,10 +639,18 @@ function loadBackground(backJson) {
               if (fext == 'jpg' || fext == 'png' || fext == 'bmp') { //the file type is image
                 img.src = str;
                 img.style = "";
+                img.onload = function() {
+                  img.style.opacity = 100;
+                  $('#progress-line').remove();
+                }
                 vid.style = "display: none;"
               } else { //file type is video
                 img.style = "display: none;"
                 vid.style = "";
+                vid.oncanplay = function() {
+                  vid.style.opacity = 100;
+                  $('#progress-line').remove();
+                };
                 vid.src = str;
                 vid.load();
               }
@@ -678,10 +709,18 @@ function loadBackground(backJson) {
                 if (fext == 'jpg' || fext == 'png' || fext == 'bmp') { //the file type is image
                   img.src = str;
                   img.style = "";
+                  img.onload = function() {
+                    img.style.opacity = 100;
+                    $('#progress-line').remove();
+                  }
                   vid.style = "display: none;"
                 } else { //file type is video
                   img.style = "display: none;"
                   vid.style = "";
+                  vid.oncanplay = function() {
+                    vid.style.opacity = 100;
+                    $('#progress-line').remove();
+                  };
                   vid.src = str;
                   vid.load();
                 }
@@ -734,12 +773,20 @@ function loadBackground(backJson) {
               console.log(str);
               let fext = str.substring(str.length - 3).toLowerCase();
               if (fext == 'jpg' || fext == 'png' || fext == 'bmp') { //the file type is image
-                img.src = str;
                 img.style = "";
+                img.onload = function() {
+                  img.style.opacity = 100;
+                  $('#progress-line').remove();
+                }
+                img.src = str;
                 vid.style = "display: none;"
               } else { //file type is video
                 img.style = "display: none;"
                 vid.style = "";
+                vid.oncanplay = function() {
+                  vid.style.opacity = 100;
+                  $('#progress-line').remove();
+                };
                 vid.src = str;
                 vid.load();
               }
@@ -830,10 +877,11 @@ function loadBackground(backJson) {
 $(document).ready(function() {
 
   //Print console warning
-  console.log("%c--- Danger Zone ---", "color: red; font-size: 25px")
-  console.log("%cThis is a browser feature intended for developers. If someone told you to copy-paste something here to enable a feature or \"hack\", it is likely a scam.", "font-size: 16px;")
-  console.log("%cIf you ARE a developer, feel free to check this project out here:", "font-size: 16px;")
-  console.log("%chttps://suitangi.github.io/Minimal-Newtab/", "font-size: 16px;")
+  console.log("%c--- Danger Zone ---", "color: red; font-size: 25px");
+  console.log("%cThis is a browser feature intended for developers. If someone told you to copy-paste something here to enable a feature or \"hack\", it is likely a scam.", "font-size: 16px;");
+  console.log("%cIf you ARE a developer, feel free to check this project out here:", "font-size: 16px;");
+  console.log("%chttps://suitangi.github.io/Minimal-Newtab/", "font-size: 16px;");
+
 
   //if Chrome is online
   if (window.navigator.onLine) {
@@ -857,6 +905,25 @@ $(document).ready(function() {
       }
     });
   }
+
+  //set the search engine list
+  window.searchEngines = [{
+      "action": "https://www.google.com/search",
+      "placeholder": "Google Search"
+    },
+    {
+      "action": "https://www.bing.com/search",
+      "placeholder": "Bing Search"
+    },
+    {
+      "action": "https://search.yahoo.com/search",
+      "placeholder": "Yahoo Search"
+    },
+    {
+      "action": "https://duckduckgo.com/",
+      "placeholder": "Duckduckgo"
+    }
+  ];
 
   startTime(); //start the time
 
@@ -982,19 +1049,19 @@ $(document).ready(function() {
     $.confirm({
       title: 'Are you sure you want to reset your data?',
       content: '<span style="font-size: 16px;">Choose what data you would like to reset: </span><br>' +
-      '<br><label class="reset-container""> Widgets Location' +
-      '<input type="checkbox" id="reset-input-loc" checked="checked">' +
-      '<span class="reset-checkmark"></span></label>' +
-      '<br><label class="reset-container"> Widgets Preferences/Data' +
-      '<input type="checkbox" id="reset-input-pref" checked="checked">' +
-      '<span class="reset-checkmark"></span></label>' +
-      '<br><label class="reset-container"> Favorite Backgrounds' +
-      '<input type="checkbox" id="reset-input-fav" checked="checked">' +
-      '<span class="reset-checkmark"></span></label>' +
-      '<br><label class="reset-container"> Removed Backgrounds' +
-      '<input type="checkbox" id="reset-input-rem" checked="checked">' +
-      '<span class="reset-checkmark"></span></label>' +
-      '<br>This action cannot be undone!',
+        '<br><label class="reset-container""> Widgets Location' +
+        '<input type="checkbox" id="reset-input-loc" checked="checked">' +
+        '<span class="reset-checkmark"></span></label>' +
+        '<br><label class="reset-container"> Widgets Preferences/Data' +
+        '<input type="checkbox" id="reset-input-pref" checked="checked">' +
+        '<span class="reset-checkmark"></span></label>' +
+        '<br><label class="reset-container"> Favorite Backgrounds' +
+        '<input type="checkbox" id="reset-input-fav" checked="checked">' +
+        '<span class="reset-checkmark"></span></label>' +
+        '<br><label class="reset-container"> Removed Backgrounds' +
+        '<input type="checkbox" id="reset-input-rem" checked="checked">' +
+        '<span class="reset-checkmark"></span></label>' +
+        '<br>This action cannot be undone!',
       boxWidth: '25%',
       useBootstrap: false,
       type: 'blue',
@@ -1005,42 +1072,42 @@ $(document).ready(function() {
           btnClass: 'btn-blue',
           keys: ['enter'],
           action: function() {
-            if(this.$content.find('#reset-input-loc').is(":checked")){
+            if (this.$content.find('#reset-input-loc').is(":checked")) {
               chrome.storage.local.set({
-                time_top_data: '',
-                time_left_data: '',
-                info_top_data: '',
-                info_left_data: '',
-                todo_top_data: '',
-                todo_left_data:'',
-                search_top_data: '',
-                search_left_data: '',
-              },
+                  time_top_data: '',
+                  time_left_data: '',
+                  info_top_data: '',
+                  info_left_data: '',
+                  todo_top_data: '',
+                  todo_left_data: '',
+                  search_top_data: '',
+                  search_left_data: '',
+                },
                 function() {});
             }
-            if(this.$content.find('#reset-input-pref').is(":checked")){
+            if (this.$content.find('#reset-input-pref').is(":checked")) {
               chrome.storage.local.set({
-                military_switch: 'off',
-                time_switch: 'on',
-                info_mode: 0,
-                info_switch: 'on',
-                search_switch: 'on',
-                todo_switch: 'on',
-                todo_data: ''
-              },
+                  military_switch: 'off',
+                  time_switch: 'on',
+                  info_mode: 0,
+                  info_switch: 'on',
+                  search_switch: 'on',
+                  todo_switch: 'on',
+                  todo_data: ''
+                },
                 function() {});
             }
-            if(this.$content.find('#reset-input-fav').is(":checked")){
+            if (this.$content.find('#reset-input-fav').is(":checked")) {
               chrome.storage.local.set({
-                fav_switch: 'off',
-                fav_list: []
-              },
+                  fav_switch: 'off',
+                  fav_list: []
+                },
                 function() {});
             }
-            if(this.$content.find('#reset-input-rem').is(":checked")){
+            if (this.$content.find('#reset-input-rem').is(":checked")) {
               chrome.storage.local.set({
-                black_list: []
-              },
+                  black_list: []
+                },
                 function() {});
             }
             location.reload();
@@ -1123,7 +1190,8 @@ $(document).ready(function() {
   chrome.storage.local.get({
     search_switch: 'on',
     search_top_data: '',
-    search_left_data: ''
+    search_left_data: '',
+    search_engine: 0
   }, function(data) {
     if (data.search_switch == 'off') {
       document.getElementById("searchSwitch").checked = false;
@@ -1139,7 +1207,13 @@ $(document).ready(function() {
     if (data.search_left_data != '') {
       document.getElementById("searchWrapper").style.left = data.search_left_data;
     }
+
+    let searchInput = $('#searchInput');
+    searchInput.parent().attr('action', window.searchEngines[data.search_engine].action);
+    searchInput.attr('data-placeholder', window.searchEngines[data.search_engine].placeholder);
+    searchInput.val(window.searchEngines[data.search_engine].placeholder);
   });
+
 
   //load the background filters
   chrome.storage.local.get({
@@ -1193,6 +1267,9 @@ $(document).ready(function() {
   //setting the switches click event listeners
   document.getElementById("searchSwitch").parentElement.addEventListener('click', function() {
     updateSearch();
+  });
+  document.getElementById("searchChange").addEventListener("click", function() {
+    changeSearch();
   });
   document.getElementById("timeSwitch").parentElement.addEventListener('click', function() {
     updateTime();
