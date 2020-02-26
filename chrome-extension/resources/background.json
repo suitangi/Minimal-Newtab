@@ -3,8 +3,26 @@
     "link": "https://i.imgur.com/t1vt5q0.mp4",
     "source": "Garden of Words"
   },
+  "info_title": "Movie",
   "info": [
-    ["source"]
+    [
+      {
+        "name": "source",
+        "size": "large"
+      }
+    ],
+    [
+      {
+        "name": "source",
+        "size": "medium"
+      }
+    ],
+    [
+      {
+        "name": "source",
+        "size": "small"
+      }
+    ]
   ],
   "type": "video",
   "sources": [{

@@ -32,8 +32,9 @@ This option allows you to [use your own background lists](#using-your-own-backgr
 - Drag the top of the list (where it says "todo list") to move the widget
 
 ### Search Bar:
-- Drag from the top of the search bar to move it
-- Type in the box and press enter to perform a Google search
+- Drag the top of the search bar to move it
+- Type in the box and press enter to perform a search
+- On the right side of the search bar there is a ⯈ button to change the search engine
 
 ### Menu
 - Move the mouse to the left most part of the window to access the menu.
