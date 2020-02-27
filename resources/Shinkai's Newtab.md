@@ -15,7 +15,8 @@ The movies included are:
 - [Chrome](https://chrome.google.com/webstore/detail/ojaookiigngaiipdhccdoaalmjpgpigh/publish-accepted?authuser=0&hl=en)
 - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/garden-of-words-newtab/)
 
-![Screenshot](https://raw.githubusercontent.com/suitangi/Minimal-Newtab/master/resources/SC.png)
+![demo](https://i.imgur.com/hlx28h5.gif)
+![Screenshot](https://github.com/suitangi/Minimal-Newtab/blob/master/resources/Images/SC.png?raw=true)
 
 ## How to use:
 1. Install the extension

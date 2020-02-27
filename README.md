@@ -1,7 +1,7 @@
 # Minimal Newtab
 This project is a Google Chrome/Firefox Newtab replacement framework that allows for custom defined lists of backgrounds to be loaded into a minimalistic page such that every time a new tab is opened, a random background is loaded.
 
-![Screenshot](https://raw.githubusercontent.com/suitangi/Minimal-Newtab/master/resources/SC.png)
+![Screenshot](https://i.imgur.com/hlx28h5.gif)
 ![Screenshot2](https://raw.githubusercontent.com/suitangi/Minimal-Newtab/master/resources/Images/SC2.png)
 ## Usage
 These are some of the published extensions with this framework:
@@ -124,7 +124,7 @@ The `background.json` is styled in such a way:
 The `background.json` name should not be changed and should be in the resources directory.
 The menu for choosing sources will be automatically generated. It takes the title from the `name:` field in the json of each `source`.
 
-More details of the `background.json` can be found [here]().
+More details of the `background.json` can be found [here](https://suitangi.github.io/Minimal-Newtab/resources/Background%20JSON).
 
 ## Other Informataion
 *Disclaimer: I do not own any of the artwork or cinemagraphs used in this extension. Credit goes to their respective owners.*

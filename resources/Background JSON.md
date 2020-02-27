@@ -1,7 +1,12 @@
+---
+title: Minimal Newtab
+description: Background JSON Documentation
+---
+
 # Background JSON
 
 ### Example
-[Here's]() an Example `backgorund.json` of some famous Paintings
+[Here's](https://raw.githubusercontent.com/suitangi/Minimal-Newtab/master/resources/exampleBackground.json) an Example `backgorund.json` of some famous Paintings
 
 ## Details
 
