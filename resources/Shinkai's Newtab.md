@@ -88,16 +88,16 @@ The movies included are:
 - Bookmark: To show the bookmarks on the right hand side tab
 
 ## FAQ
-##### The background doesn't show up
+#### The background doesn't show up
  Make sure you are connected to the internet, and have a stable connection! If the problem persists, you can report the background via the about button.
 
-##### My newtab isn't being replaced
+#### My newtab isn't being replaced
 Make sure you disable other similar extensions that also replaces your new tabs
 
-##### My screen resolution changed and now my widgets are lost off-screen. How do I get them back?
+#### My screen resolution changed and now my widgets are lost off-screen. How do I get them back?
 You can reset the widget locations using the reset button in the menu
 
-##### I accidentally removed a background I like, how do I get it back?
+#### I accidentally removed a background I like, how do I get it back?
 You can reset the removed backgrounds using the reset button in the menu
 
 ## Other Information
