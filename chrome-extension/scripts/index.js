@@ -638,6 +638,8 @@ function loadBackground(backJson) {
                 img.onload = function() {
                   img.style.opacity = 100;
                   $('#progress-line').remove();
+                  //to counteract a bug that makes the background start from Bottom
+                  window.scrollTo(0, 0);
                 }
                 vid.style = "display: none;"
               } else { //file type is video
@@ -646,6 +648,9 @@ function loadBackground(backJson) {
                 vid.oncanplay = function() {
                   vid.style.opacity = 100;
                   $('#progress-line').remove();
+                  //to counteract a bug that makes the background start from Bottom
+                  window.scrollTo(0, 0);
+
                 };
                 vid.src = str;
                 vid.load();
@@ -708,6 +713,9 @@ function loadBackground(backJson) {
                   img.onload = function() {
                     img.style.opacity = 100;
                     $('#progress-line').remove();
+                    //to counteract a bug that makes the background start from Bottom
+                    window.scrollTo(0, 0);
+
                   }
                   vid.style = "display: none;"
                 } else { //file type is video
@@ -716,6 +724,9 @@ function loadBackground(backJson) {
                   vid.oncanplay = function() {
                     vid.style.opacity = 100;
                     $('#progress-line').remove();
+                    //to counteract a bug that makes the background start from Bottom
+                    window.scrollTo(0, 0);
+
                   };
                   vid.src = str;
                   vid.load();
@@ -745,6 +756,7 @@ function loadBackground(backJson) {
                   cancel: function() {}
                 }
               });
+              loadInfo();
             } else {
               // remove the last shown if there is more than one
               for (var i = 0; i < window.backlist.length; i++) {
@@ -773,6 +785,9 @@ function loadBackground(backJson) {
                 img.onload = function() {
                   img.style.opacity = 100;
                   $('#progress-line').remove();
+                  //to counteract a bug that makes the background start from Bottom
+                  window.scrollTo(0, 0);
+
                 }
                 img.src = str;
                 vid.style = "display: none;"
@@ -782,6 +797,8 @@ function loadBackground(backJson) {
                 vid.oncanplay = function() {
                   vid.style.opacity = 100;
                   $('#progress-line').remove();
+                  //to counteract a bug that makes the background start from Bottom
+                  window.scrollTo(0, 0);
                 };
                 vid.src = str;
                 vid.load();
@@ -882,7 +899,7 @@ $(document).ready(function() {
   //if Chrome is online
   if (window.navigator.onLine) {
     //loads the backgorund json
-    const jsonUrl = chrome.runtime.getURL('resources/mtgart.json');
+    const jsonUrl = chrome.runtime.getURL('resources/background.json');
     fetch(jsonUrl)
       .then((response) => response.json())
       .then((json) => loadBackground(json));
@@ -994,12 +1011,14 @@ $(document).ready(function() {
             action: function() {
               addBlack(window.back);
               $('.delete-button').addClass('is-active');
+              window.scrollTo(0, 0);
               setTimeout(function() {
                 document.getElementById("menu").classList.remove("delay")
               }, 250);
             }
           },
           cancel: function() {
+            window.scrollTo(0, 0);
             setTimeout(function() {
               document.getElementById("menu").classList.remove("delay")
             }, 250);
@@ -1031,6 +1050,7 @@ $(document).ready(function() {
           }
         },
         Close: function() {
+          window.scrollTo(0, 0);
           setTimeout(function() {
             document.getElementById("menu").classList.remove("delay")
           }, 250);
@@ -1107,10 +1127,10 @@ $(document).ready(function() {
                 function() {});
             }
             location.reload();
-
           }
         },
         cancel: function() {
+          window.scrollTo(0, 0);
           setTimeout(function() {
             document.getElementById("menu").classList.remove("delay")
           }, 250);

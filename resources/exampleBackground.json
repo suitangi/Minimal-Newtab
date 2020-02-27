@@ -1,0 +1,76 @@
+{
+  "default": {
+    "link": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg",
+    "title": "Mona Lisa",
+    "year": "1503",
+    "painter": "Leonardo Da Vinci"
+  },
+  "info_title": "Painting Info",
+  "type": "image",
+  "info": [
+    [
+      {
+        "name": "title",
+        "size": "large"
+      },
+      {
+        "name": "painter",
+        "size": "medium"
+      },
+      {
+        "name": "year",
+        "size": "small"
+      }
+    ],
+    [
+      {
+        "name": "title",
+        "size": "medium"
+      },
+      {
+        "name": "painter",
+        "size": "small"
+      },
+      {
+        "name": "source",
+        "size": "small"
+      }
+    ],
+    [
+      {
+        "name": "title",
+        "size": "medium"
+      }
+    ]],
+  "sources": [{
+      "name": "Renaissance",
+      "list": [{
+        "link": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/1200px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg",
+        "title": "Mona Lisa",
+        "year": "1503",
+        "painter": "Leonardo Da Vinci"
+      },
+      {
+        "link": "https://upload.wikimedia.org/wikipedia/commons/4/49/%22The_School_of_Athens%22_by_Raffaello_Sanzio_da_Urbino.jpg",
+        "title": "The School of Athens",
+        "year": "1509 - 1511",
+        "painter": "Raphael"
+      }]
+    },
+    {
+      "name": "Impressionism",
+      "list": [{
+        "link": "https://upload.wikimedia.org/wikipedia/commons/5/54/Claude_Monet%2C_Impression%2C_soleil_levant.jpg",
+        "title": "Impression, Sunrise",
+        "year": "1872",
+        "painter": "Claude Monet"
+      },
+      {
+        "link": "https://upload.wikimedia.org/wikipedia/commons/3/30/The_Fighting_Temeraire%2C_JMW_Turner%2C_National_Gallery.jpg",
+        "title": "The Fighting Temeraire",
+        "year": "1839",
+        "painter": "J. M. W. Turner'"
+      }]
+    }
+  ]
+}

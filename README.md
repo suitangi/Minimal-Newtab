@@ -2,7 +2,7 @@
 This project is a Google Chrome/Firefox Newtab replacement framework that allows for custom defined lists of backgrounds to be loaded into a minimalistic page such that every time a new tab is opened, a random background is loaded.
 
 ![Screenshot](https://raw.githubusercontent.com/suitangi/Minimal-Newtab/master/resources/SC.png)
-
+![Screenshot2](https://raw.githubusercontent.com/suitangi/Minimal-Newtab/master/resources/Images/SC2.png)
 ## Usage
 These are some of the published extensions with this framework:
 * [Shinkai's Newtab](https://suitangi.github.io/Minimal-Newtab/resources/Shinkai's%20Newtab):
@@ -21,6 +21,8 @@ This option allows you to [use your own background lists](#using-your-own-backgr
 - Drag to move the clock
 - Click once to switch between standard 12hr and 24hr time
 
+![change time style](https://i.imgur.com/gsC0Lz5.gif)
+
 ### Todo List:
 - Type in the "New Item" box and press Enter to enter a new item
 - Press enter while editing a list item to create a new list item below
@@ -31,29 +33,40 @@ This option allows you to [use your own background lists](#using-your-own-backgr
 - Drag and drop the item to reorder the list
 - Drag the top of the list (where it says "todo list") to move the widget
 
+![using todo list](https://i.imgur.com/CtGcsnQ.gif)
+
 ### Search Bar:
 - Drag the top of the search bar to move it
 - Type in the box and press enter to perform a search
 - On the right side of the search bar there is a ⯈ button to change the search engine
 
+![Change search engine](https://i.imgur.com/jsSynRH.gif)
+
 ### Menu
+![menu](https://i.imgur.com/RoTnqtU.gif)
 - Move the mouse to the left most part of the window to access the menu.
 - Each switch in **Widgets** enables/disables respective widgets
 - Each switch in **Background** enables/disables the respective source of images
-- Effects:
-  - Brightness: adjust the brightness of the background
-  - Saturation: adjust the saturation (how colorful) of the background
-  - Contrast: adjust the contrast of the background
-  - Blur: adjust the blur of the background (default is no blur)
-- ❤ : Add or remove the current background to favorites
-- 🗑️: Remove this background (won't show this background again)
+- Effects: see [effects](#Effects)
+- ❤ Button: Add or remove the current background to favorites
+- 🗑️ Button: Remove this background (won't show this background again)
 - Reset Button: resets the extension, wiping all data and restarts it (use this option when the widget is lost off-screen somehow)
 - About Button: see information regarding the extension
   - Report background: used to report a broken/low quality background
 
+### Effects
+  - Brightness: adjust the brightness of the background
+  - Saturation: adjust the saturation (how colorful) of the background
+  - Contrast: adjust the contrast of the background
+  - Blur: adjust the blur of the background (default is no blur)
+
+![effects demo](https://i.imgur.com/H82sqcW.gif)
+
 ### Bookmarks
 - Move the mouse to the right most part of the window to access bookmarks.
 - Folders are drop-down-styled, click on them to see contents
+
+![bookmarks demo](https://i.imgur.com/3fgvKxo.gif)
 
 ## Using Your Own Backgrounds
 The `background.json` is styled in such a way:
@@ -65,9 +78,20 @@ The `background.json` is styled in such a way:
     "metadata1": "metadata1",
     "metadata2": "metadata2"
   },
+  "info_title": "title of info",
   "info" : [
-    ["metadata1", "metadata2"],
-    ["metadata2"]
+    [{
+      "name": "metadata1",
+      "size": "large"
+      },
+      {
+        "name": "metadata2",
+        "size": "medium"
+      }],
+    [{
+      "name": "metadata2",
+      "size": "small"
+      }]
   ],
   "sources": [{
       "name": "Name of The Source1",
@@ -79,12 +103,7 @@ The `background.json` is styled in such a way:
         { "link": "link2",
           "metadata1": "metadata1",
           "metadata2": "metadata2"
-        },
-        { "link": "link3",
-          "metadata1": "metadata1",
-          "metadata2": "metadata2"
         }]
-
     },
     {
       "name": "Source2",
@@ -96,53 +115,21 @@ The `background.json` is styled in such a way:
         { "link": "link5",
           "metadata1": "metadata1",
           "metadata2": "metadata2"
-        },
-        { "link": "link6",
-          "metadata1": "metadata1",
-          "metadata2": "metadata2"
         }]
     }
   ]
 }
 ```
 
-
-Here's and Example Backgorund Json (with no metadata):
-```json
-{
-  "default": {
-    "link": "https://i.imgur.com/t1vt5q0.mp4"
-  },
-  "info": [
-    ["source"]
-  ],
-  "sources": [{
-      "name": "Your Name",
-      "list": [{
-          "link": "https://i.imgur.com/OnwkTKE.mp4"
-        },
-        {
-          "link": "https://i.imgur.com/IpcZlnk.mp4"
-        }]
-    },
-    {
-      "name": "Garden of Words",
-      "list": [{
-        "link": "https://i.imgur.com/IrZ5pEv.mp4"
-        },
-        {
-          "link": "https://i.imgur.com/gNXhMXN.mp4"
-        }]
-    }
-  ]
-}
-```
 The `background.json` name should not be changed and should be in the resources directory.
 The menu for choosing sources will be automatically generated. It takes the title from the `name:` field in the json of each `source`.
-The `info` field is a list that determines how the background metadata is shown. `"source"` refers to the source of the background, which isn't located in the metadata of the background, but can still be retrieved.
+
+More details of the `background.json` can be found [here]().
 
 ## Other Informataion
 *Disclaimer: I do not own any of the artwork or cinemagraphs used in this extension. Credit goes to their respective owners.*
+
+If there is any issue with copyright or if you're the owner of one of the art, please contact suitangi778@gmail.com to take it down.
 
 ### Browser Permissions
 These are the permission that the `manifest.json` asks for:
@@ -157,8 +144,8 @@ This project uses these jQuery libraries:
 
 ## Special Thanks
 To all the testers:
-[G-Jayakar](https://github.com/G-Jayakar)
-[DaisyFei](https://github.com/DaisyFei)
+- [G-Jayakar](https://github.com/G-Jayakar)
+- [DaisyFei](https://github.com/DaisyFei)
 
 ## Change-Log
 ```
