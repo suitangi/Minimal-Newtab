@@ -2,6 +2,7 @@
 This project is a Google Chrome/Firefox Newtab replacement framework that allows for custom defined lists of backgrounds to be loaded into a minimalistic page such that every time a new tab is opened, a random background is loaded.
 
 ![Screenshot](https://i.imgur.com/hlx28h5.gif)
+
 ![Screenshot2](https://raw.githubusercontent.com/suitangi/Minimal-Newtab/master/resources/Images/SC2.png)
 ## Usage
 These are some of the published extensions with this framework:
@@ -22,6 +23,12 @@ This option allows you to [use your own background lists](#using-your-own-backgr
 - Click once to switch between standard 12hr and 24hr time
 
 ![change time style](https://i.imgur.com/gsC0Lz5.gif)
+
+### Info Panel:
+- Shows the info about the current background shown
+- Click to show different information and in a different style
+
+![info demo](https://i.imgur.com/vvEC3su.gif)
 
 ### Todo List:
 - Type in the "New Item" box and press Enter to enter a new item
@@ -149,6 +156,7 @@ To all the testers:
 
 ## Change-Log
 ```
+1.7.0 Minimal newtab framework established
 1.6.2 Todo list rework
 1.6.1 Todo list new functions: reordering and editing
 1.6.0 Revamped background filter effects system

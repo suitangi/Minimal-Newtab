@@ -16,6 +16,7 @@ The movies included are:
 - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/garden-of-words-newtab/)
 
 ![demo](https://i.imgur.com/hlx28h5.gif)
+
 ![Screenshot](https://github.com/suitangi/Minimal-Newtab/blob/master/resources/Images/SC.png?raw=true)
 
 ## How to use:
@@ -28,6 +29,14 @@ The movies included are:
 - Drag to move the clock
 - Click once to switch between standard 12hr and 24hr time
 
+![change time style](https://i.imgur.com/gsC0Lz5.gif)
+
+### Info Panel:
+- Shows the info about the current background shown
+- Click to show different information and in a different style
+
+![infopanel](https://i.imgur.com/ahyoxBs.gif)
+
 ### Todo List:
 - Type in the "New Item" box and press Enter to enter a new item
 - Press enter while editing a list item to create a new list item below
@@ -38,32 +47,58 @@ The movies included are:
 - Drag and drop the item to reorder the list
 - Drag the top of the list (where it says "todo list") to move the widget
 
+![using todo list](https://i.imgur.com/CtGcsnQ.gif)
+
 ### Search Bar:
 - Drag from the top of the search bar to move it
 - Type in the box and press enter to perform a Google search
+
+![Change search engine](https://i.imgur.com/jsSynRH.gif)
 
 ### Menu
 - Move the mouse to the left most part of the window to access the menu.
 - Each switch in **Widgets** enables/disables respective widgets
 - Each switch in **Background** enables/disables the respective source of images
-- Effects:
+- Effects: see [effects](#Effects)
+- ❤ Button: Add or remove the current background to favorites
+- 🗑️ Button: Remove this background (won't show this background again)
+- Reset Button: resets the extension, wiping all data and restarts it (use this option when the widget is lost off-screen somehow)
+- About Button: see information regarding the extension
+  - Report background: used to report a broken/low quality background
+
+![menudemo](https://i.imgur.com/hAekwCT.gif)
+
+### Effects
   - Brightness: adjust the brightness of the background
   - Saturation: adjust the saturation (how colorful) of the background
   - Contrast: adjust the contrast of the background
   - Blur: adjust the blur of the background (default is no blur)
-- ❤ : Add or remove the current background to favorites
-- 🗑️: Remove this background (won't show this background again)
-- Reset Button: resets the extension, wiping all data and restarts it (use this option when the widget is lost off-screen somehow)
-- About Button: see information regarding the extension
-    - Report background: used to report a broken/low quality background
+
+![effects demo](https://i.imgur.com/bfWTaZl.gif)
+
 
 ### Bookmarks
 - Move the mouse to the right most part of the window to access bookmarks.
 - Folders are drop-down-styled, click on them to see contents
 
+![bookmarks demo](https://i.imgur.com/L1PQs5u.gif)
+
 ## Browser Permissions
 - Storage: To store the data relating to preferences and widgets
 - Bookmark: To show the bookmarks on the right hand side tab
+
+## FAQ
+##### The background doesn't show up
+ Make sure you are connected to the internet, and have a stable connection! If the problem persists, you can report the background via the about button.
+
+##### My newtab isn't being replaced
+Make sure you disable other similar extensions that also replaces your new tabs
+
+##### My screen resolution changed and now my widgets are lost off-screen. How do I get them back?
+You can reset the widget locations using the reset button in the menu
+
+##### I accidentally removed a background I like, how do I get it back?
+You can reset the removed backgrounds using the reset button in the menu
 
 ## Other Information
 *Disclaimer: I do not own any of the artwork or cinemagraphs used in this extension. Credit goes to their respective owner (anime stuio/publisher) and original poster cyan1618 on Imgur.*
@@ -75,6 +110,7 @@ Please report bugs to suitangi778@gmail.com.
 
 ## Change-Log
 ```
+1.7.0 Renamed to Shinkai's Newtab, added new functions and support page
 1.6.2 Todo list rework
 1.6.1 Todo list new functions: reordering and editing
 1.6.0 Revamped background filter effects system
