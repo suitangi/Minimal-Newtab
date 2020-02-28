@@ -67,8 +67,7 @@
 | Tony Szczudlo | ![card image](https://www.mtgpics.com/pics/art/ons/126.jpg) | Aphetto Vulture | Onslaught |
 | Ron Spears | ![card image](https://www.mtgpics.com/pics/art/ons/176.jpg) | Syphon Soul | Onslaught |
 | Greg Hildebrandt | ![card image](https://www.mtgpics.com/pics/art/ons/059.jpg) | Weathered Wayfarer | Onslaught |
-| Greg Staples | ![card image](https://www.mtgpics.com/pics/art/ons/234.jpg) | Solar Blast | Onslaught |
-| Greg Staples | ![card image](https://www.mtgpics.com/pics/art/ons/187.jpg) | Avarax | Onslaught |
+| Greg Staples | ![card image](https://i.imgur.com/U0xFZJe.png) | Solar Blast | Onslaught |
 | Greg Staples | ![card image](https://www.mtgpics.com/pics/art/ons/007.jpg) | Aven Brigadier | Onslaught |
 | Jim Nelson | ![card image](https://www.mtgpics.com/pics/art/ons/274_1.jpg) | Mythic Proportions | Onslaught |
 | Rebecca Guay | ![card image](https://www.mtgpics.com/pics/art/ons/061_1.jpg) | Words of Worship | Onslaught |
@@ -5308,7 +5307,7 @@
 | Chris Rallis | ![card image](https://www.mtgpics.com/pics/art/2cn/025.jpg) | Throne Warden | Conspiracy - Take the Crown |
 | Victor Adame Minguez | ![card image](https://www.mtgpics.com/pics/art/2cn/074.jpg) | Daretti, Ingenious Iconoclast | Conspiracy - Take the Crown |
 | Svetlin Velinov | ![card image](https://www.mtgpics.com/pics/art/2cn/054.jpg) | Grenzo, Havoc Raiser | Conspiracy - Take the Crown |
-| Svetlin Velinov | ![card image](https://www.mtgpics.com/pics/art/2cn/144.jpg) | Phyrexian Arena | Conspiracy - Take the Crown |
+| Svetlin Velinov | ![card image](https://i.imgur.com/bnhrQAo.jpg) | Phyrexian Arena | Conspiracy - Take the Crown |
 | Aaron Miller | ![card image](https://www.mtgpics.com/pics/art/2cn/079.jpg) | Spy Kit | Conspiracy - Take the Crown |
 | Jesper Ejsing | ![card image](https://www.mtgpics.com/pics/art/2cn/011.jpg) | Summoner's Bond | Conspiracy - Take the Crown |
 | Ryan Pancoast | ![card image](https://www.mtgpics.com/pics/art/2cn/009.jpg) | Natural Unity | Conspiracy - Take the Crown |
