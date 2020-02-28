@@ -899,7 +899,7 @@ $(document).ready(function() {
   //if Chrome is online
   if (window.navigator.onLine) {
     //loads the backgorund json
-    const jsonUrl = chrome.runtime.getURL('resources/background.json');
+    const jsonUrl = chrome.runtime.getURL('resources/mtgart.json');
     fetch(jsonUrl)
       .then((response) => response.json())
       .then((json) => loadBackground(json));
