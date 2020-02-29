@@ -585,7 +585,7 @@
         },
         {
           "Artist": "Richard Kane Ferguson",
-          "link": "https://www.mtgpics.com/pics/art/str/027_1.jpg",
+          "link": "https://i.imgur.com/RUPCkmH.jpg",
           "Card Name": "Dream Prowler",
           "Set": "Stronghold"
         },
@@ -1826,12 +1826,6 @@
           "Set": "Portal"
         },
         {
-          "Artist": "Rebecca Guay",
-          "link": "https://www.mtgpics.com/pics/art/por/045_1.jpg",
-          "Card Name": "Cloak of Feathers",
-          "Set": "Portal"
-        },
-        {
           "Artist": "David O'Connor",
           "link": "https://www.mtgpics.com/pics/art/mir/292.jpg",
           "Card Name": "Suq'Ata Firewalker",
@@ -2055,7 +2049,7 @@
         },
         {
           "Artist": "Darrell Riche",
-          "link": "https://www.mtgpics.com/pics/art/nem/141.jpg",
+          "link": "https://images2.imgbox.com/42/40/bfnIkMB5_o.jpg",
           "Card Name": "Kor Haven",
           "Set": "Nemesis"
         },
@@ -2067,7 +2061,7 @@
         },
         {
           "Artist": "Don Hazeltine",
-          "link": "https://www.mtgpics.com/pics/art/nem/111_1.jpg",
+          "link": "https://images2.imgbox.com/1a/fc/mPaCdNVN_o.jpg",
           "Card Name": "Reverent Silence",
           "Set": "Nemesis"
         },
@@ -2079,7 +2073,7 @@
         },
         {
           "Artist": "Richard Kane Ferguson",
-          "link": "https://www.mtgpics.com/pics/art/fal/066_1.jpg",
+          "link": "https://images2.imgbox.com/9f/d3/RC815ba0_o.png",
           "Card Name": "Goblin War Drums",
           "Set": "Fallen Empires"
         },
@@ -2102,12 +2096,6 @@
           "Set": "Fallen Empires"
         },
         {
-          "Artist": "Scott Kirschner",
-          "link": "https://www.mtgpics.com/pics/art/fal/087_1.jpg",
-          "Card Name": "Hymn to Tourach",
-          "Set": "Fallen Empires"
-        },
-        {
           "Artist": "Richard Kane Ferguson",
           "link": "https://i.imgur.com/lHaSiHG.jpg",
           "Card Name": "Farrel's Zealot",
@@ -2115,7 +2103,7 @@
         },
         {
           "Artist": "Pat Morrissey",
-          "link": "https://www.mtgpics.com/pics/art/fal/029_1.jpg",
+          "link": "https://images2.imgbox.com/d2/89/YhcKfBw1_o.jpg",
           "Card Name": "Dwarven Hold",
           "Set": "Fallen Empires"
         },
@@ -2127,13 +2115,13 @@
         },
         {
           "Artist": "Pat Morrissey",
-          "link": "https://www.mtgpics.com/pics/art/fal/011_1.jpg",
+          "link": "https://images2.imgbox.com/83/50/fTYoVejx_o.png",
           "Card Name": "Bottomless Vault",
           "Set": "Fallen Empires"
         },
         {
           "Artist": "Richard Kane Ferguson",
-          "link": "https://www.mtgpics.com/pics/art/fal/009_1.jpg",
+          "link": "https://i.imgur.com/7mQPbVj.jpg",
           "Card Name": "Basal Thrull",
           "Set": "Fallen Empires"
         },
@@ -2161,6 +2149,264 @@
       "name": "Modern",
       "description": "Art from between 8th Ed. & RtR",
       "list": [
+        {
+          "Artist": "Jeff Miracola",
+          "link": "https://www.mtgpics.com/pics/art/rav/142.jpg",
+          "Card Name": "Sell-Sword Brute",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Anthony S. Waters",
+          "link": "https://www.mtgpics.com/pics/art/rav/297_2.jpg",
+          "Card Name": "Swamp",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Anthony S. Waters",
+          "link": "https://www.mtgpics.com/pics/art/rav/289.jpg",
+          "Card Name": "Plains",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Donato Giancola",
+          "link": "https://www.mtgpics.com/pics/art/rav/231.jpg",
+          "Card Name": "Sisters of Stone Death",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Richard Wright",
+          "link": "https://i.imgur.com/7JREvUs.jpg",
+          "Card Name": "Swamp",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Richard Wright",
+          "link": "https://www.mtgpics.com/pics/art/rav/290.jpg",
+          "Card Name": "Plains",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Richard Wright",
+          "link": "https://www.mtgpics.com/pics/art/rav/302.jpg",
+          "Card Name": "Mountain",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Richard Wright",
+          "link": "https://www.mtgpics.com/pics/art/rav/306.jpg",
+          "Card Name": "Forest",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Greg Staples",
+          "link": "https://www.mtgpics.com/pics/art/rav/075_1.jpg",
+          "Card Name": "Wizened Snitches",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Christopher Moeller",
+          "link": "https://www.mtgpics.com/pics/art/rav/304.jpg",
+          "Card Name": "Forest",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Matt Cavotta",
+          "link": "https://www.mtgpics.com/pics/art/rav/205.jpg",
+          "Card Name": "Firemane Angel",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Terese Nielsen",
+          "link": "https://www.mtgpics.com/pics/art/rav/009.jpg",
+          "Card Name": "Conclave Equenaut",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Dave Dorman",
+          "link": "https://www.mtgpics.com/pics/art/rav/115.jpg",
+          "Card Name": "Blockbuster",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Greg Hildebrandt",
+          "link": "https://www.mtgpics.com/pics/art/rav/167_2.jpg",
+          "Card Name": "Golgari Grave-Troll",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Kev Walker",
+          "link": "https://www.mtgpics.com/pics/art/rav/215.jpg",
+          "Card Name": "Mindleech Mass",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Thomas M. Baxa",
+          "link": "https://www.mtgpics.com/pics/art/rav/077.jpg",
+          "Card Name": "Blood Funnel",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Christopher Moeller",
+          "link": "https://www.mtgpics.com/pics/art/rav/300_1.jpg",
+          "Card Name": "Mountain",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Alex Horley-Orlandelli",
+          "link": "https://www.mtgpics.com/pics/art/rav/045.jpg",
+          "Card Name": "Dream Leash",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Carl Critchlow",
+          "link": "https://www.mtgpics.com/pics/art/rav/015.jpg",
+          "Card Name": "Dromad Purebred",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Glenn Fabry",
+          "link": "https://www.mtgpics.com/pics/art/rav/128.jpg",
+          "Card Name": "Goblin Spelunkers",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Glenn Fabry",
+          "link": "https://www.mtgpics.com/pics/art/rav/266.jpg",
+          "Card Name": "Nullstone Gargoyle",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Glenn Fabry",
+          "link": "https://www.mtgpics.com/pics/art/rav/244.jpg",
+          "Card Name": "Centaur Safeguard",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Glenn Fabry",
+          "link": "https://www.mtgpics.com/pics/art/rav/068.jpg",
+          "Card Name": "Tattered Drake",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Glenn Fabry",
+          "link": "https://www.mtgpics.com/pics/art/rav/133.jpg",
+          "Card Name": "Indentured Oaf",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Glenn Fabry",
+          "link": "https://www.mtgpics.com/pics/art/rav/149.jpg",
+          "Card Name": "Viashino Slasher",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Stephan Martiniere",
+          "link": "https://www.mtgpics.com/pics/art/rav/291.jpg",
+          "Card Name": "Island",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Scott M. Fischer",
+          "link": "https://www.mtgpics.com/pics/art/rav/225.jpg",
+          "Card Name": "Savra, Queen of the Golgari",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "John Avon",
+          "link": "https://www.mtgpics.com/pics/art/rav/275.jpg",
+          "Card Name": "Boros Garrison",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Anthony S. Waters",
+          "link": "https://www.mtgpics.com/pics/art/rav/301_2.jpg",
+          "Card Name": "Mountain",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Anthony S. Waters",
+          "link": "https://www.mtgpics.com/pics/art/rav/293_1.jpg",
+          "Card Name": "Island",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Anthony S. Waters",
+          "link": "https://i.imgur.com/InfjX4u.jpg",
+          "Card Name": "Forest",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Cyril Van Der Haegen",
+          "link": "https://www.mtgpics.com/pics/art/rav/053_1.jpg",
+          "Card Name": "Grozoth",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Greg Staples",
+          "link": "https://www.mtgpics.com/pics/art/rav/170_2.jpg",
+          "Card Name": "Hunted Troll",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Kev Walker",
+          "link": "https://i.imgur.com/wIcunDf.png",
+          "Card Name": "Loxodon Hierarch",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Scott M. Fischer",
+          "link": "https://www.mtgpics.com/pics/art/rav/069_1.jpg",
+          "Card Name": "Telling Time",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Cyril Van Der Haegen",
+          "link": "https://66.media.tumblr.com/244f8a58480fb138e1b98bcf4a706af7/tumblr_o3j523Jmar1vn68joo1_1280.jpg",
+          "Card Name": "Grozoth",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Glen Angus",
+          "link": "https://i.imgur.com/UwWW0YU.png",
+          "Card Name": "Glass Golem",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Anthony S. Waters",
+          "link": "https://www.mtgpics.com/pics/art/rav/297_1.jpg",
+          "Card Name": "Swamp",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Greg Staples",
+          "link": "https://www.mtgpics.com/pics/art/rav/253_1.jpg",
+          "Card Name": "Shadow of Doubt",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Michael Phillippi",
+          "link": "https://www.mtgpics.com/pics/art/rav/191_1.jpg",
+          "Card Name": "Autochthon Wurm",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Jen Page",
+          "link": "https://www.mtgpics.com/pics/art/rav/258_1.jpg",
+          "Card Name": "Crown of Convergence",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Donato Giancola",
+          "link": "https://www.mtgpics.com/pics/art/rav/190.jpg",
+          "Card Name": "Agrus Kos, Wojek Veteran",
+          "Set": "Ravnica"
+        },
+        {
+          "Artist": "Anthony S. Waters",
+          "link": "https://www.mtgpics.com/pics/art/rav/301_1.jpg",
+          "Card Name": "Mountain",
+          "Set": "Ravnica"
+        },
         {
           "Artist": "Nils Hamm",
           "link": "https://www.mtgpics.com/pics/art/soa/070.jpg",
@@ -2294,12 +2540,6 @@
           "Set": "Shards of Alara"
         },
         {
-          "Artist": "Jaime Jones",
-          "link": "https://www.mtgpics.com/pics/art/soa/101_1.jpg",
-          "Card Name": "Goblin Assault",
-          "Set": "Shards of Alara"
-        },
-        {
           "Artist": "Michael Komarck",
           "link": "https://www.mtgpics.com/pics/art/soa/185.jpg",
           "Card Name": "Rafiq of the Many",
@@ -2409,20 +2649,14 @@
         },
         {
           "Artist": "Anthony Francisco",
-          "link": "https://www.mtgpics.com/pics/art/soa/060_3.jpg",
+          "link": "https://i.imgur.com/bLr5xtL.jpg",
           "Card Name": "Tezzeret the Seeker",
           "Set": "Shards of Alara"
         },
         {
           "Artist": "Izzy",
-          "link": "https://www.mtgpics.com/pics/art/soa/010_1.jpg",
+          "link": "https://i.imgur.com/hHVtW0k.png",
           "Card Name": "Ethersworn Canonist",
-          "Set": "Shards of Alara"
-        },
-        {
-          "Artist": "Dave Kendall",
-          "link": "https://www.mtgpics.com/pics/art/soa/222_1.jpg",
-          "Card Name": "Crumbling Necropolis",
           "Set": "Shards of Alara"
         },
         {
@@ -2433,7 +2667,7 @@
         },
         {
           "Artist": "Volkan Baga",
-          "link": "https://www.mtgpics.com/pics/art/soa/009_2.jpg",
+          "link": "https://i.imgur.com/QsPDK2m.png",
           "Card Name": "Elspeth, Knight-Errant",
           "Set": "Shards of Alara"
         },
@@ -2450,14 +2684,8 @@
           "Set": "Shards of Alara"
         },
         {
-          "Artist": "Greg Staples",
-          "link": "https://www.mtgpics.com/pics/art/soa/166_1.jpg",
-          "Card Name": "Empyrial Archangel",
-          "Set": "Shards of Alara"
-        },
-        {
           "Artist": "Dan Scott",
-          "link": "https://www.mtgpics.com/pics/art/soa/079_1.jpg",
+          "link": "https://mtgart-images.s3.us-east-2.amazonaws.com/Immortal+Coil.png",
           "Card Name": "Immortal Coil",
           "Set": "Shards of Alara"
         },
@@ -2636,12 +2864,6 @@
           "Set": "Zendikar"
         },
         {
-          "Artist": "Steve Argyle",
-          "link": "https://www.mtgpics.com/pics/art/zen/120_5.jpg",
-          "Card Name": "Chandra Ablaze",
-          "Set": "Zendikar"
-        },
-        {
           "Artist": "Jesper Ejsing",
           "link": "https://www.mtgpics.com/pics/art/zen/188.jpg",
           "Card Name": "Territorial Baloth",
@@ -2679,7 +2901,7 @@
         },
         {
           "Artist": "Steve Argyle",
-          "link": "https://www.mtgpics.com/pics/art/zen/120_3.jpg",
+          "link": "https://mtgart-images.s3.us-east-2.amazonaws.com/Chandra+Ablaze.jpg",
           "Card Name": "Chandra Ablaze",
           "Set": "Zendikar"
         },
@@ -2769,7 +2991,7 @@
         },
         {
           "Artist": "Eric Deschamps",
-          "link": "https://www.mtgpics.com/pics/art/zen/218_1.jpg",
+          "link": "https://mtgart-images.s3.us-east-2.amazonaws.com/Magosi.jpg",
           "Card Name": "Magosi, the Waterveil",
           "Set": "Zendikar"
         },
@@ -2781,13 +3003,13 @@
         },
         {
           "Artist": "Jaime Jones",
-          "link": "https://www.mtgpics.com/pics/art/zen/170_2.jpg",
+          "link": "https://mtgart-images.s3.us-east-2.amazonaws.com/Nissa.jpg",
           "Card Name": "Nissa Revane",
           "Set": "Zendikar"
         },
         {
           "Artist": "Jason Chan",
-          "link": "https://www.mtgpics.com/pics/art/zen/013_2.jpg",
+          "link": "https://mtgart-images.s3.us-east-2.amazonaws.com/Iona.jpg",
           "Card Name": "Iona, Shield of Emeria",
           "Set": "Zendikar"
         },
@@ -2829,26 +3051,20 @@
         },
         {
           "Artist": "Raymond Swanland",
-          "link": "https://www.mtgpics.com/pics/art/zen/211_1.jpg",
+          "link": "https://mtgart-images.s3.us-east-2.amazonaws.com/Arid+Mesa.jpg",
           "Card Name": "Arid Mesa",
           "Set": "Zendikar"
         },
         {
           "Artist": "Jaime Jones",
-          "link": "https://www.mtgpics.com/pics/art/zen/213_1.jpg",
+          "link": "https://mtgart-images.s3.us-east-2.amazonaws.com/Emeria.jpg",
           "Card Name": "Emeria, the Sky Ruin",
           "Set": "Zendikar"
         },
         {
           "Artist": "Raymond Swanland",
-          "link": "https://www.mtgpics.com/pics/art/zen/062_2.jpg",
+          "link": "https://mtgart-images.s3.us-east-2.amazonaws.com/Roil+Elemental.jpg",
           "Card Name": "Roil Elemental",
-          "Set": "Zendikar"
-        },
-        {
-          "Artist": "Jason Chan",
-          "link": "https://www.mtgpics.com/pics/art/zen/013_1.jpg",
-          "Card Name": "Iona, Shield of Emeria",
           "Set": "Zendikar"
         },
         {
@@ -2859,7 +3075,7 @@
         },
         {
           "Artist": "Todd Lockwood",
-          "link": "https://www.mtgpics.com/pics/art/zen/099_2.jpg",
+          "link": "https://mtgart-images.s3.us-east-2.amazonaws.com/Kalitas.jpg",
           "Card Name": "Kalitas, Bloodchief of Ghet",
           "Set": "Zendikar"
         },
@@ -2894,21 +3110,9 @@
           "Set": "Zendikar"
         },
         {
-          "Artist": "Todd Lockwood",
-          "link": "https://www.mtgpics.com/pics/art/zen/099_1.jpg",
-          "Card Name": "Kalitas, Bloodchief of Ghet",
-          "Set": "Zendikar"
-        },
-        {
           "Artist": "Ryan Pancoast",
           "link": "https://www.mtgpics.com/pics/art/zen/150.jpg",
           "Card Name": "Spire Barrage",
-          "Set": "Zendikar"
-        },
-        {
-          "Artist": "Raymond Swanland",
-          "link": "https://www.mtgpics.com/pics/art/zen/062.jpg",
-          "Card Name": "Roil Elemental",
           "Set": "Zendikar"
         },
         {
@@ -2936,21 +3140,9 @@
           "Set": "Future Sight"
         },
         {
-          "Artist": "Richard Wright",
-          "link": "https://www.mtgpics.com/pics/art/fut/172.jpg",
-          "Card Name": "New Benalia",
-          "Set": "Future Sight"
-        },
-        {
           "Artist": "Philip Straub",
           "link": "https://www.mtgpics.com/pics/art/fut/171.jpg",
           "Card Name": "Llanowar Reborn",
-          "Set": "Future Sight"
-        },
-        {
-          "Artist": "Scott Altmann",
-          "link": "https://www.mtgpics.com/pics/art/fut/151.jpg",
-          "Card Name": "Spellwild Ouphe",
           "Set": "Future Sight"
         },
         {
@@ -3063,7 +3255,7 @@
         },
         {
           "Artist": "Daren Bader",
-          "link": "https://www.mtgpics.com/pics/art/fut/107_2.jpg",
+          "link": "https://mtgart-images.s3.us-east-2.amazonaws.com/Scourge+of+Kher+Ridges.jpg",
           "Card Name": "Scourge of Kher Ridges",
           "Set": "Future Sight"
         },
@@ -3908,12 +4100,6 @@
           "Set": "Time Spiral"
         },
         {
-          "Artist": "Darrell Riche",
-          "link": "https://www.mtgpics.com/pics/art/tsp/270.jpg",
-          "Card Name": "Calciform Pools",
-          "Set": "Time Spiral"
-        },
-        {
           "Artist": "Carl Critchlow",
           "link": "https://www.mtgpics.com/pics/art/tsp/122_1.jpg",
           "Card Name": "Phthisis",
@@ -3929,12 +4115,6 @@
           "Artist": "Martina Pilcerova",
           "link": "https://www.mtgpics.com/pics/art/tsp/274_1.jpg",
           "Card Name": "Gemstone Caverns",
-          "Set": "Time Spiral"
-        },
-        {
-          "Artist": "Jeff A. Menges",
-          "link": "https://www.mtgpics.com/pics/art/tsp/316.jpg",
-          "Card Name": "Consecrate Land",
           "Set": "Time Spiral"
         },
         {
@@ -3962,18 +4142,6 @@
           "Set": "Time Spiral"
         },
         {
-          "Artist": "Tony Szczudlo",
-          "link": "https://www.mtgpics.com/pics/art/tsp/218_1.jpg",
-          "Card Name": "Spike Tiller",
-          "Set": "Time Spiral"
-        },
-        {
-          "Artist": "Scott M. Fischer",
-          "link": "https://www.mtgpics.com/pics/art/tsp/040_2.jpg",
-          "Card Name": "Serra Avenger",
-          "Set": "Time Spiral"
-        },
-        {
           "Artist": "Christopher Moeller",
           "link": "https://www.mtgpics.com/pics/art/tsp/005.jpg",
           "Card Name": "Castle Raptors",
@@ -3981,7 +4149,7 @@
         },
         {
           "Artist": "Mark Poole",
-          "link": "https://www.mtgpics.com/pics/art/tsp/038_1.jpg",
+          "link": "https://mtgart-images.s3.us-east-2.amazonaws.com/Restore+Balance.jpg",
           "Card Name": "Restore Balance",
           "Set": "Time Spiral"
         },
@@ -4022,57 +4190,15 @@
           "Set": "Time Spiral"
         },
         {
-          "Artist": "Matt Cavotta",
-          "link": "https://www.mtgpics.com/pics/art/tsp/166_1.jpg",
-          "Card Name": "Jaya Ballard, Task Mage",
-          "Set": "Time Spiral"
-        },
-        {
           "Artist": "Dan Scott",
-          "link": "https://www.mtgpics.com/pics/art/tsp/279_1.jpg",
+          "link": "https://mtgart-images.s3.us-east-2.amazonaws.com/Terramorphic+Expanse.jpg",
           "Card Name": "Terramorphic Expanse",
-          "Set": "Time Spiral"
-        },
-        {
-          "Artist": "D. Alexander Gregory",
-          "link": "https://www.mtgpics.com/pics/art/tsp/054_1.jpg",
-          "Card Name": "Coral Trickster",
-          "Set": "Time Spiral"
-        },
-        {
-          "Artist": "Dan Scott",
-          "link": "https://www.mtgpics.com/pics/art/tsp/175_1.jpg",
-          "Card Name": "Reiterate",
           "Set": "Time Spiral"
         },
         {
           "Artist": "Scott M. Fischer",
           "link": "https://i.imgur.com/VhLOUNK.png",
           "Card Name": "Sengir Nosferatu",
-          "Set": "Time Spiral"
-        },
-        {
-          "Artist": "Greg Staples",
-          "link": "https://www.mtgpics.com/pics/art/tsp/105_1.jpg",
-          "Card Name": "Drudge Reavers",
-          "Set": "Time Spiral"
-        },
-        {
-          "Artist": "Daren Bader",
-          "link": "https://www.mtgpics.com/pics/art/tsp/253.jpg",
-          "Card Name": "Clockwork Hydra",
-          "Set": "Time Spiral"
-        },
-        {
-          "Artist": "Scott M. Fischer",
-          "link": "https://www.mtgpics.com/pics/art/tsp/147_1.jpg",
-          "Card Name": "Bogardan Hellkite",
-          "Set": "Time Spiral"
-        },
-        {
-          "Artist": "Jim Murray",
-          "link": "https://www.mtgpics.com/pics/art/tsp/007_1.jpg",
-          "Card Name": "Celestial Crusader",
           "Set": "Time Spiral"
         },
         {
@@ -4142,27 +4268,9 @@
           "Set": "Coldsnap"
         },
         {
-          "Artist": "Wayne Reynolds",
-          "link": "https://www.mtgpics.com/pics/art/col/003_1.jpg",
-          "Card Name": "Cover of Winter",
-          "Set": "Coldsnap"
-        },
-        {
           "Artist": "Zoltan Boros",
           "link": "https://i.imgur.com/Vm3ZC0a.png",
           "Card Name": "Ronom Hulk",
-          "Set": "Coldsnap"
-        },
-        {
-          "Artist": "Dave Allsop",
-          "link": "https://www.mtgpics.com/pics/art/col/140_1.jpg",
-          "Card Name": "Phyrexian Snowcrusher",
-          "Set": "Coldsnap"
-        },
-        {
-          "Artist": "Jim Murray",
-          "link": "https://www.mtgpics.com/pics/art/col/019_1.jpg",
-          "Card Name": "Sunscour",
           "Set": "Coldsnap"
         },
         {
@@ -4215,7 +4323,7 @@
         },
         {
           "Artist": "Aleksi Briclot",
-          "link": "https://www.mtgpics.com/pics/art/lor/145_1.jpg",
+          "link": "https://mtgart-images.s3.us-east-2.amazonaws.com/Thoughtseize.jpg",
           "Card Name": "Thoughtseize",
           "Set": "Lorwyn"
         },
@@ -4238,12 +4346,6 @@
           "Set": "Lorwyn"
         },
         {
-          "Artist": "Jeff Easley",
-          "link": "https://www.mtgpics.com/pics/art/lor/052_1.jpg",
-          "Card Name": "Aquitect's Will",
-          "Set": "Lorwyn"
-        },
-        {
           "Artist": "William O'Connor",
           "link": "https://i.imgur.com/DfOUK2A.jpg",
           "Card Name": "Sunrise Sovereign",
@@ -4257,14 +4359,8 @@
         },
         {
           "Artist": "Omar Rayyan",
-          "link": "https://www.mtgpics.com/pics/art/lor/193_1.jpg",
+          "link": "https://mtgart-images.s3.us-east-2.amazonaws.com/Tar+Pitcher.jpg",
           "Card Name": "Tar Pitcher",
-          "Set": "Lorwyn"
-        },
-        {
-          "Artist": "Omar Rayyan",
-          "link": "https://www.mtgpics.com/pics/art/lor/113_1.jpg",
-          "Card Name": "Final Revels",
           "Set": "Lorwyn"
         },
         {
@@ -4280,21 +4376,9 @@
           "Set": "Lorwyn"
         },
         {
-          "Artist": "Aleksi Briclot",
-          "link": "https://www.mtgpics.com/pics/art/lor/213_1.jpg",
-          "Card Name": "Garruk Wildspeaker",
-          "Set": "Lorwyn"
-        },
-        {
           "Artist": "Steve Prescott",
           "link": "https://www.mtgpics.com/pics/art/lor/177.jpg",
           "Card Name": "Hurly-Burly",
-          "Set": "Lorwyn"
-        },
-        {
-          "Artist": "Aleksi Briclot",
-          "link": "https://www.mtgpics.com/pics/art/lor/159_1.jpg",
-          "Card Name": "Chandra Nalaar",
           "Set": "Lorwyn"
         },
         {
@@ -4379,12 +4463,6 @@
           "Artist": "Jim Murray",
           "link": "https://www.mtgpics.com/pics/art/lor/033.jpg",
           "Card Name": "Oaken Brawler",
-          "Set": "Lorwyn"
-        },
-        {
-          "Artist": "Aleksi Briclot",
-          "link": "https://www.mtgpics.com/pics/art/lor/001_1.jpg",
-          "Card Name": "Ajani Goldmane",
           "Set": "Lorwyn"
         },
         {
@@ -4490,12 +4568,6 @@
           "Set": "Shadowmoor"
         },
         {
-          "Artist": "Fred Fields",
-          "link": "https://www.mtgpics.com/pics/art/sha/277.jpg",
-          "Card Name": "Mystic Gate",
-          "Set": "Shadowmoor"
-        },
-        {
           "Artist": "Adam Rex",
           "link": "https://www.mtgpics.com/pics/art/sha/135.jpg",
           "Card Name": "Woodfall Primus",
@@ -4568,21 +4640,9 @@
           "Set": "Shadowmoor"
         },
         {
-          "Artist": "Lars Grant-West",
-          "link": "https://www.mtgpics.com/pics/art/sha/273_1.jpg",
-          "Card Name": "Leechridden Swamp",
-          "Set": "Shadowmoor"
-        },
-        {
           "Artist": "Dave Kendall",
           "link": "https://i.imgur.com/6Y5YIsp.jpg",
           "Card Name": "Slinking Giant",
-          "Set": "Shadowmoor"
-        },
-        {
-          "Artist": "Kev Walker",
-          "link": "https://www.mtgpics.com/pics/art/sha/229_1.jpg",
-          "Card Name": "Kitchen Finks",
           "Set": "Shadowmoor"
         },
         {
@@ -4659,19 +4719,13 @@
         },
         {
           "Artist": "Adam Rex",
-          "link": "https://www.mtgpics.com/pics/art/sha/172_1.jpg",
+          "link": "https://i.imgur.com/Vc57Ikz.png",
           "Card Name": "Oona, Queen of the Fae",
           "Set": "Shadowmoor"
         },
         {
-          "Artist": "Larry MacDougall",
-          "link": "https://www.mtgpics.com/pics/art/sha/285_1.jpg",
-          "Card Name": "Plains",
-          "Set": "Shadowmoor"
-        },
-        {
           "Artist": "Daarken",
-          "link": "https://www.mtgpics.com/pics/art/sha/061_1.jpg",
+          "link": "https://i.imgur.com/wcaEDve.png",
           "Card Name": "Corrosive Mentor",
           "Set": "Shadowmoor"
         },
@@ -5726,12 +5780,6 @@
           "Set": "Magic 2011"
         },
         {
-          "Artist": "Jason Chan",
-          "link": "https://www.mtgpics.com/pics/art/11m/020_4.jpg",
-          "Card Name": "Knight Exemplar",
-          "Set": "Magic 2011"
-        },
-        {
           "Artist": "Jesper Ejsing",
           "link": "https://www.mtgpics.com/pics/art/11m/169.jpg",
           "Card Name": "Dryad's Favor",
@@ -5771,12 +5819,6 @@
           "Artist": "Howard Lyon",
           "link": "https://www.mtgpics.com/pics/art/11m/075.jpg",
           "Card Name": "Time Reversal",
-          "Set": "Magic 2011"
-        },
-        {
-          "Artist": "Jason Chan",
-          "link": "https://www.mtgpics.com/pics/art/11m/020_2.jpg",
-          "Card Name": "Knight Exemplar",
           "Set": "Magic 2011"
         },
         {
@@ -5927,6 +5969,12 @@
           "Artist": "Christopher Moeller",
           "link": "https://www.mtgpics.com/pics/art/roe/208.jpg",
           "Card Name": "Spider Umbra",
+          "Set": "Rise of the Eldrazi"
+        },
+        {
+          "Artist": "Véronique Meignaud",
+          "link": "https://i.redd.it/xgj5x46vshj41.png",
+          "Card Name": "Demystify",
           "Set": "Rise of the Eldrazi"
         },
         {
@@ -7394,12 +7442,6 @@
           "Set": "Magic 2013"
         },
         {
-          "Artist": "D. Alexander Gregory",
-          "link": "https://www.mtgpics.com/pics/art/13m/001_1.jpg",
-          "Card Name": "Ajani, Caller of the Pride",
-          "Set": "Magic 2013"
-        },
-        {
           "Artist": "Adam Paquette",
           "link": "https://www.mtgpics.com/pics/art/13m/220.jpg",
           "Card Name": "Trading Post",
@@ -7646,12 +7688,6 @@
           "Set": "Scars of Mirrodin"
         },
         {
-          "Artist": "Svetlin Velinov",
-          "link": "https://www.mtgpics.com/pics/art/som/174_1.jpg",
-          "Card Name": "Memnite",
-          "Set": "Scars of Mirrodin"
-        },
-        {
           "Artist": "Drew Baker",
           "link": "https://www.mtgpics.com/pics/art/som/195.jpg",
           "Card Name": "Prototype Portal",
@@ -7880,12 +7916,6 @@
           "Set": "Scars of Mirrodin"
         },
         {
-          "Artist": "Whit Brachna",
-          "link": "https://www.mtgpics.com/pics/art/som/177_1.jpg",
-          "Card Name": "Molten-Tail Masticore",
-          "Set": "Scars of Mirrodin"
-        },
-        {
           "Artist": "Jason Chan",
           "link": "https://www.mtgpics.com/pics/art/som/022_3.jpg",
           "Card Name": "Sunblast Angel",
@@ -8039,12 +8069,6 @@
           "Artist": "Jason Chan",
           "link": "https://www.mtgpics.com/pics/art/nph/020.jpg",
           "Card Name": "Puresteel Paladin",
-          "Set": "New Phyrexia"
-        },
-        {
-          "Artist": "Jason Chan",
-          "link": "https://www.mtgpics.com/pics/art/nph/001_2.jpg",
-          "Card Name": "Karn Liberated",
           "Set": "New Phyrexia"
         },
         {
@@ -8228,12 +8252,6 @@
           "Set": "Magic 2012"
         },
         {
-          "Artist": "Chris Rahn",
-          "link": "https://www.mtgpics.com/pics/art/12m/168_2.jpg",
-          "Card Name": "Volcanic Dragon",
-          "Set": "Magic 2012"
-        },
-        {
           "Artist": "Michael C. Hayes",
           "link": "https://www.mtgpics.com/pics/art/12m/094_1.jpg",
           "Card Name": "Distress",
@@ -8253,7 +8271,7 @@
         },
         {
           "Artist": "Jana Schirmer",
-          "link": "https://www.mtgpics.com/pics/art/12m/003_3.jpg",
+          "link": "https://mtgart-images.s3.us-east-2.amazonaws.com/Angelic+Destiny.jpg",
           "Card Name": "Angelic Destiny",
           "Set": "Magic 2012"
         },
@@ -8303,12 +8321,6 @@
           "Artist": "Jason Felix",
           "link": "https://www.mtgpics.com/pics/art/12m/068.jpg",
           "Card Name": "Mind Unbound",
-          "Set": "Magic 2012"
-        },
-        {
-          "Artist": "Jana Schirmer",
-          "link": "https://www.mtgpics.com/pics/art/12m/003_2.jpg",
-          "Card Name": "Angelic Destiny",
           "Set": "Magic 2012"
         },
         {
@@ -8441,12 +8453,6 @@
           "Artist": "Martina Pilcerova",
           "link": "https://www.mtgpics.com/pics/art/mrd/175_1.jpg",
           "Card Name": "Gilded Lotus",
-          "Set": "Mirrodin"
-        },
-        {
-          "Artist": "Tony Szczudlo",
-          "link": "https://www.mtgpics.com/pics/art/mrd/047_1.jpg",
-          "Card Name": "Quicksilver Elemental",
           "Set": "Mirrodin"
         },
         {
@@ -8696,12 +8702,6 @@
           "Set": "Mirrodin Besieged"
         },
         {
-          "Artist": "Aleksi Briclot",
-          "link": "https://www.mtgpics.com/pics/art/mbs/097_5.jpg",
-          "Card Name": "Tezzeret, Agent of Bolas",
-          "Set": "Mirrodin Besieged"
-        },
-        {
           "Artist": "Jason Chan",
           "link": "https://www.mtgpics.com/pics/art/mbs/092_1.jpg",
           "Card Name": "Thrun, the Last Troll",
@@ -8747,12 +8747,6 @@
           "Artist": "Dave Allsop",
           "link": "https://www.mtgpics.com/pics/art/mbs/040.jpg",
           "Card Name": "Caustic Hound",
-          "Set": "Mirrodin Besieged"
-        },
-        {
-          "Artist": "Aleksi Briclot",
-          "link": "https://www.mtgpics.com/pics/art/mbs/097_4.jpg",
-          "Card Name": "Tezzeret, Agent of Bolas",
           "Set": "Mirrodin Besieged"
         },
         {
@@ -9236,12 +9230,6 @@
           "Set": "Worldwake"
         },
         {
-          "Artist": "D. Alexander Gregory",
-          "link": "https://www.mtgpics.com/pics/art/wwk/059_2.jpg",
-          "Card Name": "Kalastria Highborn",
-          "Set": "Worldwake"
-        },
-        {
           "Artist": "Matt Stewart",
           "link": "https://www.mtgpics.com/pics/art/wwk/011.jpg",
           "Card Name": "Kor Firewalker",
@@ -9333,32 +9321,14 @@
         },
         {
           "Artist": "Jason Chan",
-          "link": "https://www.mtgpics.com/pics/art/wwk/053_2.jpg",
-          "Card Name": "Butcher of Malakir",
-          "Set": "Worldwake"
-        },
-        {
-          "Artist": "Jason Chan",
           "link": "https://i.imgur.com/wfZlDQL.png",
           "Card Name": "Jace, the Mind Sculptor",
-          "Set": "Worldwake"
-        },
-        {
-          "Artist": "Steve Argyle",
-          "link": "https://i.imgur.com/UNdRhRi.jpg",
-          "Card Name": "Admonition Angel",
           "Set": "Worldwake"
         },
         {
           "Artist": "Volkan Baga",
           "link": "https://www.mtgpics.com/pics/art/wwk/137_1.jpg",
           "Card Name": "Halimar Depths",
-          "Set": "Worldwake"
-        },
-        {
-          "Artist": "Ryan Pancoast",
-          "link": "https://www.mtgpics.com/pics/art/wwk/061_1.jpg",
-          "Card Name": "Nemesis Trap",
           "Set": "Worldwake"
         },
         {
@@ -9597,7 +9567,7 @@
         },
         {
           "Artist": "Justin Sweet",
-          "link": "https://www.mtgpics.com/pics/art/chk/118_1.jpg",
+          "link": "https://i.imgur.com/vS2S8P8.jpg",
           "Card Name": "Iname, Death Aspect",
           "Set": "Champions of Kamigawa"
         },
@@ -9615,7 +9585,7 @@
         },
         {
           "Artist": "Ittoku",
-          "link": "https://www.mtgpics.com/pics/art/chk/052_1.jpg",
+          "link": "https://i.imgur.com/IApgaQD.png",
           "Card Name": "Azami, Lady of Scrolls",
           "Set": "Champions of Kamigawa"
         },
@@ -12645,12 +12615,6 @@
         },
         {
           "Artist": "Jason A. Engle",
-          "link": "https://www.mtgpics.com/pics/art/thb/268.jpg",
-          "Card Name": "Klothys, God of Destiny",
-          "Set": "Theros Beyond Death"
-        },
-        {
-          "Artist": "Jason A. Engle",
           "link": "https://www.mtgpics.com/pics/art/thb/259.jpg",
           "Card Name": "Heliod, Sun-Crowned",
           "Set": "Theros Beyond Death"
@@ -13602,270 +13566,6 @@
           "link": "https://www.mtgpics.com/pics/art/dtk/169_1.jpg",
           "Card Name": "Zurgo Bellstriker",
           "Set": "Dragons of Tarkir"
-        },
-        {
-          "Artist": "Jeff Miracola",
-          "link": "https://www.mtgpics.com/pics/art/rav/142.jpg",
-          "Card Name": "Sell-Sword Brute",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Anthony S. Waters",
-          "link": "https://www.mtgpics.com/pics/art/rav/297_2.jpg",
-          "Card Name": "Swamp",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Anthony S. Waters",
-          "link": "https://www.mtgpics.com/pics/art/rav/289.jpg",
-          "Card Name": "Plains",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Donato Giancola",
-          "link": "https://www.mtgpics.com/pics/art/rav/231.jpg",
-          "Card Name": "Sisters of Stone Death",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Richard Wright",
-          "link": "https://i.imgur.com/7JREvUs.jpg",
-          "Card Name": "Swamp",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Richard Wright",
-          "link": "https://www.mtgpics.com/pics/art/rav/290.jpg",
-          "Card Name": "Plains",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Richard Wright",
-          "link": "https://www.mtgpics.com/pics/art/rav/302.jpg",
-          "Card Name": "Mountain",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Richard Wright",
-          "link": "https://www.mtgpics.com/pics/art/rav/306.jpg",
-          "Card Name": "Forest",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Greg Staples",
-          "link": "https://www.mtgpics.com/pics/art/rav/075_1.jpg",
-          "Card Name": "Wizened Snitches",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Christopher Moeller",
-          "link": "https://www.mtgpics.com/pics/art/rav/304.jpg",
-          "Card Name": "Forest",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Matt Cavotta",
-          "link": "https://www.mtgpics.com/pics/art/rav/205.jpg",
-          "Card Name": "Firemane Angel",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Terese Nielsen",
-          "link": "https://www.mtgpics.com/pics/art/rav/009.jpg",
-          "Card Name": "Conclave Equenaut",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Dave Dorman",
-          "link": "https://www.mtgpics.com/pics/art/rav/115.jpg",
-          "Card Name": "Blockbuster",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Greg Hildebrandt",
-          "link": "https://www.mtgpics.com/pics/art/rav/167_2.jpg",
-          "Card Name": "Golgari Grave-Troll",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Kev Walker",
-          "link": "https://www.mtgpics.com/pics/art/rav/215.jpg",
-          "Card Name": "Mindleech Mass",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Thomas M. Baxa",
-          "link": "https://www.mtgpics.com/pics/art/rav/077.jpg",
-          "Card Name": "Blood Funnel",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Christopher Moeller",
-          "link": "https://www.mtgpics.com/pics/art/rav/300_1.jpg",
-          "Card Name": "Mountain",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Alex Horley-Orlandelli",
-          "link": "https://www.mtgpics.com/pics/art/rav/045.jpg",
-          "Card Name": "Dream Leash",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Carl Critchlow",
-          "link": "https://www.mtgpics.com/pics/art/rav/015.jpg",
-          "Card Name": "Dromad Purebred",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Glenn Fabry",
-          "link": "https://www.mtgpics.com/pics/art/rav/128.jpg",
-          "Card Name": "Goblin Spelunkers",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Glenn Fabry",
-          "link": "https://www.mtgpics.com/pics/art/rav/266.jpg",
-          "Card Name": "Nullstone Gargoyle",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Glenn Fabry",
-          "link": "https://www.mtgpics.com/pics/art/rav/244.jpg",
-          "Card Name": "Centaur Safeguard",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Glenn Fabry",
-          "link": "https://www.mtgpics.com/pics/art/rav/068.jpg",
-          "Card Name": "Tattered Drake",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Glenn Fabry",
-          "link": "https://www.mtgpics.com/pics/art/rav/133.jpg",
-          "Card Name": "Indentured Oaf",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Glenn Fabry",
-          "link": "https://www.mtgpics.com/pics/art/rav/149.jpg",
-          "Card Name": "Viashino Slasher",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Stephan Martiniere",
-          "link": "https://www.mtgpics.com/pics/art/rav/291.jpg",
-          "Card Name": "Island",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Scott M. Fischer",
-          "link": "https://www.mtgpics.com/pics/art/rav/225.jpg",
-          "Card Name": "Savra, Queen of the Golgari",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "John Avon",
-          "link": "https://www.mtgpics.com/pics/art/rav/275.jpg",
-          "Card Name": "Boros Garrison",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Anthony S. Waters",
-          "link": "https://www.mtgpics.com/pics/art/rav/301_2.jpg",
-          "Card Name": "Mountain",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Anthony S. Waters",
-          "link": "https://www.mtgpics.com/pics/art/rav/293_1.jpg",
-          "Card Name": "Island",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Anthony S. Waters",
-          "link": "https://i.imgur.com/InfjX4u.jpg",
-          "Card Name": "Forest",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Cyril Van Der Haegen",
-          "link": "https://www.mtgpics.com/pics/art/rav/053_1.jpg",
-          "Card Name": "Grozoth",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Greg Staples",
-          "link": "https://www.mtgpics.com/pics/art/rav/170_2.jpg",
-          "Card Name": "Hunted Troll",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Kev Walker",
-          "link": "https://i.imgur.com/wIcunDf.png",
-          "Card Name": "Loxodon Hierarch",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Scott M. Fischer",
-          "link": "https://www.mtgpics.com/pics/art/rav/069_1.jpg",
-          "Card Name": "Telling Time",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Greg Staples",
-          "link": "https://www.mtgpics.com/pics/art/rav/170_1.jpg",
-          "Card Name": "Hunted Troll",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Cyril Van Der Haegen",
-          "link": "https://66.media.tumblr.com/244f8a58480fb138e1b98bcf4a706af7/tumblr_o3j523Jmar1vn68joo1_1280.jpg",
-          "Card Name": "Grozoth",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Glen Angus",
-          "link": "https://i.imgur.com/UwWW0YU.png",
-          "Card Name": "Glass Golem",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Anthony S. Waters",
-          "link": "https://www.mtgpics.com/pics/art/rav/297_1.jpg",
-          "Card Name": "Swamp",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Greg Staples",
-          "link": "https://www.mtgpics.com/pics/art/rav/253_1.jpg",
-          "Card Name": "Shadow of Doubt",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Michael Phillippi",
-          "link": "https://www.mtgpics.com/pics/art/rav/191_1.jpg",
-          "Card Name": "Autochthon Wurm",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Jen Page",
-          "link": "https://www.mtgpics.com/pics/art/rav/258_1.jpg",
-          "Card Name": "Crown of Convergence",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Donato Giancola",
-          "link": "https://www.mtgpics.com/pics/art/rav/190.jpg",
-          "Card Name": "Agrus Kos, Wojek Veteran",
-          "Set": "Ravnica"
-        },
-        {
-          "Artist": "Anthony S. Waters",
-          "link": "https://www.mtgpics.com/pics/art/rav/301_1.jpg",
-          "Card Name": "Mountain",
-          "Set": "Ravnica"
         },
         {
           "Artist": "Grzegorz Rutkowski",
@@ -33086,18 +32786,6 @@
           "Set": "Planar Chaos"
         },
         {
-          "Artist": "Wayne Reynolds",
-          "link": "https://www.mtgpics.com/pics/art/plc/116.jpg",
-          "Card Name": "Brute Force",
-          "Set": "Planar Chaos"
-        },
-        {
-          "Artist": "Steven Belledin",
-          "link": "https://www.mtgpics.com/pics/art/plc/017.jpg",
-          "Card Name": "Serra's Boon",
-          "Set": "Planar Chaos"
-        },
-        {
           "Artist": "Dave Allsop",
           "link": "https://i.imgur.com/oDqcbb2.jpg",
           "Card Name": "Necrotic Sliver",
@@ -33105,26 +32793,8 @@
         },
         {
           "Artist": "Dan Dos Santos",
-          "link": "https://www.mtgpics.com/pics/art/plc/032_1.jpg",
+          "link": "https://mtgart-images.s3.us-east-2.amazonaws.com/Aeon+Chronicler.jpg",
           "Card Name": "Aeon Chronicler",
-          "Set": "Planar Chaos"
-        },
-        {
-          "Artist": "Wayne Reynolds",
-          "link": "https://www.mtgpics.com/pics/art/plc/020_1.jpg",
-          "Card Name": "Stormfront Riders",
-          "Set": "Planar Chaos"
-        },
-        {
-          "Artist": "Wayne Reynolds",
-          "link": "https://www.mtgpics.com/pics/art/plc/111_1.jpg",
-          "Card Name": "Volcano Hellion",
-          "Set": "Planar Chaos"
-        },
-        {
-          "Artist": "Zoltan Boros",
-          "link": "https://www.mtgpics.com/pics/art/plc/070_1.jpg",
-          "Card Name": "Enslave",
           "Set": "Planar Chaos"
         },
         {
@@ -33138,12 +32808,6 @@
           "link": "https://www.mtgpics.com/pics/art/plc/115.jpg",
           "Card Name": "Blood Knight",
           "Set": "Planar Chaos"
-        },
-        {
-          "Artist": "Stephan Martiniere",
-          "link": "https://www.mtgpics.com/pics/art/fvo/016_1.jpg",
-          "Card Name": "Marit Lage",
-          "Set": "From the Vault : Lore"
         },
         {
           "Artist": "Adam Paquette",
@@ -33458,7 +33122,7 @@
           "Set": "Global Series Jiang Yanggu & Mu Yanling"
         },
         {
-          "Artist": "",
+          "Artist": "Xuantai Lin",
           "link": "https://www.mtgpics.com/pics/art/gs1/001.jpg",
           "Card Name": "Mu Yanling",
           "Set": "Global Series Jiang Yanggu & Mu Yanling"
