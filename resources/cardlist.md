@@ -1,4 +1,11 @@
+---
+title: Card List
+description: List of cards art in the Mtg Art Newtab
+
+---
+
 # Card List
+*Last updated 2/28/2020*
 
 | Artist | image Source | Card Name | Set |
 | --- | --- | --- | --- |
