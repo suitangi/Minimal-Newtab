@@ -7,6 +7,8 @@ description: List of cards art in the Mtg Art Newtab
 # Card List
 *Last updated 2/28/2020*
 
+[↼Back](https://suitangi.github.io/Minimal-Newtab/resources/MtG%20Art%20Newtab)
+
 | Artist | image Source | Card Name | Set |
 | --- | --- | --- | --- |
 | Jeffrey R. Busch | [Link](https://www.mtgpics.com/pics/art/psa/152.jpg) | Wild Ox | Portal Second Age |
@@ -5520,3 +5522,5 @@ description: List of cards art in the Mtg Art Newtab
 | G-host Lee | [Link](https://www.mtgpics.com/pics/art/gs1/025.jpg) | Sacred White Deer | Global Series Jiang Yanggu & Mu Yanling |
 | Xuantai Lin | [Link](https://www.mtgpics.com/pics/art/gs1/001.jpg) | Mu Yanling | Global Series Jiang Yanggu & Mu Yanling |
 | Tingting Yeh | [Link](https://www.mtgpics.com/pics/art/gs1/022.jpg) | Jiang Yanggu | Global Series Jiang Yanggu & Mu Yanling |
+
+[↼Back](https://suitangi.github.io/Minimal-Newtab/resources/MtG%20Art%20Newtab)
