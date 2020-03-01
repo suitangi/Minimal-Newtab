@@ -513,7 +513,7 @@ function reportBk() {
     title: false,
     content: '<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeeJuD-3LOxM2pJniVo2BCOLmIPctBQDdOkEg4Ejr9n29gNng/viewform?embedded=true?usp=pp_url&entry.2076178066=' +
       encodeURI(JSON.stringify(window.back)) +
-      '" width="640" height="620" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>',
+      '" width="640" height="640" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>',
     boxWidth: '640px',
     useBootstrap: false,
     escapeKey: 'Close',
@@ -637,7 +637,9 @@ function loadBackground(backJson) {
                 img.style = "";
                 img.onload = function() {
                   img.style.opacity = 100;
-                  $('#progress-line').remove();
+                  $('#progress-line').css("opacity", "0");
+                  //to counteract a bug that makes the background start from Bottom
+                  window.scrollTo(0, 0);
                 }
                 vid.style = "display: none;"
               } else { //file type is video
@@ -645,7 +647,10 @@ function loadBackground(backJson) {
                 vid.style = "";
                 vid.oncanplay = function() {
                   vid.style.opacity = 100;
-                  $('#progress-line').remove();
+                  $('#progress-line').css("opacity", "0");
+                  //to counteract a bug that makes the background start from Bottom
+                  window.scrollTo(0, 0);
+
                 };
                 vid.src = str;
                 vid.load();
@@ -707,7 +712,10 @@ function loadBackground(backJson) {
                   img.style = "";
                   img.onload = function() {
                     img.style.opacity = 100;
-                    $('#progress-line').remove();
+                    $('#progress-line').css("opacity", "0");
+                    //to counteract a bug that makes the background start from Bottom
+                    window.scrollTo(0, 0);
+
                   }
                   vid.style = "display: none;"
                 } else { //file type is video
@@ -715,7 +723,10 @@ function loadBackground(backJson) {
                   vid.style = "";
                   vid.oncanplay = function() {
                     vid.style.opacity = 100;
-                    $('#progress-line').remove();
+                    $('#progress-line').css("opacity", "0");
+                    //to counteract a bug that makes the background start from Bottom
+                    window.scrollTo(0, 0);
+
                   };
                   vid.src = str;
                   vid.load();
@@ -745,6 +756,7 @@ function loadBackground(backJson) {
                   cancel: function() {}
                 }
               });
+              loadInfo();
             } else {
               // remove the last shown if there is more than one
               for (var i = 0; i < window.backlist.length; i++) {
@@ -772,7 +784,10 @@ function loadBackground(backJson) {
                 img.style = "";
                 img.onload = function() {
                   img.style.opacity = 100;
-                  $('#progress-line').remove();
+                  $('#progress-line').css("opacity", "0");
+                  //to counteract a bug that makes the background start from Bottom
+                  window.scrollTo(0, 0);
+
                 }
                 img.src = str;
                 vid.style = "display: none;"
@@ -781,7 +796,9 @@ function loadBackground(backJson) {
                 vid.style = "";
                 vid.oncanplay = function() {
                   vid.style.opacity = 100;
-                  $('#progress-line').remove();
+                  $('#progress-line').css("opacity", "0");
+                  //to counteract a bug that makes the background start from Bottom
+                  window.scrollTo(0, 0);
                 };
                 vid.src = str;
                 vid.load();
@@ -878,6 +895,7 @@ $(document).ready(function() {
   console.log("%cIf you ARE a developer, feel free to check this project out here:", "font-size: 16px;");
   console.log("%chttps://suitangi.github.io/Minimal-Newtab/", "font-size: 16px;");
 
+  // $('#progress-line').css("display", "flex");
 
   //if Chrome is online
   if (window.navigator.onLine) {
@@ -994,12 +1012,14 @@ $(document).ready(function() {
             action: function() {
               addBlack(window.back);
               $('.delete-button').addClass('is-active');
+              window.scrollTo(0, 0);
               setTimeout(function() {
                 document.getElementById("menu").classList.remove("delay")
               }, 250);
             }
           },
           cancel: function() {
+            window.scrollTo(0, 0);
             setTimeout(function() {
               document.getElementById("menu").classList.remove("delay")
             }, 250);
@@ -1023,7 +1043,7 @@ $(document).ready(function() {
       typeAnimated: true,
       buttons: {
         ok: {
-          text: "Report this background",
+          text: "Report Problem",
           btnClass: 'btn-blue',
           keys: ['enter'],
           action: function() {
@@ -1031,6 +1051,7 @@ $(document).ready(function() {
           }
         },
         Close: function() {
+          window.scrollTo(0, 0);
           setTimeout(function() {
             document.getElementById("menu").classList.remove("delay")
           }, 250);
@@ -1107,10 +1128,10 @@ $(document).ready(function() {
                 function() {});
             }
             location.reload();
-
           }
         },
         cancel: function() {
+          window.scrollTo(0, 0);
           setTimeout(function() {
             document.getElementById("menu").classList.remove("delay")
           }, 250);

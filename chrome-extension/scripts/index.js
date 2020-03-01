@@ -513,7 +513,7 @@ function reportBk() {
     title: false,
     content: '<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeeJuD-3LOxM2pJniVo2BCOLmIPctBQDdOkEg4Ejr9n29gNng/viewform?embedded=true?usp=pp_url&entry.2076178066=' +
       encodeURI(JSON.stringify(window.back)) +
-      '" width="640" height="620" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>',
+      '" width="640" height="640" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>',
     boxWidth: '640px',
     useBootstrap: false,
     escapeKey: 'Close',
@@ -637,7 +637,7 @@ function loadBackground(backJson) {
                 img.style = "";
                 img.onload = function() {
                   img.style.opacity = 100;
-                  $('#progress-line').remove();
+                  $('#progress-line').css("opacity", "0");
                   //to counteract a bug that makes the background start from Bottom
                   window.scrollTo(0, 0);
                 }
@@ -647,7 +647,7 @@ function loadBackground(backJson) {
                 vid.style = "";
                 vid.oncanplay = function() {
                   vid.style.opacity = 100;
-                  $('#progress-line').remove();
+                  $('#progress-line').css("opacity", "0");
                   //to counteract a bug that makes the background start from Bottom
                   window.scrollTo(0, 0);
 
@@ -712,7 +712,7 @@ function loadBackground(backJson) {
                   img.style = "";
                   img.onload = function() {
                     img.style.opacity = 100;
-                    $('#progress-line').remove();
+                    $('#progress-line').css("opacity", "0");
                     //to counteract a bug that makes the background start from Bottom
                     window.scrollTo(0, 0);
 
@@ -723,7 +723,7 @@ function loadBackground(backJson) {
                   vid.style = "";
                   vid.oncanplay = function() {
                     vid.style.opacity = 100;
-                    $('#progress-line').remove();
+                    $('#progress-line').css("opacity", "0");
                     //to counteract a bug that makes the background start from Bottom
                     window.scrollTo(0, 0);
 
@@ -784,7 +784,7 @@ function loadBackground(backJson) {
                 img.style = "";
                 img.onload = function() {
                   img.style.opacity = 100;
-                  $('#progress-line').remove();
+                  $('#progress-line').css("opacity", "0");
                   //to counteract a bug that makes the background start from Bottom
                   window.scrollTo(0, 0);
 
@@ -796,7 +796,7 @@ function loadBackground(backJson) {
                 vid.style = "";
                 vid.oncanplay = function() {
                   vid.style.opacity = 100;
-                  $('#progress-line').remove();
+                  $('#progress-line').css("opacity", "0");
                   //to counteract a bug that makes the background start from Bottom
                   window.scrollTo(0, 0);
                 };
@@ -895,6 +895,7 @@ $(document).ready(function() {
   console.log("%cIf you ARE a developer, feel free to check this project out here:", "font-size: 16px;");
   console.log("%chttps://suitangi.github.io/Minimal-Newtab/", "font-size: 16px;");
 
+  // $('#progress-line').css("display", "flex");
 
   //if Chrome is online
   if (window.navigator.onLine) {
@@ -1042,7 +1043,7 @@ $(document).ready(function() {
       typeAnimated: true,
       buttons: {
         ok: {
-          text: "Report this background",
+          text: "Report Problem",
           btnClass: 'btn-blue',
           keys: ['enter'],
           action: function() {

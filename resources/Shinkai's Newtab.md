@@ -4,14 +4,14 @@ description: Want a beautiful yet minimal new tab page that comes to life?
 ---
 
 # Shinkai's Newtab
-This extension changes your new tab page so that scenes from Makoto Shinkai's movies can play as seamless, looping cinemagraphs in the background.
+This extension changes your new tab page so that scenes from Makoto Shinkai's movies can play as seamless, looping cinemagraphs in the background, while your new tab page becomes a functional dashboard with different widgets and tools to help your productivity.
 
 The movies included are:
 - Kimi no Na Wa (Your Name)
 - Byousoku 5 Centimeter (5cm/s)
 - Kotonoha no Niwa (Garden of Words)
 
-**Get the extension here:**
+#### Get the extension here:
 - [Chrome](https://chrome.google.com/webstore/detail/ojaookiigngaiipdhccdoaalmjpgpigh/publish-accepted?authuser=0&hl=en)
 - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/garden-of-words-newtab/)
 
@@ -99,6 +99,9 @@ You can reset the widget locations using the reset button in the menu
 
 #### I accidentally removed a background I like, how do I get it back?
 You can reset the removed backgrounds using the reset button in the menu
+
+#### I encountered a bug/I have a suggestion!
+You can tell me about it using the about button in the menu!
 
 ## Other Information
 *Disclaimer: I do not own any of the artwork or cinemagraphs used in this extension. Credit goes to their respective owner (anime stuio/publisher) and original poster cyan1618 on Imgur.*
