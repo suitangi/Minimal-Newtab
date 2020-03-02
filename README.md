@@ -10,7 +10,7 @@ These are some of the published extensions with this framework:
   * [Chrome](https://chrome.google.com/webstore/detail/ojaookiigngaiipdhccdoaalmjpgpigh/publish-accepted?authuser=0&hl=en)
   * [Firefox](https://addons.mozilla.org/en-US/firefox/addon/garden-of-words-newtab/)
 * [MTG Art Newtab](https://suitangi.github.io/Minimal-Newtab/resources/MtG%20Art%20Newtab):
-  * Chrome
+  * [Chrome](https://chrome.google.com/webstore/detail/mtg-art-newtab/nakflbaaglkajjpbfnpjmpjaakbjlpfl)
   * [Firefox](https://suitangi.github.io/Minimal-Newtab/resources/MtG%20Art%20Newtab)
 
 You can also clone this repository:
