@@ -113,7 +113,8 @@ Please report bugs to suitangi778@gmail.com.
 
 ## Change-Log
 ```
-1.7.0 Renamed to Shinkai's Newtab, added new functions and support page
+1.7.2 Small bug fix regarding the About button and Support page functions
+1.7.1 Renamed to Shinkai's Newtab, added new functions and support page
 1.6.2 Todo list rework
 1.6.1 Todo list new functions: reordering and editing
 1.6.0 Revamped background filter effects system
