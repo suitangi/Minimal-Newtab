@@ -7,8 +7,7 @@ description: Want a beautiful yet minimal new tab page that acts as a window to 
 This extension changes your new tab page so that art from the popular card game Magic: the Gathering displays in the background, while your new tab page becomes a functional dashboard with different widgets and tools to help your productivity.
 
 #### Get the extension here:
-- [Chrome](https://chrome.google.com/webstore/detail/ojaookiigngaiipdhccdoaalmjpgpigh/publish-accepted?authuser=0&hl=en)
-- [Firefox](https://addons.mozilla.org/en-US/firefox/addon/garden-of-words-newtab/)
+- [Firefox](https://addons.mozilla.org/en-US/firefox/addon/mtg-art-newtab/)
 
 ![Screenshot](https://raw.githubusercontent.com/suitangi/Minimal-Newtab/master/resources/Images/SC2.png)
 

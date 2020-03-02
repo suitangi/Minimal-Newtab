@@ -1042,10 +1042,16 @@ $(document).ready(function() {
       useBootstrap: false,
       typeAnimated: true,
       buttons: {
+        support: {
+          text: "Support Page",
+          btnClass: 'btn-blue',
+          action: function(){
+            window.location.href = 'https://suitangi.github.io/Minimal-Newtab/resources/MtG%20Art%20Newtab';
+          }
+        },
         ok: {
           text: "Report Problem",
-          btnClass: 'btn-blue',
-          keys: ['enter'],
+          btnClass: 'btn-red',
           action: function() {
             reportBk();
           }
