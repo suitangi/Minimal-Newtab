@@ -1,4 +1,4 @@
-# Minimal Newtab
+# ![icon](https://raw.githubusercontent.com/suitangi/Minimal-Newtab/master/chrome-extension/icons/icon48.png) Minimal Newtab
 This project is a Google Chrome/Firefox Newtab replacement framework that allows for custom defined lists of backgrounds to be loaded into a minimalistic page such that every time a new tab is opened, a random background is loaded.
 
 ![Screenshot](https://i.imgur.com/hlx28h5.gif)
@@ -7,7 +7,7 @@ This project is a Google Chrome/Firefox Newtab replacement framework that allows
 ## Usage
 These are some of the published extensions with this framework:
 * [Shinkai's Newtab](https://suitangi.github.io/Minimal-Newtab/resources/Shinkai's%20Newtab):
-  * [Chrome](https://chrome.google.com/webstore/detail/ojaookiigngaiipdhccdoaalmjpgpigh/publish-accepted?authuser=0&hl=en)
+  * [Chrome](https://chrome.google.com/webstore/detail/ojaookiigngaiipdhccdoaalmjpgpigh/)
   * [Firefox](https://addons.mozilla.org/en-US/firefox/addon/garden-of-words-newtab/)
 * [MTG Art Newtab](https://suitangi.github.io/Minimal-Newtab/resources/MtG%20Art%20Newtab):
   * [Chrome](https://chrome.google.com/webstore/detail/mtg-art-newtab/nakflbaaglkajjpbfnpjmpjaakbjlpfl)
@@ -153,12 +153,13 @@ This project uses these jQuery libraries:
 - [jQuery-ui](https://github.com/jquery/jquery-ui)
 
 ## Special Thanks
-To all the testers:
+To all the test users:
 - [G-Jayakar](https://github.com/G-Jayakar)
 - [DaisyFei](https://github.com/DaisyFei)
 
 ## Change-Log
 ```
+1.7.1 Fixed some issues and bugs
 1.7.0 Minimal newtab framework established
 1.6.2 Todo list rework
 1.6.1 Todo list new functions: reordering and editing

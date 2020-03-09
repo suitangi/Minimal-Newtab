@@ -15,6 +15,8 @@ description: Background JSON Documentation
 | [`"default"`](#default) | Standard background object | No, but highly recommended | The default background shown if some error occurred or if other backgrounds can't be displayed. |
 |[ `"info_title"`](#info-title) | String | No, but required if `"info"` is defined | The text name displayed in the menu option and hover of the info widget. |
 | [`"info"`](#info) | List | No | A list of what, and how the data in the information widget displays. |
+| `"support_link"` | String | No | The link to your support page. If no link is provided, the Minimal Newtab Project page will be provided instead. |
+| [`"report_embed"`](#report-embed) | String | Yes | The HTML embed for your report form. You can use `\\back` to get the URL-encoded Standard background object of the user's current background. |
 | `"type"` | String | Yes | `"image"` or `"video"` or `"both"` to designate what type of backgrounds are to be loaded (to facilitate with the loading process).
 | [`"sources"`](#sources) | List | Yes | A list of sources, each source contains `"name"` (the name of the source) and "`list`" (the list of standard background objects belonging to the source).
 
@@ -101,6 +103,14 @@ Even though the source of the background isn't defined in the metadata (rather, 
 The info widget will have this behavior when clicked:
 
 ![info demo](https://i.imgur.com/vvEC3su.gif)
+
+### Report Embed
+The `"report_embed"` in the json is the HTML embed for your report form. You can use `\\back` to get the URL-encoded Standard background object of the user's current background.
+In the other projects, the embed used Google forms to provide a bug reporting feature as such:
+```
+"<iframe src='https://docs.google.com/forms/d/e/1FAIpQLSeeJuD-3LOxM2pJniVo2BCOLmIPctBQDdOkEg4Ejr9n29gNng/viewform?embedded=true?usp=pp_url&entry.2076178066=\\back' width='640' height='640' frameborder='0' marginheight='0' marginwidth='0'>Loading...</iframe>"
+```
+*Do not copy the above into your project! This is only an example and you will not get any bugs reported this way*
 
 ### Sources
 The `"sources"` in the json is defined as a list of json objects. Each of these objects contains 2 fields: `"name"` and the `"list"`. The former being the name of the source. The latter is a list of standard background objects to be contained in the source. Each source generates a switch in the extension that the user can toggle to enable or disable the source of images.

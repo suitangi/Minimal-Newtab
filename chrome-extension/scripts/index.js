@@ -511,9 +511,7 @@ function reportBk() {
   document.getElementById("menu").classList.add("delay");
   $.confirm({
     title: false,
-    content: '<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeeJuD-3LOxM2pJniVo2BCOLmIPctBQDdOkEg4Ejr9n29gNng/viewform?embedded=true?usp=pp_url&entry.2076178066=' +
-      encodeURI(JSON.stringify(window.back)) +
-      '" width="640" height="640" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>',
+    content: window.report_embed.replace("\\back", encodeURI(JSON.stringify(window.back))),
     boxWidth: '640px',
     useBootstrap: false,
     escapeKey: 'Close',
@@ -591,6 +589,20 @@ function loadBackground(backJson) {
     $('#infoMenuItem').attr('data', "Toggles the " + infoTitle);
   }
 
+  //loads the support link
+  if(backJson.support_link) {
+    window.support_link = backJson.support_link;
+  } else {
+    window.support_link = "https://suitangi.github.io/Minimal-Newtab/";
+  }
+
+  //loads the support link
+  if(backJson.report_embed) {
+    window.report_embed = backJson.report_embed;
+  } else {
+    window.report_embed = "";
+  }
+
   let vid = document.getElementById("backdropvid");
   let img = document.getElementById("backdropimg");
   if (backJson.type == "video") {
@@ -605,7 +617,7 @@ function loadBackground(backJson) {
   let index = 0;
   bkMenu = document.getElementById("backgroundMenu");
 
-  //functional prograamming (recursive but there shouldn't be many calls to begin with)
+  //functional prograamming (recursive but there shouldn't be many calls)
   function loadSource(backList) {
     //end case
     if (index == backList.length) {
@@ -900,7 +912,7 @@ $(document).ready(function() {
   //if Chrome is online
   if (window.navigator.onLine) {
     //loads the backgorund json
-    const jsonUrl = chrome.runtime.getURL('resources/mtgart.json');
+    const jsonUrl = chrome.runtime.getURL('resources/background.json');
     fetch(jsonUrl)
       .then((response) => response.json())
       .then((json) => loadBackground(json));
@@ -1046,7 +1058,7 @@ $(document).ready(function() {
           text: "Support Page",
           btnClass: 'btn-blue',
           action: function(){
-            window.location.href = 'https://suitangi.github.io/Minimal-Newtab/resources/MtG%20Art%20Newtab';
+            window.location.href = window.support_link;
           }
         },
         ok: {

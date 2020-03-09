@@ -111,6 +111,8 @@ The project is free and open-sourced, you can check it out [here](https://suitan
 
 Please report bugs to suitangi778@gmail.com.
 
+If you like this project and would like to buy me a ~coffee~pepsi you can do so [here](https://www.buymeacoffee.com/suitangi).
+
 ## Change-Log
 ```
 1.7.2 Small bug fix regarding the About button and Support page functions

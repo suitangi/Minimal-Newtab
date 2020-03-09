@@ -1,7 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "Name of Extension",
+  "name": "Minimal Newtab",
   "version": "1.0.0",
+  "short_name": "Min Newtab",
   "description": "Replaces the newtab with ...",
   "permissions": ["storage", "bookmarks"],
   "icons": {
