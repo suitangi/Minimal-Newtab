@@ -103,6 +103,8 @@ The `background.json` is styled in such a way:
       "size": "small"
       }]
   ],
+  "support_link": "http://yoursupportlink.here",
+  "report_embed": "<iframe>HTML embed here</iframe>",
   "sources": [{
       "name": "Name of The Source1",
       "list": [
