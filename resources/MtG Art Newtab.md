@@ -106,6 +106,7 @@ If you like this project and would like to buy me a ~coffee~pepsi you can do so 
 
 ## Change-Log
 ```
+1.0.2 Updated library versions
 1.0.1 Initial Release MTG Art Newtab
 1.0.0 Beta Version released
 ```

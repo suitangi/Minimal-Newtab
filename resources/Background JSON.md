@@ -18,9 +18,9 @@ description: Background JSON Documentation
 | `"support_link"` | String | No | The link to your support page. If no link is provided, the Minimal Newtab Project page will be provided instead. |
 | [`"report_embed"`](#report-embed) | String | Yes | The HTML embed for your report form. You can use `\\back` to get the URL-encoded Standard background object of the user's current background. |
 | `"type"` | String | Yes | `"image"` or `"video"` or `"both"` to designate what type of backgrounds are to be loaded (to facilitate with the loading process).
-| [`"sources"`](#sources) | List | Yes | A list of sources, each source contains `"name"` (the name of the source) and "`list`" (the list of standard background objects belonging to the source).
+| [`"sources"`](#sources) | List | Yes | A list of sources, each source contains `"name"` (the name of the source) and "`list`" (the list of background objects belonging to the source).
 
-### Standard background object
+### Background object
  This just a Json object styled as such:
  it contains a `"link"` and as many different metadata tags as the image has. For example, Mona Lisa's background Json might look like this:
 ```JSON

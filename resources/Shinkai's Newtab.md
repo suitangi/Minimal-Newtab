@@ -115,6 +115,7 @@ If you like this project and would like to buy me a ~coffee~pepsi you can do so 
 
 ## Change-Log
 ```
+1.7.3 Updated library versions
 1.7.2 Small bug fix regarding the About button and Support page functions
 1.7.1 Renamed to Shinkai's Newtab, added new functions and support page
 1.6.2 Todo list rework

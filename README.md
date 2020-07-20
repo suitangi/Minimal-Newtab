@@ -139,7 +139,7 @@ The menu for choosing sources will be automatically generated. It takes the titl
 More details of the `background.json` can be found [here](https://suitangi.github.io/Minimal-Newtab/resources/Background%20JSON).
 
 ## Other Informataion
-*Disclaimer: I do not own any of the artwork or cinemagraphs used in this extension. Credit goes to their respective owners.*
+*Disclaimer: I do not own any of the artworks or cinemagraphs used in this extension. Credit goes to their respective owners.*
 
 If there is any issue with copyright or if you're the owner of one of the art, please contact suitangi778@gmail.com to take it down.
 
@@ -155,14 +155,15 @@ This project uses these jQuery libraries:
 - [jQuery-ui](https://github.com/jquery/jquery-ui)
 
 ## Special Thanks
-To all the test users:
+To all the beta test users:
 - [G-Jayakar](https://github.com/G-Jayakar)
 - [DaisyFei](https://github.com/DaisyFei)
 
 ## Change-Log
 ```
+1.7.2 Updated JQuery Version
 1.7.1 Fixed some issues and bugs
-1.7.0 Minimal newtab framework established
+1.7.0 Made into minimal newtab framework
 1.6.2 Todo list rework
 1.6.1 Todo list new functions: reordering and editing
 1.6.0 Revamped background filter effects system

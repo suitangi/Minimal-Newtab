@@ -544,17 +544,20 @@ function loadInfo() {
         size += "calc(16px + .6vw)";
       }
 
-      infoText += '<span style="' + size + '"' + '>' + window.back[infoChosen[i].name] + '</span><br>';
+      infoText += '<span style="' + size + '; white-space: nowrap;"' + '>' + window.back[infoChosen[i].name] + '</span><br>';
     }
     document.getElementById('info').innerHTML = infoText;
     let infoX = document.getElementById("infoWrapper").offsetLeft;
     let ww = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     if (infoX > 3 * ww / 4) {
       $('#info').css('text-align', 'right');
+      $('#info').css('transform','translate(-100%, 0%)');
     } else if (infoX > ww / 4) {
       $('#info').css('text-align', 'center');
+      $('#info').css('transform','translate(-50%, 0%)');
     } else {
       $('#info').css('text-align', 'left');
+      $('#info').css('transform','translate(0%, 0%)');
     }
   } else {
     $('#infoMenuItem').css("display", "none");
@@ -1055,7 +1058,7 @@ $(document).ready(function() {
       typeAnimated: true,
       buttons: {
         support: {
-          text: "Support Page",
+          text: "FAQ",
           btnClass: 'btn-blue',
           action: function(){
             window.location.href = window.support_link;
