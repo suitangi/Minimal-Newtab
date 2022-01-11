@@ -15,7 +15,11 @@ function setEndOfContenteditable(contentEditableElement) {
   range.collapse(false); //collapse the range to the end point. false means collapse to end rather than the start
   selection = window.getSelection(); //get the selection object (allows you to change selection)
   selection.removeAllRanges(); //remove any selections already made
-  selection.addRange(range); //make the range you have just created the visible selection
+  try {
+    selection.addRange(range); //make the range you have just created the visible selection
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 //Helper: insert an element after aanother
@@ -667,7 +671,12 @@ function loadBackground(backJson) {
                   window.scrollTo(0, 0);
 
                 };
-                vid.src = str;
+                //fetch the full video to try to force caching (reduce bandwidth)
+                const videoRequest = fetch(str)
+                    .then(response => response.blob());
+                videoRequest.then(blob => {
+                    vid.src = window.URL.createObjectURL(blob);
+                });
                 vid.load();
               }
               loadInfo();
@@ -743,7 +752,12 @@ function loadBackground(backJson) {
                     window.scrollTo(0, 0);
 
                   };
-                  vid.src = str;
+                  //fetch the full video to try to force caching (reduce bandwidth)
+                  const videoRequest = fetch(str)
+                      .then(response => response.blob());
+                  videoRequest.then(blob => {
+                      vid.src = window.URL.createObjectURL(blob);
+                  });
                   vid.load();
                 }
               }
@@ -815,7 +829,12 @@ function loadBackground(backJson) {
                   //to counteract a bug that makes the background start from Bottom
                   window.scrollTo(0, 0);
                 };
-                vid.src = str;
+                //fetch the full video to try to force caching (reduce bandwidth)
+                const videoRequest = fetch(str)
+                    .then(response => response.blob());
+                videoRequest.then(blob => {
+                    vid.src = window.URL.createObjectURL(blob);
+                });
                 vid.load();
               }
               //save the last shown in chrome
