@@ -3,7 +3,6 @@ function createHTML(htmlString) {
   var div = document.createElement('div');
   div.innerHTML = htmlString.trim();
 
-  // Change this to div.childNodes to support multiple top-level nodes
   return div.firstChild;
 }
 
@@ -29,27 +28,25 @@ function insertAfter(el, referenceNode) {
 
 //Time: formats the minute
 function checkMin(i) {
-  if (i < 10) {
-    i = "0" + i;
-  }
-  return i;
+  return i < 10 ? '0' + i : i;
 }
 
 //Time: formats the hour for standard (12hr) time
 function checkHour(i) {
   i = i % 12;
-  if (i == 0)
-    i = 12;
-  return i;
+  return i == 0 ? 12 : i;
 }
 
 //Time: starts the time
 function startTime() {
+
+  //clear the timer
+  if (window.nextMinute)
+    clearTimeout(window.nextMinute);
+
   let today = new Date();
   let h = today.getHours();
   let m = today.getMinutes();
-  // add a zero in front of numbers<10
-  m = checkMin(m);
   let pa = "";
 
   //sets PM and AM if not in military
@@ -63,13 +60,34 @@ function startTime() {
     h = checkHour(h);
 
   // display the time
-  document.getElementById('time').innerHTML = h + ":" + m;
+  document.getElementById('time').innerHTML = h + ":" + checkMin(m);
   document.getElementById("pa").innerHTML = pa;
 
-  //calls self every 1.2 seconds to update the time
-  t = setTimeout(function() {
-    startTime()
-  }, 1200);
+  today = new Date();
+  let s = today.getSeconds();
+  let ms = today.getMilliseconds();
+  let nextM = (60 - s) * 1000 + (1000 - ms);
+
+  //calls changeMinute setting the timeout for when next minute occurs
+  window.nextMinute = setTimeout(function() {
+    changeMinutes(h, m + 1);
+  }, nextM);
+}
+
+//Time: updates minutes
+function changeMinutes(h, m) {
+  if (m % 10 == 0) {
+    //sync time (pretty much every 10 minutes)
+    startTime();
+  } else {
+    //change minutes display
+    document.getElementById('time').innerHTML = h + ":" + checkMin(m);
+
+    //calls self every minute to update the time
+    window.nextMinute = setTimeout(function() {
+      changeMinutes(h, m + 1);
+    }, 60000);
+  }
 }
 
 //Widgets: sets the element to be draggable (customized for time, search bar, todo list)
@@ -173,18 +191,22 @@ function updateMilitary() {
 
 //Search: toggles the visibility of the search bar
 function updateSearch() {
-  document.getElementById("searchWrapper").classList.remove("firstStart");
-  if (document.getElementById("searchSwitch").checked) {
-    document.getElementById("searchSwitch").checked = false;
-    document.getElementById("searchWrapper").classList.add("exit");
-    document.getElementById("searchWrapper").classList.remove("entrance");
+
+  let searchWrapper = document.getElementById("searchWrapper");
+  let searchSwitch = document.getElementById("searchSwitch");
+
+  searchWrapper.classList.remove("firstStart");
+  if (searchSwitch.checked) {
+    searchSwitch.checked = false;
+    searchWrapper.classList.add("exit");
+    searchWrapper.classList.remove("entrance");
     chrome.storage.local.set({
       search_switch: "off"
     }, function() {});
   } else {
-    document.getElementById("searchSwitch").checked = true;
-    document.getElementById("searchWrapper").classList.add("entrance");
-    document.getElementById("searchWrapper").classList.remove("exit");
+    searchSwitch.checked = true;
+    searchWrapper.classList.add("entrance");
+    searchWrapper.classList.remove("exit");
     chrome.storage.local.set({
       search_switch: "on"
     }, function() {});
@@ -201,7 +223,7 @@ function changeSearch() {
       index = 0;
     let searchInput = $('#searchInput');
     searchInput.parent().attr('action', window.searchEngines[index].action);
-    console.log(window.searchEngines[index].action)
+    console.log(window.searchEngines[index].action);
     let val = (searchInput.val() == searchInput.attr('data-placeholder') ? "" : searchInput.val());
     searchInput.attr('data-placeholder', window.searchEngines[index].placeholder);
     searchInput.val(val);
@@ -215,18 +237,22 @@ function changeSearch() {
 
 //Time: toggles the visibility of the time display
 function updateTime() {
-  document.getElementById("timeWrapper").classList.remove("firstStart");
-  if (document.getElementById("timeSwitch").checked) {
-    document.getElementById("timeSwitch").checked = false;
-    document.getElementById("timeWrapper").classList.add("exit");
-    document.getElementById("timeWrapper").classList.remove("entrance");
+
+  let timeWrapper = document.getElementById("timeWrapper");
+  let timeSwitch = document.getElementById("timeSwitch");
+
+  timeWrapper.classList.remove("firstStart");
+  if (timeSwitch.checked) {
+    timeSwitch.checked = false;
+    timeWrapper.classList.add("exit");
+    timeWrapper.classList.remove("entrance");
     chrome.storage.local.set({
       time_switch: "off"
     }, function() {});
   } else {
-    document.getElementById("timeSwitch").checked = true;
-    document.getElementById("timeWrapper").classList.add("entrance");
-    document.getElementById("timeWrapper").classList.remove("exit");
+    timeSwitch.checked = true;
+    timeWrapper.classList.add("entrance");
+    timeWrapper.classList.remove("exit");
     chrome.storage.local.set({
       time_switch: "on"
     }, function() {});
@@ -235,18 +261,22 @@ function updateTime() {
 
 //Time: toggles the visibility of the info display
 function updateinfo() {
-  document.getElementById("infoWrapper").classList.remove("firstStart");
-  if (document.getElementById("infoSwitch").checked) {
-    document.getElementById("infoSwitch").checked = false;
-    document.getElementById("infoWrapper").classList.add("exit");
-    document.getElementById("infoWrapper").classList.remove("entrance");
+
+  let infoWrapper = document.getElementById("infoWrapper");
+  let infoSwitch = document.getElementById("infoSwitch");
+
+  infoWrapper.classList.remove("firstStart");
+  if (infoSwitch.checked) {
+    infoSwitch.checked = false;
+    infoWrapper.classList.add("exit");
+    infoWrapper.classList.remove("entrance");
     chrome.storage.local.set({
       info_switch: "off"
     }, function() {});
   } else {
-    document.getElementById("infoSwitch").checked = true;
-    document.getElementById("infoWrapper").classList.add("entrance");
-    document.getElementById("infoWrapper").classList.remove("exit");
+    infoSwitch.checked = true;
+    infoWrapper.classList.add("entrance");
+    infoWrapper.classList.remove("exit");
     chrome.storage.local.set({
       info_switch: "on"
     }, function() {});
@@ -255,8 +285,10 @@ function updateinfo() {
 
 //Time: toggles the favorites source of backgrounds
 function updateFav() {
-  if (document.getElementById("favSwitch").checked) {
-    document.getElementById("favSwitch").checked = false;
+
+  let favSwitch = document.getElementById("favSwitch");
+  if (favSwitch.checked) {
+    favSwitch.checked = false;
     chrome.storage.local.set({
       fav_switch: "off"
     }, function() {});
@@ -284,7 +316,7 @@ function updateFav() {
           }
         });
       } else {
-        document.getElementById("favSwitch").checked = true;
+        favSwitch.checked = true;
         chrome.storage.local.set({
           fav_switch: "on"
         }, function() {});
@@ -295,21 +327,25 @@ function updateFav() {
 
 //Todo: toggles the visibility of the todo list
 function updateTodo() {
-  document.getElementById("todoWrapper").classList.remove("firstStart");
-  if (document.getElementById("todoSwitch").checked) {
-    document.getElementById("todoSwitch").checked = false;
-    document.getElementById("todoWrapper").classList.add("exit");
-    document.getElementById("todoWrapper").classList.remove("entrance");
+
+  let todoWrapper = document.getElementById("todoWrapper");
+  let todoSwitch = document.getElementById("todoSwitch");
+
+  todoWrapper.classList.remove("firstStart");
+  if (todoSwitch.checked) {
+    todoSwitch.checked = false;
+    todoWrapper.classList.add("exit");
+    todoWrapper.classList.remove("entrance");
     chrome.storage.local.set({
       todo_switch: "off"
     }, function() {});
   } else {
-    document.getElementById("todoSwitch").checked = true;
+    todoSwitch.checked = true;
+    todoWrapper.classList.add("entrance");
+    todoWrapper.classList.remove("exit");
     chrome.storage.local.set({
       todo_switch: "on"
     }, function() {});
-    document.getElementById("todoWrapper").classList.add("entrance");
-    document.getElementById("todoWrapper").classList.remove("exit");
   }
 }
 
@@ -555,13 +591,13 @@ function loadInfo() {
     let ww = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     if (infoX > 3 * ww / 4) {
       $('#info').css('text-align', 'right');
-      $('#info').css('transform','translate(-100%, 0%)');
+      $('#info').css('transform', 'translate(-100%, 0%)');
     } else if (infoX > ww / 4) {
       $('#info').css('text-align', 'center');
-      $('#info').css('transform','translate(-50%, 0%)');
+      $('#info').css('transform', 'translate(-50%, 0%)');
     } else {
       $('#info').css('text-align', 'left');
-      $('#info').css('transform','translate(0%, 0%)');
+      $('#info').css('transform', 'translate(0%, 0%)');
     }
   } else {
     $('#infoMenuItem').css("display", "none");
@@ -597,14 +633,14 @@ function loadBackground(backJson) {
   }
 
   //loads the support link
-  if(backJson.support_link) {
+  if (backJson.support_link) {
     window.support_link = backJson.support_link;
   } else {
     window.support_link = "https://suitangi.github.io/Minimal-Newtab/";
   }
 
   //loads the support link
-  if(backJson.report_embed) {
+  if (backJson.report_embed) {
     window.report_embed = backJson.report_embed;
   } else {
     window.report_embed = "";
@@ -673,9 +709,9 @@ function loadBackground(backJson) {
                 };
                 //fetch the full video to try to force caching (reduce bandwidth)
                 const videoRequest = fetch(str)
-                    .then(response => response.blob());
+                  .then(response => response.blob());
                 videoRequest.then(blob => {
-                    vid.src = window.URL.createObjectURL(blob);
+                  vid.src = window.URL.createObjectURL(blob);
                 });
                 vid.load();
               }
@@ -717,7 +753,7 @@ function loadBackground(backJson) {
               }
             }
 
-            // dumb user removed all source-selected backgrounds
+            // problematic user removed all source-selected backgrounds
             if (window.backlist.length == 0) {
               if (backJson.default != null) {
                 window.back = backJson.default;
@@ -755,9 +791,9 @@ function loadBackground(backJson) {
 
                   //fetch the full video to try to force caching (reduce bandwidth)
                   const videoRequest = fetch(str)
-                      .then(response => response.blob());
+                    .then(response => response.blob());
                   videoRequest.then(blob => {
-                      vid.src = window.URL.createObjectURL(blob);
+                    vid.src = window.URL.createObjectURL(blob);
                   });
                   vid.load();
                 }
@@ -832,9 +868,9 @@ function loadBackground(backJson) {
                 };
                 //fetch the full video to try to force caching (reduce bandwidth)
                 const videoRequest = fetch(str)
-                    .then(response => response.blob());
+                  .then(response => response.blob());
                 videoRequest.then(blob => {
-                    vid.src = window.URL.createObjectURL(blob);
+                  vid.src = window.URL.createObjectURL(blob);
                 });
                 vid.load();
               }
@@ -847,13 +883,13 @@ function loadBackground(backJson) {
               if (data.fav_switch == 'on' && data.fav_list.length > 0) {
                 document.getElementById("favSwitch").checked = true;
               }
+
               //if the current image is in favorites, make the heart button filled
-              let favLinkList = [];
               for (var i = 0; i < data.fav_list.length; i++) {
-                favLinkList.push(data.fav_list[i].link);
-              }
-              if (favLinkList.indexOf(window.back.link) != -1) {
-                $('.like-button').toggleClass('is-active');
+                if (data.fav_list[i].link == window.back.link) {
+                  $('.like-button').toggleClass('is-active');
+                  break;
+                }
               }
 
               //load the background info after the background has been chosen
@@ -974,8 +1010,6 @@ $(document).ready(function() {
     }
   ];
 
-  startTime(); //start the time
-
   //add the bookmarks
   chrome.bookmarks.getTree(function(bkList) {
     window.bookmarklist = bkList[0].children[1].children;
@@ -1080,7 +1114,7 @@ $(document).ready(function() {
         support: {
           text: "FAQ",
           btnClass: 'btn-blue',
-          action: function(){
+          action: function() {
             window.location.href = window.support_link;
           }
         },
@@ -1215,12 +1249,11 @@ $(document).ready(function() {
       document.getElementById("timeWrapper").style.left = data.time_left_data;
     }
     window.military = (data.military_switch == 'on');
-    if (data.military_switch == 'on') {
-      startTime();
-    }
+
+    startTime(); //start the time
   });
 
-  //getting the clock settings
+  //getting the info settings
   chrome.storage.local.get({
     info_switch: 'on',
     info_top_data: '',

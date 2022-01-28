@@ -161,6 +161,7 @@ To all the beta test users:
 
 ## Change-Log
 ```
+1.7.3 Optimization and small bug fixes
 1.7.2 Updated JQuery Version
 1.7.1 Fixed some issues and bugs
 1.7.0 Made into minimal newtab framework
