@@ -30,6 +30,7 @@ This option allows you to [use your own background lists](#using-your-own-backgr
 ### Info Panel:
 - Shows the info about the current background shown
 - Click to show different information and in a different style
+- Drag to move the info widget
 
 ![info demo](https://i.imgur.com/vvEC3su.gif)
 
