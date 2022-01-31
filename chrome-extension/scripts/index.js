@@ -688,6 +688,7 @@ function loadBackground(backJson) {
 
               let fext = str.substring(str.length - 3).toLowerCase();
               if (fext == 'jpg' || fext == 'png' || fext == 'bmp') { //the file type is image
+                window.back.type = "image";
                 img.src = str;
                 img.style = "";
                 img.onload = function() {
@@ -698,6 +699,7 @@ function loadBackground(backJson) {
                 }
                 vid.style = "display: none;"
               } else { //file type is video
+                window.back.type = "video";
                 img.style = "display: none;"
                 vid.style = "";
                 vid.oncanplay = function() {
@@ -768,6 +770,8 @@ function loadBackground(backJson) {
                 console.log(str);
                 let fext = str.substring(str.length - 3).toLowerCase();
                 if (fext == 'jpg' || fext == 'png' || fext == 'bmp') { //the file type is image
+                  window.back.type = "image";
+                  vid.style = "display: none;";
                   img.src = str;
                   img.style = "";
                   img.onload = function() {
@@ -777,9 +781,9 @@ function loadBackground(backJson) {
                     window.scrollTo(0, 0);
 
                   }
-                  vid.style = "display: none;"
                 } else { //file type is video
-                  img.style = "display: none;"
+                  window.back.type = "video";
+                  img.style = "display: none;";
                   vid.style = "";
                   vid.oncanplay = function() {
                     vid.style.opacity = 100;
@@ -847,6 +851,7 @@ function loadBackground(backJson) {
               console.log(str);
               let fext = str.substring(str.length - 3).toLowerCase();
               if (fext == 'jpg' || fext == 'png' || fext == 'bmp') { //the file type is image
+                window.back.type = "image";
                 img.style = "";
                 img.onload = function() {
                   img.style.opacity = 100;
@@ -858,6 +863,7 @@ function loadBackground(backJson) {
                 img.src = str;
                 vid.style = "display: none;"
               } else { //file type is video
+                window.back.type = "video";
                 img.style = "display: none;"
                 vid.style = "";
                 vid.oncanplay = function() {
@@ -938,7 +944,7 @@ function loadBackground(backJson) {
 
       //add source to each element of the list
       let toPushList = backList[index].list
-      for (i = 0; i < toPushList.length; i++) {
+      for (var i = 0; i < toPushList.length; i++) {
         toPushList[i]["source"] = name;
       }
 
