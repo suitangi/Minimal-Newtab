@@ -618,7 +618,8 @@ function updateInfoMode() {
   });
 }
 
-//loads a random background (currently in video form)
+
+//loads a random background
 function loadBackground(backJson) {
   console.log("Loaded background.json:");
   console.log(backJson.sources);
@@ -660,8 +661,55 @@ function loadBackground(backJson) {
   let index = 0;
   bkMenu = document.getElementById("backgroundMenu");
 
+  //function to set background
+  function setBackground() {
+    let vid = document.getElementById("backdropvid");
+    let img = document.getElementById("backdropimg");
+    let str = window.back.link;
+
+    //console logging
+    // console.log("Favorites:");
+    // console.log(data.fav_list);
+    // console.log("Defaulted backgorund:");
+    // console.log(str);
+
+    let fext = str.substring(str.length - 3).toLowerCase();
+    if (fext == 'jpg' || fext == 'png' || fext == 'bmp') { //the file type is image
+      window.back.type = "image";
+      img.src = str;
+      img.style = "";
+      img.onload = function() {
+        img.style.opacity = 100;
+        $('#progress-line').css("opacity", "0");
+        //to counteract a bug that makes the background start from Bottom
+        window.scrollTo(0, 0);
+      }
+      vid.style = "display: none;"
+    } else { //file type is video
+      window.back.type = "video";
+      img.style = "display: none;"
+      vid.style = "";
+      vid.oncanplay = function() {
+        vid.style.opacity = 100;
+        $('#progress-line').css("opacity", "0");
+        //to counteract a bug that makes the background start from Bottom
+        window.scrollTo(0, 0);
+
+      };
+      //fetch the full video to try to force caching (reduce bandwidth)
+      const videoRequest = fetch(str)
+        .then(response => response.blob());
+      videoRequest.then(blob => {
+        vid.src = window.URL.createObjectURL(blob);
+      });
+      vid.load();
+    }
+    loadInfo();
+  }
+
   //functional prograamming (recursive but there shouldn't be many calls)
   function loadSource(backList) {
+
     //end case
     if (index == backList.length) {
 
@@ -676,48 +724,7 @@ function loadBackground(backJson) {
           if (window.backlist.length == 0 && (data.fav_switch == 'off' || (data.fav_switch == 'on' && data.fav_list.length == 0))) {
             if (backJson.default != null) {
               window.back = backJson.default;
-              vid = document.getElementById("backdropvid");
-              img = document.getElementById("backdropimg");
-
-              //console logging
-              console.log("Favorites:");
-              console.log(data.fav_list);
-              let str = window.back.link;
-              console.log("Defaulted backgorund:");
-              console.log(str);
-
-              let fext = str.substring(str.length - 3).toLowerCase();
-              if (fext == 'jpg' || fext == 'png' || fext == 'bmp') { //the file type is image
-                window.back.type = "image";
-                img.src = str;
-                img.style = "";
-                img.onload = function() {
-                  img.style.opacity = 100;
-                  $('#progress-line').css("opacity", "0");
-                  //to counteract a bug that makes the background start from Bottom
-                  window.scrollTo(0, 0);
-                }
-                vid.style = "display: none;"
-              } else { //file type is video
-                window.back.type = "video";
-                img.style = "display: none;"
-                vid.style = "";
-                vid.oncanplay = function() {
-                  vid.style.opacity = 100;
-                  $('#progress-line').css("opacity", "0");
-                  //to counteract a bug that makes the background start from Bottom
-                  window.scrollTo(0, 0);
-
-                };
-                //fetch the full video to try to force caching (reduce bandwidth)
-                const videoRequest = fetch(str)
-                  .then(response => response.blob());
-                videoRequest.then(blob => {
-                  vid.src = window.URL.createObjectURL(blob);
-                });
-                vid.load();
-              }
-              loadInfo();
+              setBackground();
             }
             $.alert({
               title: 'No Background sources selected',
@@ -759,48 +766,7 @@ function loadBackground(backJson) {
             if (window.backlist.length == 0) {
               if (backJson.default != null) {
                 window.back = backJson.default;
-                vid = document.getElementById("backdropvid");
-                img = document.getElementById("backdropimg");
-
-                //console logging
-                console.log("Favorites:");
-                console.log(data.fav_list);
-                let str = window.back.link;
-                console.log("Defaulted backgorund:");
-                console.log(str);
-                let fext = str.substring(str.length - 3).toLowerCase();
-                if (fext == 'jpg' || fext == 'png' || fext == 'bmp') { //the file type is image
-                  window.back.type = "image";
-                  vid.style = "display: none;";
-                  img.src = str;
-                  img.style = "";
-                  img.onload = function() {
-                    img.style.opacity = 100;
-                    $('#progress-line').css("opacity", "0");
-                    //to counteract a bug that makes the background start from Bottom
-                    window.scrollTo(0, 0);
-
-                  }
-                } else { //file type is video
-                  window.back.type = "video";
-                  img.style = "display: none;";
-                  vid.style = "";
-                  vid.oncanplay = function() {
-                    vid.style.opacity = 100;
-                    $('#progress-line').css("opacity", "0");
-                    //to counteract a bug that makes the background start from Bottom
-                    window.scrollTo(0, 0);
-
-                  };
-
-                  //fetch the full video to try to force caching (reduce bandwidth)
-                  const videoRequest = fetch(str)
-                    .then(response => response.blob());
-                  videoRequest.then(blob => {
-                    vid.src = window.URL.createObjectURL(blob);
-                  });
-                  vid.load();
-                }
+                setBackground();
               }
               $.alert({
                 title: 'Too many backgrounds removed',
@@ -838,54 +804,15 @@ function loadBackground(backJson) {
 
               //get the random image number
               let imn = Math.floor(Math.random() * window.backlist.length);
-              vid = document.getElementById("backdropvid");
-              img = document.getElementById("backdropimg");
+              window.back = window.backlist[imn];
+              setBackground();
 
-              console.log("Favorites:");
-              console.log(data.fav_list);
-              console.log("Removed:");
-              console.log(data.black_list);
-              window.back = window.backlist[imn]
-              let str = window.back.link;
-              console.log("Selected backgorund:");
-              console.log(str);
-              let fext = str.substring(str.length - 3).toLowerCase();
-              if (fext == 'jpg' || fext == 'png' || fext == 'bmp') { //the file type is image
-                window.back.type = "image";
-                img.style = "";
-                img.onload = function() {
-                  img.style.opacity = 100;
-                  $('#progress-line').css("opacity", "0");
-                  //to counteract a bug that makes the background start from Bottom
-                  window.scrollTo(0, 0);
-
-                }
-                img.src = str;
-                vid.style = "display: none;"
-              } else { //file type is video
-                window.back.type = "video";
-                img.style = "display: none;"
-                vid.style = "";
-                vid.oncanplay = function() {
-                  vid.style.opacity = 100;
-                  $('#progress-line').css("opacity", "0");
-                  //to counteract a bug that makes the background start from Bottom
-                  window.scrollTo(0, 0);
-                };
-                //fetch the full video to try to force caching (reduce bandwidth)
-                const videoRequest = fetch(str)
-                  .then(response => response.blob());
-                videoRequest.then(blob => {
-                  vid.src = window.URL.createObjectURL(blob);
-                });
-                vid.load();
-              }
               //save the last shown in chrome
               chrome.storage.local.set({
                 lastShown: window.backlist[imn].link
               }, function() {});
 
-              //setting the fav switch and like buttons (due to async, they have to be here)
+              //setting the fav switch and like buttons
               if (data.fav_switch == 'on' && data.fav_list.length > 0) {
                 document.getElementById("favSwitch").checked = true;
               }
@@ -897,9 +824,6 @@ function loadBackground(backJson) {
                   break;
                 }
               }
-
-              //load the background info after the background has been chosen
-              loadInfo();
             }
           }
         });
