@@ -61,8 +61,13 @@ This option allows you to [use your own background lists](#using-your-own-backgr
 - Effects: see [effects](#Effects)
 - ❤ Button: Add or remove the current background to favorites
 - 🗑️ Button: Remove this background (won't show this background again)
-- Reset Button: resets the extension, wiping all data and restarts it (use this option when the widget is lost off-screen somehow)
+- Settings Button:
+  - UI Animations: Toggles the UI Animations
+  - Avoid Repeats: When on, the extension will not allow the same background to be shown back to back
+  - Auto-pause background: When on, this option will pause video backgrounds when the window is not in focus to reduce cpu usage
+  - Reset Data: resets the extension based on options checked, wiping the chosen data and restarts the software (use this option when the widget is lost off-screen somehow)
 - About Button: see information regarding the extension
+  - FAQ: redirect to FAQ page
   - Report background: used to report a broken/low quality background
 
 ### Effects
@@ -162,6 +167,7 @@ To all the beta test users:
 
 ## Change-Log
 ```
+1.8.0 Optimization, Standardized modal, Added Advanced Options
 1.7.3 Optimization and small bug fixes
 1.7.2 Updated JQuery Version
 1.7.1 Fixed some issues and bugs

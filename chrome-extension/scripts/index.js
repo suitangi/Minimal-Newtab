@@ -41,8 +41,8 @@ function checkHour(i) {
 function startTime() {
 
   //clear the timer
-  if (window.nextMinute)
-    clearTimeout(window.nextMinute);
+  if (window.newTab.clock.nextMinute)
+    clearTimeout(window.newTab.clock.nextMinute);
 
   let today = new Date();
   let h = today.getHours();
@@ -50,13 +50,13 @@ function startTime() {
   let pa = "";
 
   //sets PM and AM if not in military
-  if (!window.military) {
+  if (!window.newTab.clock.military) {
     if (h > 11)
       pa = " PM"
     else
       pa = " AM"
   }
-  if (!window.military)
+  if (!window.newTab.clock.military)
     h = checkHour(h);
 
   // display the time
@@ -69,7 +69,7 @@ function startTime() {
   let nextM = (60 - s) * 1000 + (1000 - ms);
 
   //calls changeMinute setting the timeout for when next minute occurs
-  window.nextMinute = setTimeout(function() {
+  window.newTab.clock.nextMinute = setTimeout(function() {
     changeMinutes(h, m + 1);
   }, nextM);
 }
@@ -84,7 +84,7 @@ function changeMinutes(h, m) {
     document.getElementById('time').innerHTML = h + ":" + checkMin(m);
 
     //calls self every minute to update the time
-    window.nextMinute = setTimeout(function() {
+    window.newTab.clock.nextMinute = setTimeout(function() {
       changeMinutes(h, m + 1);
     }, 60000);
   }
@@ -131,16 +131,16 @@ function dragElement(elmnt) {
     elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
     elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
     //sets window.dragged to be true to see if an element was moved
-    if (!window.dragged)
-      window.dragged = true;
+    if (!window.newTab.dragged)
+      window.newTab.dragged = true;
 
   }
 
   // stop moving when mouse button is released
   function closeDragElement() {
     //reset the dragged to be false
-    if (window.dragged) {
-      window.dragged = false;
+    if (window.newTab.dragged) {
+      window.newTab.dragged = false;
 
       //saves the current location for the elements
       if (elmnt.id == "timeWrapper") {
@@ -148,7 +148,7 @@ function dragElement(elmnt) {
           time_top_data: elmnt.style.top,
           time_left_data: elmnt.style.left
         }, function() {});
-        window.military = !window.military;
+        window.newTab.clock.military = !window.newTab.clock.military;
       }
       if (elmnt.id == "searchWrapper") {
         chrome.storage.local.set({
@@ -163,7 +163,7 @@ function dragElement(elmnt) {
         }, function() {});
       }
       if (elmnt.id == "infoWrapper") {
-        window.infoMode -= 1;
+        window.newTab.infoMode -= 1;
         chrome.storage.local.set({
           info_top_data: elmnt.style.top,
           info_left_data: elmnt.style.left
@@ -177,8 +177,8 @@ function dragElement(elmnt) {
 
 //Time: toggles military time (24hr)
 function updateMilitary() {
-  window.military = !window.military;
-  if (window.military)
+  window.newTab.clock.military = !window.newTab.clock.military;
+  if (window.newTab.clock.military)
     chrome.storage.local.set({
       military_switch: 'on'
     }, function() {});
@@ -219,13 +219,13 @@ function changeSearch() {
     search_engine: 0
   }, function(data) {
     let index = data.search_engine + 1;
-    if (index == window.searchEngines.length)
+    if (index == window.newTab.searchEngines.length)
       index = 0;
     let searchInput = $('#searchInput');
-    searchInput.parent().attr('action', window.searchEngines[index].action);
-    console.log(window.searchEngines[index].action);
+    searchInput.parent().attr('action', window.newTab.searchEngines[index].action);
+    console.log(window.newTab.searchEngines[index].action);
     let val = (searchInput.val() == searchInput.attr('data-placeholder') ? "" : searchInput.val());
-    searchInput.attr('data-placeholder', window.searchEngines[index].placeholder);
+    searchInput.attr('data-placeholder', window.newTab.searchEngines[index].placeholder);
     searchInput.val(val);
     searchInput.focus();
     searchInput.blur();
@@ -307,6 +307,11 @@ function updateFav() {
           backgroundDismiss: true,
           useBootstrap: false,
           typeAnimated: true,
+          theme: 'dark',
+          animation: window.newTab.confirmSettings.animation,
+          closeAnimation: window.newTab.confirmSettings.animation,
+          animateFromElement: false,
+          scrollToPreviousElement: false,
           buttons: {
             Okay: function() {
               setTimeout(function() {
@@ -379,6 +384,89 @@ function saveTodo() {
   chrome.storage.local.set({
     todo_data: store
   }, function() {});
+}
+
+//Function for the data reset
+function resetData() {
+  $.confirm({
+    title: 'Are you sure you want to reset your data?',
+    content: '<span style="font-size: 16px;">Choose what data you would like to reset: </span><br>' +
+      '<br><label class="reset-container""> Widgets Location' +
+      '<input type="checkbox" id="reset-input-loc" checked="checked">' +
+      '<span class="reset-checkmark"></span></label>' +
+      '<br><label class="reset-container"> Widgets Preferences/Data' +
+      '<input type="checkbox" id="reset-input-pref" checked="checked">' +
+      '<span class="reset-checkmark"></span></label>' +
+      '<br><label class="reset-container"> Favorite Backgrounds' +
+      '<input type="checkbox" id="reset-input-fav" checked="checked">' +
+      '<span class="reset-checkmark"></span></label>' +
+      '<br><label class="reset-container"> Removed Backgrounds' +
+      '<input type="checkbox" id="reset-input-rem" checked="checked">' +
+      '<span class="reset-checkmark"></span></label>' +
+      '<br>This action cannot be undone!',
+    boxWidth: '25%',
+    useBootstrap: false,
+    type: 'blue',
+    escapeKey: 'cancel',
+    theme: 'dark',
+    animation: window.newTab.confirmSettings.animation,
+    closeAnimation: window.newTab.confirmSettings.animation,
+    animateFromElement: false,
+    scrollToPreviousElement: false,
+    buttons: {
+      ok: {
+        text: "I understand, reset",
+        btnClass: 'btn-blue',
+        keys: ['enter'],
+        action: function() {
+          if (this.$content.find('#reset-input-loc').is(":checked")) {
+            chrome.storage.local.set({
+                time_top_data: '',
+                time_left_data: '',
+                info_top_data: '',
+                info_left_data: '',
+                todo_top_data: '',
+                todo_left_data: '',
+                search_top_data: '',
+                search_left_data: '',
+              },
+              function() {});
+          }
+          if (this.$content.find('#reset-input-pref').is(":checked")) {
+            chrome.storage.local.set({
+                military_switch: 'off',
+                time_switch: 'on',
+                info_mode: 0,
+                info_switch: 'on',
+                search_switch: 'on',
+                todo_switch: 'on',
+                todo_data: ''
+              },
+              function() {});
+          }
+          if (this.$content.find('#reset-input-fav').is(":checked")) {
+            chrome.storage.local.set({
+                fav_switch: 'off',
+                fav_list: []
+              },
+              function() {});
+          }
+          if (this.$content.find('#reset-input-rem').is(":checked")) {
+            chrome.storage.local.set({
+                black_list: []
+              },
+              function() {});
+          }
+          location.reload();
+        }
+      },
+      cancel: function() {
+        setTimeout(function() {
+          document.getElementById("menu").classList.remove("delay")
+        }, 250);
+      }
+    }
+  });
 }
 
 //Todo: Set the list li element listeners
@@ -551,10 +639,14 @@ function reportBk() {
   document.getElementById("menu").classList.add("delay");
   $.confirm({
     title: false,
-    content: window.report_embed.replace("\\back", encodeURI(JSON.stringify(window.back))),
+    content: window.newTab.report_embed.replace("\\back", encodeURI(JSON.stringify(window.newTab.back))),
     boxWidth: '640px',
     useBootstrap: false,
     escapeKey: 'Close',
+    animation: window.newTab.confirmSettings.animation,
+    closeAnimation: window.newTab.confirmSettings.animation,
+    animateFromElement: false,
+    scrollToPreviousElement: false,
     buttons: {
       Close: function() {
         setTimeout(function() {
@@ -567,8 +659,8 @@ function reportBk() {
 
 // loads the background information
 function loadInfo() {
-  if (window.infoDisplay != null) {
-    let infoChosen = window.infoDisplay[window.infoMode];
+  if (window.newTab.infoDisplay != null) {
+    let infoChosen = window.newTab.infoDisplay[window.newTab.infoMode];
     let infoText = "";
     for (i = 0; i < infoChosen.length; i++) {
 
@@ -584,7 +676,7 @@ function loadInfo() {
         size += "calc(16px + .6vw)";
       }
 
-      infoText += '<span style="' + size + '; white-space: nowrap;"' + '>' + window.back[infoChosen[i].name] + '</span><br>';
+      infoText += '<span style="' + size + '; white-space: nowrap;"' + '>' + window.newTab.back[infoChosen[i].name] + '</span><br>';
     }
     document.getElementById('info').innerHTML = infoText;
     let infoX = document.getElementById("infoWrapper").offsetLeft;
@@ -607,26 +699,102 @@ function loadInfo() {
 
 //change the background info panel up/down
 function updateInfoMode() {
-  window.infoMode += 1;
-  if (window.infoMode == window.infoDisplay.length) {
-    window.infoMode = 0;
+  window.newTab.infoMode += 1;
+  if (window.newTab.infoMode == window.newTab.infoDisplay.length) {
+    window.newTab.infoMode = 0;
   }
   chrome.storage.local.set({
-    info_mode: window.infoMode
+    info_mode: window.newTab.infoMode
   }, function() {
     loadInfo();
   });
 }
 
+//change the ui animation behavior
+function updateUiAni() {
+  document.getElementById("timeWrapper").classList.toggle('noanimate');
+  document.getElementById("todoWrapper").classList.toggle('noanimate');
+  document.getElementById("searchWrapper").classList.toggle('noanimate');
+  document.getElementById("infoWrapper").classList.toggle('noanimate');
+  document.getElementById("menu").classList.toggle('noanimate');
+  document.getElementById("bookmarks").classList.toggle('noanimate');
+  window.newTab.uianimation = !window.newTab.uianimation;
+
+  if (window.newTab.uianimation) {
+    document.getElementById("uianiswitch").checked = true;
+    window.newTab.confirmSettings.animation = 'opacity';
+    chrome.storage.local.set({
+      animation: true
+    }, function() {});
+  } else {
+    document.getElementById("uianiswitch").checked = false;
+    window.newTab.confirmSettings.animation = 'none';
+    chrome.storage.local.set({
+      animation: false
+    }, function() {});
+  }
+}
+
+//change the auto pause behavior
+function updateAutoPause() {
+
+  window.newTab.autopause = !window.newTab.autopause;
+
+  if (window.newTab.autopause) {
+    document.getElementById("autopauseswitch").checked = true;
+    chrome.storage.local.set({
+      autopause: true
+    }, function() {});
+  } else {
+    document.getElementById("autopauseswitch").checked = false;
+    chrome.storage.local.set({
+      autopause: false
+    }, function() {});
+  }
+}
+
+//change the background repeat
+function updateRepeat() {
+
+  window.newTab.avoidRepeat = !window.newTab.avoidRepeat;
+
+  if (window.newTab.avoidRepeat) {
+    document.getElementById("repeatswitch").checked = true;
+    chrome.storage.local.set({
+      repeat: true
+    }, function() {});
+  } else {
+    document.getElementById("repeatswitch").checked = false;
+    chrome.storage.local.set({
+      repeat: false
+    }, function() {});
+  }
+}
+
+//function called when window not in focus
+function windowBlurred() {
+  if (window.newTab.autopause && window.newTab.back.fileType == "video") {
+    var vid = document.getElementById("backdropvid");
+    vid.pause();
+  }
+}
+
+//function called when window is in focus
+function windowFocused() {
+  if (window.newTab.autopause && window.newTab.back.fileType == "video") {
+    var vid = document.getElementById("backdropvid");
+    vid.play();
+  }
+}
 
 //loads a random background
 function loadBackground(backJson) {
   console.log("Loaded background.json:");
   console.log(backJson.sources);
-  window.backlist = [];
+  window.newTab.backlist = [];
 
   //loads the background info panel data
-  window.infoDisplay = backJson.info;
+  window.newTab.infoDisplay = backJson.info;
   if (backJson.info_title) {
     infoTitle = backJson.info_title;
     $('#infoMenuText').text(infoTitle);
@@ -635,16 +803,16 @@ function loadBackground(backJson) {
 
   //loads the support link
   if (backJson.support_link) {
-    window.support_link = backJson.support_link;
+    window.newTab.support_link = backJson.support_link;
   } else {
-    window.support_link = "https://suitangi.github.io/Minimal-Newtab/";
+    window.newTab.support_link = "https://suitangi.github.io/Minimal-Newtab/";
   }
 
   //loads the support link
   if (backJson.report_embed) {
-    window.report_embed = backJson.report_embed;
+    window.newTab.report_embed = backJson.report_embed;
   } else {
-    window.report_embed = "";
+    window.newTab.report_embed = "";
   }
 
   let vid = document.getElementById("backdropvid");
@@ -665,7 +833,7 @@ function loadBackground(backJson) {
   function setBackground() {
     let vid = document.getElementById("backdropvid");
     let img = document.getElementById("backdropimg");
-    let str = window.back.link;
+    let str = window.newTab.back.link;
 
     //console logging
     // console.log("Favorites:");
@@ -675,7 +843,7 @@ function loadBackground(backJson) {
 
     let fext = str.substring(str.length - 3).toLowerCase();
     if (fext == 'jpg' || fext == 'png' || fext == 'bmp') { //the file type is image
-      window.back.type = "image";
+      window.newTab.back.fileType = "image";
       img.src = str;
       img.style = "";
       img.onload = function() {
@@ -686,7 +854,7 @@ function loadBackground(backJson) {
       }
       vid.style = "display: none;"
     } else { //file type is video
-      window.back.type = "video";
+      window.newTab.back.fileType = "video";
       img.style = "display: none;"
       vid.style = "";
       vid.oncanplay = function() {
@@ -717,13 +885,18 @@ function loadBackground(backJson) {
           lastShown: '',
           fav_list: [],
           fav_switch: 'off',
-          black_list: []
+          black_list: [],
+          repeat: false
         },
         function(data) {
+
+          //set repeat global variable
+          window.newTab.avoidRepeat = data.repeat;
+
           //if none of the sources are selected, use the defualt provided and give warning alert
-          if (window.backlist.length == 0 && (data.fav_switch == 'off' || (data.fav_switch == 'on' && data.fav_list.length == 0))) {
+          if (window.newTab.backlist.length == 0 && (data.fav_switch == 'off' || (data.fav_switch == 'on' && data.fav_list.length == 0))) {
             if (backJson.default != null) {
-              window.back = backJson.default;
+              window.newTab.back = backJson.default;
               setBackground();
             }
             $.alert({
@@ -734,6 +907,11 @@ function loadBackground(backJson) {
               backgroundDismiss: true,
               useBootstrap: false,
               typeAnimated: true,
+              theme: 'dark',
+              animation: window.newTab.confirmSettings.animation,
+              closeAnimation: window.newTab.confirmSettings.animation,
+              animateFromElement: false,
+              scrollToPreviousElement: false,
               buttons: {
                 Dismiss: function() {
                   chrome.storage.local.set({
@@ -746,16 +924,17 @@ function loadBackground(backJson) {
 
             //adds the favorite list to the list of possible
             if (data.fav_switch == 'on') {
-              window.backlist.push(...data.fav_list);
+              window.newTab.backlist.push(...data.fav_list);
             }
 
             //if not the specific case that user only wants one faved background
-            if (!(data.fav_list.length == 1 && window.backlist.length == 1 && data.fav_list[0].link == data.lastShown)) {
-              //then remove the last shown and blacklisted backgrounds from the list
-              for (var i = 0; i < window.backlist.length; i++) {
+            if (!(data.fav_list.length == 1 && window.newTab.backlist.length == 1)) {
+
+              //then remove the blacklisted backgrounds from the list
+              for (var i = 0; i < window.newTab.backlist.length; i++) {
                 for (var j = 0; j < data.black_list.length; j++) {
-                  if (window.backlist[i] != null && window.backlist[i].link == data.black_list[j]) {
-                    window.backlist.splice(i, 1);
+                  if (window.newTab.backlist[i] !== null && window.newTab.backlist[i].link == data.black_list[j]) {
+                    window.newTab.backlist.splice(i, 1);
                     i--;
                   }
                 }
@@ -763,9 +942,9 @@ function loadBackground(backJson) {
             }
 
             // problematic user removed all source-selected backgrounds
-            if (window.backlist.length == 0) {
+            if (window.newTab.backlist.length == 0) {
               if (backJson.default != null) {
-                window.back = backJson.default;
+                window.newTab.back = backJson.default;
                 setBackground();
               }
               $.alert({
@@ -776,6 +955,11 @@ function loadBackground(backJson) {
                 backgroundDismiss: true,
                 useBootstrap: false,
                 typeAnimated: true,
+                theme: 'dark',
+                animation: window.newTab.confirmSettings.animation,
+                closeAnimation: window.newTab.confirmSettings.animation,
+                animateFromElement: false,
+                scrollToPreviousElement: false,
                 buttons: {
                   ok: {
                     text: "Reset my removed backgrounds",
@@ -794,22 +978,25 @@ function loadBackground(backJson) {
               });
               loadInfo();
             } else {
+
               // remove the last shown if there is more than one
-              for (var i = 0; i < window.backlist.length; i++) {
-                if (window.backlist[i] != null && window.backlist.length != 1 && window.backlist[i].link == data.lastShown) {
-                  window.backlist.splice(i, 1);
-                  i--;
+              if (window.newTab.avoidRepeat && window.newTab.backlist.length != 1) {
+                for (var i = 0; i < window.newTab.backlist.length; i++) {
+                  if (window.newTab.backlist[i] != null && window.newTab.backlist[i].link == data.lastShown) {
+                    window.newTab.backlist.splice(i, 1);
+                    i--;
+                  }
                 }
               }
 
               //get the random image number
-              let imn = Math.floor(Math.random() * window.backlist.length);
-              window.back = window.backlist[imn];
+              let imn = Math.floor(Math.random() * window.newTab.backlist.length);
+              window.newTab.back = window.newTab.backlist[imn];
               setBackground();
 
               //save the last shown in chrome
               chrome.storage.local.set({
-                lastShown: window.backlist[imn].link
+                lastShown: window.newTab.backlist[imn].link
               }, function() {});
 
               //setting the fav switch and like buttons
@@ -819,7 +1006,7 @@ function loadBackground(backJson) {
 
               //if the current image is in favorites, make the heart button filled
               for (var i = 0; i < data.fav_list.length; i++) {
-                if (data.fav_list[i].link == window.back.link) {
+                if (data.fav_list[i].link == window.newTab.back.link) {
                   $('.like-button').toggleClass('is-active');
                   break;
                 }
@@ -877,7 +1064,7 @@ function loadBackground(backJson) {
         if (data[key] == 'off') {
           document.getElementById(key).checked = false;
         } else {
-          window.backlist.push(...toPushList);
+          window.newTab.backlist.push(...toPushList);
         }
         index += 1;
         loadSource(backList);
@@ -889,6 +1076,12 @@ function loadBackground(backJson) {
 }
 
 $(document).ready(function() {
+
+  //define custom global objects
+  window.newTab = {};
+  window.newTab.clock = {};
+  window.newTab.confirmSettings = {};
+  window.newTab.confirmSettings.animation = 'opacity';
 
   //Print console warning
   console.log("%c--- Danger Zone ---", "color: red; font-size: 25px");
@@ -915,14 +1108,40 @@ $(document).ready(function() {
       backgroundDismiss: true,
       useBootstrap: false,
       typeAnimated: true,
+      theme: 'dark',
+      animation: window.newTab.confirmSettings.animation,
+      closeAnimation: window.newTab.confirmSettings.animation,
+      animateFromElement: false,
+      scrollToPreviousElement: false,
       buttons: {
         Dismiss: function() {}
       }
     });
   }
 
+  //get advanced settings
+  chrome.storage.local.get({
+    animation: true,
+    autopause: false
+  }, function(data) {
+    if (data.animation) {
+      window.newTab.confirmSettings.animation = 'opacity';
+      window.newTab.uianimation = true;
+    } else {
+      window.newTab.confirmSettings.animation = 'none';
+      window.newTab.uianimation = false;
+      document.getElementById("menu").classList.add('noanimate');
+      document.getElementById("bookmarks").classList.add('noanimate');
+      document.getElementById("timeWrapper").classList.add('noanimate');
+      document.getElementById("todoWrapper").classList.add('noanimate');
+      document.getElementById("searchWrapper").classList.add('noanimate');
+      document.getElementById("infoWrapper").classList.add('noanimate');
+    }
+    window.newTab.autopause = data.autopause;
+  });
+
   //set the search engine list
-  window.searchEngines = [{
+  window.newTab.searchEngines = [{
       "action": "https://www.google.com/search",
       "placeholder": "Google Search"
     },
@@ -942,9 +1161,9 @@ $(document).ready(function() {
 
   //add the bookmarks
   chrome.bookmarks.getTree(function(bkList) {
-    window.bookmarklist = bkList[0].children[1].children;
+    window.newTab.bookmarklist = bkList[0].children[1].children;
 
-    if (window.bookmarklist.length == 0) {
+    if (window.newTab.bookmarklist.length == 0) {
       document.getElementById("bookmarks").style = "display: none;"
     } else {
       let bkHtml = "";
@@ -967,7 +1186,7 @@ $(document).ready(function() {
         }
       }
 
-      recurBkList(window.bookmarklist);
+      recurBkList(window.newTab.bookmarklist);
       document.getElementById("bkList").innerHTML = bkHtml;
 
       folderList = document.getElementsByClassName("folderName");
@@ -986,9 +1205,9 @@ $(document).ready(function() {
   //add onclick for like and delete buttons
   $('.like-button').click(function() {
     if ($(this).hasClass('is-active')) {
-      removeFav(window.back);
+      removeFav(window.newTab.back);
     } else {
-      addFav(window.back);
+      addFav(window.newTab.back);
     }
     $(this).toggleClass('is-active');
   })
@@ -1003,22 +1222,25 @@ $(document).ready(function() {
         useBootstrap: false,
         type: 'blue',
         escapeKey: 'cancel',
+        theme: 'dark',
+        animation: window.newTab.confirmSettings.animation,
+        closeAnimation: window.newTab.confirmSettings.animation,
+        animateFromElement: false,
+        scrollToPreviousElement: false,
         buttons: {
           ok: {
             text: "Remove this background",
             btnClass: 'btn-blue',
             keys: ['enter'],
             action: function() {
-              addBlack(window.back);
+              addBlack(window.newTab.back);
               $('.delete-button').addClass('is-active');
-              window.scrollTo(0, 0);
               setTimeout(function() {
                 document.getElementById("menu").classList.remove("delay")
               }, 250);
             }
           },
           cancel: function() {
-            window.scrollTo(0, 0);
             setTimeout(function() {
               document.getElementById("menu").classList.remove("delay")
             }, 250);
@@ -1040,12 +1262,17 @@ $(document).ready(function() {
       backgroundDismiss: true,
       useBootstrap: false,
       typeAnimated: true,
+      theme: 'dark',
+      animation: window.newTab.confirmSettings.animation,
+      closeAnimation: window.newTab.confirmSettings.animation,
+      animateFromElement: false,
+      scrollToPreviousElement: false,
       buttons: {
         support: {
           text: "FAQ",
           btnClass: 'btn-blue',
           action: function() {
-            window.location.href = window.support_link;
+            window.location.href = window.newTab.support_link;
           }
         },
         ok: {
@@ -1056,7 +1283,6 @@ $(document).ready(function() {
           }
         },
         Close: function() {
-          window.scrollTo(0, 0);
           setTimeout(function() {
             document.getElementById("menu").classList.remove("delay")
           }, 250);
@@ -1065,90 +1291,68 @@ $(document).ready(function() {
     });
   };
 
-  //add onclick for resetButton
-  document.getElementById("resetButton").onclick = function() {
+  //add onclick for advanced Button
+  document.getElementById("advButton").onclick = function() {
     document.getElementById("menu").classList.add("delay");
     $.confirm({
-      title: 'Are you sure you want to reset your data?',
-      content: '<span style="font-size: 16px;">Choose what data you would like to reset: </span><br>' +
-        '<br><label class="reset-container""> Widgets Location' +
-        '<input type="checkbox" id="reset-input-loc" checked="checked">' +
-        '<span class="reset-checkmark"></span></label>' +
-        '<br><label class="reset-container"> Widgets Preferences/Data' +
-        '<input type="checkbox" id="reset-input-pref" checked="checked">' +
-        '<span class="reset-checkmark"></span></label>' +
-        '<br><label class="reset-container"> Favorite Backgrounds' +
-        '<input type="checkbox" id="reset-input-fav" checked="checked">' +
-        '<span class="reset-checkmark"></span></label>' +
-        '<br><label class="reset-container"> Removed Backgrounds' +
-        '<input type="checkbox" id="reset-input-rem" checked="checked">' +
-        '<span class="reset-checkmark"></span></label>' +
-        '<br>This action cannot be undone!',
-      boxWidth: '25%',
+      title: 'Advanced Options',
+      content: '<label class="smallswitch" title="Toggles UI and widget animations"><input id="uianiswitch" type="checkbox"><div><span>UI Animations</span></div></label> <br>' +
+        '<label class="smallswitch" title="Avoids repeats of backgrounds"><input id="repeatswitch" type="checkbox"><div><span>Avoid Repeats</span></div></label> <br>' +
+        '<label class="smallswitch" title="Automatically pause animated backgrounds when not in window to conserve cpu"><input id="autopauseswitch" type="checkbox"><div><span>Auto-Pause Background</span></div></label><br>',
+      boxWidth: '30%',
       useBootstrap: false,
       type: 'blue',
-      escapeKey: 'cancel',
+      escapeKey: 'Close',
+      backgroundDismiss: true,
+      theme: 'dark',
+      animation: window.newTab.confirmSettings.animation,
+      closeAnimation: window.newTab.confirmSettings.animation,
+      animateFromElement: false,
+      scrollToPreviousElement: false,
       buttons: {
         ok: {
-          text: "I understand, reset",
+          text: "Reset Data",
           btnClass: 'btn-blue',
-          keys: ['enter'],
           action: function() {
-            if (this.$content.find('#reset-input-loc').is(":checked")) {
-              chrome.storage.local.set({
-                  time_top_data: '',
-                  time_left_data: '',
-                  info_top_data: '',
-                  info_left_data: '',
-                  todo_top_data: '',
-                  todo_left_data: '',
-                  search_top_data: '',
-                  search_left_data: '',
-                },
-                function() {});
-            }
-            if (this.$content.find('#reset-input-pref').is(":checked")) {
-              chrome.storage.local.set({
-                  military_switch: 'off',
-                  time_switch: 'on',
-                  info_mode: 0,
-                  info_switch: 'on',
-                  search_switch: 'on',
-                  todo_switch: 'on',
-                  todo_data: ''
-                },
-                function() {});
-            }
-            if (this.$content.find('#reset-input-fav').is(":checked")) {
-              chrome.storage.local.set({
-                  fav_switch: 'off',
-                  fav_list: []
-                },
-                function() {});
-            }
-            if (this.$content.find('#reset-input-rem').is(":checked")) {
-              chrome.storage.local.set({
-                  black_list: []
-                },
-                function() {});
-            }
-            location.reload();
+            resetData();
           }
         },
-        cancel: function() {
-          window.scrollTo(0, 0);
+        close: function() {
           setTimeout(function() {
-            document.getElementById("menu").classList.remove("delay")
+            document.getElementById("menu").classList.remove("delay");
           }, 250);
         }
+      },
+      onContentReady: function() {
+        chrome.storage.local.get({
+          animation: true,
+          repeat: 'on',
+          autopause: false
+        }, function(data) {
+            document.getElementById("uianiswitch").checked = data.animation;
+            document.getElementById("autopauseswitch").checked = data.autopause;
+            document.getElementById("repeatswitch").checked = data.repeat;
+        });
+        document.getElementById("uianiswitch").parentElement.addEventListener('click', function(e) {
+          updateUiAni();
+          e.preventDefault();
+        });
+        document.getElementById("autopauseswitch").parentElement.addEventListener('click', function(e) {
+          updateAutoPause();
+          e.preventDefault();
+        });
+        document.getElementById("repeatswitch").parentElement.addEventListener('click', function(e) {
+          updateRepeat();
+          e.preventDefault();
+        });
       }
     });
   };
 
   //prevent right click context menu
-  document.addEventListener('contextmenu', event => event.preventDefault());
+  //document.addEventListener('contextmenu', event => event.preventDefault());
 
-  window.military = false; //set default time and initialize variable
+  window.newTab.clock.military = false; //set default time and initialize variable
 
   // Make the elements draggable:
   dragElement(document.getElementById("timeWrapper"));
@@ -1178,7 +1382,7 @@ $(document).ready(function() {
     if (data.time_left_data != '') {
       document.getElementById("timeWrapper").style.left = data.time_left_data;
     }
-    window.military = (data.military_switch == 'on');
+    window.newTab.clock.military = (data.military_switch == 'on');
 
     startTime(); //start the time
   });
@@ -1204,7 +1408,7 @@ $(document).ready(function() {
     if (data.info_left_data != '') {
       document.getElementById("infoWrapper").style.left = data.info_left_data;
     }
-    window.infoMode = data.info_mode;
+    window.newTab.infoMode = data.info_mode;
   });
 
   //getting the searchbar settings
@@ -1230,9 +1434,9 @@ $(document).ready(function() {
     }
 
     let searchInput = $('#searchInput');
-    searchInput.parent().attr('action', window.searchEngines[data.search_engine].action);
-    searchInput.attr('data-placeholder', window.searchEngines[data.search_engine].placeholder);
-    searchInput.val(window.searchEngines[data.search_engine].placeholder);
+    searchInput.parent().attr('action', window.newTab.searchEngines[data.search_engine].action);
+    searchInput.attr('data-placeholder', window.newTab.searchEngines[data.search_engine].placeholder);
+    searchInput.val(window.newTab.searchEngines[data.search_engine].placeholder);
   });
 
 
@@ -1322,6 +1526,15 @@ $(document).ready(function() {
   document.getElementById("blurSlider").addEventListener("input", function() {
     updateFilter();
   });
+
+  //window focus and blur listeners
+  window.onblur = function() {
+    windowBlurred();
+  }
+  window.onfocus = function() {
+    windowFocused();
+  }
+
 
   // makes the list sortable
   $("#myUL").sortable({

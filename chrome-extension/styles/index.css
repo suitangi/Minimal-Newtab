@@ -275,7 +275,7 @@
    top: 0;
    right: 0;
    height: 100%;
-   width: 18px;
+   width: 22px;
    overflow: hidden;
    font-size: 16px;
    font-family: "Antic";
@@ -370,7 +370,7 @@
    top: 0;
    left: 0;
    height: 100%;
-   width: 15px;
+   width: 22px;
    overflow: hidden;
    transition: all .2s cubic-bezier(.68, -0.2, .27, 1.55);
  }
@@ -464,6 +464,7 @@
  .button {
    background-color: rgba(255, 255, 255, 0.3);
    border: none;
+   width: 100px;
    color: rgba(255, 255, 255, 0.7);
    padding: 6px 20px;
    font-family: "Abel";
@@ -487,6 +488,10 @@
 
  .buttonWrapper {
    margin-bottom: 17px !important;
+ }
+
+ .buttIcons {
+   transform: translate(0px, 3px);
  }
 
  .sliderWrapper {
@@ -556,6 +561,93 @@
 
  .slider.round:before {
    border-radius: 50%;
+ }
+
+ /* advanced menu switches */
+ .smallswitch {
+   --line: #a8a8a8;
+   --dot: #2196F3;
+   --circle: #2196F3;
+   --duration: 0.3s;
+   --text: #9ea0be;
+   cursor: pointer;
+ }
+
+ .smallswitch input {
+   display: none;
+ }
+
+ .smallswitch input+div {
+   position: relative;
+ }
+
+ .smallswitch input+div:before, .smallswitch input+div:after {
+   --s: 1;
+   content: "";
+   position: absolute;
+   height: 4px;
+   top: 10px;
+   width: 16px;
+   background: var(--line);
+   transform: scaleX(var(--s));
+   transition: transform var(--duration) ease;
+ }
+
+ .smallswitch input+div:before {
+   --s: 0;
+   left: 0;
+   transform-origin: 0 50%;
+   border-radius: 2px 0 0 2px;
+ }
+
+ .smallswitch input+div:after {
+   left: 20px;
+   transform-origin: 100% 50%;
+   border-radius: 0 2px 2px 0;
+ }
+
+ .smallswitch input+div span {
+   padding-left: 56px;
+   line-height: 24px;
+   color: var(--text);
+ }
+
+ .smallswitch input+div span:before {
+   --x: 0;
+   --b: var(--circle);
+   --s: 3px;
+   content: "";
+   position: absolute;
+   left: 0;
+   top: 4px;
+   width: 16px;
+   height: 16px;
+   border-radius: 50%;
+   box-shadow: inset 0 0 0 var(--s) var(--b);
+   transform: translateX(var(--x));
+   transition: box-shadow var(--duration) ease, transform var(--duration) ease;
+ }
+
+ .smallswitch input+div span:not(:empty) {
+   padding-left: 45px;
+   font-size: 20px;
+   color: #e3e3e3;
+   position: relative;
+
+ }
+
+ .smallswitch input:checked+div:before {
+   --s: 1;
+ }
+
+ .smallswitch input:checked+div:after {
+   --s: 0;
+ }
+
+ .smallswitch input:checked+div span:before {
+   --x: 20px;
+   --s: 12px;
+   --b: var(--dot);
  }
 
  /* effect rangesliders */
@@ -893,6 +985,12 @@
  }
 
  /* animation */
+
+ .noanimate {
+   animation-duration: 0s !important;
+   transition-duration: 0s !important;
+ }
+
  .entrance {
    animation: slide-in-blurred-top 0.5s cubic-bezier(0.230, 1.000, 0.320, 1.000) forwards;
    animation-iteration-count: 1;
