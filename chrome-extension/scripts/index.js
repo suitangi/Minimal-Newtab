@@ -313,10 +313,13 @@ function updateFav() {
           animateFromElement: false,
           scrollToPreviousElement: false,
           buttons: {
-            Okay: function() {
-              setTimeout(function() {
-                document.getElementById("menu").classList.remove("delay")
-              }, 250);
+            Okay: {
+              text: "Okay",
+              action: function() {
+                setTimeout(function() {
+                  document.getElementById("menu").classList.remove("delay")
+                }, 250);
+              }
             }
           }
         });
@@ -771,21 +774,32 @@ function updateRepeat() {
   }
 }
 
-//function called when window not in focus
-function windowBlurred() {
-  if (window.newTab.autopause && window.newTab.back.fileType == "video") {
+//function for autoPause, set to check on tab activated
+function autoPause() {
+
+  //check if auto pause is on and if
+  if (!window.newTab.autopause || !window.newTab.back.fileType == "video")
+    return;
+
+  //on got tab info function
+  function onGot(tabInfo) {
     var vid = document.getElementById("backdropvid");
-    vid.pause();
+    if (tabInfo.active && vid.readyState === 4) {
+      vid.play();
+    } else {
+      vid.pause();
+    }
   }
+
+  //error function
+  function onError(error) {
+    console.log(`Error: ${error}`);
+  }
+
+  const gettingCurrent = chrome.tabs.getCurrent();
+  gettingCurrent.then(onGot, onError);
 }
 
-//function called when window is in focus
-function windowFocused() {
-  if (window.newTab.autopause && window.newTab.back.fileType == "video") {
-    var vid = document.getElementById("backdropvid");
-    vid.play();
-  }
-}
 
 //loads a random background
 function loadBackground(backJson) {
@@ -913,10 +927,13 @@ function loadBackground(backJson) {
               animateFromElement: false,
               scrollToPreviousElement: false,
               buttons: {
-                Dismiss: function() {
-                  chrome.storage.local.set({
-                    fav_switch: "off"
-                  }, function() {});
+                Okay: {
+                  text: "Okay",
+                  action: function() {
+                    chrome.storage.local.set({
+                      fav_switch: "off"
+                    }, function() {});
+                  }
                 }
               }
             });
@@ -1075,6 +1092,47 @@ function loadBackground(backJson) {
   loadSource(backList);
 }
 
+//function to loadLanguage into UI and strings
+function loadLanguage(langJson) {
+  window.newTab.langStrings = langJson;
+}
+
+//function to set language
+function setLanguage(lang) {
+  const langUrl = chrome.runtime.getURL('locales/' + lang + '.json');
+  fetch(langUrl)
+    .then((response) => response.json())
+    .then((json) => {
+      loadLanguage(json)
+    });
+}
+
+//function to get and determine the language
+function getLanguage(configJson) {
+  chrome.storage.local.get({
+      lang: ""
+    }, function(data) {
+      let lang = navigator.language;
+      if (data.lang === "") {
+        window.newTab.config = configJson;
+
+        //nav.language not found
+        if (configJson.locales.indexOf(lang) == -1) {
+          //drop area code
+          lang = lang.substring(0, lang.indexOf('-'))
+        }
+
+        //language still not found, default to default locale
+        if (configJson.locales.indexOf(lang) == -1) {
+          lang = configJson.default_locale;
+        }
+      } else {
+        lang = data.lang;
+      }
+      setLanguage(lang);
+  });
+}
+
 $(document).ready(function() {
 
   //define custom global objects
@@ -1090,6 +1148,12 @@ $(document).ready(function() {
   console.log("%chttps://suitangi.github.io/Minimal-Newtab/", "font-size: 16px;");
 
   // $('#progress-line').css("display", "flex");
+  const configUrl = chrome.runtime.getURL('resources/config.json');
+  fetch(configUrl)
+    .then((response) => response.json())
+    .then((json) => {
+      getLanguage(json)
+    });
 
   //if Chrome is online
   if (window.navigator.onLine) {
@@ -1098,6 +1162,7 @@ $(document).ready(function() {
     fetch(jsonUrl)
       .then((response) => response.json())
       .then((json) => loadBackground(json));
+
   } else {
     //send an error alert for no internet connection
     $.alert({
@@ -1114,7 +1179,12 @@ $(document).ready(function() {
       animateFromElement: false,
       scrollToPreviousElement: false,
       buttons: {
-        Dismiss: function() {}
+        close: {
+          text: "Close",
+          action: function() {
+            $('#progress-line').css("opacity", "0");
+          }
+        }
       }
     });
   }
@@ -1122,7 +1192,7 @@ $(document).ready(function() {
   //get advanced settings
   chrome.storage.local.get({
     animation: true,
-    autopause: false
+    autopause: true
   }, function(data) {
     if (data.animation) {
       window.newTab.confirmSettings.animation = 'opacity';
@@ -1298,7 +1368,7 @@ $(document).ready(function() {
       title: 'Advanced Options',
       content: '<label class="smallswitch" title="Toggles UI and widget animations"><input id="uianiswitch" type="checkbox"><div><span>UI Animations</span></div></label> <br>' +
         '<label class="smallswitch" title="Avoids repeats of backgrounds"><input id="repeatswitch" type="checkbox"><div><span>Avoid Repeats</span></div></label> <br>' +
-        '<label class="smallswitch" title="Automatically pause animated backgrounds when not in window to conserve cpu"><input id="autopauseswitch" type="checkbox"><div><span>Auto-Pause Background</span></div></label><br>',
+        '<label class="smallswitch" title="Automatically pause animated backgrounds when tab is inactive to conserve cpu"><input id="autopauseswitch" type="checkbox"><div><span>Auto-Pause Background</span></div></label><br>',
       boxWidth: '30%',
       useBootstrap: false,
       type: 'blue',
@@ -1327,11 +1397,11 @@ $(document).ready(function() {
         chrome.storage.local.get({
           animation: true,
           repeat: 'on',
-          autopause: false
+          autopause: true
         }, function(data) {
-            document.getElementById("uianiswitch").checked = data.animation;
-            document.getElementById("autopauseswitch").checked = data.autopause;
-            document.getElementById("repeatswitch").checked = data.repeat;
+          document.getElementById("uianiswitch").checked = data.animation;
+          document.getElementById("autopauseswitch").checked = data.autopause;
+          document.getElementById("repeatswitch").checked = data.repeat;
         });
         document.getElementById("uianiswitch").parentElement.addEventListener('click', function(e) {
           updateUiAni();
@@ -1528,12 +1598,7 @@ $(document).ready(function() {
   });
 
   //window focus and blur listeners
-  window.onblur = function() {
-    windowBlurred();
-  }
-  window.onfocus = function() {
-    windowFocused();
-  }
+  chrome.tabs.onActivated.addListener(autoPause);
 
 
   // makes the list sortable

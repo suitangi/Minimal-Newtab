@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "short_name": "Min Newtab",
   "description": "Replaces the newtab with ...",
-  "permissions": ["storage", "bookmarks"],
+  "permissions": ["storage", "bookmarks", "tabs"],
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
