@@ -1099,20 +1099,26 @@ function loadLanguage(langJson) {
 
 //function to set language
 function setLanguage(lang) {
-  const langUrl = chrome.runtime.getURL('locales/' + lang + '.json');
-  fetch(langUrl)
-    .then((response) => response.json())
-    .then((json) => {
-      loadLanguage(json)
-    });
+  return new Promise(function(resolve, reject) {
+    const langUrl = chrome.runtime.getURL('locales/' + lang + '.json');
+    fetch(langUrl)
+      .then((response) => response.json())
+      .then((json) => {
+        loadLanguage(json);
+        resolve(lang);
+      });
+  });
 }
 
 //function to get and determine the language
 function getLanguage(configJson) {
-  chrome.storage.local.get({
+  return new Promise(function(resolve, reject) {
+    chrome.storage.local.get({
       lang: ""
     }, function(data) {
       let lang = navigator.language;
+
+      //default language (find user locale)
       if (data.lang === "") {
         window.newTab.config = configJson;
 
@@ -1129,7 +1135,9 @@ function getLanguage(configJson) {
       } else {
         lang = data.lang;
       }
-      setLanguage(lang);
+      setLanguage(lang)
+        .then((lang) => resolve(lang));
+    });
   });
 }
 
@@ -1151,43 +1159,44 @@ $(document).ready(function() {
   const configUrl = chrome.runtime.getURL('resources/config.json');
   fetch(configUrl)
     .then((response) => response.json())
-    .then((json) => {
-      getLanguage(json)
-    });
+    .then((json) => getLanguage(json))
+    .then((lang) => {
 
-  //if Chrome is online
-  if (window.navigator.onLine) {
-    //loads the backgorund json
-    const jsonUrl = chrome.runtime.getURL('resources/background.json');
-    fetch(jsonUrl)
-      .then((response) => response.json())
-      .then((json) => loadBackground(json));
+      //if Chrome is online
+      if (window.navigator.onLine) {
+        //loads the backgorund json
+        const jsonUrl = chrome.runtime.getURL('resources/background_' + lang + '.json');
+        fetch(jsonUrl)
+          .then((response) => response.json())
+          .then((json) => loadBackground(json));
 
-  } else {
-    //send an error alert for no internet connection
-    $.alert({
-      title: 'Error',
-      content: 'No internet access. Please check your connection and try again.',
-      type: 'red',
-      boxWidth: '25%',
-      backgroundDismiss: true,
-      useBootstrap: false,
-      typeAnimated: true,
-      theme: 'dark',
-      animation: window.newTab.confirmSettings.animation,
-      closeAnimation: window.newTab.confirmSettings.animation,
-      animateFromElement: false,
-      scrollToPreviousElement: false,
-      buttons: {
-        close: {
-          text: "Close",
-          action: function() {
-            $('#progress-line').css("opacity", "0");
+      } else {
+        //send an error alert for no internet connection
+        $.alert({
+          title: 'Error',
+          content: 'No internet access. Please check your connection and try again.',
+          type: 'red',
+          boxWidth: '25%',
+          backgroundDismiss: true,
+          useBootstrap: false,
+          typeAnimated: true,
+          theme: 'dark',
+          animation: window.newTab.confirmSettings.animation,
+          closeAnimation: window.newTab.confirmSettings.animation,
+          animateFromElement: false,
+          scrollToPreviousElement: false,
+          buttons: {
+            close: {
+              text: "Close",
+              action: function() {
+                $('#progress-line').css("opacity", "0");
+              }
+            }
           }
-        }
+        });
       }
-    });
-  }
+    })
+
 
   //get advanced settings
   chrome.storage.local.get({
