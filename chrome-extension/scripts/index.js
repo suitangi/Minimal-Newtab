@@ -822,11 +822,17 @@ function loadBackground(backJson) {
     window.newTab.support_link = "https://suitangi.github.io/Minimal-Newtab/";
   }
 
-  //loads the support link
+  //loads the report embed
   if (backJson.report_embed) {
     window.newTab.report_embed = backJson.report_embed;
   } else {
     window.newTab.report_embed = "";
+  }
+
+  //remove all the other background menu switches first
+  let bgMenu = document.getElementById('backgroundMenu');
+  while (bgMenu.firstElementChild != document.getElementById('favoriteSlider')) {
+    bgMenu.removeChild(bgMenu.firstElementChild);
   }
 
   let vid = document.getElementById("backdropvid");
@@ -996,7 +1002,7 @@ function loadBackground(backJson) {
               loadInfo();
             } else {
 
-              // remove the last shown if there is more than one
+              // remove the last shown if there is more than one and avoid repeat is on
               if (window.newTab.avoidRepeat && window.newTab.backlist.length != 1) {
                 for (var i = 0; i < window.newTab.backlist.length; i++) {
                   if (window.newTab.backlist[i] != null && window.newTab.backlist[i].link == data.lastShown) {
@@ -1070,10 +1076,11 @@ function loadBackground(backJson) {
         }
       }
 
-      //add source to each element of the list
+      //add source and id to each element of the list
       let toPushList = backList[index].list
       for (var i = 0; i < toPushList.length; i++) {
         toPushList[i]["source"] = name;
+        toPushList[i]["id"] = [index, i];
       }
 
       //storing and getting data from chrome to see whether it was on or off
@@ -1095,6 +1102,20 @@ function loadBackground(backJson) {
 //function to loadLanguage into UI and strings
 function loadLanguage(langJson) {
   window.newTab.langStrings = langJson;
+
+  //find background in correct background file
+
+  //small helper
+  function setText(id, text) {
+    document.getElementById(id).innerText = langJson[text].message;
+  }
+
+  //set strings
+  setText('widgetsTitle', 'widgets-title');
+  setText('timeMenuText', 'time-name');
+  setText('todoMenuText', 'to-do-list-name');
+  setText('searchMenuText', 'search-bar-name');
+  document.getElementById('timeMenuOption').setAttribute('data', langJson['time-menu-desc'].message);
 }
 
 //function to set language
@@ -1106,6 +1127,8 @@ function setLanguage(lang) {
       .then((json) => {
         loadLanguage(json);
         resolve(lang);
+      }).catch(function (error) {
+        console.error(error);
       });
   });
 }
@@ -1132,13 +1155,17 @@ function getLanguage(configJson) {
         if (configJson.locales.indexOf(lang) == -1) {
           lang = configJson.default_locale;
         }
-      } else {
+      } else { //user selected language
         lang = data.lang;
       }
       setLanguage(lang)
         .then((lang) => resolve(lang));
     });
   });
+}
+
+function setConfig(configJson) {
+  
 }
 
 $(document).ready(function() {
@@ -1162,7 +1189,7 @@ $(document).ready(function() {
     .then((json) => getLanguage(json))
     .then((lang) => {
 
-      //if Chrome is online
+      //if Chrome is online and offline is disabled
       if (window.navigator.onLine) {
         //loads the backgorund json
         const jsonUrl = chrome.runtime.getURL('resources/background_' + lang + '.json');

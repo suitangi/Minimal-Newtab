@@ -4,7 +4,7 @@
     "description": "Widgets title in the menu."
   },
   "time-name": {
-    "message": "時間",
+    "message": "時間表示",
     "description": "Time (clock) widget toggle title in the menu."
   },
   "search-bar-name": {
@@ -55,8 +55,8 @@
     "message": "Bookmarks",
     "description": "Title of Bookmark section"
   },
-  "Time-menu-desc": {
-    "message": "Toggles the time display",
+  "time-menu-desc": {
+    "message": "時間表示を切り替えます",
     "description": "Menu description of Time toggle"
   },
   "seach-menu-desc": {

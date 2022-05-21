@@ -55,7 +55,7 @@
     "message": "Bookmarks",
     "description": "Title of Bookmark section"
   },
-  "Time-menu-desc": {
+  "time-menu-desc": {
     "message": "Toggles the time display",
     "description": "Menu description of Time toggle"
   },

@@ -31,9 +31,9 @@
     <!-- the left side menu -->
     <div ID="menu">
       <!-- the menu for widgets -->
-      <div class="menuText" style="color: rgba(255,255,255,0.95) !important; font-weight: 500;">Widgets</div>
-      <div class="menuItem" data="Toggles the Time Display">
-        <div class="menuText">Time</div>
+      <div class="menuText" ID="widgetsTitle" style="color: rgba(255,255,255,0.95) !important; font-weight: 500;">Widgets</div>
+      <div class="menuItem" ID="timeMenuOption" data="Toggles the Time Display">
+        <div class="menuText" ID="timeMenuText">Time</div>
         <div class="sliderWrapper">
           <label class="switch">
             <input type="checkbox" ID="timeSwitch" checked>
@@ -41,8 +41,8 @@
           </label>
         </div>
       </div>
-      <div class="menuItem" data="Toggles the Search Bar">
-        <div class="menuText">Search Bar</div>
+      <div class="menuItem" ID="searchMenuOption" data="Toggles the Search Bar">
+        <div class="menuText" ID="searchMenuText">Search Bar</div>
         <div class="sliderWrapper">
           <label class="switch">
             <input type="checkbox" ID="searchSwitch" checked>
@@ -50,7 +50,7 @@
           </label>
         </div>
       </div>
-      <div ID="infoMenuItem" class="menuItem" data="Toggles the Background Info">
+      <div ID="infoMenuItem" class="menuItem" ID="infoMenuOption" data="Toggles the Background Info">
         <div class="menuText" ID="infoMenuText">Background Info</div>
         <div class="sliderWrapper">
           <label class="switch">
@@ -59,8 +59,8 @@
           </label>
         </div>
       </div>
-      <div class="menuItem" data="Toggles the Todo List">
-        <div class="menuText">To-do List</div>
+      <div class="menuItem" ID="todoMenuOption" data="Toggles the Todo List">
+        <div class="menuText" ID="todoMenuText">To-do List</div>
         <div class="sliderWrapper">
           <label class="switch">
             <input type="checkbox" ID="todoSwitch" checked>
