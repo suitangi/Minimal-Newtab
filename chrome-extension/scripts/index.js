@@ -49,14 +49,14 @@ function startTime() {
   let m = today.getMinutes();
   let pa = "";
 
-  //sets PM and AM if not in military
-  if (!window.newTab.clock.military) {
+  //sets PM and AM if not in twentyFourHr
+  if (!window.newTab.clock.twentyFourHr) {
     if (h > 11)
       pa = " PM"
     else
       pa = " AM"
   }
-  if (!window.newTab.clock.military)
+  if (!window.newTab.clock.twentyFourHr)
     h = checkHour(h);
 
   // display the time
@@ -148,7 +148,7 @@ function dragElement(elmnt) {
           time_top_data: elmnt.style.top,
           time_left_data: elmnt.style.left
         }, function() {});
-        window.newTab.clock.military = !window.newTab.clock.military;
+        window.newTab.clock.twentyFourHr = !window.newTab.clock.twentyFourHr;
       }
       if (elmnt.id == "searchWrapper") {
         chrome.storage.local.set({
@@ -175,16 +175,16 @@ function dragElement(elmnt) {
   }
 }
 
-//Time: toggles military time (24hr)
-function updateMilitary() {
-  window.newTab.clock.military = !window.newTab.clock.military;
-  if (window.newTab.clock.military)
+//Time: toggles twentyFourHr time (24hr)
+function updatetwentyFourHr() {
+  window.newTab.clock.twentyFourHr = !window.newTab.clock.twentyFourHr;
+  if (window.newTab.clock.twentyFourHr)
     chrome.storage.local.set({
-      military_switch: 'on'
+      twentyFourHr_switch: 'on'
     }, function() {});
   else
     chrome.storage.local.set({
-      military_switch: 'off'
+      twentyFourHr_switch: 'off'
     }, function() {});
   startTime();
 }
@@ -437,7 +437,7 @@ function resetData() {
           }
           if (this.$content.find('#reset-input-pref').is(":checked")) {
             chrome.storage.local.set({
-                military_switch: 'off',
+                twentyFourHr_switch: 'off',
                 time_switch: 'on',
                 info_mode: 0,
                 info_switch: 'on',
@@ -456,7 +456,7 @@ function resetData() {
           }
           if (this.$content.find('#reset-input-rem').is(":checked")) {
             chrome.storage.local.set({
-                black_list: []
+                removed_list: []
               },
               function() {});
           }
@@ -623,15 +623,15 @@ function removeFav(bg) {
   });
 }
 
-// add a backgorund to the blacklist
-function addBlack(bg) {
+// add a backgorund to the removedlist
+function addRemoved(bg) {
   chrome.storage.local.get({
-    black_list: []
+    removed_list: []
   }, function(data) {
-    let list = data.black_list;
+    let list = data.removed_list;
     list.push(bg.link);
     chrome.storage.local.set({
-      black_list: list
+      removed_list: list
     }, function() {})
   });
 }
@@ -905,7 +905,7 @@ function loadBackground(backJson) {
           lastShown: '',
           fav_list: [],
           fav_switch: 'off',
-          black_list: [],
+          removed_list: [],
           repeat: false
         },
         function(data) {
@@ -953,10 +953,10 @@ function loadBackground(backJson) {
             //if not the specific case that user only wants one faved background
             if (!(data.fav_list.length == 1 && window.newTab.backlist.length == 1)) {
 
-              //then remove the blacklisted backgrounds from the list
+              //then remove the removedlisted backgrounds from the list
               for (var i = 0; i < window.newTab.backlist.length; i++) {
-                for (var j = 0; j < data.black_list.length; j++) {
-                  if (window.newTab.backlist[i] !== null && window.newTab.backlist[i].link == data.black_list[j]) {
+                for (var j = 0; j < data.removed_list.length; j++) {
+                  if (window.newTab.backlist[i] !== null && window.newTab.backlist[i].link == data.removed_list[j]) {
                     window.newTab.backlist.splice(i, 1);
                     i--;
                   }
@@ -990,7 +990,7 @@ function loadBackground(backJson) {
                     keys: ['enter'],
                     action: function() {
                       chrome.storage.local.set({
-                        black_list: []
+                        removed_list: []
                       }, function() {
                         location.reload();
                       });
@@ -1165,7 +1165,7 @@ function getLanguage(configJson) {
 }
 
 function setConfig(configJson) {
-  
+
 }
 
 $(document).ready(function() {
@@ -1339,7 +1339,7 @@ $(document).ready(function() {
             btnClass: 'btn-blue',
             keys: ['enter'],
             action: function() {
-              addBlack(window.newTab.back);
+              addRemoved(window.newTab.back);
               $('.delete-button').addClass('is-active');
               setTimeout(function() {
                 document.getElementById("menu").classList.remove("delay")
@@ -1458,7 +1458,7 @@ $(document).ready(function() {
   //prevent right click context menu
   //document.addEventListener('contextmenu', event => event.preventDefault());
 
-  window.newTab.clock.military = false; //set default time and initialize variable
+  window.newTab.clock.twentyFourHr = false; //set default time and initialize variable
 
   // Make the elements draggable:
   dragElement(document.getElementById("timeWrapper"));
@@ -1472,7 +1472,7 @@ $(document).ready(function() {
     time_switch: 'on',
     time_top_data: '',
     time_left_data: '',
-    military_switch: 'off'
+    twentyFourHr_switch: 'off'
   }, function(data) {
     if (data.time_switch == 'off') {
       document.getElementById("timeSwitch").checked = false;
@@ -1488,7 +1488,7 @@ $(document).ready(function() {
     if (data.time_left_data != '') {
       document.getElementById("timeWrapper").style.left = data.time_left_data;
     }
-    window.newTab.clock.military = (data.military_switch == 'on');
+    window.newTab.clock.twentyFourHr = (data.twentyFourHr_switch == 'on');
 
     startTime(); //start the time
   });
@@ -1618,7 +1618,7 @@ $(document).ready(function() {
     updateTodo();
   });
   document.getElementById("time").addEventListener("click", function() {
-    updateMilitary();
+    updatetwentyFourHr();
   });
   document.getElementById("darkSlider").addEventListener("input", function() {
     updateFilter();

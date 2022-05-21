@@ -1,3 +1,11 @@
+# This Branch is for a full rework of the code, this readme is a todo list
+- Long awaited weather widget
+- Locale
+- Config file
+- Debug options and testing
+- Offline options for backgrounds
+- Code rewrite: cleaner, better, and more optimized
+
 # ![icon](https://raw.githubusercontent.com/suitangi/Minimal-Newtab/master/chrome-extension/icons/icon48.png) Minimal Newtab
 This project is a Google Chrome/Firefox Newtab replacement framework that allows for custom defined lists of backgrounds to be loaded into a minimalistic page such that every time a new tab is opened, a random background is loaded.
 
