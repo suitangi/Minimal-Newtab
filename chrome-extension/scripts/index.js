@@ -377,12 +377,19 @@ function updateFilter() {
 //Todo: saves the Todo list to the chrome storage
 function saveTodo() {
   let lilist = document.getElementById("myUL").getElementsByTagName("LI");
-  let store = "";
+  let store = [];
   for (i = 0; i < lilist.length; i++) {
-    if (lilist[i].classList.contains('checked'))
-      store += "☑" + lilist[i].innerText.trim();
-    else
-      store += lilist[i].innerText.trim();
+    if (lilist[i].classList.contains('checked')) {
+      store.push({
+        text: lilist[i].children[0].innerText.trim(),
+        checked: true
+      });
+    } else {
+      store.push({
+        text: lilist[i].children[0].innerText.trim(),
+        checked: false
+      });
+    }
   }
   chrome.storage.local.set({
     todo_data: store
@@ -1562,7 +1569,7 @@ $(document).ready(function() {
     todo_switch: 'on',
     todo_top_data: '',
     todo_left_data: '',
-    todo_data: ''
+    todo_data: []
   }, function(data) {
     if (data.todo_switch == 'off') {
       document.getElementById("todoSwitch").checked = false;
@@ -1572,6 +1579,7 @@ $(document).ready(function() {
       document.getElementById("todoSwitch").checked = true;
       document.getElementById("todoWrapper").classList.add("entrance");
     }
+
     if (data.todo_top_data != '') {
       document.getElementById("todoWrapper").style.top = data.todo_top_data;
     }
@@ -1579,14 +1587,14 @@ $(document).ready(function() {
       document.getElementById("todoWrapper").style.left = data.todo_left_data;
     }
     // console.log("Todo list data loading:" + data.todo_data); //DEBUG
-    if (data.todo_data != '') {
-      let arr = data.todo_data.split("×");
-      for (i = 0; i < arr.length - 1; i++) {
-        let li;
-        if (arr[i].indexOf("☑") != -1) {
-          li = newListItem(String(arr[i]).slice(1), true);
+    if (data.todo_data.length != 0) {
+      let arr = data.todo_data;
+      let li;
+      for (i = 0; i < arr.length; i++) {
+        if (arr[i].checked) {
+          li = newListItem(arr[i].text, true);
         } else {
-          li = newListItem(arr[i], false);
+          li = newListItem(arr[i].text, false);
         }
         document.getElementById("myUL").appendChild(li);
       }
