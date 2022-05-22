@@ -226,6 +226,7 @@ function changeSearch() {
     console.log(window.newTab.searchEngines[index].action);
     let val = (searchInput.val() == searchInput.attr('data-placeholder') ? "" : searchInput.val());
     searchInput.attr('data-placeholder', window.newTab.searchEngines[index].placeholder);
+    searchInput.attr('name', window.newTab.searchEngines[data.search_engine].queryName);
     searchInput.val(val);
     searchInput.focus();
     searchInput.blur();
@@ -488,13 +489,6 @@ function setLiListeners(li) {
     } else {
       $(this).find('.listText').focus();
     }
-    // let li = document.getElementById("myUL").getElementsByTagName("li");
-    // for (i = 0; i < li.length; i++) {
-    //   if (li[i].innerText == "\u00D7") {
-    //     let node = createHTML("<br>");
-    //     li[i].insertBefore(node, li[i].firstChild);
-    //   }
-    // }
     $(this).parent().sortable("disable");
   }
   li.onmousedown = function(evt) {
@@ -1256,19 +1250,28 @@ $(document).ready(function() {
   //set the search engine list
   window.newTab.searchEngines = [{
       "action": "https://www.google.com/search",
-      "placeholder": "Google Search"
+      "placeholder": "Google Search",
+      "queryName": "q"
     },
     {
       "action": "https://www.bing.com/search",
-      "placeholder": "Bing Search"
+      "placeholder": "Bing Search",
+      "queryName": "q"
     },
     {
       "action": "https://search.yahoo.com/search",
-      "placeholder": "Yahoo Search"
+      "placeholder": "Yahoo Search",
+      "queryName": "q"
     },
     {
       "action": "https://duckduckgo.com/",
-      "placeholder": "Duckduckgo"
+      "placeholder": "Duckduckgo",
+      "queryName": "q"
+    },
+    {
+      "action": "https://yandex.com/search",
+      "placeholder": "Yandex",
+      "queryName": "text"
     }
   ];
 
@@ -1549,6 +1552,7 @@ $(document).ready(function() {
     let searchInput = $('#searchInput');
     searchInput.parent().attr('action', window.newTab.searchEngines[data.search_engine].action);
     searchInput.attr('data-placeholder', window.newTab.searchEngines[data.search_engine].placeholder);
+    searchInput.attr('name', window.newTab.searchEngines[data.search_engine].queryName);
     searchInput.val(window.newTab.searchEngines[data.search_engine].placeholder);
   });
 

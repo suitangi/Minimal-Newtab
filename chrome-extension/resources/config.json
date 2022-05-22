@@ -2,5 +2,27 @@
   "locales": ["en", "zh-cn", "zh-tw", "jp"],
   "default_locale": "en",
   "debug": false,
-  "offline": false
+  "offline": false,
+  "search_engines": [{
+      "action": "https://www.google.com/search",
+      "placeholder": "Google Search",
+      "queryName": "q"
+    }, {
+      "action": "https://www.bing.com/search",
+      "placeholder": "Bing Search",
+      "queryName": "q"
+    }, {
+      "action": "https://search.yahoo.com/search",
+      "placeholder": "Yahoo Search",
+      "queryName": "q"
+    }, {
+      "action": "https://duckduckgo.com/",
+      "placeholder": "Duckduckgo",
+      "queryName": "q"
+    }, {
+      "action": "https://yandex.com/search",
+      "placeholder": "Yandex",
+      "queryName": "text"
+    }
+  ]
 }

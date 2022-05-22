@@ -24,35 +24,35 @@
     "description": "Favorites, in menu and others"
   },
   "effects-title": {
-    "message": "Effects",
+    "message": "効果",
     "description": "Effects section title in the menu"
   },
   "brightness": {
-    "message": "Brightness",
+    "message": "明度",
     "description": "Brightness effect in the menu"
   },
   "saturation": {
-    "message": "Saturation",
+    "message": "飽和",
     "description": "Saturation effect in the menu"
   },
   "contrast": {
-    "message": "Contrast",
+    "message": "コントラスト",
     "description": "Contrast effect in the menu"
   },
   "blur": {
-    "message": "Blur",
+    "message": "ぼかし",
     "description": "Blur effect in the menu"
   },
   "advanced-options": {
-    "message": "Advanced Options",
+    "message": "高度な設定",
     "description": "Advanced options in the menu"
   },
   "about-this-extension": {
-    "message": "About This Extension",
+    "message": "この拡張機能について",
     "description": "About this extension button in the menu"
   },
   "bookmark-title": {
-    "message": "Bookmarks",
+    "message": "ブックマーク",
     "description": "Title of Bookmark section"
   },
   "time-menu-desc": {
