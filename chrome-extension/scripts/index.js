@@ -803,7 +803,7 @@ function autoPause() {
 
 
 //loads a random background
-function loadBackground(backJson) {
+function loadBackground(backJson, id) {
   console.log("Loaded background.json:");
   console.log(backJson.sources);
   window.newTab.backlist = [];
@@ -816,34 +816,22 @@ function loadBackground(backJson) {
     $('#infoMenuItem').attr('data', "Toggles the " + infoTitle);
   }
 
-  //loads the support link
-  if (backJson.support_link) {
-    window.newTab.support_link = backJson.support_link;
-  } else {
-    window.newTab.support_link = "https://suitangi.github.io/Minimal-Newtab/";
-  }
-
-  //loads the report embed
-  if (backJson.report_embed) {
-    window.newTab.report_embed = backJson.report_embed;
-  } else {
-    window.newTab.report_embed = "";
-  }
-
   //remove all the other background menu switches first
   let bgMenu = document.getElementById('backgroundMenu');
   while (bgMenu.firstElementChild != document.getElementById('favoriteSlider')) {
     bgMenu.removeChild(bgMenu.firstElementChild);
   }
 
-  let vid = document.getElementById("backdropvid");
-  let img = document.getElementById("backdropimg");
-  if (backJson.type == "video") {
-    vid.style = "";
-    img.style = "display: none;"
-  } else if (backJson.type == "image") {
-    img.style = "";
-    vid.style = "display: none;"
+  if (id == undefined) {
+    let vid = document.getElementById("backdropvid");
+    let img = document.getElementById("backdropimg");
+    if (backJson.type == "video") {
+      vid.style = "";
+      img.style = "display: none;"
+    } else if (backJson.type == "image") {
+      img.style = "";
+      vid.style = "display: none;"
+    }
   }
 
   backList = backJson.sources;
@@ -896,11 +884,20 @@ function loadBackground(backJson) {
     loadInfo();
   }
 
+
   //functional prograamming (recursive but there shouldn't be many calls)
   function loadSource(backList) {
 
     //end case
     if (index == backList.length) {
+
+      if (id !== undefined) {
+        let tmpId = window.newTab.back.id;
+        window.newTab.back = backList[tmpId[0]].list[tmpId[1]];
+        window.newTab.back.id = tmpId;
+        loadInfo();
+        return;
+      }
 
       chrome.storage.local.get({
           lastShown: '',
@@ -1088,7 +1085,7 @@ function loadBackground(backJson) {
       chrome.storage.local.get(obj, function(data) {
         if (data[key] == 'off') {
           document.getElementById(key).checked = false;
-        } else {
+        } else if (id === undefined){
           window.newTab.backlist.push(...toPushList);
         }
         index += 1;
@@ -1100,8 +1097,8 @@ function loadBackground(backJson) {
   loadSource(backList);
 }
 
-//function to loadLanguage into UI and strings
-function loadLanguage(langJson) {
+//function to loadLanguageUI into UI and strings
+function loadLanguageUI(langJson) {
   window.newTab.langStrings = langJson;
 
   //find background in correct background file
@@ -1116,7 +1113,25 @@ function loadLanguage(langJson) {
   setText('timeMenuText', 'time-name');
   setText('todoMenuText', 'to-do-list-name');
   setText('searchMenuText', 'search-bar-name');
+  setText('effectTitle', 'effects-title');
+  setText('brightnessTitle', 'brightness');
+  setText('saturationTitle', 'saturation');
+  setText('contrastTitle', 'contrast');
+  setText('blurTitle', 'blur');
   document.getElementById('timeMenuOption').setAttribute('data', langJson['time-menu-desc'].message);
+}
+
+//fucntion to change languages
+function changeLang(lang) {
+  setLanguage(lang)
+  .then((lang) => {
+      const jsonUrl = chrome.runtime.getURL('resources/background_' + lang + '.json');
+      fetch(jsonUrl)
+      .then((response) => response.json())
+      .then ((json) => {
+        loadBackground(json, window.newTab.back.id);
+      });
+  });
 }
 
 //function to set language
@@ -1126,16 +1141,37 @@ function setLanguage(lang) {
     fetch(langUrl)
       .then((response) => response.json())
       .then((json) => {
-        loadLanguage(json);
+        loadLanguageUI(json);
         resolve(lang);
-      }).catch(function (error) {
+      }).catch(function(error) {
         console.error(error);
       });
   });
 }
 
-//function to get and determine the language
-function getLanguage(configJson) {
+
+function setConfig(configJson) {
+
+  window.newTab.config = configJson;
+
+  //set searchEngines
+  window.newTab.searchEngines = configJson.search_engines;
+
+  //loads the support link
+  if (configJson.support_link) {
+    window.newTab.support_link = configJson.support_link;
+  } else {
+    window.newTab.support_link = "https://suitangi.github.io/Minimal-Newtab/";
+  }
+
+  //loads the report embed
+  if (configJson.report_embed) {
+    window.newTab.report_embed = configJson.report_embed;
+  } else {
+    window.newTab.report_embed = "";
+  }
+
+  //get language
   return new Promise(function(resolve, reject) {
     chrome.storage.local.get({
       lang: ""
@@ -1165,10 +1201,6 @@ function getLanguage(configJson) {
   });
 }
 
-function setConfig(configJson) {
-
-}
-
 $(document).ready(function() {
 
   //define custom global objects
@@ -1187,17 +1219,17 @@ $(document).ready(function() {
   const configUrl = chrome.runtime.getURL('resources/config.json');
   fetch(configUrl)
     .then((response) => response.json())
-    .then((json) => getLanguage(json))
+    .then((json) => setConfig(json))
     .then((lang) => {
 
       //if Chrome is online and offline is disabled
-      if (window.navigator.onLine) {
+      if (window.navigator.onLine || window.newTab.config.offline) {
         //loads the backgorund json
         const jsonUrl = chrome.runtime.getURL('resources/background_' + lang + '.json');
         fetch(jsonUrl)
           .then((response) => response.json())
           .then((json) => loadBackground(json));
-
+        initialSetup();
       } else {
         //send an error alert for no internet connection
         $.alert({
@@ -1224,7 +1256,11 @@ $(document).ready(function() {
         });
       }
     })
+});
 
+
+//function for initial setup
+function initialSetup() {
 
   //get advanced settings
   chrome.storage.local.get({
@@ -1246,34 +1282,6 @@ $(document).ready(function() {
     }
     window.newTab.autopause = data.autopause;
   });
-
-  //set the search engine list
-  window.newTab.searchEngines = [{
-      "action": "https://www.google.com/search",
-      "placeholder": "Google Search",
-      "queryName": "q"
-    },
-    {
-      "action": "https://www.bing.com/search",
-      "placeholder": "Bing Search",
-      "queryName": "q"
-    },
-    {
-      "action": "https://search.yahoo.com/search",
-      "placeholder": "Yahoo Search",
-      "queryName": "q"
-    },
-    {
-      "action": "https://duckduckgo.com/",
-      "placeholder": "Duckduckgo",
-      "queryName": "q"
-    },
-    {
-      "action": "https://yandex.com/search",
-      "placeholder": "Yandex",
-      "queryName": "text"
-    }
-  ];
 
   //add the bookmarks
   chrome.bookmarks.getTree(function(bkList) {
@@ -1648,7 +1656,6 @@ $(document).ready(function() {
   //window focus and blur listeners
   chrome.tabs.onActivated.addListener(autoPause);
 
-
   // makes the list sortable
   $("#myUL").sortable({
     start: function() {
@@ -1696,4 +1703,4 @@ $(document).ready(function() {
       }
     }
   });
-});
+}
