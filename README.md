@@ -3,13 +3,17 @@
 - Locale support
 - Config file
 - Debug options and testing
- - Real logging
+  - Real logging
+- Real Options Page
+  - Better background management?
+- Report a Bug page using forms id instead of iframe
 - Offline options for backgrounds
+  - Mix and match online/offline?
 - Better docs better website
 - Code rewrite: cleaner, better, and more optimized
 - Use npm for builds
- - Automate builds for different browsers
- - Potentially no-code UI build
+  - Automate builds for different browsers
+  - Potentially no-code UI build
 - Optimize for hardware acceleration for videos (potentially disabling effects without HA)
   
 
