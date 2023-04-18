@@ -14,6 +14,7 @@
 - Use npm for builds
   - Automate builds for different browsers
   - Potentially no-code UI build
+  - Actual tests for surrounding files and backgrounds
 - Optimize for hardware acceleration for videos (potentially disabling effects without HA)
   
 
