@@ -1,5 +1,9 @@
 # This Branch is for a full rework of the code, this readme is a todo list
-- Long awaited weather widget
+- Widgets
+  - Weather
+  - Recently closed
+  - Better To do; better loading storing
+  - Better bookmarks; fix for all browsers
 - Locale support
 - Config file
 - Debug options and testing
@@ -10,10 +14,16 @@
 - Offline options for backgrounds
   - Mix and match online/offline?
 - Better docs better website
+- Better Background loading
+  - Using CANVAS Tags
+  - More efficient random selection
+  - Automatically get Accent color from bgs
+- 
 - Code rewrite: cleaner, better, and more optimized
 - Use npm for builds
   - Automate builds for different browsers
   - Potentially no-code UI build
+    - Electrion
   - Actual tests for surrounding files and backgrounds
 - Optimize for hardware acceleration for videos (potentially disabling effects without HA)
   
