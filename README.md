@@ -18,14 +18,14 @@
   - Using CANVAS Tags
   - More efficient random selection
   - Automatically get Accent color from bgs
-- 
+- Low performance mode
+  - Optimize for hardware acceleration for videos (potentially disabling effects without HA)
 - Code rewrite: cleaner, better, and more optimized
 - Use npm for builds
   - Automate builds for different browsers
   - Potentially no-code UI build
     - Electrion
   - Actual tests for surrounding files and backgrounds
-- Optimize for hardware acceleration for videos (potentially disabling effects without HA)
   
 
 # ![icon](https://raw.githubusercontent.com/suitangi/Minimal-Newtab/master/chrome-extension/icons/icon48.png) Minimal Newtab
