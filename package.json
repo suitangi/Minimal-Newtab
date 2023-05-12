@@ -1,0 +1,27 @@
+{
+  "name": "minimal-newtab",
+  "version": "2.0.0",
+  "description": "Chromium Newtab replacement framework for minmalistic new tab page with custom backgrounds.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suitangi/Minimal-Newtab.git"
+  },
+  "keywords": [
+    "Chromium",
+    "Newtab",
+    "Extension",
+    "Minimal",
+    "Addon",
+    "Cinemagraph"
+  ],
+  "author": "suitangi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/suitangi/Minimal-Newtab/issues"
+  },
+  "homepage": "https://github.com/suitangi/Minimal-Newtab#readme"
+}

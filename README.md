@@ -1,11 +1,16 @@
 # This Branch is for a full rework of the code, this readme is a todo list
 - Widgets
+  - Widget Lock
   - Weather
   - Recently closed
-  - Better To do; better loading storing
   - Better bookmarks; fix for all browsers
+  - Better data storing and loading, use your data types my goodness
+  - Better animations
+    - Animate CSS
+- Support for custom fonts
 - Locale support
-- Config file
+  - Add language change ui
+- Make config and language loading less complicated
 - Debug options and testing
   - Real logging
 - Real Options Page
@@ -16,7 +21,10 @@
 - Better docs better website
 - Better Background loading
   - Using CANVAS Tags
+    - Eliminates need for img and video element distinction
+    - Better Filters
   - More efficient random selection
+  - https://en.wikipedia.org/wiki/Comparison_of_web_browsers#Image_format_support
   - Automatically get Accent color from bgs
 - Low performance mode
   - Optimize for hardware acceleration for videos (potentially disabling effects without HA)
@@ -24,9 +32,10 @@
 - Use npm for builds
   - Automate builds for different browsers
   - Potentially no-code UI build
-    - Electrion
+    - Electron
   - Actual tests for surrounding files and backgrounds
-  
+    - Test for language files
+
 
 # ![icon](https://raw.githubusercontent.com/suitangi/Minimal-Newtab/master/chrome-extension/icons/icon48.png) Minimal Newtab
 This project is a Google Chrome/Firefox Newtab replacement framework that allows for custom defined lists of backgrounds to be loaded into a minimalistic page such that every time a new tab is opened, a random background is loaded.
@@ -183,6 +192,7 @@ If there is any issue with copyright or if you're the owner of one of the art, p
 These are the permission that the `manifest.json` asks for:
 - Storage: To store the data relating to preferences and widgets
 - Bookmark: To show the bookmarks on the right hand side tab
+- Tabs: For performance optimization (disable video and effects when tab isn't active)
 
 ### jQuery
 This project uses these jQuery libraries:
@@ -199,7 +209,7 @@ To all the beta test users:
 ```
 1.8.0 Optimization, Standardized modal, Added Advanced Options
 1.7.3 Optimization and small bug fixes
-1.7.2 Updated JQuery Version
+1.7.2 Bumped JQuery Version
 1.7.1 Fixed some issues and bugs
 1.7.0 Made into minimal newtab framework
 1.6.2 Todo list rework

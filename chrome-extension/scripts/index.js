@@ -1211,7 +1211,7 @@ $(document).ready(function() {
 
   //Print console warning
   console.log("%c--- Danger Zone ---", "color: red; font-size: 25px");
-  console.log("%cThis is a browser feature intended for developers. If someone told you to copy-paste something here to enable a feature or \"hack\", it is likely a scam.", "font-size: 16px;");
+  console.log("%cThis is a browser feature intended for developers.\nBe careful!", "font-size: 16px;");
   console.log("%cIf you ARE a developer, feel free to check this project out here:", "font-size: 16px;");
   console.log("%chttps://suitangi.github.io/Minimal-Newtab/", "font-size: 16px;");
 
