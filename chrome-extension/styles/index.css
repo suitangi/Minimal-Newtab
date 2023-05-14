@@ -115,10 +115,17 @@
    object-fit: cover;
  }
 
- #backdropimg, #backdropvid {
-   transition: 0.5s;
+ #backdropCanvas {
+   width: 100vw;
+   height: 100vh;
+   transition: opacity 2s;
    opacity: 0;
  }
+
+ /* #backdropimg, #backdropvid {
+   transition: 2s;
+   opacity: 0;
+ } */
 
  /* desaturate filter */
  #desaFilter {

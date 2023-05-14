@@ -26,6 +26,17 @@ function insertAfter(el, referenceNode) {
   referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
 }
 
+function supportedImageType(type) {
+  const stypes = ['jpg', 'webp', 'gif', 'png', 'bmp', 'apng'];
+  return stypes.includes(type.toLowerCase());
+}
+
+function supportedVideoType(type) {
+  const stypes = ['mp4', 'webm', 'ogg'];
+  return stypes.includes(type.toLowerCase());
+}
+
+
 //Time: formats the minute
 function checkMin(i) {
   return i < 10 ? '0' + i : i;
@@ -801,6 +812,20 @@ function autoPause() {
   gettingCurrent.then(onGot, onError);
 }
 
+//scales the canvas
+function drawImgToCanvas() {
+  let img = window.newTab.backImage;
+  let canvas = document.getElementById('backdropCanvas');
+  let ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  // get the scale
+  var scale = Math.max(canvas.width / img.width, canvas.height / img.height);
+  // get the top left position of the image
+  var x = (canvas.width / 2) - (img.width / 2) * scale;
+  var y = (canvas.height / 2) - (img.height / 2) * scale;
+  ctx.drawImage(img, x, 0, img.width * scale, img.height * scale);
+}
 
 //loads a random background
 function loadBackground(backJson, id) {
@@ -825,13 +850,13 @@ function loadBackground(backJson, id) {
   if (id == undefined) {
     let vid = document.getElementById("backdropvid");
     let img = document.getElementById("backdropimg");
-    if (backJson.type == "video") {
-      vid.style = "";
-      img.style = "display: none;"
-    } else if (backJson.type == "image") {
-      img.style = "";
-      vid.style = "display: none;"
-    }
+    // if (backJson.type == "video") {
+    //   vid.style = "";
+    //   img.style = "display: none;"
+    // } else if (backJson.type == "image") {
+    //   img.style = "";
+    //   vid.style = "display: none;"
+    // }
   }
 
   backList = backJson.sources;
@@ -841,7 +866,6 @@ function loadBackground(backJson, id) {
   //function to set background
   function setBackground() {
     let vid = document.getElementById("backdropvid");
-    let img = document.getElementById("backdropimg");
     let str = window.newTab.back.link;
 
     //console logging
@@ -850,24 +874,28 @@ function loadBackground(backJson, id) {
     // console.log("Defaulted backgorund:");
     // console.log(str);
 
-    let fext = str.substring(str.length - 3).toLowerCase();
-    if (fext == 'jpg' || fext == 'png' || fext == 'bmp') { //the file type is image
+    let fext = str.substring(str.lastIndexOf('.') + 1).toLocaleLowerCase();
+    if (supportedImageType(fext)) { //the file type is image
       window.newTab.back.fileType = "image";
+      let img = new Image();
       img.src = str;
-      img.style = "";
+      window.newTab.backImage = img;
       img.onload = function() {
-        img.style.opacity = 100;
         $('#progress-line').css("opacity", "0");
-        //to counteract a bug that makes the background start from Bottom
-        window.scrollTo(0, 0);
+        let img = document.getElementById("backdropimg");
+        drawImgToCanvas();
+        document.getElementById('backdropCanvas').style = "opacity: 1";
+        addEventListener("resize", (event) => {
+          drawImgToCanvas();
+        });
       }
       vid.style = "display: none;"
-    } else { //file type is video
+    } else if (supportedVideoType(fext)) { //file type is video
       window.newTab.back.fileType = "video";
-      img.style = "display: none;"
-      vid.style = "";
+      // img.style = "display: none;"
+      // vid.style = "";
       vid.oncanplay = function() {
-        vid.style.opacity = 100;
+        // vid.style.opacity = 100;
         $('#progress-line').css("opacity", "0");
         //to counteract a bug that makes the background start from Bottom
         window.scrollTo(0, 0);
@@ -880,6 +908,9 @@ function loadBackground(backJson, id) {
         vid.src = window.URL.createObjectURL(blob);
       });
       vid.load();
+    } else {
+      console.console.error("Requested background file type not supported.");
+      return;
     }
     loadInfo();
   }
@@ -1085,7 +1116,7 @@ function loadBackground(backJson, id) {
       chrome.storage.local.get(obj, function(data) {
         if (data[key] == 'off') {
           document.getElementById(key).checked = false;
-        } else if (id === undefined){
+        } else if (id === undefined) {
           window.newTab.backlist.push(...toPushList);
         }
         index += 1;
@@ -1124,14 +1155,14 @@ function loadLanguageUI(langJson) {
 //fucntion to change languages
 function changeLang(lang) {
   setLanguage(lang)
-  .then((lang) => {
+    .then((lang) => {
       const jsonUrl = chrome.runtime.getURL('resources/background_' + lang + '.json');
       fetch(jsonUrl)
-      .then((response) => response.json())
-      .then ((json) => {
-        loadBackground(json, window.newTab.back.id);
-      });
-  });
+        .then((response) => response.json())
+        .then((json) => {
+          loadBackground(json, window.newTab.back.id);
+        });
+    });
 }
 
 //function to set language

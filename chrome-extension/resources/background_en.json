@@ -71,6 +71,15 @@
         "year": "1839",
         "painter": "J. M. W. Turner'"
       }]
+    },
+    {
+      "name": "Video",
+      "list": [{
+        "link": "https://i.imgur.com/ZwfrlbT.mp4",
+        "title": "Video Test",
+        "year": "2016",
+        "painter": "Shinkai Makoto"
+      }]
     }
   ]
 }
