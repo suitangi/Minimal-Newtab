@@ -371,16 +371,12 @@ function updateTodo() {
 
 //Filters: Updates the filter Effects
 function updateFilter() {
-  // console.log(document.getElementById("darkSlider").value);
   let darkVal = document.getElementById("darkSlider").value;
   let satuVal = document.getElementById("satuSlider").value;
   let conVal = document.getElementById("conSlider").value;
   let blurVal = document.getElementById("blurSlider").value;
-  document.getElementById("backloader").style = "filter: brightness(" + darkVal / 100 + ") " +
-    "saturate(" + satuVal / 100 + ") " +
-    "contrast(" + conVal / 100 + ") " +
-    "blur(" + blurVal / 10 + "px);";
   let arr = [darkVal, satuVal, conVal, blurVal];
+  window.newTab.backFilter = arr;
   chrome.storage.local.set({
     filter: arr
   }, function() {});
@@ -795,11 +791,10 @@ function autoPause() {
 
   //on got tab info function
   function onGot(tabInfo) {
-    var vid = document.getElementById("backdropvid");
-    if (tabInfo.active && vid.readyState === 4) {
-      vid.play();
+    if (tabInfo.active && window.newTab.backVideo.readyState === 4) {
+      window.newTab.backVideo.play();
     } else {
-      vid.pause();
+      window.newTab.backVideo.pause();
     }
   }
 
@@ -813,17 +808,22 @@ function autoPause() {
 }
 
 //scales the canvas
-function drawImgToCanvas() {
-  let img = window.newTab.backImage;
+function drawImgToCanvas(img) {
   let canvas = document.getElementById('backdropCanvas');
   let ctx = canvas.getContext('2d');
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
+  // console.log(img.width);
   // get the scale
   var scale = Math.max(canvas.width / img.width, canvas.height / img.height);
   // get the top left position of the image
   var x = (canvas.width / 2) - (img.width / 2) * scale;
   var y = (canvas.height / 2) - (img.height / 2) * scale;
+  let arr = window.newTab.backFilter;
+  ctx.filter = "brightness(" + arr[0] / 100 + ") " +
+    "saturate(" + arr[1] / 100 + ") " +
+    "contrast(" + arr[2] / 100 + ") " +
+    "blur(" + arr[3] / 10 + "px)";
   ctx.drawImage(img, x, 0, img.width * scale, img.height * scale);
 }
 
@@ -847,25 +847,15 @@ function loadBackground(backJson, id) {
     bgMenu.removeChild(bgMenu.firstElementChild);
   }
 
-  if (id == undefined) {
-    let vid = document.getElementById("backdropvid");
-    let img = document.getElementById("backdropimg");
-    // if (backJson.type == "video") {
-    //   vid.style = "";
-    //   img.style = "display: none;"
-    // } else if (backJson.type == "image") {
-    //   img.style = "";
-    //   vid.style = "display: none;"
-    // }
-  }
-
   backList = backJson.sources;
   let index = 0;
   bkMenu = document.getElementById("backgroundMenu");
 
   //function to set background
   function setBackground() {
-    let vid = document.getElementById("backdropvid");
+    let vid = document.createElement("video");
+    vid.setAttribute('autoplay', true);
+    vid.setAttribute('loop', true);
     let str = window.newTab.back.link;
 
     //console logging
@@ -883,24 +873,37 @@ function loadBackground(backJson, id) {
       img.onload = function() {
         $('#progress-line').css("opacity", "0");
         let img = document.getElementById("backdropimg");
-        drawImgToCanvas();
-        document.getElementById('backdropCanvas').style = "opacity: 1";
+        drawImgToCanvas(window.newTab.backImage);
+        document.getElementById('backdropCanvas').style = "opacity: 1"; //fade in
         addEventListener("resize", (event) => {
-          drawImgToCanvas();
+          drawImgToCanvas(window.newTab.backImage);
         });
       }
       vid.style = "display: none;"
     } else if (supportedVideoType(fext)) { //file type is video
       window.newTab.back.fileType = "video";
-      // img.style = "display: none;"
-      // vid.style = "";
+      window.newTab.backVideo = vid;
+      vid.addEventListener("loadedmetadata", function (e) {
+          window.newTab.backVideo.width = this.videoWidth
+          window.newTab.backVideo.height = this.videoHeight;
+      }, false);
       vid.oncanplay = function() {
-        // vid.style.opacity = 100;
+        document.getElementById('backdropCanvas').style = "opacity: 1"; //fade in
         $('#progress-line').css("opacity", "0");
-        //to counteract a bug that makes the background start from Bottom
-        window.scrollTo(0, 0);
-
+        function step() {
+          drawImgToCanvas(window.newTab.backVideo);
+          requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+        window.newTab.backVideo.oncanplay = function(){};
       };
+      // vid.addEventListener("play", () => {
+      //   function step() {
+      //     drawImgToCanvas(window.newTab.backVideo);
+      //       requestAnimationFrame(step);
+      //     }
+      //     requestAnimationFrame(step);
+      // });
       //fetch the full video to try to force caching (reduce bandwidth)
       const videoRequest = fetch(str)
         .then(response => response.blob());
