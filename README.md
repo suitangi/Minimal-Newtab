@@ -15,16 +15,15 @@
   - Real logging
 - Real Options Page
   - Better background management?
+- CSS cleanup
 - Report a Bug page using forms id instead of iframe
 - Offline options for backgrounds
-  - Mix and match online/offline?
+  - Mix and match online/offline
 - Better docs better website
 - Better Background loading
   - Using CANVAS Tags
-    - Eliminates need for img and video element distinction
     - Better Filters
   - More efficient random selection
-  - https://en.wikipedia.org/wiki/Comparison_of_web_browsers#Image_format_support
   - Automatically get Accent color from bgs
 - Low performance mode
   - Optimize for hardware acceleration for videos (potentially disabling effects without HA)

@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Minimal Newtab",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "short_name": "Min Newtab",
   "description": "Replaces the newtab with ...",
   "permissions": ["storage", "bookmarks", "tabs"],

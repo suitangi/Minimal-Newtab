@@ -1,2 +1,4 @@
 *.zip
 
+#ignore node_moules
+node_modules/

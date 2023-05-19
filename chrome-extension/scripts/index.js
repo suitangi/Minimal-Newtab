@@ -102,21 +102,13 @@ function changeMinutes(h, m) {
 }
 
 //Widgets: sets the element to be draggable (customized for time, search bar, todo list)
-function dragElement(elmnt) {
+function dragElement(elmnt, dragElmnt) {
   let pos1 = 0,
     pos2 = 0,
     pos3 = 0,
     pos4 = 0;
 
-  //depends on which element it is, different place to click
-  if (elmnt.id == "timeWrapper")
-    document.getElementById("time").onmousedown = dragMouseDown;
-  if (elmnt.id == "searchWrapper")
-    document.getElementById("searchDiv").onmousedown = dragMouseDown;
-  if (elmnt.id == "todoWrapper")
-    document.getElementById("todoDiv").onmousedown = dragMouseDown;
-  if (elmnt.id == "infoWrapper")
-    document.getElementById("info").onmousedown = dragMouseDown;
+  dragElmnt.onmousedown = dragMouseDown;
 
   function dragMouseDown(e) {
     e = e || window.event;
@@ -156,8 +148,7 @@ function dragElement(elmnt) {
       //saves the current location for the elements
       if (elmnt.id == "timeWrapper") {
         chrome.storage.local.set({
-          time_top_data: elmnt.style.top,
-          time_left_data: elmnt.style.left
+          time_location: [elmnt.style.top, elmnt.style.left]
         }, function() {});
         window.newTab.clock.twentyFourHr = !window.newTab.clock.twentyFourHr;
       }
@@ -184,6 +175,50 @@ function dragElement(elmnt) {
     document.onmouseup = null;
     document.onmousemove = null;
   }
+}
+
+//Widget constructor
+function widget(name, wrapper, dragger, toggle) {
+  this.name = name;
+  this.wrapperElement = wrapper;
+  this.switchElement = toggle;
+  this.dragElement = dragger;
+
+  //make element draggable
+  dragElement(this.wrapperElement, this.dragElement);
+
+  chrome.storage.local.get({
+    [this.name]: {
+      location: [0, 0],
+      visible: true
+    }
+  }, function(data) {
+    this.location = data[this.name]['location'];
+    this.visible = data[this.name]['visible'];
+  });
+  this.updateVisibilty = function() {
+    this.wrapperElement.classList.remove("firstStart");
+    if (this.switchElement.checked) {
+      this.switchElement.checked = false;
+      this.wrapperElement.classList.add("exit");
+      this.wrapperElement.classList.remove("entrance");
+      chrome.storage.local.set({
+        [this.name]: {
+          visible: false
+        }
+      }, function() {});
+    } else {
+      this.switchElement.checked = true;
+      this.wrapperElement.classList.add("entrance");
+      this.wrapperElement.classList.remove("exit");
+      chrome.storage.local.set({
+        [this.name]: {
+          visible: true
+        }
+      }, function() {});
+    }
+  }
+
 }
 
 //Time: toggles twentyFourHr time (24hr)
@@ -377,6 +412,8 @@ function updateFilter() {
   let blurVal = document.getElementById("blurSlider").value;
   let arr = [darkVal, satuVal, conVal, blurVal];
   window.newTab.backFilter = arr;
+  if (window.newTab.back != undefined && window.newTab.back.fileType == 'image')
+    drawImgToCanvas(window.newTab.backImage);
   chrome.storage.local.set({
     filter: arr
   }, function() {});
@@ -439,8 +476,7 @@ function resetData() {
         action: function() {
           if (this.$content.find('#reset-input-loc').is(":checked")) {
             chrome.storage.local.set({
-                time_top_data: '',
-                time_left_data: '',
+                time_location: [0, 0],
                 info_top_data: '',
                 info_left_data: '',
                 todo_top_data: '',
@@ -883,19 +919,20 @@ function loadBackground(backJson, id) {
     } else if (supportedVideoType(fext)) { //file type is video
       window.newTab.back.fileType = "video";
       window.newTab.backVideo = vid;
-      vid.addEventListener("loadedmetadata", function (e) {
-          window.newTab.backVideo.width = this.videoWidth
-          window.newTab.backVideo.height = this.videoHeight;
+      vid.addEventListener("loadedmetadata", function(e) {
+        window.newTab.backVideo.width = this.videoWidth
+        window.newTab.backVideo.height = this.videoHeight;
       }, false);
       vid.oncanplay = function() {
         document.getElementById('backdropCanvas').style = "opacity: 1"; //fade in
         $('#progress-line').css("opacity", "0");
+
         function step() {
           drawImgToCanvas(window.newTab.backVideo);
           requestAnimationFrame(step);
         }
         requestAnimationFrame(step);
-        window.newTab.backVideo.oncanplay = function(){};
+        window.newTab.backVideo.oncanplay = function() {};
       };
       // vid.addEventListener("play", () => {
       //   function step() {
@@ -1513,17 +1550,17 @@ function initialSetup() {
   window.newTab.clock.twentyFourHr = false; //set default time and initialize variable
 
   // Make the elements draggable:
-  dragElement(document.getElementById("timeWrapper"));
-  dragElement(document.getElementById("searchWrapper"));
-  dragElement(document.getElementById("todoWrapper"));
-  dragElement(document.getElementById('infoWrapper'));
+  dragElement(document.getElementById("timeWrapper"), document.getElementById("time"));
+  dragElement(document.getElementById("searchWrapper"), document.getElementById("searchDiv"));
+  dragElement(document.getElementById("todoWrapper"), document.getElementById("todoDiv"));
+  dragElement(document.getElementById('infoWrapper'), document.getElementById("info"));
+
 
   //data/settings loading from chrome
   //getting the clock settings
   chrome.storage.local.get({
     time_switch: 'on',
-    time_top_data: '',
-    time_left_data: '',
+    time_location: [0, 0],
     twentyFourHr_switch: 'off'
   }, function(data) {
     if (data.time_switch == 'off') {
@@ -1534,11 +1571,11 @@ function initialSetup() {
       document.getElementById("timeSwitch").checked = true;
       document.getElementById("timeWrapper").classList.add("entrance");
     }
-    if (data.time_top_data != '') {
-      document.getElementById("timeWrapper").style.top = data.time_top_data;
+    if (data.time_location[0] != 0) {
+      document.getElementById("timeWrapper").style.top = data.time_location[0];
     }
-    if (data.time_left_data != '') {
-      document.getElementById("timeWrapper").style.left = data.time_left_data;
+    if (data.time_location[1] != 0) {
+      document.getElementById("timeWrapper").style.left = data.time_location[1];
     }
     window.newTab.clock.twentyFourHr = (data.twentyFourHr_switch == 'on');
 
@@ -1550,6 +1587,7 @@ function initialSetup() {
     info_switch: 'on',
     info_top_data: '',
     info_left_data: '',
+    info_location: [0, 0],
     info_mode: 0,
   }, function(data) {
     if (data.info_switch == 'off') {
