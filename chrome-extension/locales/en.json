@@ -210,7 +210,9 @@
   "no-internet-title": {
     "message": "No internet access. Please check your connection and try again.",
     "description": "Title of no internet message"
+  },
+  "days-of-week": {
+    "dates": ["SUN","MON","TUE","WED","THU","FRI","SAT"],
+    "description": "Days of the week"
   }
-
-
 }

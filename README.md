@@ -7,7 +7,9 @@
   - Better data storing and loading, use your data types my goodness
   - Better animations
     - Animate CSS
+- Use formatted strings
 - Support for custom fonts
+- Add don't show this again for background removal prompts
 - Locale support
   - Add language change ui
 - Make config and language loading less complicated

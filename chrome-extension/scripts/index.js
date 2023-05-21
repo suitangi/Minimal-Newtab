@@ -48,6 +48,14 @@ function checkHour(i) {
   return i == 0 ? 12 : i;
 }
 
+//Date: fomats the date
+function formatDate() {
+  let d = new Date();
+  let dow = window.newTab.langStrings['days-of-week']['dates'][d.getDay()]
+  let str = `${d.getMonth() + 1}/${d.getDate()} (${dow})`;
+  document.getElementById('date').innerText = str;
+}
+
 //Time: starts the time
 function startTime() {
 
@@ -79,6 +87,8 @@ function startTime() {
   let ms = today.getMilliseconds();
   let nextM = (60 - s) * 1000 + (1000 - ms);
 
+  formatDate();
+
   //calls changeMinute setting the timeout for when next minute occurs
   window.newTab.clock.nextMinute = setTimeout(function() {
     changeMinutes(h, m + 1);
@@ -87,6 +97,8 @@ function startTime() {
 
 //Time: updates minutes
 function changeMinutes(h, m) {
+  if (h == 0 && m <= 1)
+    formatDate();
   if (m % 10 == 0) {
     //sync time (pretty much every 10 minutes)
     startTime();
@@ -101,128 +113,11 @@ function changeMinutes(h, m) {
   }
 }
 
-//Widgets: sets the element to be draggable (customized for time, search bar, todo list)
-function dragElement(elmnt, dragElmnt) {
-  let pos1 = 0,
-    pos2 = 0,
-    pos3 = 0,
-    pos4 = 0;
 
-  dragElmnt.onmousedown = dragMouseDown;
 
-  function dragMouseDown(e) {
-    e = e || window.event;
-    e.preventDefault();
-    // get the mouse cursor position at startup:
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    document.onmouseup = closeDragElement;
-    // call a function whenever the cursor moves:
-    document.onmousemove = elementDrag;
-  }
-
-  //when element is dragged
-  function elementDrag(e) {
-    e = e || window.event;
-    e.preventDefault();
-    // calculate the new cursor position:
-    pos1 = pos3 - e.clientX;
-    pos2 = pos4 - e.clientY;
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    // set the element's new position:
-    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-    //sets window.dragged to be true to see if an element was moved
-    if (!window.newTab.dragged)
-      window.newTab.dragged = true;
-
-  }
-
-  // stop moving when mouse button is released
-  function closeDragElement() {
-    //reset the dragged to be false
-    if (window.newTab.dragged) {
-      window.newTab.dragged = false;
-
-      //saves the current location for the elements
-      if (elmnt.id == "timeWrapper") {
-        chrome.storage.local.set({
-          time_location: [elmnt.style.top, elmnt.style.left]
-        }, function() {});
-        window.newTab.clock.twentyFourHr = !window.newTab.clock.twentyFourHr;
-      }
-      if (elmnt.id == "searchWrapper") {
-        chrome.storage.local.set({
-          search_top_data: elmnt.style.top,
-          search_left_data: elmnt.style.left
-        }, function() {});
-      }
-      if (elmnt.id == "todoWrapper") {
-        chrome.storage.local.set({
-          todo_top_data: elmnt.style.top,
-          todo_left_data: elmnt.style.left
-        }, function() {});
-      }
-      if (elmnt.id == "infoWrapper") {
-        window.newTab.infoMode -= 1;
-        chrome.storage.local.set({
-          info_top_data: elmnt.style.top,
-          info_left_data: elmnt.style.left
-        }, function() {});
-      }
-    }
-    document.onmouseup = null;
-    document.onmousemove = null;
-  }
-}
-
-//Widget constructor
-function widget(name, wrapper, dragger, toggle) {
-  this.name = name;
-  this.wrapperElement = wrapper;
-  this.switchElement = toggle;
-  this.dragElement = dragger;
-
-  //make element draggable
-  dragElement(this.wrapperElement, this.dragElement);
-
-  chrome.storage.local.get({
-    [this.name]: {
-      location: [0, 0],
-      visible: true
-    }
-  }, function(data) {
-    this.location = data[this.name]['location'];
-    this.visible = data[this.name]['visible'];
-  });
-  this.updateVisibilty = function() {
-    this.wrapperElement.classList.remove("firstStart");
-    if (this.switchElement.checked) {
-      this.switchElement.checked = false;
-      this.wrapperElement.classList.add("exit");
-      this.wrapperElement.classList.remove("entrance");
-      chrome.storage.local.set({
-        [this.name]: {
-          visible: false
-        }
-      }, function() {});
-    } else {
-      this.switchElement.checked = true;
-      this.wrapperElement.classList.add("entrance");
-      this.wrapperElement.classList.remove("exit");
-      chrome.storage.local.set({
-        [this.name]: {
-          visible: true
-        }
-      }, function() {});
-    }
-  }
-
-}
 
 //Time: toggles twentyFourHr time (24hr)
-function updatetwentyFourHr() {
+function updateClockStyle() {
   window.newTab.clock.twentyFourHr = !window.newTab.clock.twentyFourHr;
   if (window.newTab.clock.twentyFourHr)
     chrome.storage.local.set({
@@ -476,7 +371,7 @@ function resetData() {
         action: function() {
           if (this.$content.find('#reset-input-loc').is(":checked")) {
             chrome.storage.local.set({
-                time_location: [0, 0],
+                time_location: ['', ''],
                 info_top_data: '',
                 info_left_data: '',
                 todo_top_data: '',
@@ -821,8 +716,8 @@ function updateRepeat() {
 //function for autoPause, set to check on tab activated
 function autoPause() {
 
-  //check if auto pause is on and if
-  if (!window.newTab.autopause || !window.newTab.back.fileType == "video")
+  //check if auto pause is on and if it's a video
+  if (!window.newTab.autopause || window.newTab.back.fileType != "video")
     return;
 
   //on got tab info function
@@ -1333,6 +1228,8 @@ $(document).ready(function() {
 //function for initial setup
 function initialSetup() {
 
+  window.newTab.widgets = {};
+
   //get advanced settings
   chrome.storage.local.get({
     animation: true,
@@ -1550,33 +1447,30 @@ function initialSetup() {
   window.newTab.clock.twentyFourHr = false; //set default time and initialize variable
 
   // Make the elements draggable:
-  dragElement(document.getElementById("timeWrapper"), document.getElementById("time"));
-  dragElement(document.getElementById("searchWrapper"), document.getElementById("searchDiv"));
-  dragElement(document.getElementById("todoWrapper"), document.getElementById("todoDiv"));
-  dragElement(document.getElementById('infoWrapper'), document.getElementById("info"));
+  // dragElement(document.getElementById("timeWrapper"), document.getElementById("time"));
+  // dragElement(document.getElementById("searchWrapper"), document.getElementById("searchDiv"));
+  // dragElement(document.getElementById("todoWrapper"), document.getElementById("todoDiv"));
+  // dragElement(document.getElementById('infoWrapper'), document.getElementById("info"));
 
+  new Widget('date', document.getElementById('dateWrapper'), document.getElementById('date'), document.getElementById('dateSwitch'));
+  new Widget('time', document.getElementById('timeWrapper'), document.getElementById('time'), document.getElementById('timeSwitch'));
+  new Widget('todo', document.getElementById('todoWrapper'), document.getElementById('todoDiv'), document.getElementById('todoSwitch'));
+  new Widget('search', document.getElementById('searchWrapper'), document.getElementById('searchDiv'), document.getElementById('searchSwitch'));
+  new Widget('info', document.getElementById('infoWrapper'), document.getElementById('info'), document.getElementById('infoSwitch'));
+
+  window.newTab.widgets.time.closeDrag = function() {
+    window.newTab.clock.twentyFourHr = !window.newTab.clock.twentyFourHr;
+  }
+
+  window.newTab.widgets.info.closeDrag = function() {
+    window.newTab.infoMode -= 1;
+  }
 
   //data/settings loading from chrome
   //getting the clock settings
   chrome.storage.local.get({
-    time_switch: 'on',
-    time_location: [0, 0],
     twentyFourHr_switch: 'off'
   }, function(data) {
-    if (data.time_switch == 'off') {
-      document.getElementById("timeSwitch").checked = false;
-      document.getElementById("timeWrapper").classList.add("exit");
-      document.getElementById("timeWrapper").classList.add("firstStart");
-    } else {
-      document.getElementById("timeSwitch").checked = true;
-      document.getElementById("timeWrapper").classList.add("entrance");
-    }
-    if (data.time_location[0] != 0) {
-      document.getElementById("timeWrapper").style.top = data.time_location[0];
-    }
-    if (data.time_location[1] != 0) {
-      document.getElementById("timeWrapper").style.left = data.time_location[1];
-    }
     window.newTab.clock.twentyFourHr = (data.twentyFourHr_switch == 'on');
 
     startTime(); //start the time
@@ -1584,50 +1478,16 @@ function initialSetup() {
 
   //getting the info settings
   chrome.storage.local.get({
-    info_switch: 'on',
-    info_top_data: '',
-    info_left_data: '',
-    info_location: [0, 0],
     info_mode: 0,
   }, function(data) {
-    if (data.info_switch == 'off') {
-      document.getElementById("infoSwitch").checked = false;
-      document.getElementById("infoWrapper").classList.add("exit");
-      document.getElementById("infoWrapper").classList.add("firstStart");
-    } else {
-      document.getElementById("infoSwitch").checked = true;
-      document.getElementById("infoWrapper").classList.add("entrance");
-    }
-    if (data.info_top_data != '') {
-      document.getElementById("infoWrapper").style.top = data.info_top_data;
-    }
-    if (data.info_left_data != '') {
-      document.getElementById("infoWrapper").style.left = data.info_left_data;
-    }
+
     window.newTab.infoMode = data.info_mode;
   });
 
   //getting the searchbar settings
   chrome.storage.local.get({
-    search_switch: 'on',
-    search_top_data: '',
-    search_left_data: '',
     search_engine: 0
   }, function(data) {
-    if (data.search_switch == 'off') {
-      document.getElementById("searchSwitch").checked = false;
-      document.getElementById("searchWrapper").classList.add("exit");
-      document.getElementById("searchWrapper").classList.add("firstStart");
-    } else {
-      document.getElementById("searchSwitch").checked = true;
-      document.getElementById("searchWrapper").classList.add("entrance");
-    }
-    if (data.search_top_data != '') {
-      document.getElementById("searchWrapper").style.top = data.search_top_data;
-    }
-    if (data.search_left_data != '') {
-      document.getElementById("searchWrapper").style.left = data.search_left_data;
-    }
 
     let searchInput = $('#searchInput');
     searchInput.parent().attr('action', window.newTab.searchEngines[data.search_engine].action);
@@ -1650,26 +1510,8 @@ function initialSetup() {
 
   // todo list data loading (and parsing list data)
   chrome.storage.local.get({
-    todo_switch: 'on',
-    todo_top_data: '',
-    todo_left_data: '',
     todo_data: []
   }, function(data) {
-    if (data.todo_switch == 'off') {
-      document.getElementById("todoSwitch").checked = false;
-      document.getElementById("todoWrapper").classList.add("exit");
-      document.getElementById("todoWrapper").classList.add("firstStart");
-    } else {
-      document.getElementById("todoSwitch").checked = true;
-      document.getElementById("todoWrapper").classList.add("entrance");
-    }
-
-    if (data.todo_top_data != '') {
-      document.getElementById("todoWrapper").style.top = data.todo_top_data;
-    }
-    if (data.todo_left_data != '') {
-      document.getElementById("todoWrapper").style.left = data.todo_left_data;
-    }
     // console.log("Todo list data loading:" + data.todo_data); //DEBUG
     if (data.todo_data.length != 0) {
       let arr = data.todo_data;
@@ -1688,17 +1530,9 @@ function initialSetup() {
   });
 
   //setting the switches click event listeners
-  document.getElementById("searchSwitch").parentElement.addEventListener('click', function() {
-    updateSearch();
-  });
+
   document.getElementById("searchChange").addEventListener("click", function() {
     changeSearch();
-  });
-  document.getElementById("timeSwitch").parentElement.addEventListener('click', function() {
-    updateTime();
-  });
-  document.getElementById("infoSwitch").parentElement.addEventListener('click', function() {
-    updateinfo();
   });
   document.getElementById("info").addEventListener("click", function() {
     updateInfoMode();
@@ -1706,12 +1540,11 @@ function initialSetup() {
   document.getElementById("favSwitch").parentElement.addEventListener('click', function() {
     updateFav();
   });
-  document.getElementById("todoSwitch").parentElement.addEventListener('click', function() {
-    updateTodo();
-  });
   document.getElementById("time").addEventListener("click", function() {
-    updatetwentyFourHr();
+    updateClockStyle();
   });
+
+  //filter sliders listeners
   document.getElementById("darkSlider").addEventListener("input", function() {
     updateFilter();
   });
