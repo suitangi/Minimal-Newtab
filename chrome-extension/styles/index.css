@@ -93,7 +93,6 @@
    transition: 2s;
    opacity: 0;
  } */
-
  /* desaturate filter */
  #desaFilter {
    min-width: 100%;
@@ -384,10 +383,11 @@
    display: none;
  }
 
- #menu:hover .menuText,
  #menu:hover .sliderWrapper,
  #menu:hover .slidecontainer,
+ #menu:hover .menuText,
  #menu.delay .menuText,
+ #menu.delay .menuSwitch,
  #menu.delay .sliderWrapper,
  #menu.delay .slidecontainer {
    opacity: 0.6 !important;
@@ -395,12 +395,81 @@
    transition: all .17s ease;
  }
 
+ #menu:hover .menuSwitch {
+   opacity: 0.8 !important;
+   visibility: visible;
+   transition: all .15s ease;
+ }
+
+ #menu.delay .menuHeader,
+ #menu:hover .menuHeader {
+   opacity: 0.95 !important;
+   visibility: visible;
+   transition: all .15s ease;
+ }
+
  .menuText,
  .sliderWrapper,
- .slidecontainer {
-   opacity: 0 !important;
+ .slidecontainer,
+ .menuSwitch,
+ .menuHeader {
+   opacity: 0;
    visibility: hidden;
    transition: all .17s ease;
+ }
+
+ #menu .menuHeader {
+   color: rgba(255, 255, 255, 1) !important;
+   font-size: 28px;
+   letter-spacing: .13rem;
+   font-weight: 600 !important;
+ }
+
+ .menuSwitch {
+   background-color: rgba(255, 255, 255, 0) !important;
+   color: rgba(255, 255, 255, 0.5);
+   margin-top: 25px;
+   margin-bottom: 10px;
+   font-size: 24px;
+   font-family: "Abel";
+   user-select: none;
+   text-align: center;
+   transition: color .5s;
+   cursor: pointer;
+ }
+
+ .menuSwitch[checked="true"] {
+   background-color: rgba(255, 255, 255, 0) !important;
+   opacity: 1 !important;
+   transition: color .5s;
+   color: rgba(255, 255, 255, 1) !important;
+   margin-top: 25px;
+   margin-bottom: 10px;
+   font-size: 24px;
+   font-family: "Abel";
+   user-select: none;
+   text-align: center;
+ }
+
+ .menuSwitch::after {
+   content: '';
+   position: relative;
+   bottom: 0;
+   left: 50%;
+   display: inherit;
+   width: 30%;
+   transform: translate(-50%, 0%) scale(0);
+   transform-origin: center;
+   border-radius: 2px;
+   height: 0.08em;
+   background-color: rgba(33, 150, 243, 1);
+   opacity: 1;
+   transition: opacity 300ms, transform 300ms;
+ }
+
+ .menuSwitch[checked="true"]::after {
+   opacity: 1;
+   transform: translate(-50%, 0%) scale(1);
  }
 
  .menuText {
@@ -431,6 +500,23 @@
    opacity: 0;
  }
 
+ .menuSwitchItem:after {
+   transition: opacity .2s ease-in-out;
+   transition-delay: 0s;
+   content: attr(data);
+   padding: 4px 8px;
+   color: rgba(255, 255, 255, 1);
+   position: absolute;
+   left: 50%;
+   white-space: nowrap;
+   z-index: 2;
+   border-radius: 7px;
+   font-size: 12px;
+   transform: translate(-50%, -270%);
+   background: rgba(0, 0, 0, 0.9);
+   opacity: 0;
+ }
+
  .buttonWrapper:after {
    transition: opacity .2s ease-in-out;
    transition-delay: 0s;
@@ -449,6 +535,7 @@
  }
 
  .menuItem:hover:after,
+ .menuSwitchItem:hover:after,
  .buttonWrapper:hover:after {
    transition: opacity .25s ease-in-out;
    transition-delay: .45s;
@@ -628,7 +715,6 @@
    font-size: 20px;
    color: #e3e3e3;
    position: relative;
-
  }
 
  .smallswitch input:checked+div:before {
@@ -661,8 +747,8 @@
    border-radius: 4px;
    background: #2196F3;
    outline: none;
-   -webkit-transition: .2s;
-   transition: opacity .2s;
+   -webkit-transition: .4s;
+   transition: opacity .4s;
    opacity: 0.7;
  }
 
@@ -980,7 +1066,6 @@
  }
 
  /* animation */
-
  .noanimate {
    animation-duration: 0s !important;
    transition-duration: 0s !important;

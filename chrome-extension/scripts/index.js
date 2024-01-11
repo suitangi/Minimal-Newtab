@@ -130,30 +130,6 @@ function updateClockStyle() {
   startTime();
 }
 
-//Search: toggles the visibility of the search bar
-function updateSearch() {
-
-  let searchWrapper = document.getElementById("searchWrapper");
-  let searchSwitch = document.getElementById("searchSwitch");
-
-  searchWrapper.classList.remove("firstStart");
-  if (searchSwitch.checked) {
-    searchSwitch.checked = false;
-    searchWrapper.classList.add("exit");
-    searchWrapper.classList.remove("entrance");
-    chrome.storage.local.set({
-      search_switch: "off"
-    }, function() {});
-  } else {
-    searchSwitch.checked = true;
-    searchWrapper.classList.add("entrance");
-    searchWrapper.classList.remove("exit");
-    chrome.storage.local.set({
-      search_switch: "on"
-    }, function() {});
-  }
-}
-
 //Search bar: chaanges the search engine
 function changeSearch() {
   chrome.storage.local.get({
@@ -177,60 +153,13 @@ function changeSearch() {
   });
 }
 
-//Time: toggles the visibility of the time display
-function updateTime() {
-
-  let timeWrapper = document.getElementById("timeWrapper");
-  let timeSwitch = document.getElementById("timeSwitch");
-
-  timeWrapper.classList.remove("firstStart");
-  if (timeSwitch.checked) {
-    timeSwitch.checked = false;
-    timeWrapper.classList.add("exit");
-    timeWrapper.classList.remove("entrance");
-    chrome.storage.local.set({
-      time_switch: "off"
-    }, function() {});
-  } else {
-    timeSwitch.checked = true;
-    timeWrapper.classList.add("entrance");
-    timeWrapper.classList.remove("exit");
-    chrome.storage.local.set({
-      time_switch: "on"
-    }, function() {});
-  }
-}
-
-//Time: toggles the visibility of the info display
-function updateinfo() {
-
-  let infoWrapper = document.getElementById("infoWrapper");
-  let infoSwitch = document.getElementById("infoSwitch");
-
-  infoWrapper.classList.remove("firstStart");
-  if (infoSwitch.checked) {
-    infoSwitch.checked = false;
-    infoWrapper.classList.add("exit");
-    infoWrapper.classList.remove("entrance");
-    chrome.storage.local.set({
-      info_switch: "off"
-    }, function() {});
-  } else {
-    infoSwitch.checked = true;
-    infoWrapper.classList.add("entrance");
-    infoWrapper.classList.remove("exit");
-    chrome.storage.local.set({
-      info_switch: "on"
-    }, function() {});
-  }
-}
 
 //Time: toggles the favorites source of backgrounds
 function updateFav() {
 
   let favSwitch = document.getElementById("favSwitch");
-  if (favSwitch.checked) {
-    favSwitch.checked = false;
+  if (favSwitch.getAttribute('checked') == 'true') {
+    favSwitch.setAttribute('checked', 'false');
     chrome.storage.local.set({
       fav_switch: "off"
     }, function() {});
@@ -266,36 +195,12 @@ function updateFav() {
           }
         });
       } else {
-        favSwitch.checked = true;
+        favSwitch.setAttribute('checked', 'true');
         chrome.storage.local.set({
           fav_switch: "on"
         }, function() {});
       }
     });
-  }
-}
-
-//Todo: toggles the visibility of the todo list
-function updateTodo() {
-
-  let todoWrapper = document.getElementById("todoWrapper");
-  let todoSwitch = document.getElementById("todoSwitch");
-
-  todoWrapper.classList.remove("firstStart");
-  if (todoSwitch.checked) {
-    todoSwitch.checked = false;
-    todoWrapper.classList.add("exit");
-    todoWrapper.classList.remove("entrance");
-    chrome.storage.local.set({
-      todo_switch: "off"
-    }, function() {});
-  } else {
-    todoSwitch.checked = true;
-    todoWrapper.classList.add("entrance");
-    todoWrapper.classList.remove("exit");
-    chrome.storage.local.set({
-      todo_switch: "on"
-    }, function() {});
   }
 }
 
@@ -634,7 +539,7 @@ function loadInfo() {
       $('#info').css('transform', 'translate(0%, 0%)');
     }
   } else {
-    $('#infoMenuItem').css("display", "none");
+    $('#infoMenuOption').css("display", "none");
     $('#infoWrapper').css("display", "none");
   }
 }
@@ -988,7 +893,7 @@ function loadBackground(backJson, id) {
 
               //setting the fav switch and like buttons
               if (data.fav_switch == 'on' && data.fav_list.length > 0) {
-                document.getElementById("favSwitch").checked = true;
+                document.getElementById("favSwitch").setAttribute('checked', 'true');
               }
 
               //if the current image is in favorites, make the heart button filled
@@ -1008,20 +913,18 @@ function loadBackground(backJson, id) {
       //build the json object to store data
       obj = {};
       key = name.split(' ').join('-');
-      obj[key] = 'on';
+      obj[key] = true;
 
       //descriptors shouldn't be more than 34 characters
-      let descriptor = "Backgrounds from " + name;
+      let descriptor = `Backgrounds from ${name}`;
       if (backList[index].description != null) {
         descriptor = backList[index].description;
       }
 
       //create the backgroundMenu switch and add it to background menu
-      var itemNode = createHTML("<div class=\"menuItem\" data=\"" + descriptor + "\"></div>");
-      var textNode = createHTML("<div class=\"menuText\">" + name + "</div>");
-      var divNode = createHTML("<div class=\"sliderWrapper\"> <label class=\"switch\"> <input type=\"checkbox\" ID=\"" + key + "\" checked> <span class=\"slider round\"></span> </label> </div>");
+      var itemNode = createHTML(`<div class="menuSwitchItem" data="${descriptor}"></div>`);
+      var textNode = createHTML(`<div class="menuSwitch" ID="${key}" checked="true">${name}</div>`);
       itemNode.appendChild(textNode);
-      itemNode.appendChild(divNode);
       bkMenu.insertBefore(itemNode, document.getElementById("favoriteSlider"));
 
       //adding the onClick for the swtiches
@@ -1029,13 +932,13 @@ function loadBackground(backJson, id) {
         checkElement = this.firstElementChild;
         obj = {};
         key = checkElement.id;
-        if (checkElement.checked) {
-          checkElement.checked = false;
-          obj[key] = "off";
+        if (checkElement.getAttribute('checked') == 'true') {
+          checkElement.setAttribute('checked', 'false');
+          obj[key] = false;
           chrome.storage.local.set(obj, function() {});
         } else {
-          checkElement.checked = true;
-          obj[key] = "on";
+          checkElement.setAttribute('checked', 'true');
+          obj[key] = true;
           chrome.storage.local.set(obj, function() {});
         }
       }
@@ -1049,8 +952,8 @@ function loadBackground(backJson, id) {
 
       //storing and getting data from chrome to see whether it was on or off
       chrome.storage.local.get(obj, function(data) {
-        if (data[key] == 'off') {
-          document.getElementById(key).checked = false;
+        if (!data[key]) {
+          document.getElementById(key).setAttribute('checked', 'false');
         } else if (id === undefined) {
           window.newTab.backlist.push(...toPushList);
         }
@@ -1076,9 +979,9 @@ function loadLanguageUI(langJson) {
 
   //set strings
   setText('widgetsTitle', 'widgets-title');
-  setText('timeMenuText', 'time-name');
-  setText('todoMenuText', 'to-do-list-name');
-  setText('searchMenuText', 'search-bar-name');
+  setText('timeSwitch', 'time-name');
+  setText('todoSwitch', 'to-do-list-name');
+  setText('searchSwitch', 'search-bar-name');
   setText('effectTitle', 'effects-title');
   setText('brightnessTitle', 'brightness');
   setText('saturationTitle', 'saturation');
@@ -1091,7 +994,7 @@ function loadLanguageUI(langJson) {
 function changeLang(lang) {
   setLanguage(lang)
     .then((lang) => {
-      const jsonUrl = chrome.runtime.getURL('resources/background_' + lang + '.json');
+      const jsonUrl = chrome.runtime.getURL(`resources/background_${lang}.json`);
       fetch(jsonUrl)
         .then((response) => response.json())
         .then((json) => {
@@ -1164,6 +1067,12 @@ function setConfig(configJson) {
       setLanguage(lang)
         .then((lang) => resolve(lang));
     });
+  });
+}
+
+function dumpStorage() {
+  chrome.storage.local.get(null, function(data) {
+    console.log(data)
   });
 }
 
@@ -1446,12 +1355,7 @@ function initialSetup() {
 
   window.newTab.clock.twentyFourHr = false; //set default time and initialize variable
 
-  // Make the elements draggable:
-  // dragElement(document.getElementById("timeWrapper"), document.getElementById("time"));
-  // dragElement(document.getElementById("searchWrapper"), document.getElementById("searchDiv"));
-  // dragElement(document.getElementById("todoWrapper"), document.getElementById("todoDiv"));
-  // dragElement(document.getElementById('infoWrapper'), document.getElementById("info"));
-
+  //create widgets
   new Widget('date', document.getElementById('dateWrapper'), document.getElementById('date'), document.getElementById('dateSwitch'));
   new Widget('time', document.getElementById('timeWrapper'), document.getElementById('time'), document.getElementById('timeSwitch'));
   new Widget('todo', document.getElementById('todoWrapper'), document.getElementById('todoDiv'), document.getElementById('todoSwitch'));
@@ -1460,10 +1364,28 @@ function initialSetup() {
 
   window.newTab.widgets.time.closeDrag = function() {
     window.newTab.clock.twentyFourHr = !window.newTab.clock.twentyFourHr;
+    chrome.storage.local.get({
+      [name + '-data']: {
+        name: name,
+        location: ['', ''],
+        visible: true
+      }
+    }, function(data) {
+      console.log(data);
+    });
   }
 
   window.newTab.widgets.info.closeDrag = function() {
     window.newTab.infoMode -= 1;
+    chrome.storage.local.get({
+      [name + '-data']: {
+        name: name,
+        location: ['', ''],
+        visible: true
+      }
+    }, function(data) {
+      console.log(data);
+    });
   }
 
   //data/settings loading from chrome

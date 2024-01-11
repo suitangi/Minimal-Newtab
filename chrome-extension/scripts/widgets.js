@@ -7,33 +7,30 @@ function Widget(name, wrapper, dragger, toggle) {
   window.newTab.widgets[name] = this;
   //make element draggable
   dragElement(this);
-
   //get widget data
   chrome.storage.local.get({
-    [name + '-data']: {
-      name: name,
-      location: ['', ''],
-      visible: true
-    }
+    [`${name}-location`]: ['', ''],
+    [`${name}-onoff`]: true,
+    widgetName: name
   }, function(data) {
-    let widData = data[Object.keys(data)[0]];
-    let widObj = window.newTab.widgets[widData.name];
-    widObj.location = widData['location'];
-    widObj.visible = widData['visible'];
-    if (!widData['visible']) {
-      widObj.switchElement.checked = false;
+    let widName = data.widgetName;
+    let widObj = window.newTab.widgets[widName];
+    widObj.location = data[`${widName}-location`];
+    widObj.visible = data[`${widName}-onoff`];
+    if (!widObj.visible) {
+      widObj.switchElement.setAttribute('checked', 'false');
       widObj.wrapperElement.classList.add("exit");
       widObj.wrapperElement.classList.add("firstStart");
     } else {
-      widObj.switchElement.checked = true;
+      widObj.switchElement.setAttribute('checked', 'true');
       widObj.wrapperElement.classList.add("entrance");
     }
 
-    if (widData.location[0] != '') {
-      widObj.wrapperElement.style.top = widData.location[0];
+    if (widObj.location[0] != '') {
+      widObj.wrapperElement.style.top = widObj.location[0];
     }
-    if (widData.location[1] != '') {
-      widObj.wrapperElement.style.left = widData.location[1];
+    if (widObj.location[1] != '') {
+      widObj.wrapperElement.style.left = widObj.location[1];
     }
   });
 
@@ -43,23 +40,19 @@ function Widget(name, wrapper, dragger, toggle) {
   //update visibility funciton
   this.updateVisibilty = function() {
     this.wrapperElement.classList.remove("firstStart");
-    if (this.switchElement.checked) {
-      this.switchElement.checked = false;
+    if (this.switchElement.getAttribute('checked') == 'true') {
+      this.switchElement.setAttribute('checked', 'false');
       this.wrapperElement.classList.add("exit");
       this.wrapperElement.classList.remove("entrance");
       chrome.storage.local.set({
-        [this.name + '-data']: {
-          visible: false
-        }
+        [`${this.name}-onoff`]: false
       });
     } else {
-      this.switchElement.checked = true;
+      this.switchElement.setAttribute('checked', 'true');
       this.wrapperElement.classList.add("entrance");
       this.wrapperElement.classList.remove("exit");
       chrome.storage.local.set({
-        [this.name + '-data']: {
-          visible: true
-        }
+        [`${this.name}-onoff`]: true
       });
     }
   }
@@ -116,11 +109,8 @@ function dragElement(widget) {
     //reset the dragged to be false
     if (window.newTab.dragged) {
       window.newTab.dragged = false;
-      console.log(widget.name + '-data');
       chrome.storage.local.set({
-        [widget.name + '-data']: {
-          location: [elmnt.style.top, elmnt.style.left]
-        }
+        [widget.name + '-location']: [elmnt.style.top, elmnt.style.left]
       });
       widget.closeDrag();
     }

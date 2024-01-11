@@ -1,5 +1,6 @@
 # This Branch is for a full rework of the code, this readme is a todo list
 - Widgets
+  - Quick Links
   - Widget Lock
   - Weather
   - Recently closed
@@ -8,6 +9,7 @@
   - Better animations
     - Animate CSS
 - Use formatted strings
+- Menu redesign
 - Support for custom fonts
 - Add don't show this again for background removal prompts
 - Locale support

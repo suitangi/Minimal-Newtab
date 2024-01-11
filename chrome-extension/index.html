@@ -27,64 +27,29 @@
     <!-- the left side menu -->
     <div ID="menu">
       <!-- the menu for widgets -->
-      <div class="menuText" ID="widgetsTitle" style="color: rgba(255,255,255,0.95) !important; font-weight: 500;">Widgets</div>
-      <div class="menuItem" ID="timeMenuOption" data="Toggles the Time Display">
-        <div class="menuText" ID="timeMenuText">Time</div>
-        <div class="sliderWrapper">
-          <label class="switch">
-            <input type="checkbox" ID="timeSwitch" widget-data="time" checked>
-            <span class="slider round"></span>
-          </label>
-        </div>
+      <div class="menuText menuHeader" ID="widgetsTitle" style="">Widgets</div>
+      <div class="menuSwitchItem" ID="timeMenuOption" data="Toggles the Time Display">
+        <div class="menuSwitch" ID="timeSwitch" checked="true" widget-data="time">Time</div>
       </div>
-      <div class="menuItem" ID="dateMenuOption" data="Toggles the Date Display">
-        <div class="menuText" ID="dateMenuText">Date</div>
-        <div class="sliderWrapper">
-          <label class="switch">
-            <input type="checkbox" ID="dateSwitch" widget-data="date" checked>
-            <span class="slider round"></span>
-          </label>
-        </div>
+      <div class="menuSwitchItem" ID="dateMenuOption" data="Toggles the Date Display">
+        <div class="menuSwitch" ID="dateSwitch" checked="true" widget-data="date">Date</div>
       </div>
-      <div class="menuItem" ID="searchMenuOption" data="Toggles the Search Bar">
-        <div class="menuText" ID="searchMenuText">Search Bar</div>
-        <div class="sliderWrapper">
-          <label class="switch">
-            <input type="checkbox" ID="searchSwitch" widget-data="search" checked>
-            <span class="slider round"></span>
-          </label>
-        </div>
+      <div class="menuSwitchItem" ID="searchMenuOption" data="Toggles the Search Bar">
+        <div class="menuSwitch" ID="searchSwitch" checked="true" widget-data="search">Search Bar</div>
       </div>
-      <div ID="infoMenuItem" class="menuItem" ID="infoMenuOption" data="Toggles the Background Info">
-        <div class="menuText" ID="infoMenuText">Background Info</div>
-        <div class="sliderWrapper">
-          <label class="switch">
-            <input type="checkbox" ID="infoSwitch" widget-data="info" checked>
-            <span class="slider round"></span>
-          </label>
-        </div>
+      <div ID="infoMenuItem" class="menuSwitchItem" ID="infoMenuOption" data="Toggles the Background Info">
+        <div class="menuSwitch" ID="infoSwitch" checked="true" widget-data="info">Background Info</div>
       </div>
-      <div class="menuItem" ID="todoMenuOption" data="Toggles the Todo List">
-        <div class="menuText" ID="todoMenuText">To-do List</div>
-        <div class="sliderWrapper">
-          <label class="switch">
-            <input type="checkbox" ID="todoSwitch" widget-data="todo" checked>
-            <span class="slider round"></span>
-          </label>
-        </div>
+      <div class="menuSwitchItem" ID="todoMenuOption" data="Toggles the Todo List">
+        <div class="menuSwitch" ID="todoSwitch" checked="true" widget-data="todo">Todo List</div>
       </div>
       <div class="menuText" style="color: transparent !important">.</div><!-- blank space divide -->
 
       <!-- the menu for background -->
-      <div class="menuText backgroundMenu" style="color: rgba(255,255,255,0.95) !important; font-weight: 500;">Background</div>
+      <div class="menuText  menuHeader backgroundMenu">Backgrounds</div>
       <div ID="backgroundMenu" class="backgroundMenu">
-        <div ID="favoriteSlider" class="menuItem" data="Toggle your favorite backgrounds">
-          <div class="menuText">Favorites</div>
-          <div class="sliderWrapper">
-            <label class="switch">
-              <input type="checkbox" ID="favSwitch">
-              <span class="slider round"></span>
-            </label> </div>
+        <div ID="favoriteSlider" class="menuSwitchItem" data="Toggle your favorite backgrounds">
+          <div class="menuSwitch" ID="favSwitch" checked="false">Favorites</div>
         </div>
       </div>
       <div class="menuText backgroundMenu" style="color: transparent !important">.</div><!-- blank space divide -->
@@ -110,7 +75,7 @@
       <div class="menuText backgroundMenu" style="color: transparent !important">.</div><!-- blank space divide -->
 
       <!-- the menu for effects -->
-      <div class="menuText" ID="effectTitle" style="color: rgba(255,255,255,0.95) !important; font-weight: 500;">Effects</div>
+      <div class="menuText menuHeader" ID="effectTitle">Effects</div>
       <div class="menuItem" data="Adjust the brightness of the background">
         <div class="menuText" ID="brightnessTitle">Brightness</div>
         <div class="slidecontainer">
@@ -192,7 +157,7 @@
 
     <!-- the bookmarks side panel -->
     <div ID="bookmarks">
-      <div id="bkTitle" style="color: rgba(255,255,255,0.95) !important; font-weight: 500;">Bookmarks</div>
+      <div id="bkTitle" style="color: rgba(255,255,255,1) !important; font-weight: 500;">Bookmarks</div>
       <ol id="bkList" style="list-style-type:none;">
 
       </ol>
