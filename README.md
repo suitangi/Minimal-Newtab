@@ -8,6 +8,8 @@
   - Better data storing and loading, use your data types my goodness
   - Better animations
     - Animate CSS
+  - Todo list
+    - Allow editting of list name
 - Use formatted strings
 - Menu redesign
 - Support for custom fonts
@@ -37,7 +39,8 @@
   - Potentially no-code UI build
     - Electron
   - Actual tests for surrounding files and backgrounds
-    - Test for language files
+    - Tests for language files
+    - Test for backgrounds, repeat checks etc.
 
 
 # ![icon](https://raw.githubusercontent.com/suitangi/Minimal-Newtab/master/chrome-extension/icons/icon48.png) Minimal Newtab
